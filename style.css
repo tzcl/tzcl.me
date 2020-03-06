@@ -33,6 +33,11 @@ h4 {
     color: ivory;
 }
 
+p {
+    text-align: center;
+    color: ivory;
+}
+
 div.center {
     position: absolute;
     left: 50%;
@@ -41,5 +46,5 @@ div.center {
 }
 
 div.image {
-    translate: translateX(50%);
+    /* translate: translateX(50%); */
 }
