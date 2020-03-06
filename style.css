@@ -30,6 +30,11 @@ h4 {
     color: ivory;
 }
 
+h5 {
+    text-align: center;
+    color: ivory;
+}
+
 p {
     text-align: center;
     color: ivory;
@@ -40,8 +45,4 @@ div.center {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
-}
-
-div.image {
-    /* translate: translateX(50%); */
 }
