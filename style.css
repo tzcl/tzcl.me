@@ -37,13 +37,14 @@ h1 {
 
 h2 {
   font-size: 3rem;
-  opacity: 0.2;
+  opacity: 0.4;
   color: ivory;
+  margin-bottom: 0;
 }
 
 h3 {
     text-align: center;
-    color: oldlace;
+    color: ivory;
 }
 
 h4 {
@@ -74,11 +75,35 @@ li {
   line-height: 2;
 }
 
-.other {
-  max-width: 40rem;
-  margin: 4rem auto;
-  display: grid;
-  grid-template-columns: [title] 1fr [content] 2fr;
-  grid-gap: 4rem 1rem;
-  align-items: center;
+a {
+  color: #13527f;
+  text-decoration: none;
+  box-shadow: inset 0 -0.75em 0 ivory;
+  transition-property: box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+a:hover,
+a:focus {
+  box-shadow: inset 0 -0.15em 0 ivory;
+}
+
+a:focus {
+  outline: none;
+}
+
+@media (min-width: 44rem) {
+  .other {
+    max-width: 40rem;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: [title] 1fr [content] 2fr;
+    grid-gap: 4rem 1rem;
+    align-items: center;
+  }
+
+  h2 {
+    margin: auto;
+  }
 }
