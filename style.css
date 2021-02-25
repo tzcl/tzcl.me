@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Garamond';
-  src: url('static/EBGaramond-Regular.ttf') format('truetype');
+  src: url('EBGaramond-Regular.ttf') format('truetype');
 }
 
 :root {
@@ -99,14 +99,16 @@ a:focus {
     align-items: center;
   }
 
-  #title {
-    font-size: 15rem;
-    line-height: 1.6;
-  }
-
   h2 {
     font-size: 3rem;
     text-align: unset;
     margin: unset;
+  }
+}
+
+@media (min-width: 70rem) {
+  #title {
+    font-size: 15rem;
+    line-height: 1.6;
   }
 }
