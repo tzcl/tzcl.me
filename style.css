@@ -37,7 +37,7 @@ h5 {font-size: 1.194em;}
 h6 {font-size: 1em;}
 
 #title {
-  font-size: 25vw;
+  font-size: 30vw;
   line-height: 1;
   background-image: url("2.jpg");
   background-size: cover;
@@ -109,7 +109,4 @@ a:focus {
     text-align: unset;
     margin: unset;
   }
-}
-
-@media (min-width: 1000px) {
 }
