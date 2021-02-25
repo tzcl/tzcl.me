@@ -1,30 +1,40 @@
+@font-face {
+  font-family: 'Garamond';
+  src: url('static/EBGaramond-Regular.ttf') format('truetype');
+}
+
+:root {
+  --pad: 1rem;
+  --pad-large: 2rem;
+  --space: calc(var(--pad) * 4);
+  --text-width: 40rem;
+  --colour-bg: #f2c8aa;
+  --colour-primary: ivory;
+  --colour-secondary: #13527f;
+}
+
 body {
-    background-color: #f2c8aa;
-    font: 100%/1.6 "Lora", serif; 
-    font-weight: 400; 
-    margin: 0 auto;
-    padding: 2em; 
-    text-align: left;
+  background-color: var(--colour-bg);
+  font-family: 'Garamond', monospace;
+  font-size: 1.2em;
+  margin: 25vh var(--pad);
+  color: var(--colour-primary);
 }
 
-.center {
-  margin: auto;
-    max-width: 40rem;
+h1, h2, h3, h4, h5, h6 {
+  font: 100%/1.6 'Lora', serif;
+  font-weight: 700;
+  margin: var(--space) 0 var(--pad-large) 0;
+  color: var(--colour-primary);
+  text-align: center;
 }
 
-  h1 {font-size: 3.125em;}
-  h2 {font-size: 2.618em;}
-  h3 {font-size: 1.931em;}
-  h4 {font-size: 1.618em;}
-  h5 {font-size: 1.194em;}
-  h6 {font-size: 1em;}
-
-h1 {
-    font-size: 3.125em;
-    text-align: center;
-    color: white;
-    margin: 0 auto;
-}
+h1 {font-size: 3.125em;}
+h2 {font-size: 2.618em;}
+h3 {font-size: 1.931em;}
+h4 {font-size: 1.618em;}
+h5 {font-size: 1.194em;}
+h6 {font-size: 1em;}
 
 #title {
   font-size: 15vw;
@@ -33,33 +43,13 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  margin: 0 auto;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 10vw;
   opacity: 0.4;
-  color: ivory;
-  margin-bottom: 0;
-}
-
-h3 {
-    text-align: center;
-    color: ivory;
-}
-
-h4 {
-    text-align: center;
-    color: ivory;
-}
-
-h5 {
-    text-align: center;
-    color: ivory;
-}
-
-p {
-    text-align: center;
-    color: ivory;
+  margin: 0 auto;
 }
 
 ul {
@@ -69,16 +59,17 @@ ul {
 }
 
 li {
-  padding-left: 2em;
-  text-indent: -2em;
-  margin-bottom: 1em;
+  --indent: 2em;
+  padding-left: var(--indent);
+  text-indent: calc(var(--indent) * -1);
+  margin-bottom: var(--pad);
   line-height: 2;
 }
 
 a {
-  color: #13527f;
+  color: var(--colour-secondary);
   text-decoration: none;
-  box-shadow: inset 0 -0.75em 0 ivory;
+  box-shadow: inset 0 -0.6em 0 var(--colour-primary);
   transition-property: box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -86,24 +77,31 @@ a {
 
 a:hover,
 a:focus {
-  box-shadow: inset 0 -0.15em 0 ivory;
+  box-shadow: inset 0 -0.15em 0 var(--colour-primary);
 }
 
 a:focus {
   outline: none;
 }
 
+.center {
+  margin: auto;
+  max-width: var(--text-width);
+}
+
 @media (min-width: 44rem) {
   .other {
-    max-width: 40rem;
-    margin: 4rem auto;
+    max-width: var(--text-width);
+    margin: var(--space) auto;
     display: grid;
     grid-template-columns: [title] 1fr [content] 2fr;
-    grid-gap: 4rem 1rem;
+    grid-gap: var(--space) var(--pad);
     align-items: center;
   }
 
   h2 {
-    margin: auto;
+    text-align: unset;
+    margin: unset;
+    font-size: 3rem;
   }
 }
