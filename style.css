@@ -17,7 +17,7 @@ body {
   background-color: var(--colour-bg);
   font-family: 'Garamond', monospace;
   font-size: 1.2em;
-  margin: 25vh var(--pad);
+  margin: 15vh var(--pad) 0 var(--pad);
   color: var(--colour-primary);
 }
 
@@ -37,17 +37,17 @@ h5 {font-size: 1.194em;}
 h6 {font-size: 1em;}
 
 #title {
-  font-size: 15vw;
+  font-size: 25vw;
+  line-height: 1;
   background-image: url("2.jpg");
   background-size: cover;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  margin: 0 auto;
 }
 
 h2 {
-  font-size: 10vw;
+  font-size: 15vw;
   opacity: 0.4;
   margin: 0 auto;
 }
@@ -99,9 +99,17 @@ a:focus {
     align-items: center;
   }
 
+  #title {
+    font-size: 15rem;
+    line-height: 1.6;
+  }
+
   h2 {
+    font-size: 3rem;
     text-align: unset;
     margin: unset;
-    font-size: 3rem;
   }
+}
+
+@media (min-width: 1000px) {
 }
