@@ -16,7 +16,7 @@
 body {
   background-color: var(--colour-bg);
   font-family: 'Garamond', monospace;
-  font-size: 1.5em;
+  font-size: 20px;
   margin: 15vh var(--pad);
   color: var(--colour-primary);
 }
