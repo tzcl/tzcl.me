@@ -8,9 +8,9 @@
   --pad-large: 2rem;
   --space: calc(var(--pad) * 4);
   --text-width: 40rem;
-  --colour-bg: #f2c8aa;
-  --colour-primary: ivory;
-  --colour-secondary: #13527f;
+  --color-bg: #fff;
+  --colour-primary: #383838;
+  --colour-secondary: #99C4FF;
 }
 
 body {
@@ -39,7 +39,7 @@ h6 {font-size: 1em;}
 #title {
   font-size: 30vw;
   line-height: 1;
-  background-image: url("2.jpg");
+  background-image: url("sky.jpg");
   background-size: cover;
   background-clip: text;
   -webkit-background-clip: text;
@@ -67,9 +67,9 @@ li {
 }
 
 a {
-  color: var(--colour-secondary);
+  color: var(--colour-primary);
   text-decoration: none;
-  box-shadow: inset 0 -0.6em 0 var(--colour-primary);
+  box-shadow: inset 0 -0.6em 0 var(--colour-secondary);
   transition-property: box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
@@ -77,7 +77,7 @@ a {
 
 a:hover,
 a:focus {
-  box-shadow: inset 0 -0.15em 0 var(--colour-primary);
+  box-shadow: inset 0 -0.15em 0 var(--colour-secondary);
 }
 
 a:focus {
