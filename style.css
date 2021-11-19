@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Garamond';
-  src: url('EBGaramond-Regular.ttf') format('truetype');
+  font-family: "Garamond";
+  src: url("EBGaramond-Regular.ttf") format("truetype");
 }
 
 :root {
@@ -10,40 +10,57 @@
   --text-width: 40rem;
   --color-bg: #fff;
   --colour-primary: #383838;
-  --colour-secondary: #99C4FF;
+  --colour-secondary: #99c4ff;
 }
 
 body {
   background-color: var(--colour-bg);
-  font-family: 'Garamond', monospace;
+  font-family: "Garamond", monospace;
   font-size: 20px;
   margin: 15vh var(--pad);
   color: var(--colour-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font: 100%/1.6 'Lora', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: 100%/1.6 "Lora", serif;
   font-weight: 700;
   margin: var(--space) 0 var(--pad-large) 0;
   color: var(--colour-primary);
   text-align: center;
 }
 
-h1 {font-size: 3.125em;}
-h2 {font-size: 2.618em;}
-h3 {font-size: 1.931em;}
-h4 {font-size: 1.618em;}
-h5 {font-size: 1.194em;}
-h6 {font-size: 1em;}
+h1 {
+  font-size: 3.125em;
+}
+h2 {
+  font-size: 2.618em;
+}
+h3 {
+  font-size: 1.931em;
+}
+h4 {
+  font-size: 1.618em;
+}
+h5 {
+  font-size: 1.194em;
+}
+h6 {
+  font-size: 1em;
+}
 
 #title {
   font-size: 30vw;
   line-height: 1;
-  background-image: url("sky.jpg");
   background-size: cover;
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
+  color: var(--colour-primary);
+  transition: color 0.5s;
 }
 
 h2 {
@@ -111,4 +128,23 @@ a:focus {
     font-size: 15rem;
     line-height: 1.6;
   }
+}
+
+.hidden {
+  height: 0;
+}
+
+.loading {
+  opacity: 0;
+  transform: translateY(1em);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loaded #title {
+  color: transparent;
 }

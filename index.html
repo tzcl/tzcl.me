@@ -1,44 +1,85 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134957270-1"></script>
-        <script>
+<head>
+    <meta charset="utf-8">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+    <script async src=
+    "https://www.googletagmanager.com/gtag/js?id=UA-134957270-1"></script>
+    <script>
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
 
          gtag('config', 'UA-134957270-1');
-        </script>
-        <!-- Inspired by Violet Pena: violet.is -->
-        <meta charset="utf-8">
-        <title>Toby Law</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1 id="title">Toby Law</h1>
-        <div class="center">
-            <ul>
-                <li>Computer Science and Maths major at the University of Melbourne</li>
-                <li>Aspiring software engineer with an interest in data science and machine learning</li>
-                <li>Emacs enthusiast, writer, Atlanta Hawks fan</li>
-            </ul>
-        </div>
-        <div class="other">
-            <!-- <h2>Writing</h2>
+    </script><!-- Inspired by Violet Pena: violet.is -->
+    <title>Toby Law</title>
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1">
+    <link href=
+    '//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic'
+    rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="title">Toby Law</h1>
+    <div class="center">
+        <ul>
+            <li>Computer Science and Maths major at the University
+            of Melbourne</li>
+            <li>Aspiring software engineer with an interest in data
+            science and machine learning</li>
+            <li>Emacs enthusiast, writer, Atlanta Hawks fan</li>
+        </ul>
+    </div>
+    <div class="other">
+        <!-- <h2>Writing</h2>
                  <ul>
                  <li><a href="mailto:toby@tzcl.me">email</a></li>
                  <li><a href="https://github.com/tzcl">github</a></li>
                  <li><a href="https://linkedin.com/tzcl">linkedin</a></li>
                  </ul> -->
-            <h2>Contact</h2>
-            <ul>
-                <li><a href="mailto:toby@tzcl.me">email</a></li>
-                <li><a href="https://github.com/tzcl">github</a></li>
-                <li><a href="https://linkedin.com/in/tobylaw">linkedin</a></li>
-            </ul>
-        </div>
-    </body>
+        <h2>Contact</h2>
+        <ul>
+            <li>
+                <a href="mailto:toby@tzcl.me">email</a>
+            </li>
+            <li>
+                <a href="https://github.com/tzcl">github</a>
+            </li>
+            <li>
+                <a href=
+                "https://linkedin.com/in/tobylaw">linkedin</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+     function setLoading() {
+         document.body.classList.add('loading');
+     }
+
+     function setLoaded() {
+         document.body.classList.add('loaded');
+     }
+
+     function loadImage() {
+         const preloadImage = document.createElement('img');
+         preloadImage.classList.add('hidden');
+         preloadImage.src = `sky.jpg`;
+
+         const title = document.getElementById('title');
+         title.parentElement.appendChild(preloadImage);
+
+         preloadImage.addEventListener('load', () => {
+             title.style.backgroundImage = `url(sky.jpg)`;
+             setLoaded();
+         }, { once: true });
+     }
+
+     document.addEventListener('DOMContentLoaded', () => {
+         setLoading();
+         loadImage();
+     });
+    </script>
+</body>
 </html>
