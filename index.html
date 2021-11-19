@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
+    <!-- Inspired by Violet Pena: violet.is -->
     <meta charset="utf-8">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
     <script async src=
     "https://www.googletagmanager.com/gtag/js?id=UA-134957270-1"></script>
     <script>
@@ -12,18 +11,18 @@
          gtag('js', new Date());
 
          gtag('config', 'UA-134957270-1');
-    </script><!-- Inspired by Violet Pena: violet.is -->
+    </script>
     <title>Toby Law</title>
     <meta name="viewport" content=
     "width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="apple-touch-icon" sizes="180x180" href=
     "apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href=
     "favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href=
     "favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
     <h1 id="title">Toby Law</h1>
@@ -37,18 +36,15 @@
         </ul>
     </div>
     <div class="other">
-        <h2>Writing</h2>
-        <ul>
-            <li>
-                <a href="mailto:toby@tzcl.me">email</a>
-            </li>
-            <li>
-                <a href="https://github.com/tzcl">github</a>
-            </li>
-            <li>
-                <a href="https://linkedin.com/tzcl">linkedin</a>
-            </li>
-        </ul>
+        <!-- <h2>Writing</h2>
+             <ul>
+             <li>
+             <a href="blog.html">blog</a>
+             </li>
+             <li>
+             <a href="/">notes</a>
+             </li>
+             </ul> -->
         <h2>Contact</h2>
         <ul>
             <li>
@@ -75,13 +71,13 @@
      function loadImage() {
          const preloadImage = document.createElement('img');
          preloadImage.classList.add('hidden');
-         preloadImage.src = `sky.jpg`;
+         preloadImage.src = `img/sky.jpg`;
 
          const title = document.getElementById('title');
          title.parentElement.appendChild(preloadImage);
 
          preloadImage.addEventListener('load', () => {
-             title.style.backgroundImage = `url(sky.jpg)`;
+             title.style.backgroundImage = `url(img/sky.jpg)`;
              setLoaded();
          }, { once: true });
      }
