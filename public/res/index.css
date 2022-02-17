@@ -2,12 +2,12 @@
   font-family: "Lora";
   font-style: normal;
   font-weight: 700;
-  src: url("../fonts/lora.woff2") format("woff2");
+  src: url("lora.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Garamond";
-  src: url("../fonts/EBGaramond-Regular.ttf") format("truetype");
+  src: url("EBGaramond-Regular.ttf") format("truetype");
 }
 
 :root {
