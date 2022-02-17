@@ -15,17 +15,17 @@
   --pad-large: 2rem;
   --space: calc(var(--pad) * 4);
   --text-width: 40rem;
-  --color-bg: #fff;
-  --colour-primary: #383838;
-  --colour-secondary: #99c4ff;
+  --colour-bg: #fffff8;
+  --colour-text: #383838;
+  --colour-primary: #1166aa;
+  --colour-secondary: #e2efff;
 }
 
 body {
   background-color: var(--colour-bg);
   font-family: "Garamond", monospace;
-  font-size: 20px;
-  margin: 15vh var(--pad);
-  color: var(--colour-primary);
+  font-size: 24px;
+  color: var(--colour-text);
 }
 
 h1,
@@ -36,8 +36,8 @@ h5,
 h6 {
   font: 100%/1.6 "Lora", serif;
   font-weight: 700;
-  margin: var(--space) 0 var(--pad-large) 0;
-  color: var(--colour-primary);
+  margin: 0 0 var(--pad-large) 0;
+  color: var(--colour-text);
   text-align: center;
 }
 
@@ -66,7 +66,7 @@ h6 {
   background-size: cover;
   background-clip: text;
   -webkit-background-clip: text;
-  color: var(--colour-primary);
+  color: var(--colour-text);
   transition: color 0.5s;
 }
 
@@ -93,7 +93,7 @@ li {
 a {
   color: var(--colour-primary);
   text-decoration: none;
-  box-shadow: inset 0 -0.6em 0 var(--colour-secondary);
+  box-shadow: inset 0 -0.5em 0 var(--colour-secondary);
   transition-property: box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
