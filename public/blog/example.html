@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-03-20 Sun 17:54 -->
+<!-- 2022-03-20 Sun 19:11 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tufte CSS</title>
@@ -34,7 +34,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<nil id="nil" class="content">
+<article id="content" class="content">
 <header>
 <h1 class="title">Tufte CSS</h1>
 <p class="subtitle" role="doc-subtitle">Dave Liepmann</p>
@@ -59,7 +59,7 @@
 </div>
 </nav>
 
-
+<section id="outline-2" class="nil">
 <h2 id="overview">Overview</h2>
 <p>
 Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte&rsquo;s books and handouts. Tufte&rsquo;s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
@@ -76,8 +76,9 @@ If you see anything that Tufte CSS could improve, we welcome your contribution i
 <p>
 Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="getting-started">Getting Started</h2>
 <p>
 To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> directory of font files to your project directory, then add the following to your HTML document&rsquo;s <code>head</code> block:
@@ -88,8 +89,9 @@ To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> direc
 <p>
 Now you just have to use the provided CSS rules, and the Tufte CSS conventions described in this document. For best results, View Source and Inspect Element frequently.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="fundamentals">Fundamentals</h2>
 
 <h3 id="sections-and-headings">Sections and Headings</h3>
@@ -141,8 +143,9 @@ Links in Tufte CSS match the body text in colour and do not change on mouseover 
 <p>
 As always, these design choices are merely one approach that Tufte CSS provides by default. Other approaches can be made to work. The goal is to make sentences readable without interference from links, as well as to make links immediately identifiable even by casual web users.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="epigraphs">Epigraphs</h2>
 <p>
 Note, each of these <code>blockquotes</code> has their own <code>div</code> rather than sharing a common epigraph <code>div</code>.
@@ -172,8 +175,9 @@ I do not paint things, I paint only the differences between things.
 <p>
 If you&rsquo;d like to introduce your page or a section of your page with some quotes, use epigraphs. Modelled after chapter epigraphs on Tufte&rsquo;s books (particularly <cite>Beautiful Evidence</cite>), these are <code>blockquote</code> elements with a bit of specialised styling. Quoted text is italicised. The source goes in a <code>footer</code> element inside the <code>blockquote</code>. We have provided three examples in the epigraph of this section, demonstrating shorter and longer quotes, with and without a paragraph tag, and showing how multiple quotes within an epigraph fit together with the use of a wrapper class.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="sidenotes:-footnotes-and-marginal-notes">Sidenotes: Footnotes and Marginal Notes</h2>
 <p>
 One of the most distinctive features of Tufte&rsquo;s style is his extensive use of sidenotes.<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">This is a sidenote.</span> Sidenotes are like footnotes, except they don&rsquo;t force the reader to jump their eye to the bottom of the page, but instead display off to the side in the margin. Perhaps you have noticed their use in this document already. You are very astute.
@@ -215,8 +219,9 @@ Margin notes are created just like sidenotes, but with the <code>marginnote</cod
 <p>
 Figures in the margin are created as margin notes, as demonstrated in the next section.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="figures">Figures</h2>
 <p>
 Tufte emphasises tight integration of graphics with text. Data, graphs, and figures are kept with the text that discusses them. In print, this means they are not relegated to a spearate page. On the web, that means readability of graphics and their accompanying text without extra clicks, tab-switching, or scrolling.
@@ -226,7 +231,7 @@ Tufte emphasises tight integration of graphics with text. Data, graphs, and figu
 Figures should try to use the <code>figure</code> element, which by default are constrained to the main column. Don&rsquo;t wrap figures in a paragraph tag. Any label or margin note goes in a regular margin note inside the figure. For example, most of the time one should introduce a figure directly into the main flow of discussion, like so:
 </p>
 
-<figure id="orgec76b0a">
+<figure id="org412ef99">
 <img src="img/exports-imports.png" alt="Exports and Imports to and from Denmark &amp; Norway from 1700 to 1780">
 
 </figure>
@@ -259,8 +264,9 @@ One obstacle to creating elegant figures on the web is the difficulty of handlin
 <p>
 You can use this class on a <code>div</code> instead of a <code>figure</code>, with slightly different results but the same general effect. Experiment and choose depending on your application.
 </p>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="code">Code</h2>
 <p>
 Technical jargon, programming language terms, and code samples are denoted with the <code>code</code> class, as I&rsquo;ve been sing in this document to denote HTML. Code needs to be monospace for formatting purposes and to aid in code analysis, but it must maintain its readability. To those ends, Tufte CSS follows GitHub&rsquo;s font selection, which shifts gracefully along the monospace spectrum from the elegant but rare Consolas all the way to goold old reliable Courier.
@@ -269,16 +275,18 @@ Technical jargon, programming language terms, and code samples are denoted with 
 <p>
 Extended code examples should live in a <code>code</code> element within a <code>pre</code> element. This adds control over indentation and overflow as well:
 </p>
-<pre class="code"><code><span style="color: #268bd2;">(</span><span style="color: #859900; font-weight: bold;">define</span> <span style="color: #d33682;">(</span><span style="color: #b58900;">fact</span> n<span style="color: #d33682;">)</span>
-  <span style="color: #d33682;">(</span><span style="color: #859900; font-weight: bold;">if</span> <span style="color: #859900;">(</span>= n <span style="color: #6c71c4; font-weight: bold;">1</span><span style="color: #859900;">)</span> <span style="color: #6c71c4; font-weight: bold;">1</span>
-      <span style="color: #859900;">(</span>* n <span style="color: #6c71c4;">(</span>fact <span style="color: #268bd2;">(</span>1- n<span style="color: #268bd2;">)</span><span style="color: #6c71c4;">)</span><span style="color: #859900;">)</span><span style="color: #d33682;">)</span><span style="color: #268bd2;">)</span>
+<pre class="code"><code><span style="color: #AB9DF2;">(</span><span style="color: #FF6188;">define</span> <span style="color: #78DCE8;">(</span><span style="color: #A9DC76;">fact</span> n<span style="color: #78DCE8;">)</span>
+  <span style="color: #78DCE8;">(</span><span style="color: #FF6188;">if</span> <span style="color: #FC9867;">(</span>= n <span style="color: #AB9DF2; font-weight: bold;">1</span><span style="color: #FC9867;">)</span> <span style="color: #AB9DF2; font-weight: bold;">1</span>
+      <span style="color: #FC9867;">(</span>* n <span style="color: #A9DC76;">(</span>fact <span style="color: #AB9DF2;">(</span>1- n<span style="color: #AB9DF2;">)</span><span style="color: #A9DC76;">)</span><span style="color: #FC9867;">)</span><span style="color: #78DCE8;">)</span><span style="color: #AB9DF2;">)</span>
 </code></pre>
+</section>
 
-
+<section id="outline-2" class="nil">
 <h2 id="epilogue">Epilogue</h2>
 <p>
 Many thanks go to Edward Tufte for leading the way with his work. It is only through his kind and careful editing that this project accomplishes what it does. All errors of implementation are of course mine.
 </p>
+</section>
 <!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="http://www.edwardtufte.com/tufte/books_be">Beautiful Evidence</a></p></div></div>
 
@@ -286,6 +294,6 @@ Many thanks go to Edward Tufte for leading the way with his work. It is only thr
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">This is a sidenote.</p></div></div>
 
- --></nil>
+ --></article>
 </body>
 </html>
