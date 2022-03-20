@@ -1,4 +1,5 @@
 #+TITLE: Syncthing
+#+OPTIONS: toc:t
 
 [[../blog.html][← Back to blog]]
 
@@ -6,7 +7,7 @@ Last modified: <2022-03-20 Sun>
 
 * Other file sync solutions
 I've been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I've tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven't been completely satisfied with them.
-+ Dropbox: Only starts you with 2 GB (up to 16 GB if you complete all the tasks and refer other people), which just isn't enough for how I work (I like storing a bunch of reference material). Overall though, I enjoyed the user experience of Dropbox the most and think it's maybe the most suitable for less technical users.
++ Dropbox: Only starts you with 2 GB (up to 16 GB if you complete all the tasks and refer other people), which just isn't enough for how I work[fn:: I like storing a bunch of reference material and having it on hand across all my devices]. Overall though, I enjoyed the user experience of Dropbox the most and think it's maybe the most suitable for less technical users.
 + Google Drive: Similar to Dropbox, the free plan only gives you 15 GB of space and that's shared across all of your Google services. Additionally, I had a lot of trouble getting Google Drive to work on Linux properly -- despite Google saying an official client was in the works for years, nothing ever came out. There are third party clients you can use, but I would relatively frequently run into sync issues that were a headache to debug and fix.
 + MEGAsync: Finally I came across something that seemed like my long-term solution. MEGAsync offers 50 GB of storage on its free tier and is cross-platform; I was able to get it running on Windows/MacOS/Linux without too much trouble. It also has mobile apps and a web client which have been great for transferring files between my computer and my phone and The main issue I'm having with it now is that on my MacBook, it won't automatically detect changes and I frequently have to restart the client to force a sync.
 
@@ -45,7 +46,7 @@ sudo apt-get install syncthing
 
 The version of Syncthing available by default with Ubuntu is old and doesn't run properly so it's important to add either the "candidate" or "stable" channel.
 
-Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL: "As of Nov 2021, Canonical is working on bring systemd to WSL." Instead, my approach was to add the following snippet to my =.zprofile=:
+Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL[fn::  [[https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/][As of Nov 2021, Canonical is working on bringing systemd to WSL.]]]. Instead, my approach was to add the following snippet to my =.zprofile=:
 #+begin_src shell
 # Start Syncthing
 if ! /usr/bin/pgrep syncthing > /dev/null; then

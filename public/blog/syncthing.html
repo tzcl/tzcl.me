@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-03-20 Sun 20:58 -->
+<!-- 2022-03-20 Sun 22:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Syncthing</title>
@@ -13,7 +13,19 @@
 <article id="content" class="content">
 <header>
 <h1 class="title">Syncthing</h1>
-</header><p>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4e7c6e1">Other file sync solutions</a></li>
+<li><a href="#org1afe0ae">Why Syncthing?</a></li>
+<li><a href="#org13af67c">Installing on MacBook</a></li>
+<li><a href="#org5997ec5">Installing on Windows (WSL)</a></li>
+<li><a href="#orgceb3815">Sharing a folder between devices</a></li>
+</ul>
+</div>
+</nav>
+<p>
 <a href="../blog.html">← Back to blog</a>
 </p>
 
@@ -27,7 +39,7 @@ Last modified: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-
 I&rsquo;ve been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I&rsquo;ve tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven&rsquo;t been completely satisfied with them.
 </p>
 <ul class="org-ul">
-<li>Dropbox: Only starts you with 2 GB (up to 16 GB if you complete all the tasks and refer other people), which just isn&rsquo;t enough for how I work (I like storing a bunch of reference material). Overall though, I enjoyed the user experience of Dropbox the most and think it&rsquo;s maybe the most suitable for less technical users.</li>
+<li>Dropbox: Only starts you with 2 GB (up to 16 GB if you complete all the tasks and refer other people), which just isn&rsquo;t enough for how I work<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">I like storing a bunch of reference material and having it on hand across all my devices</span>. Overall though, I enjoyed the user experience of Dropbox the most and think it&rsquo;s maybe the most suitable for less technical users.</li>
 <li>Google Drive: Similar to Dropbox, the free plan only gives you 15 GB of space and that&rsquo;s shared across all of your Google services. Additionally, I had a lot of trouble getting Google Drive to work on Linux properly &#x2013; despite Google saying an official client was in the works for years, nothing ever came out. There are third party clients you can use, but I would relatively frequently run into sync issues that were a headache to debug and fix.</li>
 <li>MEGAsync: Finally I came across something that seemed like my long-term solution. MEGAsync offers 50 GB of storage on its free tier and is cross-platform; I was able to get it running on Windows/MacOS/Linux without too much trouble. It also has mobile apps and a web client which have been great for transferring files between my computer and my phone and The main issue I&rsquo;m having with it now is that on my MacBook, it won&rsquo;t automatically detect changes and I frequently have to restart the client to force a sync.</li>
 </ul>
@@ -87,7 +99,7 @@ The version of Syncthing available by default with Ubuntu is old and doesn&rsquo
 </p>
 
 <p>
-Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL: &ldquo;As of Nov 2021, Canonical is working on bring systemd to WSL.&rdquo; Instead, my approach was to add the following snippet to my <code>.zprofile</code>:
+Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote"><a href="https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As of Nov 2021, Canonical is working on bringing systemd to WSL.</a></span>. Instead, my approach was to add the following snippet to my <code>.zprofile</code>:
 </p>
 <pre class="code"><code><span style="color: #727072;"># </span><span style="color: #727072;">Start Syncthing</span>
 <span style="color: #FF6188;">if</span> <span style="color: #FF6188; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #FF6188;">then</span>
@@ -106,6 +118,11 @@ I&rsquo;ve added my MacBook Air to my Windows desktop machine. Then sharing a fo
 So far, I&rsquo;ve only shared my org files, but they&rsquo;re by far the files I edit the most.
 </p>
 </section>
-</article>
+<!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I like storing a bunch of reference material and having it on hand across all my devices</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As of Nov 2021, Canonical is working on bringing systemd to WSL.</a></p></div></div>
+
+ --></article>
 </body>
 </html>
