@@ -218,6 +218,30 @@ is nil. INFO is a plist used as a communication channel."
   (format "<pre class=\"code\"><code>%s</code></pre>"
           (org-html-format-code src-block info)))
 
+(defun org-html-toc (depth info &optional scope)
+  "Overwrite toc generation to remove heading"
+  (let ((toc-entries
+         (mapcar (lambda (headline)
+                   (cons (org-html--format-toc-headline headline info)
+                         (org-export-get-relative-level headline info)))
+                 (org-export-collect-headlines info depth scope))))
+    (when toc-entries
+      (let ((toc (concat "<div id=\"text-table-of-contents\" role=\"doc-toc\">"
+                         (org-html--toc-text toc-entries)
+                         "</div>\n")))
+        (if scope toc
+          (let ((outer-tag (if (org-html--html5-fancy-p info)
+                               "nav"
+                             "div")))
+            (concat (format "<%s id=\"table-of-contents\" role=\"doc-toc\">\n" outer-tag)
+                    (let ((top-level (plist-get info :html-toplevel-hlevel)))
+                      (format "<h%d>%s</h%d>\n"
+                              top-level
+                              ""
+                              top-level))
+                    toc
+                    (format "</%s>\n" outer-tag))))))))
+
 ;;; Export functions
 
 ;;;###autoload
