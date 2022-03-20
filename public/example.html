@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-02-17 Thu 14:13 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-03-20 Sun 17:54 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tufte CSS</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Toby Law">
+<meta name="author" content="Toby Law" />
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="res/tufte.min.css" />
 <script type="text/x-mathjax-config">
+   <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         displayAlign: "center",
         displayIndent: "0em",
@@ -26,21 +27,42 @@
                TagSide: "right",
                TagIndent: ".8em"
              }
-});
-</script>
-<script type="text/javascript"
+  });
+  /*]]>*///-->
+  </script>
+  <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<article id="content">
+<nil id="nil" class="content">
 <header>
 <h1 class="title">Tufte CSS</h1>
-<p class="subtitle">Dave Liepmann</p>
-</header>
-<section id="outline-2" class="nil">
+<p class="subtitle" role="doc-subtitle">Dave Liepmann</p>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb21e55a">Overview</a></li>
+<li><a href="#orgc9fde35">Getting Started</a></li>
+<li><a href="#org2fa9bfd">Fundamentals</a>
+<ul>
+<li><a href="#org1106d8a">Sections and Headings</a></li>
+<li><a href="#orgfcdf442">Text</a></li>
+</ul>
+</li>
+<li><a href="#org708a4d6">Epigraphs</a></li>
+<li><a href="#org61053b5">Sidenotes: Footnotes and Marginal Notes</a></li>
+<li><a href="#orgaadb471">Figures</a></li>
+<li><a href="#orgeb7f556">Code</a></li>
+<li><a href="#org32445e0">Epilogue</a></li>
+</ul>
+</div>
+</nav>
+
+
 <h2 id="overview">Overview</h2>
 <p>
-Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte's books and handouts. Tufte's style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
+Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte&rsquo;s books and handouts. Tufte&rsquo;s style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.
 </p>
 
 <p>
@@ -54,12 +76,11 @@ If you see anything that Tufte CSS could improve, we welcome your contribution i
 <p>
 Finally, a reminder about the goal of this project. The web is not print. Webpages are not books. Therefore, the goal of Tufte CSS is not to say “websites should look like this interpretation of Tufte’s books” but rather “here are some techniques Tufte developed that we’ve found useful in print; maybe you can find a way to make them useful on the web”. Tufte CSS is merely a sketch of one way to implement this particular set of ideas. It should be a starting point, not a design goal, because any project should present their information as best suits their particular circumstances.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="getting-started">Getting Started</h2>
 <p>
-To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> directory of font files to your project directory, then add the following to your HTML document's <code>head</code> block:
+To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> directory of font files to your project directory, then add the following to your HTML document&rsquo;s <code>head</code> block:
 </p>
 <pre class="code"><code>&lt;link rel="stylesheet" href="tufte.css" /&gt;
 </code></pre>
@@ -67,9 +88,8 @@ To use Tufte CSS, copy <code>tufte.css</code> and the <code>et-book</code> direc
 <p>
 Now you just have to use the provided CSS rules, and the Tufte CSS conventions described in this document. For best results, View Source and Inspect Element frequently.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="fundamentals">Fundamentals</h2>
 
 <h3 id="sections-and-headings">Sections and Headings</h3>
@@ -82,7 +102,7 @@ Tufte CSS uses <code>h1</code> for the document title, <code>p</code> with class
 </p>
 
 <blockquote><p>
-[It is] notable that the Feynman lectures (3 volumes) write about all of physics in 1800 pages, using only 2 levels of hierarchical headings: chapters and A-level heads in the text. It also uses the methodology of <i>sentences</i> which then cumulate sequentially into <i>paragraphs</i>, rather than the grunt of bullet points. Undergraduate Caltech physics is very complicated material, but it didn't require an elaborate hierarchy to organise.
+[It is] notable that the Feynman lectures (3 volumes) write about all of physics in 1800 pages, using only 2 levels of hierarchical headings: chapters and A-level heads in the text. It also uses the methodology of <i>sentences</i> which then cumulate sequentially into <i>paragraphs</i>, rather than the grunt of bullet points. Undergraduate Caltech physics is very complicated material, but it didn&rsquo;t require an elaborate hierarchy to organise.
 </p>
 
 <footer><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">Edward Tufte, forum post, 'Book design: advice and examples' thread</a></footer>
@@ -99,11 +119,11 @@ As a bonus, this excerpt regarding the use of headings provides an example of bl
 
 <h3 id="text">Text</h3>
 <p>
-Although paper handouts obviously have a pure white background, the web is better served by the use of slightly off-white and off-black colours. Tufte CSS uses <code>#fffff8</code> and <code>#111111</code> because they are nearly indistinguishable from their 'pure' cousins, but dial down the harsh contrast. We stick to the greyscale for text, reserving colour for specific, careful use in figures and images.
+Although paper handouts obviously have a pure white background, the web is better served by the use of slightly off-white and off-black colours. Tufte CSS uses <code>#fffff8</code> and <code>#111111</code> because they are nearly indistinguishable from their &rsquo;pure&rsquo; cousins, but dial down the harsh contrast. We stick to the greyscale for text, reserving colour for specific, careful use in figures and images.
 </p>
 
 <p>
-In print, Tufte has used the proprietary Monotype Bembo<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">See Tufte's comment in the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> thread.</span>. A similar effect is achieved in digital formats with the now open-source <a href="https://github.com/edwardtufte/et-book">ETBook</a>, which Tufte CSS supplies with a <code>@font-face</code> reference to the <code>.ttf</code> file. In case ETBook somehow doesn't work, Tufte CSS shifts gracefully to other serif fonts like Palatino and Georgia.
+In print, Tufte has used the proprietary Monotype Bembo<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">See Tufte&rsquo;s comment in the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> thread.</span>. A similar effect is achieved in digital formats with the now open-source <a href="https://github.com/edwardtufte/et-book">ETBook</a>, which Tufte CSS supplies with a <code>@font-face</code> reference to the <code>.ttf</code> file. In case ETBook somehow doesn&rsquo;t work, Tufte CSS shifts gracefully to other serif fonts like Palatino and Georgia.
 </p>
 
 <p>
@@ -111,19 +131,18 @@ Also notice how Tufte CSS includes separate font files for bold (strong) and ita
 </p>
 
 <p class="sans">
-If you prefer sans-serif, use the <code>sans</code> class. It relies on Gill Sans, Tufte's sans-serif font of choice.
+If you prefer sans-serif, use the <code>sans</code> class. It relies on Gill Sans, Tufte&rsquo;s sans-serif font of choice.
 </p>
 
 <p>
-Links in Tufte CSS match the body text in colour and do not change on mouseover or when clicked. Here is a <a href="#">dummy example</a> that goes nowhere. These links are underlined, since this is the most widely recognised indicator of clickable text. <label for="blue-text" class="margin-toggle">&#8853;</label><input type="checkbox" id="blue-text" class="margin-toggle"/><span class="marginnote">Blue text, while also a widely recognisable clickable-text indicator, is crass and distracting. Luckily, it is also rendered unnecessary by the use of underlining.</span> However, because most browsers' default underlining does not clear descenders and is so thick and distracting, the underline effect is instead achieved using CSS trickery involving background gradients instead of the standard <code>text-decoration</code>. Credit goes to Adam Schwartz for that technique.
+Links in Tufte CSS match the body text in colour and do not change on mouseover or when clicked. Here is a <a href="#">dummy example</a> that goes nowhere. These links are underlined, since this is the most widely recognised indicator of clickable text. <label for="blue-text" class="margin-toggle">&#8853;</label><input type="checkbox" id="blue-text" class="margin-toggle"/><span class="marginnote">Blue text, while also a widely recognisable clickable-text indicator, is crass and distracting. Luckily, it is also rendered unnecessary by the use of underlining.</span> However, because most browsers&rsquo; default underlining does not clear descenders and is so thick and distracting, the underline effect is instead achieved using CSS trickery involving background gradients instead of the standard <code>text-decoration</code>. Credit goes to Adam Schwartz for that technique.
 </p>
 
 <p>
 As always, these design choices are merely one approach that Tufte CSS provides by default. Other approaches can be made to work. The goal is to make sentences readable without interference from links, as well as to make links immediately identifiable even by casual web users.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="epigraphs">Epigraphs</h2>
 <p>
 Note, each of these <code>blockquotes</code> has their own <code>div</code> rather than sharing a common epigraph <code>div</code>.
@@ -151,14 +170,13 @@ I do not paint things, I paint only the differences between things.
 <footer>Henri Matisse, <cite>Henri Matisse Desins: thèmes et variations</cite> (Paris, 1943), 37</footer></blockquote></div>
 
 <p>
-If you'd like to introduce your page or a section of your page with some quotes, use epigraphs. Modelled after chapter epigraphs on Tufte's books (particularly <cite>Beautiful Evidence</cite>), these are <code>blockquote</code> elements with a bit of specialised styling. Quoted text is italicised. The source goes in a <code>footer</code> element inside the <code>blockquote</code>. We have provided three examples in the epigraph of this section, demonstrating shorter and longer quotes, with and without a paragraph tag, and showing how multiple quotes within an epigraph fit together with the use of a wrapper class.
+If you&rsquo;d like to introduce your page or a section of your page with some quotes, use epigraphs. Modelled after chapter epigraphs on Tufte&rsquo;s books (particularly <cite>Beautiful Evidence</cite>), these are <code>blockquote</code> elements with a bit of specialised styling. Quoted text is italicised. The source goes in a <code>footer</code> element inside the <code>blockquote</code>. We have provided three examples in the epigraph of this section, demonstrating shorter and longer quotes, with and without a paragraph tag, and showing how multiple quotes within an epigraph fit together with the use of a wrapper class.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="sidenotes:-footnotes-and-marginal-notes">Sidenotes: Footnotes and Marginal Notes</h2>
 <p>
-One of the most distinctive features of Tufte's style is his extensive use of sidenotes.<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">This is a sidenote.</span> Sidenotes are like footnotes, except they don't force the reader to jump their eye to the bottom of the page, but instead display off to the side in the margin. Perhaps you have noticed their use in this document already. You are very astute.
+One of the most distinctive features of Tufte&rsquo;s style is his extensive use of sidenotes.<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">This is a sidenote.</span> Sidenotes are like footnotes, except they don&rsquo;t force the reader to jump their eye to the bottom of the page, but instead display off to the side in the margin. Perhaps you have noticed their use in this document already. You are very astute.
 </p>
 
 <p>
@@ -173,7 +191,7 @@ Sidenotes consist of two elements: a superscript reference number that goes inli
 </code></pre>
 
 <p>
-You must manually assign a reference <code>id</code> to each side or margin note, replacing "sn-demo" in the <code>for</code> and the <code>id</code> attribute values with an appropriate descriptor. It is useful to use prefixes like <code>sn-</code> for sidenotes and <code>mn-</code> for margin notes.
+You must manually assign a reference <code>id</code> to each side or margin note, replacing &ldquo;sn-demo&rdquo; in the <code>for</code> and the <code>id</code> attribute values with an appropriate descriptor. It is useful to use prefixes like <code>sn-</code> for sidenotes and <code>mn-</code> for margin notes.
 </p>
 
 <p>
@@ -181,7 +199,7 @@ Immediately adjacent to that sidenote reference in the main text goes the sideno
 </p>
 
 <p>
-If you want a sidenote without footnote-style numberings, then you want a margin note. <label for="2" class="margin-toggle">&#8853;</label><input type="checkbox" id="2" class="margin-toggle"/><span class="marginnote">This is a margin note. Notice there isn't a number preceding the note.</span> On large screen,s a margin note is just a sidenote that omits the reference number. This lessens the distracting effect taking away from the flow of the main text, but can increase the cognitive load of matching a margin note to its referent text. However, on small screens, a margin note is like a sidenote except its viewability-toggle is a symbol rather than a reference number. This document currently uses the symbol &#8853; (<code>&amp;#8853;</code>), but it's up to you.
+If you want a sidenote without footnote-style numberings, then you want a margin note. <label for="2" class="margin-toggle">&#8853;</label><input type="checkbox" id="2" class="margin-toggle"/><span class="marginnote">This is a margin note. Notice there isn&rsquo;t a number preceding the note.</span> On large screen,s a margin note is just a sidenote that omits the reference number. This lessens the distracting effect taking away from the flow of the main text, but can increase the cognitive load of matching a margin note to its referent text. However, on small screens, a margin note is like a sidenote except its viewability-toggle is a symbol rather than a reference number. This document currently uses the symbol &#8853; (<code>&amp;#8853;</code>), but it&rsquo;s up to you.
 </p>
 
 <p>
@@ -197,19 +215,18 @@ Margin notes are created just like sidenotes, but with the <code>marginnote</cod
 <p>
 Figures in the margin are created as margin notes, as demonstrated in the next section.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="figures">Figures</h2>
 <p>
 Tufte emphasises tight integration of graphics with text. Data, graphs, and figures are kept with the text that discusses them. In print, this means they are not relegated to a spearate page. On the web, that means readability of graphics and their accompanying text without extra clicks, tab-switching, or scrolling.
 </p>
 
 <p>
-Figures should try to use the <code>figure</code> element, which by default are constrained to the main column. Don't wrap figures in a paragraph tag. Any label or margin note goes in a regular margin note inside the figure. For example, most of the time one should introduce a figure directly into the main flow of discussion, like so:
+Figures should try to use the <code>figure</code> element, which by default are constrained to the main column. Don&rsquo;t wrap figures in a paragraph tag. Any label or margin note goes in a regular margin note inside the figure. For example, most of the time one should introduce a figure directly into the main flow of discussion, like so:
 </p>
 
-<figure id="org4f77bc0">
+<figure id="orgec76b0a">
 <img src="img/exports-imports.png" alt="Exports and Imports to and from Denmark &amp; Norway from 1700 to 1780">
 
 </figure>
@@ -224,7 +241,7 @@ But tight integration of graphics with text is central to Tufte's work even when
 </p>
 
 <p>
-If you need a full-width figure, give it the <code>fullwidth</code> class. Make sure that's inside an <code>article</code>, and it will take up (almost) the full width of the screen. This approach is demonstrated using Edward Tufte's English translation of the Napoleon's March data visualisation. From <cite>Beautiful Evidence</cite>, page 122-124.
+If you need a full-width figure, give it the <code>fullwidth</code> class. Make sure that&rsquo;s inside an <code>article</code>, and it will take up (almost) the full width of the screen. This approach is demonstrated using Edward Tufte&rsquo;s English translation of the Napoleon&rsquo;s March data visualisation. From <cite>Beautiful Evidence</cite>, page 122-124.
 </p>
 
 <figure class="fullwidth">
@@ -242,36 +259,33 @@ One obstacle to creating elegant figures on the web is the difficulty of handlin
 <p>
 You can use this class on a <code>div</code> instead of a <code>figure</code>, with slightly different results but the same general effect. Experiment and choose depending on your application.
 </p>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="code">Code</h2>
 <p>
-Technical jargon, programming language terms, and code samples are denoted with the <code>code</code> class, as I've been sing in this document to denote HTML. Code needs to be monospace for formatting purposes and to aid in code analysis, but it must maintain its readability. To those ends, Tufte CSS follows GitHub's font selection, which shifts gracefully along the monospace spectrum from the elegant but rare Consolas all the way to goold old reliable Courier.
+Technical jargon, programming language terms, and code samples are denoted with the <code>code</code> class, as I&rsquo;ve been sing in this document to denote HTML. Code needs to be monospace for formatting purposes and to aid in code analysis, but it must maintain its readability. To those ends, Tufte CSS follows GitHub&rsquo;s font selection, which shifts gracefully along the monospace spectrum from the elegant but rare Consolas all the way to goold old reliable Courier.
 </p>
 
 <p>
 Extended code examples should live in a <code>code</code> element within a <code>pre</code> element. This adds control over indentation and overflow as well:
 </p>
-<pre class="code"><code>(<span style="font-weight: bold;">define</span> (<span style="font-weight: bold;">fact</span> n)
-  (<span style="font-weight: bold;">if</span> (= n 1) 1
-      (* n (fact (1- n)))))
+<pre class="code"><code><span style="color: #268bd2;">(</span><span style="color: #859900; font-weight: bold;">define</span> <span style="color: #d33682;">(</span><span style="color: #b58900;">fact</span> n<span style="color: #d33682;">)</span>
+  <span style="color: #d33682;">(</span><span style="color: #859900; font-weight: bold;">if</span> <span style="color: #859900;">(</span>= n <span style="color: #6c71c4; font-weight: bold;">1</span><span style="color: #859900;">)</span> <span style="color: #6c71c4; font-weight: bold;">1</span>
+      <span style="color: #859900;">(</span>* n <span style="color: #6c71c4;">(</span>fact <span style="color: #268bd2;">(</span>1- n<span style="color: #268bd2;">)</span><span style="color: #6c71c4;">)</span><span style="color: #859900;">)</span><span style="color: #d33682;">)</span><span style="color: #268bd2;">)</span>
 </code></pre>
-</section>
 
-<section id="outline-2" class="nil">
+
 <h2 id="epilogue">Epilogue</h2>
 <p>
 Many thanks go to Edward Tufte for leading the way with his work. It is only through his kind and careful editing that this project accomplishes what it does. All errors of implementation are of course mine.
 </p>
-</section>
 <!-- Footnotes --><!-- 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara"><a href="http://www.edwardtufte.com/tufte/books_be">Beautiful Evidence</a></p></div></div>
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="http://www.edwardtufte.com/tufte/books_be">Beautiful Evidence</a></p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">See Tufte's comment in the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> thread.</p></div></div>
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">See Tufte&rsquo;s comment in the <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Vt">Tufte book fonts</a> thread.</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">This is a sidenote.</p></div></div>
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">This is a sidenote.</p></div></div>
 
- --></article>
+ --></nil>
 </body>
 </html>
