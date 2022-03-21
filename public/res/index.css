@@ -25,7 +25,7 @@
 body {
   background-color: var(--colour-bg);
   font-family: "Garamond", monospace;
-  font-size: 24px;
+  font-size: 1.4em;
   color: var(--colour-text);
 }
 
