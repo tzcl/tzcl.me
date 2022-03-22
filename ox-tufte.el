@@ -80,8 +80,7 @@
            (full-text (funcall (plist-get info :html-format-headline-function)
                                todo todo-type priority text tags info))
            (contents (or contents ""))
-           ;; REVIEW: may not be sufficient -- try to find parent id?
-           (id (mapconcat #'downcase (split-string text) "-"))
+           (id (org-html--reference headline info))
            (formatted-text
             (if (plist-get info :html-self-link-headlines)
                 (format "<a href=\"#%s\">%s</a>" id full-text)
@@ -108,8 +107,7 @@
            (if (not (equal headline-container "div"))
                (format "<%s id=\"%s\" class=\"%s\">"
                        headline-container
-                       (concat (format "outline-%d" level)
-                               (and extra-class " "))
+                       id
                        extra-class))
            (format "\n<h%d id=\"%s\"%s>%s</h%d>\n"
                    level

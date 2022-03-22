@@ -3,7 +3,7 @@
 
 [[../blog.html][← Back to blog]]
 
-Last modified: <2022-03-20 Sun>
+Last modified: <2022-03-22 Tue>
 
 * Other file sync solutions
 I've been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I've tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven't been completely satisfied with them.

@@ -93,24 +93,41 @@ li {
 a {
   color: var(--colour-primary);
   text-decoration: none;
+}
+
+a span {
+  color: var(--colour-primary);
+  text-decoration: none;
   box-shadow: inset 0 -0.5em 0 var(--colour-secondary);
   transition-property: box-shadow;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
 }
 
-a:hover,
-a:focus {
+a span:hover,
+a span:focus {
   box-shadow: inset 0 -0.15em 0 var(--colour-secondary);
-}
-
-a:focus {
-  outline: none;
 }
 
 .center {
   margin: auto;
   max-width: var(--text-width);
+}
+
+.posts {
+  margin: 2em auto;
+  max-width: var(--text-width);
+}
+
+.post {
+  margin: 1em auto;
+  display: flex;
+  align-items: center;
+  gap: var(--pad);
+}
+
+.post aside {
+  flex: 0 0 20%;
 }
 
 @media (min-width: 44rem) {
