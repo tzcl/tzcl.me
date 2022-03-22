@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-03-20 Sun 22:08 -->
+<!-- 2022-03-22 Tue 11:08 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Syncthing</title>
@@ -17,11 +17,11 @@
 <h2></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4e7c6e1">Other file sync solutions</a></li>
-<li><a href="#org1afe0ae">Why Syncthing?</a></li>
-<li><a href="#org13af67c">Installing on MacBook</a></li>
-<li><a href="#org5997ec5">Installing on Windows (WSL)</a></li>
-<li><a href="#orgceb3815">Sharing a folder between devices</a></li>
+<li><a href="#org3bd60bf">Other file sync solutions</a></li>
+<li><a href="#orgca90341">Why Syncthing?</a></li>
+<li><a href="#orgc23d6b3">Installing on MacBook</a></li>
+<li><a href="#org67722c1">Installing on Windows (WSL)</a></li>
+<li><a href="#org263f71f">Sharing a folder between devices</a></li>
 </ul>
 </div>
 </nav>
@@ -30,11 +30,11 @@
 </p>
 
 <p>
-Last modified: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-03-20 Sun&gt;</span></span>
+Last modified: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-03-22 Tue&gt;</span></span>
 </p>
 
-<section id="outline-2" class="nil">
-<h2 id="other-file-sync-solutions">Other file sync solutions</h2>
+<section id="org3bd60bf" class="nil">
+<h2 id="org3bd60bf">Other file sync solutions</h2>
 <p>
 I&rsquo;ve been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I&rsquo;ve tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven&rsquo;t been completely satisfied with them.
 </p>
@@ -55,8 +55,8 @@ In summary, what I really want is a file sync service that is
 </ol>
 </section>
 
-<section id="outline-2" class="nil">
-<h2 id="why-syncthing?">Why Syncthing?</h2>
+<section id="orgca90341" class="nil">
+<h2 id="orgca90341">Why Syncthing?</h2>
 <p>
 I stumbled across <a href="https://tonsky.me/blog/syncthing/">Computers as I used to love them</a> and Syncthing seemed like the natural next step for me. I love that its free and open-source, and that it doesn&rsquo;t rely on some central server storing all of your files. It removes the artificial limitation of having to pay for storage space &#x2013; now I can sync as much as can fit on my hard-drive. Additionally, you can sync any folder on your hard-drive, it doesn&rsquo;t have to be contained within some central sync folder.
 </p>
@@ -66,8 +66,8 @@ The only downside is that there is no iOS app yet, but I don&rsquo;t really brow
 </p>
 </section>
 
-<section id="outline-2" class="nil">
-<h2 id="installing-on-macbook">Installing on MacBook</h2>
+<section id="orgc23d6b3" class="nil">
+<h2 id="orgc23d6b3">Installing on MacBook</h2>
 <p>
 Setting up Syncthing was super simple. To get set up, all you need to do is download a binary from the <a href="https://github.com/syncthing/syncthing/releases">project releases page</a> and run it. In my case, I just used Homebrew:
 </p>
@@ -80,18 +80,18 @@ By default, Syncthing runs on <code>localhost:8384</code>. To avoid Syncthing op
 </p>
 </section>
 
-<section id="outline-2" class="nil">
-<h2 id="installing-on-windows-(wsl)">Installing on Windows (WSL)</h2>
+<section id="org67722c1" class="nil">
+<h2 id="org67722c1">Installing on Windows (WSL)</h2>
 <p>
 To install Syncthing on Ubuntu (the OS I&rsquo;m using for WSL), it&rsquo;s as simple as
 </p>
-<pre class="code"><code><span style="color: #727072;"># </span><span style="color: #727072;">Add the release PGP keys:</span>
-<span style="color: #78DCE8;">sudo</span> <span style="color: #78DCE8;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
-<span style="color: #727072;"># </span><span style="color: #727072;">Add the "stable" channel to your APT sources:</span>
-<span style="color: #78DCE8;">echo</span> <span style="color: #FFD866;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #78DCE8;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
-<span style="color: #727072;"># </span><span style="color: #727072;">Update and install syncthing:</span>
-<span style="color: #78DCE8;">sudo</span> apt-get update
-<span style="color: #78DCE8;">sudo</span> apt-get install syncthing
+<pre class="code"><code><span style="color: #96A7A9;"># </span><span style="color: #96A7A9;">Add the release PGP keys:</span>
+<span style="color: #b58900; font-style: italic;">sudo</span> <span style="color: #b58900; font-style: italic;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
+<span style="color: #96A7A9;"># </span><span style="color: #96A7A9;">Add the "stable" channel to your APT sources:</span>
+<span style="color: #b58900; font-style: italic;">echo</span> <span style="color: #2aa198;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #b58900; font-style: italic;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
+<span style="color: #96A7A9;"># </span><span style="color: #96A7A9;">Update and install syncthing:</span>
+<span style="color: #b58900; font-style: italic;">sudo</span> apt-get update
+<span style="color: #b58900; font-style: italic;">sudo</span> apt-get install syncthing
 </code></pre>
 
 <p>
@@ -101,15 +101,15 @@ The version of Syncthing available by default with Ubuntu is old and doesn&rsquo
 <p>
 Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote"><a href="https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As of Nov 2021, Canonical is working on bringing systemd to WSL.</a></span>. Instead, my approach was to add the following snippet to my <code>.zprofile</code>:
 </p>
-<pre class="code"><code><span style="color: #727072;"># </span><span style="color: #727072;">Start Syncthing</span>
-<span style="color: #FF6188;">if</span> <span style="color: #FF6188; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #FF6188;">then</span>
-    <span style="color: #AB9DF2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #AB9DF2; font-weight: bold;">2</span>&gt;&amp;<span style="color: #AB9DF2; font-weight: bold;">1</span> &amp;<span style="color: #AB9DF2;">)</span>
-<span style="color: #FF6188;">fi</span>
+<pre class="code"><code><span style="color: #96A7A9;"># </span><span style="color: #96A7A9;">Start Syncthing</span>
+<span style="color: #859900; font-weight: bold;">if</span> <span style="color: #268bd2; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #859900; font-weight: bold;">then</span>
+    <span style="color: #268bd2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #6c71c4; font-weight: bold;">2</span>&gt;&amp;<span style="color: #6c71c4; font-weight: bold;">1</span> &amp;<span style="color: #268bd2;">)</span>
+<span style="color: #859900; font-weight: bold;">fi</span>
 </code></pre>
 </section>
 
-<section id="outline-2" class="nil">
-<h2 id="sharing-a-folder-between-devices">Sharing a folder between devices</h2>
+<section id="org263f71f" class="nil">
+<h2 id="org263f71f">Sharing a folder between devices</h2>
 <p>
 I&rsquo;ve added my MacBook Air to my Windows desktop machine. Then sharing a folder was as easy as clicking edit and selecting the device to share with.
 </p>
