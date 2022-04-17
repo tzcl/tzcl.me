@@ -3,7 +3,7 @@
 
 [[../blog.html][← Back to blog]]
 
-Last modified: <2022-03-22 Tue>
+Last modified: <2022-04-17 Sun>
 
 * Other file sync solutions
 I've been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I've tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven't been completely satisfied with them.
@@ -18,7 +18,6 @@ In summary, what I really want is a file sync service that is
 4. Reliable, in that I don't have to spend time working out why my files are out of sync
 
 * Why Syncthing?
-
 I stumbled across [[https://tonsky.me/blog/syncthing/][Computers as I used to love them]] and Syncthing seemed like the natural next step for me. I love that its free and open-source, and that it doesn't rely on some central server storing all of your files. It removes the artificial limitation of having to pay for storage space -- now I can sync as much as can fit on my hard-drive. Additionally, you can sync any folder on your hard-drive, it doesn't have to be contained within some central sync folder.
 
 The only downside is that there is no iOS app yet, but I don't really browse my files from my phone. A more common use case for me is transferring files and I'm still on the lookout for an appropriate tool.
@@ -58,3 +57,6 @@ fi
 I've added my MacBook Air to my Windows desktop machine. Then sharing a folder was as easy as clicking edit and selecting the device to share with.
 
 So far, I've only shared my org files, but they're by far the files I edit the most.
+
+* Things to look out for
+Coming from other file sharing solutions, something I didn't expect was that there is no 'passive' syncing. As a consequence of peer-to-peer file syncing, if you want your changes on one device to be replicated on another device, they need to communicate with each other, i.e., be online at the same time.
