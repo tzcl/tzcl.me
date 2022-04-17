@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-03-22 Tue 11:08 -->
+<!-- 2022-04-17 Sun 14:16 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Syncthing</title>
@@ -17,11 +17,12 @@
 <h2></h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3bd60bf">Other file sync solutions</a></li>
-<li><a href="#orgca90341">Why Syncthing?</a></li>
-<li><a href="#orgc23d6b3">Installing on MacBook</a></li>
-<li><a href="#org67722c1">Installing on Windows (WSL)</a></li>
-<li><a href="#org263f71f">Sharing a folder between devices</a></li>
+<li><a href="#org4e7c6e1">Other file sync solutions</a></li>
+<li><a href="#org1afe0ae">Why Syncthing?</a></li>
+<li><a href="#org13af67c">Installing on MacBook</a></li>
+<li><a href="#org5997ec5">Installing on Windows (WSL)</a></li>
+<li><a href="#orgceb3815">Sharing a folder between devices</a></li>
+<li><a href="#org8c1a333">Things to look out for</a></li>
 </ul>
 </div>
 </nav>
@@ -30,11 +31,11 @@
 </p>
 
 <p>
-Last modified: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-03-22 Tue&gt;</span></span>
+Last modified: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-04-17 Sun&gt;</span></span>
 </p>
 
-<section id="org3bd60bf" class="nil">
-<h2 id="org3bd60bf">Other file sync solutions</h2>
+<section id="org4e7c6e1" class="nil">
+<h2 id="org4e7c6e1">Other file sync solutions</h2>
 <p>
 I&rsquo;ve been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I&rsquo;ve tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven&rsquo;t been completely satisfied with them.
 </p>
@@ -55,8 +56,8 @@ In summary, what I really want is a file sync service that is
 </ol>
 </section>
 
-<section id="orgca90341" class="nil">
-<h2 id="orgca90341">Why Syncthing?</h2>
+<section id="org1afe0ae" class="nil">
+<h2 id="org1afe0ae">Why Syncthing?</h2>
 <p>
 I stumbled across <a href="https://tonsky.me/blog/syncthing/">Computers as I used to love them</a> and Syncthing seemed like the natural next step for me. I love that its free and open-source, and that it doesn&rsquo;t rely on some central server storing all of your files. It removes the artificial limitation of having to pay for storage space &#x2013; now I can sync as much as can fit on my hard-drive. Additionally, you can sync any folder on your hard-drive, it doesn&rsquo;t have to be contained within some central sync folder.
 </p>
@@ -66,8 +67,8 @@ The only downside is that there is no iOS app yet, but I don&rsquo;t really brow
 </p>
 </section>
 
-<section id="orgc23d6b3" class="nil">
-<h2 id="orgc23d6b3">Installing on MacBook</h2>
+<section id="org13af67c" class="nil">
+<h2 id="org13af67c">Installing on MacBook</h2>
 <p>
 Setting up Syncthing was super simple. To get set up, all you need to do is download a binary from the <a href="https://github.com/syncthing/syncthing/releases">project releases page</a> and run it. In my case, I just used Homebrew:
 </p>
@@ -80,8 +81,8 @@ By default, Syncthing runs on <code>localhost:8384</code>. To avoid Syncthing op
 </p>
 </section>
 
-<section id="org67722c1" class="nil">
-<h2 id="org67722c1">Installing on Windows (WSL)</h2>
+<section id="org5997ec5" class="nil">
+<h2 id="org5997ec5">Installing on Windows (WSL)</h2>
 <p>
 To install Syncthing on Ubuntu (the OS I&rsquo;m using for WSL), it&rsquo;s as simple as
 </p>
@@ -108,14 +109,21 @@ Getting Syncthing to automatically startup is not as easy as it is on MacOS. It 
 </code></pre>
 </section>
 
-<section id="org263f71f" class="nil">
-<h2 id="org263f71f">Sharing a folder between devices</h2>
+<section id="orgceb3815" class="nil">
+<h2 id="orgceb3815">Sharing a folder between devices</h2>
 <p>
 I&rsquo;ve added my MacBook Air to my Windows desktop machine. Then sharing a folder was as easy as clicking edit and selecting the device to share with.
 </p>
 
 <p>
 So far, I&rsquo;ve only shared my org files, but they&rsquo;re by far the files I edit the most.
+</p>
+</section>
+
+<section id="org8c1a333" class="nil">
+<h2 id="org8c1a333">Things to look out for</h2>
+<p>
+Coming from other file sharing solutions, something I didn&rsquo;t expect was that there is no &rsquo;passive&rsquo; syncing. As a consequence of peer-to-peer file syncing, if you want your changes on one device to be replicated on another device, they need to communicate with each other, i.e., be online at the same time. 
 </p>
 </section>
 <!-- Footnotes --><!-- 
