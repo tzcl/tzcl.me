@@ -161,12 +161,12 @@ a span:focus {
 .loading {
   opacity: 0;
   transform: translateY(1em);
-  transition: opacity 0.5s, transform 0.5s;
 }
 
 .loaded {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.5s, transform 0.5s;
 }
 
 .loaded #title {
