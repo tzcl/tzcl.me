@@ -1,7 +1,7 @@
 #+TITLE: Syncthing
 #+OPTIONS: toc:t
 
-[[../blog.html][← Back to blog]]
+[[index.html][← Back to blog]]
 
 Last modified: <2022-04-17 Sun>
 

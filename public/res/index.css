@@ -157,12 +157,12 @@ a span:focus {
   }
 
   a span {
-    color: #cce3ff;
-    box-shadow: inset 0 -0.5em 0 #0c304d;
+    color: #a1c7f7;
+    box-shadow: inset 0 -0.5em 0 #04326a;
   }
 
   a span:hover,
   a span:focus {
-    box-shadow: inset 0 -0.15em 0 #0c304d;
+    box-shadow: inset 0 -0.15em 0 #04326a;
   }
 }
