@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- 2022-05-14 Sat 20:03 -->
+   <meta charset="utf-8">
+   <meta name="viewport" content=
+   "width=device-width, initial-scale=1">
+   <title>Eloquent JavaScript</title>
+   <meta name="author" content="Toby Law">
+   <meta name="generator" content="Org Mode">
+   <link rel="stylesheet" href="res/tufte.min.css">
+</head>
+<body>
+   <article id="content" class="content">
+      <header>
+         <h1 class="title">Eloquent JavaScript</h1>
+         <p class="subtitle" role="doc-subtitle">Marijn
+         Haverbeke</p>
+      </header>
+      <nav id="table-of-contents" role="doc-toc">
+         <h2></h2>
+         <div id="text-table-of-contents" role="doc-toc">
+            <ul>
+               <li>
+                  <a href="#org2541a17">Overview</a>
+               </li>
+               <li>
+                  <a href="#org2b3e660">Project 1: Path-finding
+                  robot</a>
+               </li>
+               <li>
+                  <a href="#org2852783">Project 2: Egg programming
+                  language</a>
+               </li>
+               <li>
+                  <a href="#orgbf32908">Project 3: Platformer
+                  game</a>
+               </li>
+               <li>
+                  <a href="#org6d74a05">Project 4: Pixel art
+                  editor</a>
+               </li>
+               <li>
+                  <a href="#orge7fa24b">Project 5: Skill-sharing
+                  website</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <section id="org2541a17" class="nil">
+         <h2 id="org2541a17">Overview</h2>
+         <p>Eloquent JavaScript is a book that teaches you the
+         fundamentals of programming through JavaScript. I heard
+         about it online, with other popular suggestions being
+         <a href="https://javascript.info/">javascript.info</a>,
+         <a href=
+         "https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024">
+         JavaScript: The Definitive Guide</a> and the <a href=
+         "https://github.com/getify/You-Dont-Know-JS">You Don’t
+         Know JS Yet</a> book series.</p>
+         <p>Overall, I really enjoyed the text and the exercises.
+         The level of difficulty scales up pretty quickly so I
+         wouldn’t recommend this book as a first introduction to
+         programming but if you have learned another language it
+         should be manageable. The projects were a lot of fun and
+         satisfying to implement.</p>
+         <p>JavaScript has an interesting history, given how it was
+         rapidly hacked together by Brendan Eich to how it has
+         evolved over time. Some of the design decisions are
+         questionable and very confusing as a beginner but I think
+         I am more tolerant of them than most. Before reading
+         Eloquent JavaScript, I was working my way through <a href=
+         "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
+         SICP</a>, a classic computer science text. The influence
+         of Scheme on JavaScript is obvious; we were this close to
+         a Lisp being the most popular language in the world.</p>
+         <p>Below are my solutions to the projects and the
+         accompanying exercises from the text.</p>
+      </section>
+      <section id="org2b3e660" class="nil">
+         <h2 id="org2b3e660">Project 1: Path-finding robot</h2>
+         <p>The first project of the book is to build a
+         mail-delivery robot that picks up and drops off parcels.
+         Immediately, we are exposed to graphs and path-finding
+         algorithms<label for="1" class=
+         "margin-toggle sidenote-number"></label><input type=
+         "checkbox" id="1" class="margin-toggle"><span class=
+         "sidenote">These are not the focus of the project but are
+         cool to see</span>, and get to try solve an interesting
+         problem.</p>
+         <div id="pathfinding"></div>
+         <p>&lt;script
+         src=“../eloquentjs/robot.js”&gt;&lt;/script&gt;</p>
+         <h3 id="org117d8f6">Measuring a robot</h3>
+         <h3 id="orgd84a8b2">Robot efficiency</h3>
+         <h3 id="orgfbcce16">Persistent group</h3>
+      </section>
+      <section id="org2852783" class="nil">
+         <h2 id="org2852783">Project 2: Egg programming
+         language</h2>
+         <p>In this project we build our own simple programming
+         language called Egg:</p>
+         <pre class="code"><code>do(define(x, <span style=
+         "color: #AB9DF2; font-weight: bold;">10</span>),
+   if(&gt;(x, <span style=
+"color: #AB9DF2; font-weight: bold;">5</span>),
+      print(<span style="color: #FFD866;">"large"</span>),
+      print(<span style="color: #FFD866;">"small"</span>)))
+
+# Output: large
+</code></pre>
+         <p>This section is a transpiler and evaluator. It takes an
+         Egg program, converts it to JavaScript, then evaluates the
+         JavaScript and prints the result. <a href=
+         "../eloquentjs/egg.html">Try it out!</a></p>
+         <h3 id="org1eaae3c">Arrays</h3>
+         <h3 id="org545f585">Closures</h3>
+         <h3 id="orgda40371">Comments</h3>
+         <h3 id="org94fc18f">Fixing scope</h3>
+      </section>
+      <section id="orgbf32908" class="nil">
+         <h2 id="orgbf32908">Project 3: Platformer game</h2>
+      </section>
+      <section id="org6d74a05" class="nil">
+         <h2 id="org6d74a05">Project 4: Pixel art editor</h2>
+      </section>
+      <section id="orge7fa24b" class="nil">
+         <h2 id="orge7fa24b">Project 5: Skill-sharing website</h2>
+      </section><!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">These are not the focus of the project but are cool to see</p></div></div>
+
+ -->
+   </article>
+</body>
+</html>

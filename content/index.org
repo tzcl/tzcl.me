@@ -1,5 +1,6 @@
 #+TITLE: Blog
 
++ [[file:eloquentjs.org][Eloquent JavaScript projects]]
 + [[file:syncthing.org][Syncthing: how I sync files between my computers]]
 + [[file:example.org][Recreating the Tufte CSS homepage in org-mode and ox-tufte]]
 
