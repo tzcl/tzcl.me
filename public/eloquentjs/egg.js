@@ -2,10 +2,8 @@
 //
 // Skips until a non-whitespace character or non-commented line is found
 function skipSpace(string) {
-  // TODO: fix this up
-  let first = string.search(/\S/);
-  if (first == -1) return "";
-  return string.slice(first);
+  let skippable = string.match(/^(\s|#.*)*/);
+  return string.slice(skippable[0].length);
 }
 
 // Parses a string, number or identifier and checks whether the expression is an
