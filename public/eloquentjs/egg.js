@@ -23,7 +23,6 @@ function parseExpression(program) {
     // matches an identifier
     expr = { type: "identifier", name: match[0] };
   } else {
-    console.log(expr);
     throw new SyntaxError("Unexpected syntax: " + program);
   }
 
@@ -57,7 +56,6 @@ function parseApply(expr, program) {
 function parse(program) {
   let { expr, rest } = parseExpression(program);
   if (skipSpace(rest).length > 0) {
-    console.log(rest);
     throw new SyntaxError("Unexpected text after program");
   }
 
@@ -231,15 +229,77 @@ function elt(name, props, ...children) {
   return dom;
 }
 
-function interpreterView(program) {}
+function interpreterView(program) {
+  try {
+    let parseTree = parse(program);
+    let parseTreeString = JSON.stringify(parseTree, null, 2);
+    let parseTreeElt = elt(
+      "div",
+      null,
+      elt("h2", null, "Parse Tree"),
+      elt("pre", null, parseTreeString)
+    );
+
+    let evaluation = evaluate(parseTree, Object.create(globalScope));
+    let evalElt = elt(
+      "div",
+      null,
+      elt("h2", null, "Output"),
+      elt("pre", null, String(evaluation))
+    );
+
+    return elt(
+      "div",
+      null,
+      elt("h1", null, "Interpreter"),
+      evalElt,
+      parseTreeElt
+    );
+  } catch (err) {
+    return elt(
+      "div",
+      null,
+      elt("h1", null, "Interpreter"),
+      elt("h2", null, "Output"),
+      err.toString()
+    );
+  }
+}
+function compilerView(program) {}
 
 class App {
   constructor(init) {
-    this.input = elt("textarea", null, init);
-    this.dom = elt("div", null, elt("h1", null, "Egg"), this.input);
+    let app = this;
+    this.input = elt(
+      "textarea",
+      {
+        oninput(e) {
+          e.preventDefault();
+          app.update(e.target.value);
+        },
+      },
+      init
+    );
+    this.output = elt("div", null);
+    this.dom = elt(
+      "div",
+      null,
+      elt("h1", null, "Egg"),
+      this.input,
+      this.output
+    );
+
+    this.update(init);
   }
 
-  update(program) {}
+  update(program) {
+    if (this.program == program) return;
+    this.program = program;
+
+    this.output.innerHTML = "";
+    this.output.appendChild(interpreterView(program));
+    // this.output.appendChild(compilerView(program));
+  }
 }
 
 // Run app
