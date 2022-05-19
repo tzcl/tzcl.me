@@ -213,8 +213,6 @@ function run(program) {
   return evaluate(parse(program), Object.create(globalScope));
 }
 
-// Compiler
-
 // View
 function elt(name, props, ...children) {
   let dom = document.createElement(name);
@@ -239,31 +237,18 @@ function interpreterView(program) {
     );
 
     let evaluation = evaluate(parseTree, Object.create(globalScope));
-    let evalElt = elt(
-      "div",
-      null,
-      elt("h2", null, "Output"),
-      elt("pre", null, String(evaluation))
-    );
+    let evalElt = elt("pre", null, String(evaluation));
 
-    return elt(
-      "div",
-      null,
-      elt("h1", null, "Interpreter"),
-      evalElt,
-      parseTreeElt
-    );
+    return elt("div", null, elt("h2", null, "Output"), evalElt, parseTreeElt);
   } catch (err) {
     return elt(
       "div",
       null,
-      elt("h1", null, "Interpreter"),
       elt("h2", null, "Output"),
-      err.toString()
+      elt("pre", null, err.toString())
     );
   }
 }
-function compilerView(program) {}
 
 class App {
   constructor(init) {
@@ -282,7 +267,7 @@ class App {
     this.dom = elt(
       "div",
       null,
-      elt("h1", null, "Egg"),
+      elt("h1", null, "Egg Interpreter"),
       this.input,
       this.output
     );
@@ -296,7 +281,6 @@ class App {
 
     this.output.innerHTML = "";
     this.output.appendChild(interpreterView(program));
-    // this.output.appendChild(compilerView(program));
   }
 }
 
