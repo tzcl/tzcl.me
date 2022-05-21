@@ -1,139 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- 2022-05-21 Sat 11:01 -->
-   <meta charset="utf-8">
-   <meta name="viewport" content=
-   "width=device-width, initial-scale=1">
-   <title>Eloquent JavaScript</title>
-   <meta name="author" content="Toby Law">
-   <meta name="generator" content="Org Mode">
-   <link rel="stylesheet" href="res/tufte.min.css">
-   <script async defer data-website-id=
-   "6e6d5221-0e72-43ef-8e6e-27955832c259" src=
-   "https://analytics.tzcl.me/umami.js"></script>
+  <!-- 2022-05-21 Sat 12:36 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content=
+  "width=device-width, initial-scale=1">
+  <title>Eloquent JavaScript</title>
+  <meta name="author" content="Toby Law">
+  <meta name="generator" content="Org Mode">
+  <link rel="stylesheet" href="res/tufte.min.css">
+  <script async defer data-website-id=
+  "6e6d5221-0e72-43ef-8e6e-27955832c259" src=
+  "https://analytics.tzcl.me/umami.js"></script>
 </head>
 <body>
-   <article id="content" class="content">
-      <header>
-         <h1 class="title">Eloquent JavaScript</h1>
-         <p class="subtitle" role="doc-subtitle">Marijn
-         Haverbeke</p>
-      </header>
-      <nav id="table-of-contents" role="doc-toc">
-         <h2></h2>
-         <div id="text-table-of-contents" role="doc-toc">
-            <ul>
-               <li>
-                  <a href="#org076b9f7">Review</a>
-               </li>
-               <li>
-                  <a href="#org8c0e161">Project 1: Path-finding
-                  robot</a>
-               </li>
-               <li>
-                  <a href="#org56ef9f0">Project 2: Egg programming
-                  language</a>
-               </li>
-               <li>
-                  <a href="#org7860efb">Project 3: Platformer
-                  game</a>
-               </li>
-               <li>
-                  <a href="#org16814c5">Project 4: Pixel art
-                  editor</a>
-               </li>
-               <li>
-                  <a href="#org6e7a6f3">Project 5: Skill-sharing
-                  website</a>
-               </li>
-            </ul>
-         </div>
-      </nav>
-      <section id="org076b9f7" class="nil">
-         <h2 id="org076b9f7">Review</h2>
-         <p><a href="https://eloquentjavascript.net/">Eloquent
-         JavaScript</a> is a book that teaches you the fundamentals
-         of programming through JavaScript. From a cursory glance
-         online, it had the most recommendations, with other
-         popular suggestions being <a href=
-         "https://javascript.info/">The Modern JavaScript
-         Tutorial</a>, <a href=
-         "https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024">
-         JavaScript: The Definitive Guide</a> and the <a href=
-         "https://github.com/getify/You-Dont-Know-JS">You Don’t
-         Know JS Yet</a> book series.</p>
-         <p>Overall, I really enjoyed the text and the exercises.
-         The level of difficulty scales up pretty quickly so I
-         wouldn’t recommend this book as a first introduction to
-         programming but if you have learned another language it
-         should be manageable. The projects were a lot of fun and
-         satisfying to implement.</p>
-         <p>JavaScript has an interesting history, given how it was
-         rapidly hacked together by Brendan Eich to how it has
-         evolved over time. Some of the design decisions are
-         questionable and very confusing as a beginner but I think
-         I am more tolerant of them than most. Before reading
-         Eloquent JavaScript, I was working my way through <a href=
-         "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
-         SICP</a>, a classic computer science text. You can really
-         see the inspiration that JavaScript took from Scheme.</p>
-         <p>Below are my solutions to the projects and the
-         accompanying exercises from the text.</p>
-      </section>
-      <section id="org8c0e161" class="nil">
-         <h2 id="org8c0e161">Project 1: Path-finding robot</h2>
-         <p>The first project of the book is to build a
-         mail-delivery robot that picks up and drops off parcels.
-         Immediately, we are exposed to graphs and path-finding
-         algorithms<label for="1" class=
-         "margin-toggle sidenote-number"></label><input type=
-         "checkbox" id="1" class="margin-toggle"><span class=
-         "sidenote">These are not the focus of the project but are
-         cool to see</span>, and get to try solve an interesting
-         problem.</p>
-         <div id="pathfinding"></div>
-         <p>&lt;script
-         src=“../eloquentjs/robot.js”&gt;&lt;/script&gt;</p>
-         <h3 id="org4b30327">Measuring a robot</h3>
-         <h3 id="org86d1406">Robot efficiency</h3>
-         <h3 id="org3dec3de">Persistent group</h3>
-      </section>
-      <section id="org56ef9f0" class="nil">
-         <h2 id="org56ef9f0">Project 2: Egg programming
-         language</h2>
-         <p>In this project we build our own simple programming
-         language called Egg:</p>
-         <pre class="code"><code>do(define(x, <span style=
-         "color: #6c71c4; font-weight: bold;">10</span>),
-   if(&gt;(x, <span style=
+  <article id="content" class="content">
+    <header>
+      <h1 class="title">Eloquent JavaScript</h1>
+      <p class="subtitle" role="doc-subtitle">Marijn Haverbeke</p>
+    </header>
+    <nav id="table-of-contents" role="doc-toc">
+      <h2></h2>
+      <div id="text-table-of-contents" role="doc-toc">
+        <ul>
+          <li>
+            <a href="#org076b9f7">Review</a>
+          </li>
+          <li>
+            <a href="#org8c0e161">Project 1: Path-finding robot</a>
+          </li>
+          <li>
+            <a href="#org56ef9f0">Project 2: Egg programming
+            language</a>
+          </li>
+          <li>
+            <a href="#org7860efb">Project 3: Platformer game</a>
+          </li>
+          <li>
+            <a href="#org152564e">Side project: Game of Life</a>
+          </li>
+          <li>
+            <a href="#org16814c5">Project 4: Pixel art editor</a>
+          </li>
+          <li>
+            <a href="#org6e7a6f3">Project 5: Skill-sharing
+            website</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section id="org076b9f7" class="nil">
+      <h2 id="org076b9f7">Review</h2>
+      <p><a href="https://eloquentjavascript.net/">Eloquent
+      JavaScript</a> is a book that teaches you the fundamentals of
+      programming through JavaScript. From a cursory glance online
+      it was the most recommended book I could find, with other
+      popular suggestions being <a href=
+      "https://javascript.info/">The Modern JavaScript
+      Tutorial</a>, <a href=
+      "https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024">
+      JavaScript: The Definitive Guide</a> and the <a href=
+      "https://github.com/getify/You-Dont-Know-JS">You Don’t Know
+      JS Yet</a> book series.</p>
+      <p>Overall, I really enjoyed the text and the exercises. The
+      level of difficulty scales up pretty quickly so I wouldn’t
+      recommend this book as a first introduction to programming
+      but if you have learned another language it should be
+      manageable. The projects were a lot of fun and satisfying to
+      implement.</p>
+      <p>JavaScript has an interesting history, given how it was
+      rapidly hacked together by Brendan Eich and how the web has
+      evolved since then. Some of the design decisions are
+      questionable and very confusing as a beginner but I think I
+      am more tolerant of them than most. Before reading Eloquent
+      JavaScript, I was working my way through <a href=
+      "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
+      SICP</a><label for="1" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="1" class="margin-toggle"><span class=
+      "sidenote">One of the great classics of computer
+      science</span> and you can really see the inspiration that
+      JavaScript took from Scheme.</p>
+      <p>Below are my solutions to the projects and the
+      accompanying exercises from the text.</p>
+    </section>
+    <section id="org8c0e161" class="nil">
+      <h2 id="org8c0e161">Project 1: Path-finding robot</h2>
+      <p>The first project of the book is to build a mail-delivery
+      robot that picks up and drops off parcels. Immediately, we
+      are exposed to graphs and path-finding algorithms<label for=
+      "2" class=
+      "margin-toggle sidenote-number"></label><input type="checkbox"
+      id="2" class="margin-toggle"><span class="sidenote">These are
+      not the focus of the project but are cool to see</span>, and
+      get to try solve an interesting problem.</p>
+      <div id="pathfinding"></div>
+      <p>&lt;script
+      src=“../eloquentjs/robot.js”&gt;&lt;/script&gt;</p>
+      <h3 id="org4b30327">Measuring a robot</h3>
+      <h3 id="org86d1406">Robot efficiency</h3>
+      <h3 id="org3dec3de">Persistent group</h3>
+    </section>
+    <section id="org56ef9f0" class="nil">
+      <h2 id="org56ef9f0">Project 2: Egg programming language</h2>
+      <p>In this project we build our own simple programming
+      language called Egg:</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">do</span>(define(x, <span style="color: #6c71c4; font-weight: bold;">10</span>),
+   <span style=
+"color: #859900; font-weight: bold;">if</span>(&gt;(x, <span style=
 "color: #6c71c4; font-weight: bold;">5</span>),
       print(<span style="color: #2aa198;">"large"</span>),
       print(<span style="color: #2aa198;">"small"</span>)))
 
-# Output: large
+# Console: large
 </code></pre>
-         <p>This section is a transpiler and evaluator. It takes an
-         Egg program, converts it to JavaScript, then evaluates the
-         JavaScript and prints the result. <a href=
-         "./eloquentjs/egg.html">Try it out!</a></p>
-         <h3 id="orgc79095a">Arrays</h3>
-         <h3 id="orgac86bd3">Closures</h3>
-         <h3 id="orgb717884">Comments</h3>
-         <h3 id="orgf1fe884">Fixing scope</h3>
-      </section>
-      <section id="org7860efb" class="nil">
-         <h2 id="org7860efb">Project 3: Platformer game</h2>
-      </section>
-      <section id="org16814c5" class="nil">
-         <h2 id="org16814c5">Project 4: Pixel art editor</h2>
-      </section>
-      <section id="org6e7a6f3" class="nil">
-         <h2 id="org6e7a6f3">Project 5: Skill-sharing website</h2>
-      </section><!-- Footnotes --><!-- 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">These are not the focus of the project but are cool to see</p></div></div>
+      <p>Egg is a tiny, simple language with a simple, uniform
+      syntax. Everything in Egg is an expression. An expression can
+      be a value, an identifier, or an application. Applications
+      are what is applied to a function or a special form like
+      <code>if</code> or <code>while</code>.</p>
+      <p>Expressions of type “value” represent literal strings or
+      numbers. Their <code>value</code> property contains the
+      string or number value that they represent. Expressions of
+      type “identifier” are used for names (variables or bindings).
+      Such objects have a <code>name</code> property that holds the
+      identifier’s name as a string. Finally, “apply” expressions
+      represent applications. They have an <code>operator</code>
+      property that refers to the expression that is being applied,
+      as well as an <code>args</code> property that holds an array
+      of argument expressions.</p>
+      <p>The <code>&gt;(x, 5)</code> part of the previous program
+      would be represented like this:</p>
+      <pre class="code"><code>{
+  type: <span style="color: #2aa198;">"apply"</span>,
+  operator: {type: <span style=
+"color: #2aa198;">"identifier"</span>, name: <span style=
+"color: #2aa198;">"&gt;"</span>},
+  args: [
+    {type: <span style=
+"color: #2aa198;">"identifier"</span>, name: <span style=
+"color: #2aa198;">"x"</span>},
+    {type: <span style=
+"color: #2aa198;">"value"</span>, value: <span style=
+"color: #6c71c4; font-weight: bold;">5</span>}
+  ]
+}
+</code></pre>
+      <p>To let us do interesting things in our language, we
+      include a few special forms and useful bindings in the global
+      scope:</p>
+      <ul class="org-ul">
+        <li>Special forms: <code>if</code>, <code>while</code>,
+        <code>do</code> to do multiple things in one expression,
+        <code>define</code> to create bindings, and
+        <code>fun</code> to create functions</li>
+        <li>Global scope: <code>true</code>, <code>false</code>,
+        <code>+, -, *, /</code>, <code>print</code> to print to the
+        console</li>
+      </ul>
+      <p><a href="./eloquentjs/egg.html">Try out the Egg
+      interpreter!</a></p>
+      <h3 id="orgc79095a">Arrays</h3>
+      <p>We can implement arrays in Egg by adding the functions
+      <code>array</code>, <code>length</code>, and
+      <code>element</code> to the global scope. Respectively, they
+      initialise an array, compute its length, and retrieve an
+      element by index. Like with <code>if</code> and
+      <code>while</code>, we cheat and use JavaScript’s arrays in
+      our implementation.</p>
+      <pre class=
+      "code"><code>globalScope.array = (...values) =&gt; {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> [...values];
+};
+
+globalScope.length = (array) =&gt; {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> array.length;
+};
+
+globalScope.element = (array, n) =&gt; {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> array[n];
+};
+</code></pre>
+      <h3 id="orgb717884">Comments</h3>
+      <p>Allowing comments in Egg is a matter of changing the
+      parser so it skips the rest of the line when it encounters a
+      <code>#</code>.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">skipSpace</span>(<span style=
+      "color: #268bd2;">string</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">skippable</span> = string.match(<span style=
+"color: #2aa198;">/^(\s|#.*)*/</span>);
+  <span style=
+"color: #859900; font-weight: bold;">return</span> string.slice(skippable[<span style="color: #6c71c4; font-weight: bold;">0</span>].length);
+}
+</code></pre>
+      <h3 id="orgf1fe884">Fixing scope</h3>
+      <p>Assigning a new value to a binding with
+      <code>define</code> can be counterintuitive because it may
+      create a new binding in the local scope instead of updating
+      the desired binding. We can get around this by adding the
+      <code>set</code> function which will search for the binding
+      in outer scopes.</p>
+      <pre class=
+      "code"><code>specialForms.set = (args, scope) =&gt; {
+  <span style=
+"color: #859900; font-weight: bold;">if</span> (args.length != <span style="color: #6c71c4; font-weight: bold;">2</span> || args[<span style="color: #6c71c4; font-weight: bold;">0</span>].type != <span style="color: #2aa198;">"identifier"</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">throw</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">SyntaxError</span>(<span style="color: #2aa198;">"Incorrect use of set"</span>);
+  }
+
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">value</span> = evaluate(args[<span style=
+"color: #6c71c4; font-weight: bold;">1</span>], scope);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">name</span> = args[<span style=
+"color: #6c71c4; font-weight: bold;">0</span>].name;
+
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">s</span> = scope; s; s = Object.getPrototypeOf(s)) {
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (Object.<span style=
+"color: #6c71c4; font-weight: bold;">prototype</span>.hasOwnProperty(s, name)) {
+      s[name] = value;
+      <span style=
+"color: #859900; font-weight: bold;">return</span> value;
+    }
+  }
+
+  <span style=
+"color: #859900; font-weight: bold;">throw</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">ReferenceError</span>(<span style="color: #2aa198;">`Could not find ${name} in any scope.`</span>);
+};
+</code></pre>
+    </section>
+    <section id="org7860efb" class="nil">
+      <h2 id="org7860efb">Project 3: Platformer game</h2>
+    </section>
+    <section id="org152564e" class="nil">
+      <h2 id="org152564e">Side project: Game of Life</h2>
+    </section>
+    <section id="org16814c5" class="nil">
+      <h2 id="org16814c5">Project 4: Pixel art editor</h2>
+    </section>
+    <section id="org6e7a6f3" class="nil">
+      <h2 id="org6e7a6f3">Project 5: Skill-sharing website</h2>
+    </section><!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">One of the great classics of computer science</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">These are not the focus of the project but are cool to see</p></div></div>
 
  -->
-   </article>
+  </article>
 </body>
 </html>
