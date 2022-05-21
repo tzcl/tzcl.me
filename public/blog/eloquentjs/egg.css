@@ -6,6 +6,7 @@
 textarea {
   padding: 8px;
   width: 100%;
+
   min-height: 6rem;
   height: 10rem;
   resize: vertical;
@@ -13,4 +14,15 @@ textarea {
 
 pre {
   overflow: scroll;
+}
+
+@media (min-width: 40em) {
+  #root {
+    height: 100vh;
+  }
+
+  textarea {
+    width: 50%;
+    max-width: 40em;
+  }
 }
