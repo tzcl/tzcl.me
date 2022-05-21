@@ -2,13 +2,13 @@
 #+SUBTITLE: Marijn Haverbeke
 #+OPTIONS: toc:1
 
-* Overview
+* Review
 
-Eloquent JavaScript is a book that teaches you the fundamentals of programming through JavaScript. I heard about it online, with other popular suggestions being [[https://javascript.info/][javascript.info]], [[https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024][JavaScript: The Definitive Guide]] and the [[https://github.com/getify/You-Dont-Know-JS][You Don't Know JS Yet]] book series.
+[[https://eloquentjavascript.net/][Eloquent JavaScript]] is a book that teaches you the fundamentals of programming through JavaScript. From a cursory glance online, it had the most recommendations, with other popular suggestions being [[https://javascript.info/][The Modern JavaScript Tutorial]], [[https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024][JavaScript: The Definitive Guide]] and the [[https://github.com/getify/You-Dont-Know-JS][You Don't Know JS Yet]] book series.
 
 Overall, I really enjoyed the text and the exercises. The level of difficulty scales up pretty quickly so I wouldn't recommend this book as a first introduction to programming but if you have learned another language it should be manageable. The projects were a lot of fun and satisfying to implement.
 
-JavaScript has an interesting history, given how it was rapidly hacked together by Brendan Eich to how it has evolved over time. Some of the design decisions are questionable and very confusing as a beginner but I think I am more tolerant of them than most. Before reading Eloquent JavaScript, I was working my way through [[https://mitpress.mit.edu/sites/default/files/sicp/index.html][SICP]], a classic computer science text. The influence of Scheme on JavaScript is obvious; we were this close to a Lisp being the most popular language in the world.
+JavaScript has an interesting history, given how it was rapidly hacked together by Brendan Eich to how it has evolved over time. Some of the design decisions are questionable and very confusing as a beginner but I think I am more tolerant of them than most. Before reading Eloquent JavaScript, I was working my way through [[https://mitpress.mit.edu/sites/default/files/sicp/index.html][SICP]], a classic computer science text. You can really see the inspiration that JavaScript took from Scheme.
 
 Below are my solutions to the projects and the accompanying exercises from the text.
 
@@ -34,7 +34,7 @@ do(define(x, 10),
 # Output: large
 #+end_src
 
-This section is a transpiler and evaluator. It takes an Egg program, converts it to JavaScript, then evaluates the JavaScript and prints the result. [[../eloquentjs/egg.html][Try it out!]]
+This section is a transpiler and evaluator. It takes an Egg program, converts it to JavaScript, then evaluates the JavaScript and prints the result. [[./eloquentjs/egg.html][Try it out!]]
 
 ** Arrays
 ** Closures
