@@ -1,4 +1,16 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
 textarea {
+  padding: 8px;
   width: 100%;
+  min-height: 6rem;
+  height: 10rem;
   resize: vertical;
+}
+
+pre {
+  overflow: scroll;
 }
