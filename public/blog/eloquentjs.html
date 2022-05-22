@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-05-22 Sun 09:55 -->
+  <!-- 2022-05-22 Sun 17:23 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -37,13 +37,16 @@
             <a href="#org7860efb">Project 3: Platformer game</a>
           </li>
           <li>
-            <a href="#org152564e">Side project: Game of Life</a>
+            <a href="#org75eee08"><span class=
+            "todo TODO">TODO</span> Game of Life</a>
           </li>
           <li>
-            <a href="#org16814c5">Project 4: Pixel art editor</a>
+            <a href="#org16814c5"><span class=
+            "todo TODO">TODO</span> Project 4: Pixel art editor</a>
           </li>
           <li>
-            <a href="#org6e7a6f3">Project 5: Skill-sharing
+            <a href="#org6e7a6f3"><span class=
+            "todo TODO">TODO</span> Project 5: Skill-sharing
             website</a>
           </li>
         </ul>
@@ -54,11 +57,10 @@
       <h2 id="org076b9f7">Review</h2>
       <p><a href="https://eloquentjavascript.net/">Eloquent
       JavaScript</a> is a book that teaches you the fundamentals of
-      programming through JavaScript. From a cursory glance online
-      it was the most recommended book I could find, with other
-      popular suggestions being <a href=
-      "https://javascript.info/">The Modern JavaScript
-      Tutorial</a>, <a href=
+      programming through JavaScript. From a cursory glance online,
+      it seemed to the be the most recommended, with other popular
+      suggestions being <a href="https://javascript.info/">The
+      Modern JavaScript Tutorial</a>, <a href=
       "https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024">
       JavaScript: The Definitive Guide</a> and the <a href=
       "https://github.com/getify/You-Dont-Know-JS">You Don’t Know
@@ -72,9 +74,9 @@
       <p>JavaScript has an interesting history, given how it was
       rapidly hacked together by Brendan Eich and how the web has
       evolved since then. Some of the design decisions are
-      questionable and very confusing as a beginner but I think I
-      am more tolerant of them than most. Before reading Eloquent
-      JavaScript, I was working my way through <a href=
+      questionable and very confusing as a beginner but actually
+      make some sense once you understand them. Before reading
+      Eloquent JavaScript, I was working my way through <a href=
       "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
       SICP</a><label for="1" class=
       "margin-toggle sidenote-number"></label><input type=
@@ -95,12 +97,13 @@
       id="2" class="margin-toggle"><span class="sidenote">These are
       not the focus of the project but are cool to see</span>, and
       get to try solve an interesting problem.</p>
-      <div id="pathfinding"></div>
-      <p>&lt;script
-      src=“../eloquentjs/robot.js”&gt;&lt;/script&gt;</p>
+      <p><a href="./eloquentjs/robot/robot.html">Try out the robot
+      here!</a></p>
+      <p>I need to keep going at this, stuck on implementing
+      controls. Need to do some thinking on how to organise this
+      all.</p>
       <h3 id="org4b30327">Measuring a robot</h3>
       <h3 id="org86d1406">Robot efficiency</h3>
-      <h3 id="org3dec3de">Persistent group</h3>
     </section>
     <section id="org56ef9f0" class="nil">
       <h2 id="org56ef9f0">Project 2: Egg programming language</h2>
@@ -160,7 +163,7 @@
         <code>+, -, *, /</code>, <code>print</code> to print to the
         console</li>
       </ul>
-      <p><a href="./eloquentjs/egg.html">Try out the Egg
+      <p><a href="./eloquentjs/egg/egg.html">Try out the Egg
       interpreter!</a></p>
       <h3 id="orgc79095a">Arrays</h3>
       <p>We can implement arrays in Egg by adding the functions
@@ -250,19 +253,221 @@ globalScope.element = (array, n) =&gt; {
     </section>
     <section id="org7860efb" class="nil">
       <h2 id="org7860efb">Project 3: Platformer game</h2>
+      <p>This project uses the DOM as the rendering backend for a
+      simple 2D platformer. Everything in the game is made of
+      <code>div</code> elements with styling and positioning
+      applied. You can actually get decent performance by adding
+      and removing DOM elements, although working this way can feel
+      a little clunky<label for="3" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="3" class="margin-toggle"><span class=
+      "sidenote">A more idiomatic approach is to use the
+      <code>&lt;canvas&gt;</code> element</span>.</p>
+      <p><a href="./eloquentjs/platformer/platformer.html">Try out
+      the platformer game here!</a></p>
+      <h3 id="orgbf259d5">Game over</h3>
+      <p>We can keep track of the player’s lives by adding some
+      logic to the function that starts the game.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">async</span> <span style=
+      "color: #859900; font-weight: bold;">function</span> runGame(<span style="color: #268bd2;">plans</span>, <span style="color: #268bd2;">Display</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">lives</span> = <span style=
+"color: #6c71c4; font-weight: bold;">3</span>;
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">level</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; level &lt; plans.length; ) {
+    console.log(<span style=
+"color: #2aa198;">`Lives: ${lives}`</span>);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">status</span> = <span style=
+"color: #859900; font-weight: bold;">await</span> runLevel(<span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Level</span>(plans[level]), Display);
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"lost"</span>) {
+      lives--;
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (lives == <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+        console.log(<span style=
+"color: #2aa198;">"You lost, restarting the game..."</span>);
+        level = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>;
+        lives = <span style=
+"color: #6c71c4; font-weight: bold;">3</span>;
+      }
+    }
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"won"</span>) level++;
+  }
+  console.log(<span style="color: #2aa198;">"You've won!"</span>);
+}
+</code></pre>
+      <h3 id="org3f40239">Pausing the game</h3>
+      <p>Adding a way to pause/unpause the game is not immediately
+      obvious since adding another key listener in the section
+      where we listen to user input won’t work. The solution is to
+      add the key listener for pausing higher up, putting that
+      logic into the <code>runLevel</code> function.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">runLevel</span>(<span style=
+      "color: #268bd2;">level</span>, <span style=
+      "color: #268bd2;">Display</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">display</span> = <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Display</span>(document.body, level);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">state</span> = State.start(level);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">ending</span> = <span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">running</span> = <span style=
+"color: #2aa198;">"yes"</span>;
+
+  <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Promise</span>((resolve) =&gt; {
+    <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">escHandler</span>(<span style=
+"color: #268bd2;">event</span>) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (event.key != <span style="color: #2aa198;">"Escape"</span>) <span style="color: #859900; font-weight: bold;">return</span>;
+      event.preventDefault();
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"no"</span>) {
+        console.log(<span style=
+"color: #2aa198;">"Unpausing game"</span>);
+        running = <span style="color: #2aa198;">"yes"</span>;
+        runAnimation(frame);
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"yes"</span>) {
+        console.log(<span style=
+"color: #2aa198;">"Pausing game"</span>);
+        running = <span style="color: #2aa198;">"pausing"</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+        running = <span style="color: #2aa198;">"yes"</span>;
+      }
+    }
+
+    window.addEventListener(<span style=
+"color: #2aa198;">"keyup"</span>, escHandler);
+
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">keys</span> = trackKeys([<span style=
+"color: #2aa198;">"ArrowLeft"</span>, <span style=
+"color: #2aa198;">"ArrowRight"</span>, <span style=
+"color: #2aa198;">"ArrowUp"</span>, <span style=
+"color: #2aa198;">"a"</span>, <span style=
+"color: #2aa198;">"d"</span>, <span style=
+"color: #2aa198;">"w"</span>]);
+
+    <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">frame</span>(<span style=
+"color: #268bd2;">time</span>) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"pausing"</span>) {
+        console.log(<span style=
+"color: #2aa198;">"Game paused"</span>);
+        running = <span style="color: #2aa198;">"no"</span>;
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">false</span>;
+      }
+
+      state = state.update(time, keys);
+      display.syncState(state);
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (state.status == <span style="color: #2aa198;">"playing"</span>) {
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">true</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (ending &gt; <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+        ending -= time;
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">true</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+        display.clear();
+        window.removeEventListener(<span style=
+"color: #2aa198;">"keyup"</span>, escHandler);
+        keys.unregister();
+        resolve(state.status);
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">false</span>;
+      }
+    }
+
+    runAnimation(frame);
+  });
+}
+</code></pre>
+      <h3 id="org913a585"><span class="todo TODO">TODO</span> A
+      monster</h3>
+      <p>zzz</p>
     </section>
-    <section id="org152564e" class="nil">
-      <h2 id="org152564e">Side project: Game of Life</h2>
+    <section id="org75eee08" class="nil">
+      <h2 id="org75eee08"><span class="todo TODO">TODO</span> Game
+      of Life</h2>
+      <p>Using HTML forms, it’s possible to write a basic version
+      of the Game of Life. Each generation, a checkbox transitions
+      according to the following rules:</p>
+      <ol class="org-ol">
+        <li>Underpopulation: any checked checkbox with less than
+        two checked neighbours becomes unchecked</li>
+        <li>Survival: any checked checkbox with two or three
+        neighbours stays checked in the next generation</li>
+        <li>Overpopulation: any checked checkbox with more than
+        three checked neighbours becomes unchecked</li>
+        <li>Reproduction: any unchecked checkbox with exactly three
+        neighbours becomes checked</li>
+      </ol>
+      <p>Technically, the Game of Life is meant to be played on an
+      infinite grid. There are a few ways to address this, such as
+      wrapping cells around to the other side of the grid in case
+      they go off screen. However, I didn’t bother with this – try
+      to imagine there is a sea of dead cells around the grid.</p>
+      <p><a href="./eloquentjs/game-of-life/game-of-life.html">Try
+      out the Game of Life!</a></p>
     </section>
     <section id="org16814c5" class="nil">
-      <h2 id="org16814c5">Project 4: Pixel art editor</h2>
+      <h2 id="org16814c5"><span class="todo TODO">TODO</span>
+      Project 4: Pixel art editor</h2>
+      <p>As discussed in the platformer project, another way to
+      render graphics on the web is using
+      <code>&lt;canvas&gt;</code> elements.</p>
+      <p><a href="./eloquentjs/pixel-art/pixel-art.html">Try out
+      the pixel art editor!</a></p>
     </section>
     <section id="org6e7a6f3" class="nil">
-      <h2 id="org6e7a6f3">Project 5: Skill-sharing website</h2>
+      <h2 id="org6e7a6f3"><span class="todo TODO">TODO</span>
+      Project 5: Skill-sharing website</h2>
+      <p>Need to host this somewhere… need Node to be running to
+      keep store the talks.</p>
     </section><!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">One of the great classics of computer science</p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">These are not the focus of the project but are cool to see</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">A more idiomatic approach is to use the <code>&lt;canvas&gt;</code>  element</p></div></div>
 
  -->
   </article>
