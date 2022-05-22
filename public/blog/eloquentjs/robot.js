@@ -236,6 +236,8 @@ class RobotAnimation {
     this.turn = 0;
     this.parcels = [];
 
+    let anim = this;
+
     this.village = elt("img", {
       style: "vertical-align: -8px",
       src: "assets/village.png",
@@ -255,10 +257,25 @@ class RobotAnimation {
     this.robotElt.addEventListener("transitionend", () => this.updateParcels());
 
     this.text = elt("span");
+
+    const algos = {
+      random: randomRobot,
+      route: routeRobot,
+      "path-finding": goalOrientedRobot,
+      greedy: greedyRobot,
+    };
+    this.select = elt("select", {
+      onchange: () => {
+        anim.robot = algos[this.select.value];
+      },
+      ...Object.keys(algos).map((name) => elt("option", null, name)),
+    });
+    this.picker = elt("label", null, "Algorithm: ", this.select);
+
     this.button = elt("button", null, "Stop");
     this.button.addEventListener("click", () => this.clicked());
 
-    this.output = elt("div", null, this.text, this.button);
+    this.output = elt("div", null, this.text, this.picker, this.button);
 
     this.dom = elt(
       "div",
