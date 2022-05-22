@@ -2,8 +2,6 @@
 // Algorithm
 //
 
-let active = null;
-
 const places = {
   "Alice's House": { x: 279, y: 100 },
   "Bob's House": { x: 295, y: 203 },
@@ -66,6 +64,27 @@ function randomRobot(state) {
   return { direction: randomPick(roadGraph[state.place]) };
 }
 
+const mailRoute = [
+  "Alice's House",
+  "Cabin",
+  "Alice's House",
+  "Bob's House",
+  "Town Hall",
+  "Daria's House",
+  "Ernie's House",
+  "Grete's House",
+  "Shop",
+  "Grete's House",
+  "Farm",
+  "Marketplace",
+  "Post Office",
+];
+
+function routeRobot(state, memory) {
+  if (memory.length == 0) memory = mailRoute;
+  return { direction: memory[0], memory: memory.slice(1) };
+}
+
 //
 // State
 //
@@ -117,6 +136,83 @@ function runRobot(state, robot, memory) {
   }
 }
 
+function findRoute(graph, from, to) {
+  let work = [{ at: from, route: [] }];
+  for (let i = 0; i < work.length; i++) {
+    let { at, route } = work[i];
+    for (let place of graph[at]) {
+      if (place == to) return route.concat(place);
+      if (!work.some((w) => w.at == place)) {
+        work.push({ at: place, route: route.concat(place) });
+      }
+    }
+  }
+}
+
+function goalOrientedRobot({ place, parcels }, route) {
+  if (route.length == 0) {
+    let parcel = parcels[0];
+    if (parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return { direction: route[0], memory: route.slice(1) };
+}
+
+function countRobot(state, robot, memory) {
+  for (let turns = 0; ; turns++) {
+    if (state.parcels.length == 0) return turns;
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
+  }
+}
+
+function compareRobots(robot1, memory1, robot2, memory2) {
+  let steps1 = 0,
+    steps2 = 0;
+  for (let task = 0; task < 100; task++) {
+    let state = VillageState.random();
+    steps1 += countRobot(state, robot1, memory1);
+    steps2 += countRobot(state, robot2, memory2);
+  }
+
+  console.log(`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`);
+}
+
+// One problem with the goalOrientedRobot is that it just takes the top parcel
+// and delivers that first. We can use the heuristic of picking up the nearest
+// parcel or delivering one of the previously picked up parcels, whichever is
+// closer.
+function greedyRobot({ place, parcels }, route) {
+  if (route.length == 0) {
+    route = closestParceRoute(place, parcels);
+  }
+
+  return { direction: route[0], memory: route.slice(1) };
+}
+
+// Could make more efficient by updating routes instead of recomputing them all.
+function closestParceRoute(place, parcels) {
+  let min_route = [];
+
+  for (let parcel of parcels) {
+    if (parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+
+    if (min_route.length == 0 || route.length < min_route.length) {
+      min_route = route;
+    }
+  }
+
+  return min_route;
+}
+
 //
 // View
 //
@@ -148,10 +244,8 @@ class RobotAnimation {
     this.robotElt = elt(
       "div",
       {
-        style: `width: 40px; position: absolute; transition: left ${
-          0.8 / speed
-        }s, top ${0.8 / speed}s;
-top: 110px; left:162px;`,
+        id: "robot",
+        style: `transition: left ${0.8 / speed}s, top ${0.8 / speed}s;`,
       },
       elt("img", {
         style: "width: inherit",
@@ -161,30 +255,17 @@ top: 110px; left:162px;`,
     this.robotElt.addEventListener("transitionend", () => this.updateParcels());
 
     this.text = elt("span");
-    this.button = elt(
-      "button",
-      {
-        style: `
-color: white;
-background: #28b;
-border: none;
-border-radius: 2px;
-padding: 2px 5px;
-line-height: 1.1;
-font-family: sans-serif;
-font-size: 80%`,
-      },
-      "Stop"
-    );
+    this.button = elt("button", null, "Stop");
     this.button.addEventListener("click", () => this.clicked());
+
+    this.output = elt("div", null, this.text, this.button);
 
     this.dom = elt(
       "div",
-      { style: "position: relative; line-height: 0.1; margin-left: 10px" },
+      { id: "main" },
       this.village,
       this.robotElt,
-      this.text,
-      this.button
+      this.output
     );
 
     this.schedule();
@@ -220,7 +301,6 @@ font-size: 80%`,
   }
 
   updateParcels() {
-    // empty parcels
     while (this.parcels.length) this.parcels.pop().remove();
 
     let heights = {};
@@ -230,16 +310,12 @@ font-size: 80%`,
 
       let offset = placeKeys.indexOf(address) * 16;
       let parcel = elt("div", {
-        style: `
-position: absolute;
-height: 16px;
-width: 16px;
-background-image: url(assets/parcel.png);
-background-position: 0 -${offset}px`,
+        className: "parcel",
+        style: `background-position: 0 -${offset}px`,
       });
 
       if (place == this.worldState.place) {
-        parcel.style.top = 20 + height + "px";
+        parcel.style.bottom = 20 + height + "px";
         parcel.style.left = "25px";
         this.robotElt.appendChild(parcel);
       } else {
@@ -266,14 +342,22 @@ background-position: 0 -${offset}px`,
   }
 }
 
+let active = null;
+
 function runRobotAnimation(state, robot, memory) {
   if (active && active.timeout != null) clearTimeout(active.timeout);
   active = new RobotAnimation(state, robot, memory);
+}
+
+class Controller {
+  constructor(controls) {}
+
+  update() {}
 }
 
 //
 // Application
 //
 
-let robotAnimation = new RobotAnimation(VillageState.random(), randomRobot, []);
+let robotAnimation = new RobotAnimation(VillageState.random(), greedyRobot, []);
 document.getElementById("root").appendChild(robotAnimation.dom);
