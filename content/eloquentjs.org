@@ -2,6 +2,8 @@
 #+SUBTITLE: Marijn Haverbeke
 #+OPTIONS: toc:1
 
+[[file:index.org][← Back to blog]]
+
 * Review
 
 [[https://eloquentjavascript.net/][Eloquent JavaScript]] is a book that teaches you the fundamentals of programming through JavaScript. From a cursory glance online it was the most recommended book I could find, with other popular suggestions being [[https://javascript.info/][The Modern JavaScript Tutorial]], [[https://www.amazon.com/JavaScript-Definitive-Most-Used-Programming-Language-dp-1491952024/dp/1491952024][JavaScript: The Definitive Guide]] and the [[https://github.com/getify/You-Dont-Know-JS][You Don't Know JS Yet]] book series.
