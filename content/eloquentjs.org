@@ -17,10 +17,7 @@ Below are my solutions to the projects and the accompanying exercises from the t
 * Project 1: Path-finding robot
 The first project of the book is to build a mail-delivery robot that picks up and drops off parcels. Immediately, we are exposed to graphs and path-finding algorithms[fn:: These are not the focus of the project but are cool to see], and get to try solve an interesting problem.
 
-#+begin_export html
-<div id="pathfinding"></div>
-#+end_export
-<script src="../eloquentjs/robot.js"></script>
+[[eloquentjs/robot.html][Try out the robot here!]]
 
 ** Measuring a robot
 ** Robot efficiency
