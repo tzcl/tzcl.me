@@ -192,7 +192,7 @@ function runLevel(level, Display) {
 ** TODO A monster
 zzz
 
-* TODO Game of Life
+* Exercise: Game of Life
 Using HTML forms, it's possible to write a basic version of the Game of Life. Each generation, a checkbox transitions according to the following rules:
 1. Underpopulation: any checked checkbox with less than two checked neighbours becomes unchecked
 2. Survival: any checked checkbox with two or three neighbours stays checked in the next generation

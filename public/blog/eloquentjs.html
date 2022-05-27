@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-05-22 Sun 17:23 -->
+  <!-- 2022-05-27 Fri 23:13 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -37,8 +37,7 @@
             <a href="#org7860efb">Project 3: Platformer game</a>
           </li>
           <li>
-            <a href="#org75eee08"><span class=
-            "todo TODO">TODO</span> Game of Life</a>
+            <a href="#org8fef33c">Exercise: Game of Life</a>
           </li>
           <li>
             <a href="#org16814c5"><span class=
@@ -110,12 +109,12 @@
       <p>In this project we build our own simple programming
       language called Egg:</p>
       <pre class="code"><code><span style=
-      "color: #859900; font-weight: bold;">do</span>(define(x, <span style="color: #6c71c4; font-weight: bold;">10</span>),
-   <span style=
-"color: #859900; font-weight: bold;">if</span>(&gt;(x, <span style=
-"color: #6c71c4; font-weight: bold;">5</span>),
-      print(<span style="color: #2aa198;">"large"</span>),
-      print(<span style="color: #2aa198;">"small"</span>)))
+      "color: #FF6188;">do</span>(define(x, <span style=
+      "color: #AB9DF2; font-weight: bold;">10</span>),
+   <span style="color: #FF6188;">if</span>(&gt;(x, <span style=
+"color: #AB9DF2; font-weight: bold;">5</span>),
+      print(<span style="color: #FFD866;">"large"</span>),
+      print(<span style="color: #FFD866;">"small"</span>)))
 
 # Console: large
 </code></pre>
@@ -137,17 +136,17 @@
       <p>The <code>&gt;(x, 5)</code> part of the previous program
       would be represented like this:</p>
       <pre class="code"><code>{
-  type: <span style="color: #2aa198;">"apply"</span>,
+  type: <span style="color: #FFD866;">"apply"</span>,
   operator: {type: <span style=
-"color: #2aa198;">"identifier"</span>, name: <span style=
-"color: #2aa198;">"&gt;"</span>},
+"color: #FFD866;">"identifier"</span>, name: <span style=
+"color: #FFD866;">"&gt;"</span>},
   args: [
     {type: <span style=
-"color: #2aa198;">"identifier"</span>, name: <span style=
-"color: #2aa198;">"x"</span>},
+"color: #FFD866;">"identifier"</span>, name: <span style=
+"color: #FFD866;">"x"</span>},
     {type: <span style=
-"color: #2aa198;">"value"</span>, value: <span style=
-"color: #6c71c4; font-weight: bold;">5</span>}
+"color: #FFD866;">"value"</span>, value: <span style=
+"color: #AB9DF2; font-weight: bold;">5</span>}
   ]
 }
 </code></pre>
@@ -175,18 +174,15 @@
       our implementation.</p>
       <pre class=
       "code"><code>globalScope.array = (...values) =&gt; {
-  <span style=
-"color: #859900; font-weight: bold;">return</span> [...values];
+  <span style="color: #FF6188;">return</span> [...values];
 };
 
 globalScope.length = (array) =&gt; {
-  <span style=
-"color: #859900; font-weight: bold;">return</span> array.length;
+  <span style="color: #FF6188;">return</span> array.length;
 };
 
 globalScope.element = (array, n) =&gt; {
-  <span style=
-"color: #859900; font-weight: bold;">return</span> array[n];
+  <span style="color: #FF6188;">return</span> array[n];
 };
 </code></pre>
       <h3 id="orgb717884">Comments</h3>
@@ -194,15 +190,15 @@ globalScope.element = (array, n) =&gt; {
       parser so it skips the rest of the line when it encounters a
       <code>#</code>.</p>
       <pre class="code"><code><span style=
-      "color: #859900; font-weight: bold;">function</span> <span style=
-      "color: #b58900;">skipSpace</span>(<span style=
-      "color: #268bd2;">string</span>) {
+      "color: #FF6188;">function</span> <span style=
+      "color: #A9DC76;">skipSpace</span>(<span style=
+      "color: #FCFCFA;">string</span>) {
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">skippable</span> = string.match(<span style=
+"color: #FFD866;">/^(\s|#.*)*/</span>);
   <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">skippable</span> = string.match(<span style=
-"color: #2aa198;">/^(\s|#.*)*/</span>);
-  <span style=
-"color: #859900; font-weight: bold;">return</span> string.slice(skippable[<span style="color: #6c71c4; font-weight: bold;">0</span>].length);
+"color: #FF6188;">return</span> string.slice(skippable[<span style=
+"color: #AB9DF2; font-weight: bold;">0</span>].length);
 }
 </code></pre>
       <h3 id="orgf1fe884">Fixing scope</h3>
@@ -215,39 +211,37 @@ globalScope.element = (array, n) =&gt; {
       <pre class=
       "code"><code>specialForms.set = (args, scope) =&gt; {
   <span style=
-"color: #859900; font-weight: bold;">if</span> (args.length != <span style="color: #6c71c4; font-weight: bold;">2</span> || args[<span style="color: #6c71c4; font-weight: bold;">0</span>].type != <span style="color: #2aa198;">"identifier"</span>) {
-    <span style=
-"color: #859900; font-weight: bold;">throw</span> <span style=
-"color: #859900; font-weight: bold;">new</span> <span style=
-"color: #b58900; font-style: italic;">SyntaxError</span>(<span style="color: #2aa198;">"Incorrect use of set"</span>);
+"color: #FF6188;">if</span> (args.length != <span style=
+"color: #AB9DF2; font-weight: bold;">2</span> || args[<span style=
+"color: #AB9DF2; font-weight: bold;">0</span>].type != <span style=
+"color: #FFD866;">"identifier"</span>) {
+    <span style="color: #FF6188;">throw</span> <span style=
+"color: #FF6188;">new</span> <span style=
+"color: #78DCE8;">SyntaxError</span>(<span style=
+"color: #FFD866;">"Incorrect use of set"</span>);
   }
 
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">value</span> = evaluate(args[<span style=
-"color: #6c71c4; font-weight: bold;">1</span>], scope);
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">name</span> = args[<span style=
-"color: #6c71c4; font-weight: bold;">0</span>].name;
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">value</span> = evaluate(args[<span style=
+"color: #AB9DF2; font-weight: bold;">1</span>], scope);
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">name</span> = args[<span style=
+"color: #AB9DF2; font-weight: bold;">0</span>].name;
 
-  <span style=
-"color: #859900; font-weight: bold;">for</span> (<span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">s</span> = scope; s; s = Object.getPrototypeOf(s)) {
-    <span style=
-"color: #859900; font-weight: bold;">if</span> (Object.<span style=
-"color: #6c71c4; font-weight: bold;">prototype</span>.hasOwnProperty(s, name)) {
+  <span style="color: #FF6188;">for</span> (<span style=
+"color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">s</span> = scope; s; s = Object.getPrototypeOf(s)) {
+    <span style="color: #FF6188;">if</span> (Object.<span style=
+"color: #AB9DF2;">prototype</span>.hasOwnProperty(s, name)) {
       s[name] = value;
-      <span style=
-"color: #859900; font-weight: bold;">return</span> value;
+      <span style="color: #FF6188;">return</span> value;
     }
   }
 
-  <span style=
-"color: #859900; font-weight: bold;">throw</span> <span style=
-"color: #859900; font-weight: bold;">new</span> <span style=
-"color: #b58900; font-style: italic;">ReferenceError</span>(<span style="color: #2aa198;">`Could not find ${name} in any scope.`</span>);
+  <span style="color: #FF6188;">throw</span> <span style=
+"color: #FF6188;">new</span> <span style=
+"color: #78DCE8;">ReferenceError</span>(<span style=
+"color: #FFD866;">`Could not find ${name} in any scope.`</span>);
 };
 </code></pre>
     </section>
@@ -269,40 +263,41 @@ globalScope.element = (array, n) =&gt; {
       <p>We can keep track of the player’s lives by adding some
       logic to the function that starts the game.</p>
       <pre class="code"><code><span style=
-      "color: #859900; font-weight: bold;">async</span> <span style=
-      "color: #859900; font-weight: bold;">function</span> runGame(<span style="color: #268bd2;">plans</span>, <span style="color: #268bd2;">Display</span>) {
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">lives</span> = <span style=
-"color: #6c71c4; font-weight: bold;">3</span>;
-  <span style=
-"color: #859900; font-weight: bold;">for</span> (<span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">level</span> = <span style=
-"color: #6c71c4; font-weight: bold;">0</span>; level &lt; plans.length; ) {
+      "color: #FF6188;">async</span> <span style=
+      "color: #FF6188;">function</span> runGame(<span style=
+      "color: #FCFCFA;">plans</span>, <span style=
+      "color: #FCFCFA;">Display</span>) {
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">lives</span> = <span style=
+"color: #AB9DF2; font-weight: bold;">3</span>;
+  <span style="color: #FF6188;">for</span> (<span style=
+"color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">level</span> = <span style=
+"color: #AB9DF2; font-weight: bold;">0</span>; level &lt; plans.length; ) {
     console.log(<span style=
-"color: #2aa198;">`Lives: ${lives}`</span>);
-    <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">status</span> = <span style=
-"color: #859900; font-weight: bold;">await</span> runLevel(<span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Level</span>(plans[level]), Display);
-    <span style=
-"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"lost"</span>) {
+"color: #FFD866;">`Lives: ${lives}`</span>);
+    <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">status</span> = <span style=
+"color: #FF6188;">await</span> runLevel(<span style=
+"color: #FF6188;">new</span> <span style=
+"color: #78DCE8;">Level</span>(plans[level]), Display);
+    <span style="color: #FF6188;">if</span> (status == <span style=
+"color: #FFD866;">"lost"</span>) {
       lives--;
       <span style=
-"color: #859900; font-weight: bold;">if</span> (lives == <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+"color: #FF6188;">if</span> (lives == <span style="color: #AB9DF2; font-weight: bold;">0</span>) {
         console.log(<span style=
-"color: #2aa198;">"You lost, restarting the game..."</span>);
+"color: #FFD866;">"You lost, restarting the game..."</span>);
         level = <span style=
-"color: #6c71c4; font-weight: bold;">0</span>;
+"color: #AB9DF2; font-weight: bold;">0</span>;
         lives = <span style=
-"color: #6c71c4; font-weight: bold;">3</span>;
+"color: #AB9DF2; font-weight: bold;">3</span>;
       }
     }
-    <span style=
-"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"won"</span>) level++;
+    <span style="color: #FF6188;">if</span> (status == <span style=
+"color: #FFD866;">"won"</span>) level++;
   }
-  console.log(<span style="color: #2aa198;">"You've won!"</span>);
+  console.log(<span style="color: #FFD866;">"You've won!"</span>);
 }
 </code></pre>
       <h3 id="org3f40239">Pausing the game</h3>
@@ -312,107 +307,98 @@ globalScope.element = (array, n) =&gt; {
       add the key listener for pausing higher up, putting that
       logic into the <code>runLevel</code> function.</p>
       <pre class="code"><code><span style=
-      "color: #859900; font-weight: bold;">function</span> <span style=
-      "color: #b58900;">runLevel</span>(<span style=
-      "color: #268bd2;">level</span>, <span style=
-      "color: #268bd2;">Display</span>) {
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">display</span> = <span style=
-"color: #859900; font-weight: bold;">new</span> <span style=
-"color: #b58900; font-style: italic;">Display</span>(document.body, level);
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">state</span> = State.start(level);
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">ending</span> = <span style=
-"color: #6c71c4; font-weight: bold;">1</span>;
-  <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">running</span> = <span style=
-"color: #2aa198;">"yes"</span>;
+      "color: #FF6188;">function</span> <span style=
+      "color: #A9DC76;">runLevel</span>(<span style=
+      "color: #FCFCFA;">level</span>, <span style=
+      "color: #FCFCFA;">Display</span>) {
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">display</span> = <span style=
+"color: #FF6188;">new</span> <span style=
+"color: #78DCE8;">Display</span>(document.body, level);
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">state</span> = State.start(level);
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">ending</span> = <span style=
+"color: #AB9DF2; font-weight: bold;">1</span>;
+  <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">running</span> = <span style=
+"color: #FFD866;">"yes"</span>;
 
-  <span style=
-"color: #859900; font-weight: bold;">return</span> <span style=
-"color: #859900; font-weight: bold;">new</span> <span style=
-"color: #b58900; font-style: italic;">Promise</span>((resolve) =&gt; {
-    <span style=
-"color: #859900; font-weight: bold;">function</span> <span style=
-"color: #b58900;">escHandler</span>(<span style=
-"color: #268bd2;">event</span>) {
+  <span style="color: #FF6188;">return</span> <span style=
+"color: #FF6188;">new</span> <span style=
+"color: #78DCE8;">Promise</span>((resolve) =&gt; {
+    <span style="color: #FF6188;">function</span> <span style=
+"color: #A9DC76;">escHandler</span>(<span style=
+"color: #FCFCFA;">event</span>) {
       <span style=
-"color: #859900; font-weight: bold;">if</span> (event.key != <span style="color: #2aa198;">"Escape"</span>) <span style="color: #859900; font-weight: bold;">return</span>;
+"color: #FF6188;">if</span> (event.key != <span style=
+"color: #FFD866;">"Escape"</span>) <span style=
+"color: #FF6188;">return</span>;
       event.preventDefault();
       <span style=
-"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"no"</span>) {
+"color: #FF6188;">if</span> (running == <span style=
+"color: #FFD866;">"no"</span>) {
         console.log(<span style=
-"color: #2aa198;">"Unpausing game"</span>);
-        running = <span style="color: #2aa198;">"yes"</span>;
+"color: #FFD866;">"Unpausing game"</span>);
+        running = <span style="color: #FFD866;">"yes"</span>;
         runAnimation(frame);
-      } <span style=
-"color: #859900; font-weight: bold;">else</span> <span style=
-"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"yes"</span>) {
+      } <span style="color: #FF6188;">else</span> <span style=
+"color: #FF6188;">if</span> (running == <span style=
+"color: #FFD866;">"yes"</span>) {
         console.log(<span style=
-"color: #2aa198;">"Pausing game"</span>);
-        running = <span style="color: #2aa198;">"pausing"</span>;
-      } <span style=
-"color: #859900; font-weight: bold;">else</span> {
-        running = <span style="color: #2aa198;">"yes"</span>;
+"color: #FFD866;">"Pausing game"</span>);
+        running = <span style="color: #FFD866;">"pausing"</span>;
+      } <span style="color: #FF6188;">else</span> {
+        running = <span style="color: #FFD866;">"yes"</span>;
       }
     }
 
     window.addEventListener(<span style=
-"color: #2aa198;">"keyup"</span>, escHandler);
+"color: #FFD866;">"keyup"</span>, escHandler);
 
-    <span style=
-"color: #859900; font-weight: bold;">let</span> <span style=
-"color: #268bd2;">keys</span> = trackKeys([<span style=
-"color: #2aa198;">"ArrowLeft"</span>, <span style=
-"color: #2aa198;">"ArrowRight"</span>, <span style=
-"color: #2aa198;">"ArrowUp"</span>, <span style=
-"color: #2aa198;">"a"</span>, <span style=
-"color: #2aa198;">"d"</span>, <span style=
-"color: #2aa198;">"w"</span>]);
+    <span style="color: #FF6188;">let</span> <span style=
+"color: #FCFCFA;">keys</span> = trackKeys([<span style=
+"color: #FFD866;">"ArrowLeft"</span>, <span style=
+"color: #FFD866;">"ArrowRight"</span>, <span style=
+"color: #FFD866;">"ArrowUp"</span>, <span style=
+"color: #FFD866;">"a"</span>, <span style=
+"color: #FFD866;">"d"</span>, <span style=
+"color: #FFD866;">"w"</span>]);
 
-    <span style=
-"color: #859900; font-weight: bold;">function</span> <span style=
-"color: #b58900;">frame</span>(<span style=
-"color: #268bd2;">time</span>) {
+    <span style="color: #FF6188;">function</span> <span style=
+"color: #A9DC76;">frame</span>(<span style=
+"color: #FCFCFA;">time</span>) {
       <span style=
-"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"pausing"</span>) {
+"color: #FF6188;">if</span> (running == <span style=
+"color: #FFD866;">"pausing"</span>) {
         console.log(<span style=
-"color: #2aa198;">"Game paused"</span>);
-        running = <span style="color: #2aa198;">"no"</span>;
-        <span style=
-"color: #859900; font-weight: bold;">return</span> <span style=
-"color: #6c71c4; font-weight: bold;">false</span>;
+"color: #FFD866;">"Game paused"</span>);
+        running = <span style="color: #FFD866;">"no"</span>;
+        <span style="color: #FF6188;">return</span> <span style=
+"color: #AB9DF2;">false</span>;
       }
 
       state = state.update(time, keys);
       display.syncState(state);
       <span style=
-"color: #859900; font-weight: bold;">if</span> (state.status == <span style="color: #2aa198;">"playing"</span>) {
-        <span style=
-"color: #859900; font-weight: bold;">return</span> <span style=
-"color: #6c71c4; font-weight: bold;">true</span>;
-      } <span style=
-"color: #859900; font-weight: bold;">else</span> <span style=
-"color: #859900; font-weight: bold;">if</span> (ending &gt; <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+"color: #FF6188;">if</span> (state.status == <span style=
+"color: #FFD866;">"playing"</span>) {
+        <span style="color: #FF6188;">return</span> <span style=
+"color: #AB9DF2;">true</span>;
+      } <span style="color: #FF6188;">else</span> <span style=
+"color: #FF6188;">if</span> (ending &gt; <span style=
+"color: #AB9DF2; font-weight: bold;">0</span>) {
         ending -= time;
-        <span style=
-"color: #859900; font-weight: bold;">return</span> <span style=
-"color: #6c71c4; font-weight: bold;">true</span>;
-      } <span style=
-"color: #859900; font-weight: bold;">else</span> {
+        <span style="color: #FF6188;">return</span> <span style=
+"color: #AB9DF2;">true</span>;
+      } <span style="color: #FF6188;">else</span> {
         display.clear();
         window.removeEventListener(<span style=
-"color: #2aa198;">"keyup"</span>, escHandler);
+"color: #FFD866;">"keyup"</span>, escHandler);
         keys.unregister();
         resolve(state.status);
-        <span style=
-"color: #859900; font-weight: bold;">return</span> <span style=
-"color: #6c71c4; font-weight: bold;">false</span>;
+        <span style="color: #FF6188;">return</span> <span style=
+"color: #AB9DF2;">false</span>;
       }
     }
 
@@ -424,9 +410,8 @@ globalScope.element = (array, n) =&gt; {
       monster</h3>
       <p>zzz</p>
     </section>
-    <section id="org75eee08" class="nil">
-      <h2 id="org75eee08"><span class="todo TODO">TODO</span> Game
-      of Life</h2>
+    <section id="org8fef33c" class="nil">
+      <h2 id="org8fef33c">Exercise: Game of Life</h2>
       <p>Using HTML forms, it’s possible to write a basic version
       of the Game of Life. Each generation, a checkbox transitions
       according to the following rules:</p>
