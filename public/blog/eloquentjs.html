@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-03 Fri 16:33 -->
+  <!-- 2022-06-03 Fri 17:50 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -99,11 +99,88 @@
       get to try solve an interesting problem.</p>
       <p><a href="./eloquentjs/robot/robot.html">Try out the robot
       here!</a></p>
-      <p>I need to keep going at this, stuck on implementing
-      controls. Need to do some thinking on how to organise this
-      all.</p>
       <h3 id="org4b30327">Measuring a robot</h3>
+      <p>To objectively compare robots, we want to make sure each
+      time we generate a task, we give that task to both robots and
+      track the result.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">compareRobots</span>(<span style=
+      "color: #268bd2;">robot1</span>, <span style=
+      "color: #268bd2;">memory1</span>, <span style=
+      "color: #268bd2;">robot2</span>, <span style=
+      "color: #268bd2;">memory2</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">steps1</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>,
+    steps2 = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>;
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">task</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; task &lt; <span style="color: #6c71c4; font-weight: bold;">100</span>; task++) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">state</span> = VillageState.random();
+    steps1 += countRobot(state, robot1, memory1);
+    steps2 += countRobot(state, robot2, memory2);
+  }
+
+  console.log(<span style=
+"color: #2aa198;">`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`</span>);
+}
+</code></pre>
       <h3 id="org86d1406">Robot efficiency</h3>
+      <p>The trick to designing a more efficient robot than the
+      <code>goalOrientedRobot</code> is to realise that the
+      <code>goalOrientedRobot</code> only looks at one parcel at a
+      time. In some cases, the robot would be able to find a better
+      route if it considered all parcels. This was fun to play
+      around with, although I wished I could pause the animation to
+      think about what I would do as my next move if I were the
+      robot<label for="3" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="3" class="margin-toggle"><span class=
+      "sidenote">I’ve built this into my version of the <a href=
+      "./eloquentjs/robot/robot.html">robot
+      animation</a></span>.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">greedyRobot</span>({ place, parcels }, route) {
+  <span style=
+"color: #859900; font-weight: bold;">if</span> (route.length == <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">min_route</span> = [];
+
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">parcel</span> <span style=
+"color: #859900; font-weight: bold;">of</span> parcels) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (parcel.place != place) {
+        route = findRoute(roadGraph, place, parcel.place);
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+        route = findRoute(roadGraph, place, parcel.address);
+      }
+
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (min_route.length == <span style="color: #6c71c4; font-weight: bold;">0</span> || route.length &lt; min_route.length) {
+        min_route = route;
+      }
+    }
+
+    route = min_route;
+  }
+
+  <span style=
+"color: #859900; font-weight: bold;">return</span> { direction: route[<span style="color: #6c71c4; font-weight: bold;">0</span>], memory: route.slice(<span style="color: #6c71c4; font-weight: bold;">1</span>) };
+}
+</code></pre>
     </section>
     <section id="org56ef9f0" class="nil">
       <h2 id="org56ef9f0">Project 2: Egg programming language</h2>
@@ -258,9 +335,9 @@ globalScope.element = (array, n) =&gt; {
       <code>div</code> elements with styling and positioning
       applied. You can actually get decent performance by adding
       and removing DOM elements, although working this way can feel
-      a little clunky<label for="3" class=
+      a little clunky<label for="4" class=
       "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="3" class="margin-toggle"><span class=
+      "checkbox" id="4" class="margin-toggle"><span class=
       "sidenote">A more idiomatic approach is to use the
       <code>&lt;canvas&gt;</code> element</span>.</p>
       <p><a href="./eloquentjs/platformer/platformer.html">Try out
@@ -466,7 +543,9 @@ globalScope.element = (array, n) =&gt; {
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">These are not the focus of the project but are cool to see</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">A more idiomatic approach is to use the <code>&lt;canvas&gt;</code>  element</p></div></div>
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I&rsquo;ve built this into my version of the <a href="./eloquentjs/robot/robot.html">robot animation</a></p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">A more idiomatic approach is to use the <code>&lt;canvas&gt;</code>  element</p></div></div>
 
  -->
   </article>

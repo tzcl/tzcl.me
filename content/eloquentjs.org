@@ -19,10 +19,47 @@ The first project of the book is to build a mail-delivery robot that picks up an
 
 [[./eloquentjs/robot/robot.html][Try out the robot here!]]
 
-I need to keep going at this, stuck on implementing controls. Need to do some thinking on how to organise this all.
-
 ** Measuring a robot
+To objectively compare robots, we want to make sure each time we generate a task, we give that task to both robots and track the result.
+#+begin_src js
+function compareRobots(robot1, memory1, robot2, memory2) {
+  let steps1 = 0,
+    steps2 = 0;
+  for (let task = 0; task < 100; task++) {
+    let state = VillageState.random();
+    steps1 += countRobot(state, robot1, memory1);
+    steps2 += countRobot(state, robot2, memory2);
+  }
+
+  console.log(`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`);
+}
+#+end_src
+
 ** Robot efficiency
+The trick to designing a more efficient robot than the =goalOrientedRobot= is to realise that the =goalOrientedRobot= only looks at one parcel at a time. In some cases, the robot would be able to find a better route if it considered all parcels. This was fun to play around with, although I wished I could pause the animation to think about what I would do as my next move if I were the robot[fn:: I've built this into my version of the [[./eloquentjs/robot/robot.html][robot animation]]].
+#+begin_src js
+function greedyRobot({ place, parcels }, route) {
+  if (route.length == 0) {
+    let min_route = [];
+
+    for (let parcel of parcels) {
+      if (parcel.place != place) {
+        route = findRoute(roadGraph, place, parcel.place);
+      } else {
+        route = findRoute(roadGraph, place, parcel.address);
+      }
+
+      if (min_route.length == 0 || route.length < min_route.length) {
+        min_route = route;
+      }
+    }
+
+    route = min_route;
+  }
+
+  return { direction: route[0], memory: route.slice(1) };
+}
+#+end_src
 
 * Project 2: Egg programming language
 In this project we build our own simple programming language called Egg:
