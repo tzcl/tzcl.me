@@ -236,8 +236,6 @@ class RobotAnimation {
     this.turn = 0;
     this.parcels = [];
 
-    let anim = this;
-
     this.village = elt("img", {
       style: "vertical-align: -8px",
       src: "assets/village.png",
@@ -256,34 +254,7 @@ class RobotAnimation {
     );
     this.robotElt.addEventListener("transitionend", () => this.updateParcels());
 
-    this.text = elt("span");
-
-    const algos = {
-      random: randomRobot,
-      route: routeRobot,
-      "path-finding": goalOrientedRobot,
-      greedy: greedyRobot,
-    };
-    this.select = elt("select", {
-      onchange: () => {
-        anim.robot = algos[this.select.value];
-      },
-      ...Object.keys(algos).map((name) => elt("option", null, name)),
-    });
-    this.picker = elt("label", null, "Algorithm: ", this.select);
-
-    this.button = elt("button", null, "Stop");
-    this.button.addEventListener("click", () => this.clicked());
-
-    this.output = elt("div", null, this.text, this.picker, this.button);
-
-    this.dom = elt(
-      "div",
-      { id: "main" },
-      this.village,
-      this.robotElt,
-      this.output
-    );
+    this.dom = elt("div", { id: "main" }, this.village, this.robotElt);
 
     this.schedule();
     this.updateView();
@@ -297,8 +268,6 @@ class RobotAnimation {
     this.turn++;
     this.updateView();
     if (this.worldState.parcels.length == 0) {
-      this.button.remove();
-      this.text.textContent = ` Finished after ${this.turn} turns`;
       this.robotElt.firstChild.src = "assets/robot.png";
     } else {
       this.schedule();
@@ -313,8 +282,6 @@ class RobotAnimation {
     let pos = places[this.worldState.place];
     this.robotElt.style.top = pos.y - 38 + "px";
     this.robotElt.style.left = pos.x - 16 + "px";
-
-    this.text.textContent = ` Turn ${this.turn}`;
   }
 
   updateParcels() {
@@ -342,19 +309,6 @@ class RobotAnimation {
         this.dom.appendChild(parcel);
       }
       this.parcels.push(parcel);
-    }
-  }
-
-  clicked() {
-    if (this.timeout == null) {
-      this.schedule();
-      this.button.textContent = "Stop";
-      this.robotElt.firstChild.src = "assets/robot.gif";
-    } else {
-      clearTimeout(this.timeout);
-      this.timeout = null;
-      this.button.textContent = "Start";
-      this.robotElt.firstChild.src = "assets/robot.png";
     }
   }
 }
