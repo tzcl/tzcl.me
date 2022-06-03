@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-03 Fri 19:13 -->
+  <!-- 2022-06-03 Fri 19:38 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -39,8 +39,7 @@
             <a href="#org8fef33c">Exercise: Game of Life</a>
           </li>
           <li>
-            <a href="#org16814c5"><span class=
-            "todo TODO">TODO</span> Project 4: Pixel art editor</a>
+            <a href="#org16814c5">Project 4: Pixel art editor</a>
           </li>
           <li>
             <a href="#org6e7a6f3"><span class=
@@ -596,19 +595,306 @@ globalScope.element = (array, n) =&gt; {
       out the Game of Life!</a></p>
     </section>
     <section id="org16814c5" class="nil">
-      <h2 id="org16814c5"><span class="todo TODO">TODO</span>
-      Project 4: Pixel art editor</h2>
+      <h2 id="org16814c5">Project 4: Pixel art editor</h2>
       <p>As discussed in the platformer project, another way to
       render graphics on the web is using
-      <code>&lt;canvas&gt;</code> elements.</p>
+      <code>&lt;canvas&gt;</code> elements. The design of this
+      application is the first time we use components, which
+      logically distribute state throughout the interface. Properly
+      dealing with the flow of data is important to avoid ending up
+      with spaghetti code. An interesting problem was adding event
+      listeners to work both with mouse events and touch events,
+      each of which work slightly differently.</p>
       <p><a href="./eloquentjs/pixel-art/pixel-art.html">Try out
       the pixel art editor!</a></p>
+      <h3 id="org76514d7">Keyboard bindings</h3>
+      <p>We want to add keyboard shortcuts such that pressing
+      <code>ctrl-</code> or <code>cmd-</code> and the first letter
+      of the tool automatically switches to that tool. Fortunately,
+      the way we’ve designed the app makes this easy to do – we
+      just need to add an event listener that dispatches on the
+      different keybindings.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">class</span> PixelEditor {
+  constructor(state, config) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> { tools, controls, dispatch } = config;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state = state;
+
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.canvas = <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">PictureCanvas</span>(
+      state.picture,
+      (pos) =&gt; {
+        <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">tool</span> = tools[<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state.tool];
+
+        <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Call the tool once</span>
+        <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">onMove</span> = tool(pos, <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state, dispatch);
+        <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Pass along function in case we need to redraw</span>
+        <span style=
+"color: #859900; font-weight: bold;">if</span> (onMove) <span style="color: #859900; font-weight: bold;">return</span> (pos) =&gt; onMove(pos, <span style="color: #6c71c4; font-weight: bold;">this</span>.state);
+      },
+      () =&gt; dispatch({ commit: <span style=
+"color: #6c71c4; font-weight: bold;">true</span> })
+    );
+
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.controls = controls.map((Control) =&gt; <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Control</span>(state, config));
+
+    <span style=
+"color: #859900; font-weight: bold;">const</span> <span style=
+"color: #268bd2;">keyDown</span> = (event) =&gt; {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (event.key == <span style="color: #2aa198;">"z"</span> &amp;& (event.ctrlKey || event.metaKey)) {
+        dispatch({ revert: <span style=
+"color: #2aa198;">"undo"</span> });
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (event.key == <span style="color: #2aa198;">"y"</span> &amp;& (event.ctrlKey || event.metaKey)) {
+        dispatch({ revert: <span style=
+"color: #2aa198;">"redo"</span> });
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (!event.ctrlKey &amp;& !event.metaKey &amp;& !event.altKey) {
+        <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">tool</span> <span style=
+"color: #859900; font-weight: bold;">in</span> tools) {
+          <span style=
+"color: #859900; font-weight: bold;">if</span> (event.key == tool[<span style="color: #6c71c4; font-weight: bold;">0</span>]) {
+            dispatch({ tool });
+            <span style=
+"color: #859900; font-weight: bold;">return</span>;
+          }
+        }
+      }
+    };
+
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.dom = elt(
+      <span style="color: #2aa198;">"div"</span>,
+      { tabIndex: <span style=
+"color: #6c71c4; font-weight: bold;">0</span>, onkeydown: (event) =&gt; keyDown(event) },
+      <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.canvas.dom,
+      elt(<span style="color: #2aa198;">"br"</span>),
+      ...<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.controls.reduce((a, c) =&gt; a.concat(<span style="color: #2aa198;">" "</span>, c.dom), [])
+    );
+  }
+  ...
+}
+</code></pre>
+      <h3 id="org00ce14f">Efficient drawing</h3>
+      <p>At the moment, each time we create a new state, we are
+      redrawing all the pixels on the canvas which can be
+      expensive. One way we can optimise this is to keep track of
+      the previous state and then ’diff’ that against the new state
+      and only draw the pixels that change.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">patchPicture</span>(<span style=
+      "color: #268bd2;">prev</span>, <span style=
+      "color: #268bd2;">curr</span>, <span style=
+      "color: #268bd2;">canvas</span>, <span style=
+      "color: #268bd2;">scale</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">cx</span> = canvas.getContext(<span style=
+"color: #2aa198;">"2d"</span>);
+
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">y</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; y &lt; prev.height; y++) {
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; x &lt; prev.width; x++) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (prev.pixel(x, y) != curr.pixel(x, y)) {
+        cx.fillStyle = curr.pixel(x, y);
+        cx.fillRect(x * scale, y * scale, scale, scale);
+      }
+    }
+  }
+}
+</code></pre>
+      <h3 id="org42ffa9c">Circles</h3>
+      <p>Figuring out how to draw circles was a lot of fun. I
+      struggled for a bit getting circles which were mostly squares
+      with individual pixels sticking out (that looked like
+      nipples) but managed to fix this by taking the
+      <code>ceil</code> of the distance when I was computing the
+      radius. Below is what I found to give the best looking
+      circles.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">circle</span>(<span style=
+      "color: #268bd2;">start</span>, <span style=
+      "color: #268bd2;">state</span>, <span style=
+      "color: #268bd2;">dispatch</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">const</span> <span style=
+"color: #268bd2;">dist</span> = (x, y) =&gt; {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dx</span> = x - start.x;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dy</span> = y - start.y;
+    <span style=
+"color: #859900; font-weight: bold;">return</span> Math.sqrt(dx * dx + dy * dy);
+  };
+
+  <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">drawCircle</span>(<span style=
+"color: #268bd2;">pos</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">radius</span> = Math.ceil(dist(pos.x, pos.y));
+
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">xStart</span> = Math.max(<span style=
+"color: #6c71c4; font-weight: bold;">0</span>, start.x - radius);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">yStart</span> = Math.max(<span style=
+"color: #6c71c4; font-weight: bold;">0</span>, start.y - radius);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">xEnd</span> = Math.min(start.x + radius, state.picture.width);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">yEnd</span> = Math.min(start.y + radius, state.picture.height);
+
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">drawn</span> = [];
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">y</span> = yStart; y &lt;= yEnd; y++) {
+      <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = xStart; x &lt;= xEnd; x++) {
+        <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">d</span> = dist(x, y);
+        <span style=
+"color: #859900; font-weight: bold;">if</span> (d &lt; radius) drawn.push({ x, y, colour: state.colour });
+      }
+    }
+
+    dispatch({ picture: state.picture.draw(drawn) });
+  }
+
+  drawCircle(start);
+  <span style=
+"color: #859900; font-weight: bold;">return</span> drawCircle;
+}
+</code></pre>
+      <h3 id="org1b8b692">Proper lines</h3>
+      <p>This was much more difficult than the previous exercises.
+      I’ve heard of <a href=
+      "https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham’s
+      line algorithm</a> before and that seemed to be what was
+      needed. Generalising the algorithm to work for all octants
+      took some time but it was satisfying being able to draw quick
+      lines without gaps.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">drawLine</span>(<span style=
+      "color: #268bd2;">start</span>, <span style=
+      "color: #268bd2;">pos</span>, <span style=
+      "color: #268bd2;">colour</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dx</span> = Math.abs(pos.x - start.x);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">sx</span> = start.x &lt; pos.x ? <span style=
+"color: #6c71c4; font-weight: bold;">1</span> : -<span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
+
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Note the negative</span>
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">In graphics, y++ means moving down</span>
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dy</span> = -Math.abs(pos.y - start.y);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">sy</span> = start.y &lt; pos.y ? <span style=
+"color: #6c71c4; font-weight: bold;">1</span> : -<span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
+
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">err</span> = dx + dy;
+
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">drawn</span> = [];
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = start.x, <span style=
+"color: #268bd2;">y</span> = start.y; ; ) {
+    drawn.push({ x, y, colour });
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (x == pos.x &amp;& y == pos.y) <span style="color: #859900; font-weight: bold;">break</span>;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">err2</span> = <span style=
+"color: #6c71c4; font-weight: bold;">2</span> * err; <span style=
+"color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">avoid dividing</span>
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (err2 &gt;= dy) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (x == pos.x) <span style="color: #859900; font-weight: bold;">break</span>;
+      err += dy;
+      x += sx;
+    }
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (err2 &lt;= dx) {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (y == pos.y) <span style="color: #859900; font-weight: bold;">break</span>;
+      err += dx;
+      y += sy;
+    }
+  }
+
+  <span style=
+"color: #859900; font-weight: bold;">return</span> drawn;
+}
+</code></pre>
     </section>
     <section id="org6e7a6f3" class="nil">
       <h2 id="org6e7a6f3"><span class="todo TODO">TODO</span>
       Project 5: Skill-sharing website</h2>
       <p>Need to host this somewhere… need Node to be running to
       keep store the talks.</p>
+      <h3 id="org1d4c507"><span class="todo TODO">TODO</span> Disk
+      persistence</h3>
+      <h3 id="org43af059"><span class="todo TODO">TODO</span>
+      Comment field resets</h3>
     </section><!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">One of the great classics of computer science</p></div></div>
 

@@ -279,10 +279,148 @@ Technically, the Game of Life is meant to be played on an infinite grid. There a
 
 [[./eloquentjs/game-of-life/game-of-life.html][Try out the Game of Life!]]
 
-* TODO Project 4: Pixel art editor
-As discussed in the platformer project, another way to render graphics on the web is using =<canvas>= elements.
+* Project 4: Pixel art editor
+As discussed in the platformer project, another way to render graphics on the web is using =<canvas>= elements. The design of this application is the first time we use components, which logically distribute state throughout the interface. Properly dealing with the flow of data is important to avoid ending up with spaghetti code. An interesting problem was adding event listeners to work both with mouse events and touch events, each of which work slightly differently.
 
 [[./eloquentjs/pixel-art/pixel-art.html][Try out the pixel art editor!]]
 
+** Keyboard bindings
+We want to add keyboard shortcuts such that pressing =ctrl-= or =cmd-= and the first letter of the tool automatically switches to that tool. Fortunately, the way we've designed the app makes this easy to do -- we just need to add an event listener that dispatches on the different keybindings.
+#+begin_src js
+class PixelEditor {
+  constructor(state, config) {
+    let { tools, controls, dispatch } = config;
+    this.state = state;
+
+    this.canvas = new PictureCanvas(
+      state.picture,
+      (pos) => {
+        let tool = tools[this.state.tool];
+
+        // Call the tool once
+        let onMove = tool(pos, this.state, dispatch);
+        // Pass along function in case we need to redraw
+        if (onMove) return (pos) => onMove(pos, this.state);
+      },
+      () => dispatch({ commit: true })
+    );
+
+    this.controls = controls.map((Control) => new Control(state, config));
+
+    const keyDown = (event) => {
+      if (event.key == "z" && (event.ctrlKey || event.metaKey)) {
+        dispatch({ revert: "undo" });
+      } else if (event.key == "y" && (event.ctrlKey || event.metaKey)) {
+        dispatch({ revert: "redo" });
+      } else if (!event.ctrlKey && !event.metaKey && !event.altKey) {
+        for (let tool in tools) {
+          if (event.key == tool[0]) {
+            dispatch({ tool });
+            return;
+          }
+        }
+      }
+    };
+
+    this.dom = elt(
+      "div",
+      { tabIndex: 0, onkeydown: (event) => keyDown(event) },
+      this.canvas.dom,
+      elt("br"),
+      ...this.controls.reduce((a, c) => a.concat(" ", c.dom), [])
+    );
+  }
+  ...
+}
+#+end_src
+
+** Efficient drawing
+At the moment, each time we create a new state, we are redrawing all the pixels on the canvas which can be expensive. One way we can optimise this is to keep track of the previous state and then 'diff' that against the new state and only draw the pixels that change.
+#+begin_src js
+function patchPicture(prev, curr, canvas, scale) {
+  let cx = canvas.getContext("2d");
+
+  for (let y = 0; y < prev.height; y++) {
+    for (let x = 0; x < prev.width; x++) {
+      if (prev.pixel(x, y) != curr.pixel(x, y)) {
+        cx.fillStyle = curr.pixel(x, y);
+        cx.fillRect(x * scale, y * scale, scale, scale);
+      }
+    }
+  }
+}
+#+end_src
+
+** Circles
+Figuring out how to draw circles was a lot of fun. I struggled for a bit getting circles which were mostly squares with individual pixels sticking out (that looked like nipples) but managed to fix this by taking the =ceil= of the distance when I was computing the radius. Below is what I found to give the best looking circles.
+#+begin_src js
+function circle(start, state, dispatch) {
+  const dist = (x, y) => {
+    let dx = x - start.x;
+    let dy = y - start.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  function drawCircle(pos) {
+    let radius = Math.ceil(dist(pos.x, pos.y));
+
+    let xStart = Math.max(0, start.x - radius);
+    let yStart = Math.max(0, start.y - radius);
+    let xEnd = Math.min(start.x + radius, state.picture.width);
+    let yEnd = Math.min(start.y + radius, state.picture.height);
+
+    let drawn = [];
+    for (let y = yStart; y <= yEnd; y++) {
+      for (let x = xStart; x <= xEnd; x++) {
+        let d = dist(x, y);
+        if (d < radius) drawn.push({ x, y, colour: state.colour });
+      }
+    }
+
+    dispatch({ picture: state.picture.draw(drawn) });
+  }
+
+  drawCircle(start);
+  return drawCircle;
+}
+#+end_src
+
+** Proper lines
+This was much more difficult than the previous exercises. I've heard of [[https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm][Bresenham's line algorithm]] before and that seemed to be what was needed. Generalising the algorithm to work for all octants took some time but it was satisfying being able to draw quick lines without gaps.
+#+begin_src js
+function drawLine(start, pos, colour) {
+  let dx = Math.abs(pos.x - start.x);
+  let sx = start.x < pos.x ? 1 : -1;
+
+  // Note the negative
+  // In graphics, y++ means moving down
+  let dy = -Math.abs(pos.y - start.y);
+  let sy = start.y < pos.y ? 1 : -1;
+
+  let err = dx + dy;
+
+  let drawn = [];
+  for (let x = start.x, y = start.y; ; ) {
+    drawn.push({ x, y, colour });
+    if (x == pos.x && y == pos.y) break;
+    let err2 = 2 * err; // avoid dividing
+    if (err2 >= dy) {
+      if (x == pos.x) break;
+      err += dy;
+      x += sx;
+    }
+    if (err2 <= dx) {
+      if (y == pos.y) break;
+      err += dx;
+      y += sy;
+    }
+  }
+
+  return drawn;
+}
+#+end_src
+
 * TODO Project 5: Skill-sharing website
 Need to host this somewhere... need Node to be running to keep store the talks.
+** TODO Disk persistence
+** TODO Comment field resets
