@@ -60,8 +60,8 @@ function randomPick(array) {
   return array[choice];
 }
 
-function randomRobot(state) {
-  return { direction: randomPick(roadGraph[state.place]) };
+function randomRobot(state, memory) {
+  return { direction: randomPick(roadGraph[state.place]), memory };
 }
 
 const mailRoute = [
@@ -188,29 +188,24 @@ function compareRobots(robot1, memory1, robot2, memory2) {
 // closer.
 function greedyRobot({ place, parcels }, route) {
   if (route.length == 0) {
-    route = closestParceRoute(place, parcels);
+    let min_route = [];
+
+    for (let parcel of parcels) {
+      if (parcel.place != place) {
+        route = findRoute(roadGraph, place, parcel.place);
+      } else {
+        route = findRoute(roadGraph, place, parcel.address);
+      }
+
+      if (min_route.length == 0 || route.length < min_route.length) {
+        min_route = route;
+      }
+    }
+
+    route = min_route;
   }
 
   return { direction: route[0], memory: route.slice(1) };
-}
-
-// Could make more efficient by updating routes instead of recomputing them all.
-function closestParceRoute(place, parcels) {
-  let min_route = [];
-
-  for (let parcel of parcels) {
-    if (parcel.place != place) {
-      route = findRoute(roadGraph, place, parcel.place);
-    } else {
-      route = findRoute(roadGraph, place, parcel.address);
-    }
-
-    if (min_route.length == 0 || route.length < min_route.length) {
-      min_route = route;
-    }
-  }
-
-  return min_route;
 }
 
 //
@@ -229,10 +224,11 @@ function elt(name, props, ...children) {
 }
 
 class RobotAnimation {
-  constructor(worldState, robot, robotState) {
+  constructor(worldState, robot, robotState, controller) {
     this.worldState = worldState;
     this.robot = robot;
     this.robotState = robotState;
+    this.controller = controller;
     this.turn = 0;
     this.parcels = [];
 
@@ -254,9 +250,16 @@ class RobotAnimation {
     );
     this.robotElt.addEventListener("transitionend", () => this.updateParcels());
 
-    this.dom = elt("div", { id: "main" }, this.village, this.robotElt);
+    this.text = elt("p");
 
-    this.schedule();
+    this.dom = elt(
+      "div",
+      { id: "main" },
+      this.village,
+      this.robotElt,
+      this.text
+    );
+
     this.updateView();
     this.updateParcels();
   }
@@ -268,7 +271,9 @@ class RobotAnimation {
     this.turn++;
     this.updateView();
     if (this.worldState.parcels.length == 0) {
+      this.text.textContent = `Finished after ${this.turn} turns`;
       this.robotElt.firstChild.src = "assets/robot.png";
+      this.controller.finished();
     } else {
       this.schedule();
     }
@@ -282,6 +287,8 @@ class RobotAnimation {
     let pos = places[this.worldState.place];
     this.robotElt.style.top = pos.y - 38 + "px";
     this.robotElt.style.left = pos.x - 16 + "px";
+
+    this.text.textContent = `Turn ${this.turn}`;
   }
 
   updateParcels() {
@@ -311,24 +318,106 @@ class RobotAnimation {
       this.parcels.push(parcel);
     }
   }
-}
 
-let active = null;
+  active() {
+    return this.timeout;
+  }
 
-function runRobotAnimation(state, robot, memory) {
-  if (active && active.timeout != null) clearTimeout(active.timeout);
-  active = new RobotAnimation(state, robot, memory);
+  stop() {
+    clearTimeout(this.timeout);
+    this.timeout = null;
+  }
 }
 
 class Controller {
-  constructor(controls) {}
+  constructor(algos) {
+    this.algos = algos;
 
-  update() {}
+    this.anim = new RobotAnimation(
+      VillageState.random(),
+      randomRobot,
+      [],
+      this
+    );
+
+    let that = this;
+
+    this.code = elt("code", null, this.anim.robot.toString());
+
+    this.select = elt("select", {
+      onchange: () => {
+        that.anim.robot = algos[this.select.value];
+        that.code.textContent = that.anim.robot.toString();
+      },
+      ...Object.keys(algos).map((name) => elt("option", null, name)),
+    });
+    this.picker = elt("label", null, "Algorithm: ", this.select);
+
+    this.text = elt("span");
+    this.startBtn = elt("button", null, "Start");
+    this.startBtn.addEventListener("click", () => this.clicked());
+
+    this.resetBtn = elt("button", null, "Reset");
+    this.resetBtn.addEventListener("click", () => this.reset());
+
+    this.output = elt(
+      "div",
+      null,
+      this.picker,
+      " ",
+      this.startBtn,
+      " ",
+      this.resetBtn,
+      elt("pre", null, this.code)
+    );
+
+    this.dom = elt("div", null, this.anim.dom, this.output);
+  }
+
+  finished() {
+    this.startBtn.textContent = "Start";
+    this.startBtn.disabled = true;
+  }
+
+  clicked() {
+    if (this.anim.active()) {
+      this.anim.stop();
+      this.startBtn.textContent = "Start";
+    } else {
+      this.anim.schedule();
+      this.startBtn.textContent = "Stop";
+    }
+  }
+
+  reset() {
+    if (this.anim && this.anim.timeout != null) clearTimeout(this.anim.timeout);
+
+    this.anim = new RobotAnimation(
+      VillageState.random(),
+      this.algos[this.select.value],
+      [],
+      this
+    );
+
+    this.dom.textContent = "";
+    this.dom.appendChild(this.anim.dom);
+    this.dom.appendChild(this.output);
+
+    this.startBtn.textContent = "Start";
+    this.startBtn.disabled = false;
+  }
 }
 
 //
 // Application
 //
 
-let robotAnimation = new RobotAnimation(VillageState.random(), greedyRobot, []);
-document.getElementById("root").appendChild(robotAnimation.dom);
+const algos = {
+  random: randomRobot,
+  route: routeRobot,
+  "path-finding": goalOrientedRobot,
+  greedy: greedyRobot,
+};
+
+let app = new Controller(algos);
+document.getElementById("root").appendChild(app.dom);

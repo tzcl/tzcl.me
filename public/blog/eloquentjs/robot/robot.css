@@ -3,18 +3,6 @@ img {
   user-select: none;
 }
 
-/* button { */
-/*   color: white; */
-/*   background: #28b; */
-/*   border: none; */
-/*   border-radius: 2px; */
-/*   padding: 2px 5px; */
-/*   margin: 0 10px; */
-/*   line-height: 1.1; */
-/*   font-family: sans-serif; */
-/*   font-size: 80%; */
-/* } */
-
 #robot {
   position: absolute;
   width: 40px;
