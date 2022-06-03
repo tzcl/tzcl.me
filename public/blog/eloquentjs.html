@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-03 Fri 17:50 -->
+  <!-- 2022-06-03 Fri 19:13 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -20,7 +20,6 @@
       <p class="subtitle" role="doc-subtitle">Marijn Haverbeke</p>
     </header>
     <nav id="table-of-contents" role="doc-toc">
-      <h2></h2>
       <div id="text-table-of-contents" role="doc-toc">
         <ul>
           <li>
@@ -78,12 +77,10 @@
       make some sense once you understand them. Before reading
       Eloquent JavaScript, I was working my way through <a href=
       "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
-      SICP</a><label for="1" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="1" class="margin-toggle"><span class=
-      "sidenote">One of the great classics of computer
-      science</span> and you can really see the inspiration that
-      JavaScript took from Scheme.</p>
+      SICP</a><input type="checkbox" id="1" class=
+      "margin-toggle"><span class="sidenote">One of the great
+      classics of computer science</span> and you can really see
+      the inspiration that JavaScript took from Scheme.</p>
       <p>Below are my solutions to the projects and the
       accompanying exercises from the text.</p>
     </section>
@@ -91,12 +88,11 @@
       <h2 id="org8c0e161">Project 1: Path-finding robot</h2>
       <p>The first project of the book is to build a mail-delivery
       robot that picks up and drops off parcels. Immediately, we
-      are exposed to graphs and path-finding algorithms<label for=
-      "2" class=
-      "margin-toggle sidenote-number"></label><input type="checkbox"
-      id="2" class="margin-toggle"><span class="sidenote">These are
-      not the focus of the project but are cool to see</span>, and
-      get to try solve an interesting problem.</p>
+      are exposed to graphs and path-finding algorithms<input type=
+      "checkbox" id="2" class="margin-toggle"><span class=
+      "sidenote">These are not the focus of the project but are
+      cool to see</span>, and get to try solve an interesting
+      problem.</p>
       <p><a href="./eloquentjs/robot/robot.html">Try out the robot
       here!</a></p>
       <h3 id="org4b30327">Measuring a robot</h3>
@@ -140,10 +136,9 @@
       route if it considered all parcels. This was fun to play
       around with, although I wished I could pause the animation to
       think about what I would do as my next move if I were the
-      robot<label for="3" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="3" class="margin-toggle"><span class=
-      "sidenote">I’ve built this into my version of the <a href=
+      robot<input type="checkbox" id="3" class=
+      "margin-toggle"><span class="sidenote">I’ve built this into
+      my version of the <a href=
       "./eloquentjs/robot/robot.html">robot
       animation</a></span>.</p>
       <pre class="code"><code><span style=
@@ -335,11 +330,10 @@ globalScope.element = (array, n) =&gt; {
       <code>div</code> elements with styling and positioning
       applied. You can actually get decent performance by adding
       and removing DOM elements, although working this way can feel
-      a little clunky<label for="4" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="4" class="margin-toggle"><span class=
-      "sidenote">A more idiomatic approach is to use the
-      <code>&lt;canvas&gt;</code> element</span>.</p>
+      a little clunky<input type="checkbox" id="4" class=
+      "margin-toggle"><span class="sidenote">A more idiomatic
+      approach is to use the <code>&lt;canvas&gt;</code>
+      element</span>.</p>
       <p><a href="./eloquentjs/platformer/platformer.html">Try out
       the platformer game here!</a></p>
       <h3 id="orgbf259d5">Game over</h3>
@@ -497,9 +491,86 @@ globalScope.element = (array, n) =&gt; {
   });
 }
 </code></pre>
-      <h3 id="org913a585"><span class="todo TODO">TODO</span> A
-      monster</h3>
-      <p>zzz</p>
+      <h3 id="org913a585">A monster</h3>
+      <p>Using the scaffolding we’ve set up for the player, adding
+      an enemy isn’t too hard. The tricky part is determining
+      whether the player jumped on the head of the monster. The
+      simplest way to approach is to compare the y-coords of the
+      player and the monster at the time of collision.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">class</span> Monster {
+  constructor(pos, speed) {
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos = pos;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.speed = speed;
+  }
+
+  update(time, state) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">newPos</span> = <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos.plus(<span style="color: #6c71c4; font-weight: bold;">this</span>.speed.times(time));
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (!state.level.touches(newPos, <span style="color: #6c71c4; font-weight: bold;">this</span>.size, <span style="color: #2aa198;">"wall"</span>)) {
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(newPos, <span style="color: #6c71c4; font-weight: bold;">this</span>.speed);
+    } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos, <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.speed.times(-<span style="color: #6c71c4; font-weight: bold;">1</span>));
+    }
+  }
+
+  collide(state) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">player</span> = state.player;
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (player.pos.y &lt; <span style="color: #6c71c4; font-weight: bold;">this</span>.pos.y) {
+      <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">filtered</span> = state.actors.filter((a) =&gt; a != <span style="color: #6c71c4; font-weight: bold;">this</span>);
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">State</span>(state.level, filtered, <span style="color: #2aa198;">"playing"</span>);
+    }
+
+    <span style=
+"color: #859900; font-weight: bold;">return</span> state;
+  }
+
+  get type() {
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #2aa198;">"monster"</span>;
+  }
+
+  get size() {
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Vec</span>(<span style=
+"color: #6c71c4; font-weight: bold;">1.2</span>, <span style=
+"color: #6c71c4; font-weight: bold;">2</span>);
+  }
+
+  <span style=
+"color: #859900; font-weight: bold;">static</span> create(pos) {
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(pos.plus(<span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Vec</span>(<span style="color: #6c71c4; font-weight: bold;">0</span>, -<span style="color: #6c71c4; font-weight: bold;">1</span>)), <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Vec</span>(<span style="color: #6c71c4; font-weight: bold;">2</span>, <span style="color: #6c71c4; font-weight: bold;">0</span>));
+  }
+}
+</code></pre>
     </section>
     <section id="org8fef33c" class="nil">
       <h2 id="org8fef33c">Exercise: Game of Life</h2>

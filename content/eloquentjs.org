@@ -226,8 +226,47 @@ function runLevel(level, Display) {
 }
 #+end_src
 
-** TODO A monster
-zzz
+** A monster
+Using the scaffolding we've set up for the player, adding an enemy isn't too hard. The tricky part is determining whether the player jumped on the head of the monster. The simplest way to approach is to compare the y-coords of the player and the monster at the time of collision.
+#+begin_src js
+class Monster {
+  constructor(pos, speed) {
+    this.pos = pos;
+    this.speed = speed;
+  }
+
+  update(time, state) {
+    let newPos = this.pos.plus(this.speed.times(time));
+    if (!state.level.touches(newPos, this.size, "wall")) {
+      return new Monster(newPos, this.speed);
+    } else {
+      return new Monster(this.pos, this.speed.times(-1));
+    }
+  }
+
+  collide(state) {
+    let player = state.player;
+    if (player.pos.y < this.pos.y) {
+      let filtered = state.actors.filter((a) => a != this);
+      return new State(state.level, filtered, "playing");
+    }
+
+    return state;
+  }
+
+  get type() {
+    return "monster";
+  }
+
+  get size() {
+    return new Vec(1.2, 2);
+  }
+
+  static create(pos) {
+    return new Monster(pos.plus(new Vec(0, -1)), new Vec(2, 0));
+  }
+}
+#+end_src
 
 * Exercise: Game of Life
 Using HTML forms, it's possible to write a basic version of the Game of Life. Each generation, a checkbox transitions according to the following rules:
