@@ -420,7 +420,115 @@ function drawLine(start, pos, colour) {
 }
 #+end_src
 
-* TODO Project 5: Skill-sharing website
-Need to host this somewhere... need Node to be running to keep store the talks.
-** TODO Disk persistence
-** TODO Comment field resets
+* Project 5: Skill-sharing website
+This project was most like a real web app. In short, it allows users to add talks (for some kind of meetup) and comments on those talks. Using long-polling, it was possible to have the client update whenever any changes occurred on the server. To summarise, long polling is where clients continually ask the server for new information using regular HTTP requests, and the server delays its answer until it an update. The trick is to always have a polling request open and to set a long maximum time for each request to avoid timing out. Node made this easy to manage on the server side.
+
+[[https://skillsharing.tzcl.me][Try out the skill-sharing website here!]]
+
+** Disk persistence
+The simplest way we can add disk persistence is to make our =update= function write any changes to a file.
+#+begin_src js
+class SkillShareServer {
+  updated() {
+    this.version++;
+    let res = this.talkResponse();
+    this.waiting.forEach((resolve) => resolve(res));
+    this.waiting = [];
+
+    writeFile(filePath, JSON.stringify(this.talks), (err) => {
+      if (err) throw err;
+    });
+  }
+  ...
+}
+#+end_src
+
+Then, when we launch the server, we want it to read in any talks from disk, if they exist. We pass this to the =SkillShareServer= through its constructor.
+#+begin_src js
+const filePath = "data.json";
+
+async function loadTalks(file = filePath) {
+  let data;
+  try {
+    data = JSON.parse(await readFile(file, { encoding: "utf-8" }));
+  } catch (err) {
+    data = {};
+  }
+
+  // Need to do this to remove the prototype
+  // If not, we wouldn't be able to use the 'in' operator safely
+  return Object.assign(Object.create(null), data);
+}
+#+end_src
+
+** Comment field resets
+One issue with how we've built the app is that it replaces DOM elements each time it renders. This may be annoying if you start writing a comment, and then someone else posts something, leading to the app replacing the comment box and losing its content.
+
+The simplest way to fix this is to keep track of comments as part of state and using that to fill in the content when the view updates.
+#+begin_src js
+class Talk {
+  constructor(talk, dispatch) {
+    this.comments = elt("div");
+    this.dom = elt(
+      "section",
+      { className: "talk" },
+      elt(
+        "h2",
+        null,
+        talk.title,
+        " ",
+        elt(
+          "button",
+          {
+            type: "button",
+            onclick() {
+              dispatch({ type: "deleteTalk", talk: talk.title });
+            },
+          },
+          "Delete"
+        )
+      ),
+      elt("div", null, "by ", elt("strong", null, talk.presenter)),
+      elt("p", null, talk.summary),
+      this.comments,
+      elt(
+        "form",
+        {
+          onsubmit(e) {
+            e.preventDefault();
+            let form = e.target;
+            dispatch({
+              type: "newComment",
+              talk: talk.title,
+              message: form.elements.comment.value,
+            });
+            form.reset();
+          },
+        },
+        elt("input", { type: "text", name: "comment" }),
+        " ",
+        elt("button", { type: "submit" }, "Add comment")
+      )
+    );
+    this.syncState(talk);
+  }
+
+  syncState(talk) {
+    this.talk = talk;
+    this.comments.textContent = "";
+    for (let comment of talk.comments) {
+      this.comments.appendChild(renderComment(comment));
+    }
+  }
+}
+
+function renderComment(comment) {
+  return elt(
+    "p",
+    { className: "comment" },
+    elt("strong", null, comment.author),
+    ": ",
+    comment.message
+  );
+}
+#+end_src

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-03 Fri 19:38 -->
+  <!-- 2022-06-04 Sat 13:38 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -42,8 +42,7 @@
             <a href="#org16814c5">Project 4: Pixel art editor</a>
           </li>
           <li>
-            <a href="#org6e7a6f3"><span class=
-            "todo TODO">TODO</span> Project 5: Skill-sharing
+            <a href="#org6e7a6f3">Project 5: Skill-sharing
             website</a>
           </li>
         </ul>
@@ -887,14 +886,186 @@ globalScope.element = (array, n) =&gt; {
 </code></pre>
     </section>
     <section id="org6e7a6f3" class="nil">
-      <h2 id="org6e7a6f3"><span class="todo TODO">TODO</span>
-      Project 5: Skill-sharing website</h2>
-      <p>Need to host this somewhere… need Node to be running to
-      keep store the talks.</p>
-      <h3 id="org1d4c507"><span class="todo TODO">TODO</span> Disk
-      persistence</h3>
-      <h3 id="org43af059"><span class="todo TODO">TODO</span>
-      Comment field resets</h3>
+      <h2 id="org6e7a6f3">Project 5: Skill-sharing website</h2>
+      <p>This project was most like a real web app. In short, it
+      allows users to add talks (for some kind of meetup) and
+      comments on those talks. Using long-polling, it was possible
+      to have the client update whenever any changes occurred on
+      the server. To summarise, long polling is where clients
+      continually ask the server for new information using regular
+      HTTP requests, and the server delays its answer until it an
+      update. The trick is to always have a polling request open
+      and to set a long maximum time for each request to avoid
+      timing out. Node made this easy to manage on the server
+      side.</p>
+      <p><a href="https://skillsharing.tzcl.me">Try out the
+      skill-sharing website here!</a></p>
+      <h3 id="org1d4c507">Disk persistence</h3>
+      <p>The simplest way we can add disk persistence is to make
+      our <code>update</code> function write any changes to a
+      file.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">class</span> SkillShareServer {
+  updated() {
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.version++;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">res</span> = <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.talkResponse();
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.waiting.forEach((resolve) =&gt; resolve(res));
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.waiting = [];
+
+    writeFile(filePath, JSON.stringify(<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.talks), (err) =&gt; {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (err) <span style=
+"color: #859900; font-weight: bold;">throw</span> err;
+    });
+  }
+  ...
+}
+</code></pre>
+      <p>Then, when we launch the server, we want it to read in any
+      talks from disk, if they exist. We pass this to the
+      <code>SkillShareServer</code> through its constructor.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">const</span> <span style=
+      "color: #268bd2;">filePath</span> = <span style=
+      "color: #2aa198;">"data.json"</span>;
+
+<span style=
+"color: #859900; font-weight: bold;">async</span> <span style=
+"color: #859900; font-weight: bold;">function</span> loadTalks(<span style="color: #268bd2;">file</span> = <span style="color: #268bd2;">filePath</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">data</span>;
+  <span style="color: #859900; font-weight: bold;">try</span> {
+    data = JSON.parse(<span style=
+"color: #859900; font-weight: bold;">await</span> readFile(file, { encoding: <span style="color: #2aa198;">"utf-8"</span> }));
+  } <span style=
+"color: #859900; font-weight: bold;">catch</span> (err) {
+    data = {};
+  }
+
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Need to do this to remove the prototype</span>
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">If not, we wouldn't be able to use the 'in' operator safely</span>
+  <span style=
+"color: #859900; font-weight: bold;">return</span> Object.assign(Object.create(<span style="color: #6c71c4; font-weight: bold;">null</span>), data);
+}
+</code></pre>
+      <h3 id="org43af059">Comment field resets</h3>
+      <p>One issue with how we’ve built the app is that it replaces
+      DOM elements each time it renders. This may be annoying if
+      you start writing a comment, and then someone else posts
+      something, leading to the app replacing the comment box and
+      losing its content.</p>
+      <p>The simplest way to fix this is to keep track of comments
+      as part of state and using that to fill in the content when
+      the view updates.</p>
+      <pre class="code"><code><span style=
+      "color: #859900; font-weight: bold;">class</span> Talk {
+  constructor(talk, dispatch) {
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments = elt(<span style="color: #2aa198;">"div"</span>);
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.dom = elt(
+      <span style="color: #2aa198;">"section"</span>,
+      { className: <span style="color: #2aa198;">"talk"</span> },
+      elt(
+        <span style="color: #2aa198;">"h2"</span>,
+        <span style=
+"color: #6c71c4; font-weight: bold;">null</span>,
+        talk.title,
+        <span style="color: #2aa198;">" "</span>,
+        elt(
+          <span style="color: #2aa198;">"button"</span>,
+          {
+            type: <span style="color: #2aa198;">"button"</span>,
+            onclick() {
+              dispatch({ type: <span style=
+"color: #2aa198;">"deleteTalk"</span>, talk: talk.title });
+            },
+          },
+          <span style="color: #2aa198;">"Delete"</span>
+        )
+      ),
+      elt(<span style="color: #2aa198;">"div"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, <span style=
+"color: #2aa198;">"by "</span>, elt(<span style=
+"color: #2aa198;">"strong"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, talk.presenter)),
+      elt(<span style="color: #2aa198;">"p"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, talk.summary),
+      <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments,
+      elt(
+        <span style="color: #2aa198;">"form"</span>,
+        {
+          onsubmit(e) {
+            e.preventDefault();
+            <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">form</span> = e.target;
+            dispatch({
+              type: <span style=
+"color: #2aa198;">"newComment"</span>,
+              talk: talk.title,
+              message: form.elements.comment.value,
+            });
+            form.reset();
+          },
+        },
+        elt(<span style=
+"color: #2aa198;">"input"</span>, { type: <span style=
+"color: #2aa198;">"text"</span>, name: <span style=
+"color: #2aa198;">"comment"</span> }),
+        <span style="color: #2aa198;">" "</span>,
+        elt(<span style=
+"color: #2aa198;">"button"</span>, { type: <span style=
+"color: #2aa198;">"submit"</span> }, <span style=
+"color: #2aa198;">"Add comment"</span>)
+      )
+    );
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.syncState(talk);
+  }
+
+  syncState(talk) {
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.talk = talk;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments.textContent = <span style="color: #2aa198;">""</span>;
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">comment</span> <span style=
+"color: #859900; font-weight: bold;">of</span> talk.comments) {
+      <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments.appendChild(renderComment(comment));
+    }
+  }
+}
+
+<span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">renderComment</span>(<span style=
+"color: #268bd2;">comment</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> elt(
+    <span style="color: #2aa198;">"p"</span>,
+    { className: <span style="color: #2aa198;">"comment"</span> },
+    elt(<span style="color: #2aa198;">"strong"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, comment.author),
+    <span style="color: #2aa198;">": "</span>,
+    comment.message
+  );
+}
+</code></pre>
     </section><!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">One of the great classics of computer science</p></div></div>
 
