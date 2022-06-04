@@ -5,7 +5,7 @@
 [[file:index.org][← Back to blog]]
 
 * Background
-This is a recreation of the [[https://edwardtufte.github.io/tufte-css/][Tufte CSS homepage]] in org-mode using [[https://github.com/tzcl/ox-tufte][ox-tufte]]. The org file that generated this page is available [[https://github.com/tzcl/ox-tufte/blob/master/example.org][here]].
+This is a recreation of the [[https://edwardtufte.github.io/tufte-css/][Tufte CSS homepage]] in org-mode using [[https://edwardtufte.github.io/tufte-css/][ox-tufte]]. The org file that generated this page is available [[https://github.com/tzcl/ox-tufte/blob/master/example.org][here]].
 
 * Overview
 Tufte CSS provides tools to style web articles using the ideas demonstrated by Edward Tufte's books and handouts. Tufte's style is known for its simplicity, extensive use of sidenotes, tight integration of graphics with text, and carefully chosen typography.

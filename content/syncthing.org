@@ -3,8 +3,6 @@
 
 [[file:index.org][← Back to blog]]
 
-Last modified: <2022-04-17 Sun>
-
 * Other file sync solutions
 I've been using file storage and synchronisation services for almost 10 years. What started as a simple way of backing up my personal files has become a critical part of my work flow as I often have to jump between different devices. Over that time, I've tried the likes of Dropbox, Google Drive, and most recently, MEGAsync, but I haven't been completely satisfied with them.
 + Dropbox: Only starts you with 2 GB (up to 16 GB if you complete all the tasks and refer other people), which just isn't enough for how I work[fn:: I like storing a bunch of reference material and having it on hand across all my devices]. Overall though, I enjoyed the user experience of Dropbox the most and think it's maybe the most suitable for less technical users.
@@ -45,7 +43,7 @@ sudo apt-get install syncthing
 
 The version of Syncthing available by default with Ubuntu is old and doesn't run properly so it's important to add either the "candidate" or "stable" channel.
 
-Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL[fn::  [[https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/][As of Nov 2021, Canonical is working on bringing systemd to WSL.]]]. Instead, my approach was to add the following snippet to my =.zprofile=:
+Getting Syncthing to automatically startup is not as easy as it is on MacOS. It turns out that systemd is not fully operational on WSL[fn:: [[https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/][As of Nov 2021, Canonical is working on bringing systemd to WSL.]]]. Instead, my approach was to add the following snippet to my =.zprofile=:
 #+begin_src shell
 # Start Syncthing
 if ! /usr/bin/pgrep syncthing > /dev/null; then
