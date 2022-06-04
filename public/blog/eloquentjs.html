@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-04 Sat 13:38 -->
+  <!-- 2022-06-04 Sat 13:46 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -20,6 +20,7 @@
       <p class="subtitle" role="doc-subtitle">Marijn Haverbeke</p>
     </header>
     <nav id="table-of-contents" role="doc-toc">
+      <h2></h2>
       <div id="text-table-of-contents" role="doc-toc">
         <ul>
           <li>
@@ -75,10 +76,12 @@
       make some sense once you understand them. Before reading
       Eloquent JavaScript, I was working my way through <a href=
       "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
-      SICP</a><input type="checkbox" id="1" class=
-      "margin-toggle"><span class="sidenote">One of the great
-      classics of computer science</span> and you can really see
-      the inspiration that JavaScript took from Scheme.</p>
+      SICP</a><label for="1" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="1" class="margin-toggle"><span class=
+      "sidenote">One of the great classics of computer
+      science</span> and you can really see the inspiration that
+      JavaScript took from Scheme.</p>
       <p>Below are my solutions to the projects and the
       accompanying exercises from the text.</p>
     </section>
@@ -86,11 +89,12 @@
       <h2 id="org8c0e161">Project 1: Path-finding robot</h2>
       <p>The first project of the book is to build a mail-delivery
       robot that picks up and drops off parcels. Immediately, we
-      are exposed to graphs and path-finding algorithms<input type=
-      "checkbox" id="2" class="margin-toggle"><span class=
-      "sidenote">These are not the focus of the project but are
-      cool to see</span>, and get to try solve an interesting
-      problem.</p>
+      are exposed to graphs and path-finding algorithms<label for=
+      "2" class=
+      "margin-toggle sidenote-number"></label><input type="checkbox"
+      id="2" class="margin-toggle"><span class="sidenote">These are
+      not the focus of the project but are cool to see</span>, and
+      get to try solve an interesting problem.</p>
       <p><a href="./eloquentjs/robot/robot.html">Try out the robot
       here!</a></p>
       <h3 id="org4b30327">Measuring a robot</h3>
@@ -134,9 +138,10 @@
       route if it considered all parcels. This was fun to play
       around with, although I wished I could pause the animation to
       think about what I would do as my next move if I were the
-      robot<input type="checkbox" id="3" class=
-      "margin-toggle"><span class="sidenote">I’ve built this into
-      my version of the <a href=
+      robot<label for="3" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="3" class="margin-toggle"><span class=
+      "sidenote">I’ve built this into my version of the <a href=
       "./eloquentjs/robot/robot.html">robot
       animation</a></span>.</p>
       <pre class="code"><code><span style=
@@ -328,10 +333,11 @@ globalScope.element = (array, n) =&gt; {
       <code>div</code> elements with styling and positioning
       applied. You can actually get decent performance by adding
       and removing DOM elements, although working this way can feel
-      a little clunky<input type="checkbox" id="4" class=
-      "margin-toggle"><span class="sidenote">A more idiomatic
-      approach is to use the <code>&lt;canvas&gt;</code>
-      element</span>.</p>
+      a little clunky<label for="4" class=
+      "margin-toggle sidenote-number"></label><input type=
+      "checkbox" id="4" class="margin-toggle"><span class=
+      "sidenote">A more idiomatic approach is to use the
+      <code>&lt;canvas&gt;</code> element</span>.</p>
       <p><a href="./eloquentjs/platformer/platformer.html">Try out
       the platformer game here!</a></p>
       <h3 id="orgbf259d5">Game over</h3>
