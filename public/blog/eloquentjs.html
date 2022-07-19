@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-06-04 Sat 13:46 -->
+  <!-- 2022-07-18 Mon 16:42 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -20,38 +20,37 @@
       <p class="subtitle" role="doc-subtitle">Marijn Haverbeke</p>
     </header>
     <nav id="table-of-contents" role="doc-toc">
-      <h2></h2>
       <div id="text-table-of-contents" role="doc-toc">
         <ul>
           <li>
-            <a href="#org076b9f7">Review</a>
+            <a href="#org6799cfe">Review</a>
           </li>
           <li>
-            <a href="#org8c0e161">Project 1: Path-finding robot</a>
+            <a href="#org2312039">Project 1: Path-finding robot</a>
           </li>
           <li>
-            <a href="#org56ef9f0">Project 2: Egg programming
+            <a href="#orga603415">Project 2: Egg programming
             language</a>
           </li>
           <li>
-            <a href="#org7860efb">Project 3: Platformer game</a>
+            <a href="#org74f0212">Project 3: Platformer game</a>
           </li>
           <li>
-            <a href="#org8fef33c">Exercise: Game of Life</a>
+            <a href="#org23b4c10">Exercise: Game of Life</a>
           </li>
           <li>
-            <a href="#org16814c5">Project 4: Pixel art editor</a>
+            <a href="#orgb941274">Project 4: Pixel art editor</a>
           </li>
           <li>
-            <a href="#org6e7a6f3">Project 5: Skill-sharing
+            <a href="#org3d93dec">Project 5: Skill-sharing
             website</a>
           </li>
         </ul>
       </div>
     </nav>
     <p><a href="index.html">← Back to blog</a></p>
-    <section id="org076b9f7" class="nil">
-      <h2 id="org076b9f7">Review</h2>
+    <section id="org6799cfe" class="nil">
+      <h2 id="org6799cfe">Review</h2>
       <p><a href="https://eloquentjavascript.net/">Eloquent
       JavaScript</a> is a book that teaches you the fundamentals of
       programming through JavaScript. From my five minutes of
@@ -76,28 +75,25 @@
       make some sense once you understand them. Before reading
       Eloquent JavaScript, I was working my way through <a href=
       "https://mitpress.mit.edu/sites/default/files/sicp/index.html">
-      SICP</a><label for="1" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="1" class="margin-toggle"><span class=
-      "sidenote">One of the great classics of computer
-      science</span> and you can really see the inspiration that
-      JavaScript took from Scheme.</p>
+      SICP</a><input type="checkbox" id="1" class=
+      "margin-toggle"><span class="sidenote">One of the great
+      classics of computer science</span> and you can really see
+      the inspiration that JavaScript took from Scheme.</p>
       <p>Below are my solutions to the projects and the
       accompanying exercises from the text.</p>
     </section>
-    <section id="org8c0e161" class="nil">
-      <h2 id="org8c0e161">Project 1: Path-finding robot</h2>
+    <section id="org2312039" class="nil">
+      <h2 id="org2312039">Project 1: Path-finding robot</h2>
       <p>The first project of the book is to build a mail-delivery
       robot that picks up and drops off parcels. Immediately, we
-      are exposed to graphs and path-finding algorithms<label for=
-      "2" class=
-      "margin-toggle sidenote-number"></label><input type="checkbox"
-      id="2" class="margin-toggle"><span class="sidenote">These are
-      not the focus of the project but are cool to see</span>, and
-      get to try solve an interesting problem.</p>
+      are exposed to graphs and path-finding algorithms<input type=
+      "checkbox" id="2" class="margin-toggle"><span class=
+      "sidenote">These are not the focus of the project but are
+      cool to see</span>, and get to try solve an interesting
+      problem.</p>
       <p><a href="./eloquentjs/robot/robot.html">Try out the robot
       here!</a></p>
-      <h3 id="org4b30327">Measuring a robot</h3>
+      <h3 id="org392716a">Measuring a robot</h3>
       <p>To objectively compare robots, we want to make sure each
       time we generate a task, we give that task to both robots and
       track the result.</p>
@@ -130,7 +126,7 @@
 "color: #2aa198;">`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`</span>);
 }
 </code></pre>
-      <h3 id="org86d1406">Robot efficiency</h3>
+      <h3 id="org1a65eeb">Robot efficiency</h3>
       <p>The trick to designing a more efficient robot than the
       <code>goalOrientedRobot</code> is to realise that the
       <code>goalOrientedRobot</code> only looks at one parcel at a
@@ -138,10 +134,9 @@
       route if it considered all parcels. This was fun to play
       around with, although I wished I could pause the animation to
       think about what I would do as my next move if I were the
-      robot<label for="3" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="3" class="margin-toggle"><span class=
-      "sidenote">I’ve built this into my version of the <a href=
+      robot<input type="checkbox" id="3" class=
+      "margin-toggle"><span class="sidenote">I’ve built this into
+      my version of the <a href=
       "./eloquentjs/robot/robot.html">robot
       animation</a></span>.</p>
       <pre class="code"><code><span style=
@@ -180,8 +175,8 @@
 }
 </code></pre>
     </section>
-    <section id="org56ef9f0" class="nil">
-      <h2 id="org56ef9f0">Project 2: Egg programming language</h2>
+    <section id="orga603415" class="nil">
+      <h2 id="orga603415">Project 2: Egg programming language</h2>
       <p>In this project we build our own simple programming
       language called Egg:</p>
       <pre class="code"><code><span style=
@@ -240,7 +235,7 @@
       </ul>
       <p><a href="./eloquentjs/egg/egg.html">Try out the Egg
       interpreter!</a></p>
-      <h3 id="orgc79095a">Arrays</h3>
+      <h3 id="orgc7da5b7">Arrays</h3>
       <p>We can implement arrays in Egg by adding the functions
       <code>array</code>, <code>length</code>, and
       <code>element</code> to the global scope. Respectively, they
@@ -264,7 +259,7 @@ globalScope.element = (array, n) =&gt; {
 "color: #859900; font-weight: bold;">return</span> array[n];
 };
 </code></pre>
-      <h3 id="orgb717884">Comments</h3>
+      <h3 id="org5b31c34">Comments</h3>
       <p>Allowing comments in Egg is a matter of changing the
       parser so it skips the rest of the line when it encounters a
       <code>#</code>.</p>
@@ -280,7 +275,7 @@ globalScope.element = (array, n) =&gt; {
 "color: #859900; font-weight: bold;">return</span> string.slice(skippable[<span style="color: #6c71c4; font-weight: bold;">0</span>].length);
 }
 </code></pre>
-      <h3 id="orgf1fe884">Fixing scope</h3>
+      <h3 id="org859cd0f">Fixing scope</h3>
       <p>Assigning a new value to a binding with
       <code>define</code> can be counterintuitive because it may
       create a new binding in the local scope instead of updating
@@ -326,21 +321,20 @@ globalScope.element = (array, n) =&gt; {
 };
 </code></pre>
     </section>
-    <section id="org7860efb" class="nil">
-      <h2 id="org7860efb">Project 3: Platformer game</h2>
+    <section id="org74f0212" class="nil">
+      <h2 id="org74f0212">Project 3: Platformer game</h2>
       <p>This project uses the DOM as the rendering backend for a
       simple 2D platformer. Everything in the game is made of
       <code>div</code> elements with styling and positioning
       applied. You can actually get decent performance by adding
       and removing DOM elements, although working this way can feel
-      a little clunky<label for="4" class=
-      "margin-toggle sidenote-number"></label><input type=
-      "checkbox" id="4" class="margin-toggle"><span class=
-      "sidenote">A more idiomatic approach is to use the
-      <code>&lt;canvas&gt;</code> element</span>.</p>
+      a little clunky<input type="checkbox" id="4" class=
+      "margin-toggle"><span class="sidenote">A more idiomatic
+      approach is to use the <code>&lt;canvas&gt;</code>
+      element</span>.</p>
       <p><a href="./eloquentjs/platformer/platformer.html">Try out
       the platformer game here!</a></p>
-      <h3 id="orgbf259d5">Game over</h3>
+      <h3 id="org1bf59b9">Game over</h3>
       <p>We can keep track of the player’s lives by adding some
       logic to the function that starts the game.</p>
       <pre class="code"><code><span style=
@@ -380,7 +374,7 @@ globalScope.element = (array, n) =&gt; {
   console.log(<span style="color: #2aa198;">"You've won!"</span>);
 }
 </code></pre>
-      <h3 id="org3f40239">Pausing the game</h3>
+      <h3 id="org2d36eb5">Pausing the game</h3>
       <p>Adding a way to pause/unpause the game is not immediately
       obvious since adding another key listener in the section
       where we listen to user input won’t work. The solution is to
@@ -495,7 +489,7 @@ globalScope.element = (array, n) =&gt; {
   });
 }
 </code></pre>
-      <h3 id="org913a585">A monster</h3>
+      <h3 id="org03e29dd">A monster</h3>
       <p>Using the scaffolding we’ve set up for the player, adding
       an enemy isn’t too hard. The tricky part is determining
       whether the player jumped on the head of the monster. The
@@ -576,8 +570,8 @@ globalScope.element = (array, n) =&gt; {
 }
 </code></pre>
     </section>
-    <section id="org8fef33c" class="nil">
-      <h2 id="org8fef33c">Exercise: Game of Life</h2>
+    <section id="org23b4c10" class="nil">
+      <h2 id="org23b4c10">Exercise: Game of Life</h2>
       <p>Using HTML forms, it’s possible to write a basic version
       of the Game of Life. Each generation, a checkbox transitions
       according to the following rules:</p>
@@ -599,8 +593,8 @@ globalScope.element = (array, n) =&gt; {
       <p><a href="./eloquentjs/game-of-life/game-of-life.html">Try
       out the Game of Life!</a></p>
     </section>
-    <section id="org16814c5" class="nil">
-      <h2 id="org16814c5">Project 4: Pixel art editor</h2>
+    <section id="orgb941274" class="nil">
+      <h2 id="orgb941274">Project 4: Pixel art editor</h2>
       <p>As discussed in the platformer project, another way to
       render graphics on the web is using
       <code>&lt;canvas&gt;</code> elements. The design of this
@@ -612,7 +606,7 @@ globalScope.element = (array, n) =&gt; {
       each of which work slightly differently.</p>
       <p><a href="./eloquentjs/pixel-art/pixel-art.html">Try out
       the pixel art editor!</a></p>
-      <h3 id="org76514d7">Keyboard bindings</h3>
+      <h3 id="orgc817883">Keyboard bindings</h3>
       <p>We want to add keyboard shortcuts such that pressing
       <code>ctrl-</code> or <code>cmd-</code> and the first letter
       of the tool automatically switches to that tool. Fortunately,
@@ -699,7 +693,7 @@ globalScope.element = (array, n) =&gt; {
   ...
 }
 </code></pre>
-      <h3 id="org00ce14f">Efficient drawing</h3>
+      <h3 id="orgf0f0d1c">Efficient drawing</h3>
       <p>At the moment, each time we create a new state, we are
       redrawing all the pixels on the canvas which can be
       expensive. One way we can optimise this is to keep track of
@@ -736,7 +730,7 @@ globalScope.element = (array, n) =&gt; {
   }
 }
 </code></pre>
-      <h3 id="org42ffa9c">Circles</h3>
+      <h3 id="org13640cf">Circles</h3>
       <p>Figuring out how to draw circles was a lot of fun. I
       struggled for a bit getting circles which were mostly squares
       with individual pixels sticking out (that looked like
@@ -813,7 +807,7 @@ globalScope.element = (array, n) =&gt; {
 "color: #859900; font-weight: bold;">return</span> drawCircle;
 }
 </code></pre>
-      <h3 id="org1b8b692">Proper lines</h3>
+      <h3 id="orgdfa1939">Proper lines</h3>
       <p>This was much more difficult than the previous exercises.
       I’ve heard of <a href=
       "https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham’s
@@ -891,8 +885,8 @@ globalScope.element = (array, n) =&gt; {
 }
 </code></pre>
     </section>
-    <section id="org6e7a6f3" class="nil">
-      <h2 id="org6e7a6f3">Project 5: Skill-sharing website</h2>
+    <section id="org3d93dec" class="nil">
+      <h2 id="org3d93dec">Project 5: Skill-sharing website</h2>
       <p>This project was most like a real web app. In short, it
       allows users to add talks (for some kind of meetup) and
       comments on those talks. Using long-polling, it was possible
@@ -906,7 +900,7 @@ globalScope.element = (array, n) =&gt; {
       side.</p>
       <p><a href="https://skillsharing.tzcl.me">Try out the
       skill-sharing website here!</a></p>
-      <h3 id="org1d4c507">Disk persistence</h3>
+      <h3 id="orgd543d5c">Disk persistence</h3>
       <p>The simplest way we can add disk persistence is to make
       our <code>update</code> function write any changes to a
       file.</p>
@@ -964,7 +958,7 @@ globalScope.element = (array, n) =&gt; {
 "color: #859900; font-weight: bold;">return</span> Object.assign(Object.create(<span style="color: #6c71c4; font-weight: bold;">null</span>), data);
 }
 </code></pre>
-      <h3 id="org43af059">Comment field resets</h3>
+      <h3 id="orged67fbd">Comment field resets</h3>
       <p>One issue with how we’ve built the app is that it replaces
       DOM elements each time it renders. This may be annoying if
       you start writing a comment, and then someone else posts
