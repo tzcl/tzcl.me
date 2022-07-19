@@ -72,6 +72,8 @@ https://i.imgur.com/8yt9ReM.png
 
 To flash the nice!nanos, you need to hit the reset button twice to put them into bootloader mode. Starting with the left half, connect it to your computer using a USB-C cable and put it into booloader mode. Then, you should it pop up on your computer, where you need to copy and paste the left =.uf2=. After this, it should reboot and eject itself. Repeat this with the other half.
 
+https://i.imgur.com/mjb0HtT.png
+
 Once this is done, you should be able to go to the Bluetooth settings on your computer or phone and see 'rae-dux'. Connecting to this should let you see if your keyboard is correctly sending keystrokes.
 
 Note, if you have the keyboard connected to your computer via a USB cable, it will communicate via that cable instead of by Bluetooth. Also, if you have issues getting your keyboard to connect, grab the =settings_reset .uf2= file in the firmware folder and follow these steps to [[https://zmk.dev/docs/troubleshooting#reset-split-keyboard-procedure][reset your split keyboard halves]].
