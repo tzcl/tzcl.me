@@ -7,7 +7,7 @@
 
 * Overview
 The [[https://github.com/andrewjrae/rae-dux][rae-dux]] is a 36-key wireless ergo split keyboard designed by [[https://github.com/andrewjrae][Andrew Rae]]. In my mind, it's the perfect keyboard:
-+ I've found that 36 keys is optimal for me[fn::Although, with combos, maybe going even smaller is better 🤔] -- it feels great letting your index fingers and thumbs do most of the work.
++ I've found that 36 keys strikes the right balance for me[fn::Although, with combos, maybe going even smaller is better 🤔] -- it feels great letting your index fingers and thumbs do most of the work.
 + Going wireless has a lot of benefits, e.g., reducing clutter on your desk and allowing you to pair to your tablet or your phone.
 + nice!nanos come with 18 pins so you can actually get away without using diodes[fn::Note, [[https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start][the n!n docs warn against socketing the B+ and B- pins]]] (can connect all keys on each side directly to a pin).
 + Low profile switches and keycaps feel super comfy and help give the board a small form factor, making it easy to pack away and carry with you.
