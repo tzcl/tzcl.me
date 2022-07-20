@@ -7,7 +7,7 @@
 
 * Overview
 The [[https://github.com/andrewjrae/rae-dux][rae-dux]] is a 36-key wireless ergo split keyboard designed by [[https://github.com/andrewjrae][Andrew Rae]]. In my mind, it's the perfect keyboard:
-+ I've found that 36 keys is optimal for me[fn::Going this small basically requires home row/one shot mods, which may take a bit to learn but are definitely worth it] -- it feels great letting your index fingers and thumbs do most of the work.
++ I've found that 36 keys is optimal for me[fn::Although, with combos, maybe going even smaller is better 🤔] -- it feels great letting your index fingers and thumbs do most of the work.
 + Going wireless has a lot of benefits, e.g., reducing clutter on your desk and allowing you to pair to your tablet or your phone.
 + nice!nanos come with 18 pins so you can actually get away without using diodes[fn::Note, [[https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start][the n!n docs warn against socketing the B+ and B- pins]]] (can connect all keys on each side directly to a pin).
 + Low profile switches and keycaps feel super comfy and help give the board a small form factor, making it easy to pack away and carry with you.
@@ -21,7 +21,7 @@ If you're interested in seeing how I use the rae-dux, my ZMK config is available
 - 2 x [[https://core-electronics.com.au/jst-right-angle-connector-through-hole-2-pin.html][right-angle JST-2 connector]]: should be stocked by most electronics stores
 - 4 x 13 x [[https://keebd.com/products/40-pin-machined-ic-breakable-female-header-strip][female machined pin headers]]
 - 56 x [[https://keebd.com/products/mill-max-low-profile-controller-pins-pack-of-25][mill-max pins]]
-- 2 x [[https://keebd.com/products/3x6x4-3mm-dip-push-button-switch][reset button]]: should have dimensions 6x3x4.3mm
+- 2 x [[https://keebd.com/products/3x6x4-3mm-dip-push-button-switch][reset button]]: dimensions should be 6x3x4.3mm
 - 2 x [[https://keebd.com/products/switch-mini-7-pin-2-slide-positions][power switch]]: should have 7 pins
 - 36 x [[https://keebd.com/products/kailh-hot-swappable-low-profile-1350-pcb-socket-pack-of-10][kailh low-profile hotswap sockets]]
 - 36 x [[https://keebd.com/collections/choc-switches][choc switches]]
@@ -53,7 +53,7 @@ Next, we need to solder on the front-facing components. Like the hotswap sockets
 7. Insert the mill-max pins into the pin headers
 8. Put the nice!nanos in position and solder them to the mill-max pins (the left n!n should face down and the right n!n should face up)
 
-The last step is socketing the nice!nanos. If you've never done this before, the [[https://docs.splitkb.com/hc/en-us/articles/360011263059-How-do-I-socket-a-microcontroller-][splitkb.com docs]] have a good guide with pictures. So far, I haven't had any issues but something to be mindful of. Break off four rows of 13 of the female machined pin headers and solder them to the front of each PCB. Again, using masking tape may come in handy. Once that's done, insert the mill-max pins into the sockets and then put the nice!nanos into place. Make sure the left nice!nano should be flipped so the flat side (the back) is facing upwards. Then, solder the pins to the controllers. Be careful, take your time and reduce the heat of your soldering iron.
+The last step is socketing the nice!nanos. If you've never done this before, the [[https://docs.splitkb.com/hc/en-us/articles/360011263059-How-do-I-socket-a-microcontroller-][splitkb.com docs]] have a good guide with pictures. Break off four rows of 13 of the female machined pin headers and solder them to the front of each PCB. Again, masking tape may come in handy. Once that's done, insert the mill-max pins into the sockets and then put the nice!nanos into place. Make sure the left nice!nano should be flipped so the flat side (the back) is facing upwards. Then, solder the pins to the controllers. Be careful, take your time and reduce the heat of your soldering iron.
 
 9. [@9] Lift the nice!nanos from the sockets, position the batteries between the pin headers and reseat the nice!nanos on top of the batteries
 
@@ -64,7 +64,7 @@ At this stage, you should have something like this. Before installing all of you
 [[https://i.imgur.com/VQaLfG4.jpg]]
 
 * Configuring ZMK
-Now that you've built your keyboard, we want to make sure that things work before going through the effort of putting all your switches and keycaps in place. The simplest way to do that is to grab [[https://github.com/tzcl/zmk-config/actions/runs/2681775211][the firmware from my zmk-config]]. You can completely customise this if you want, you just need to make sure that you use [[https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux][the shield created by Andrew]] which isn't available in the main ZMK repo at this point.
+Now that you've built your keyboard, we want to make sure that things work before going through the effort of putting all your switches and keycaps in place. The simplest way to do that is to grab [[https://github.com/tzcl/zmk-config/actions/runs/2681775211][the firmware from my zmk-config]]. You can completely customise this if you want, you just need to make sure that you use [[https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux][the shield created by Andrew]] which isn't available in the main ZMK repo at this point[fn::The policy is that personal projects should create a separate zmk-config repo instead].
 
 Once you've downloaded the firmware, you need to extract it. This should give you a folder with a bunch of =.uf2= files.
 
