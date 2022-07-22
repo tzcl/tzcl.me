@@ -1,194 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-07-18 Mon 16:42 -->
-  <meta charset="utf-8">
-  <meta name="viewport" content=
-  "width=device-width, initial-scale=1">
-  <title>Syncthing</title>
-  <meta name="author" content="Toby Law">
-  <meta name="generator" content="Org Mode">
-  <link rel="stylesheet" href="res/tufte.min.css">
-  <script async defer data-website-id=
-  "6e6d5221-0e72-43ef-8e6e-27955832c259" src=
-  "https://analytics.tzcl.me/umami.js"></script>
+    <!-- 2022-07-22 Fri 21:08 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1">
+    <title>Syncthing</title>
+    <meta name="author" content="Toby Law">
+    <meta name="generator" content="Org Mode">
+    <link rel="stylesheet" href="res/tufte.min.css">
+    <script async defer data-website-id=
+    "6e6d5221-0e72-43ef-8e6e-27955832c259" src=
+    "https://analytics.tzcl.me/umami.js"></script>
 </head>
 <body>
-  <article id="content" class="content">
-    <header>
-      <h1 class="title">Syncthing</h1>
-    </header>
-    <nav id="table-of-contents" role="doc-toc">
-      <div id="text-table-of-contents" role="doc-toc">
-        <ul>
-          <li>
-            <a href="#org80f0019">Other file sync solutions</a>
-          </li>
-          <li>
-            <a href="#org39db685">Why Syncthing?</a>
-          </li>
-          <li>
-            <a href="#org3b4fde2">Installing on MacBook</a>
-          </li>
-          <li>
-            <a href="#org1e4bbde">Installing on Windows (WSL)</a>
-          </li>
-          <li>
-            <a href="#orgb38199d">Sharing a folder between
-            devices</a>
-          </li>
-          <li>
-            <a href="#orgfe4c807">Things to look out for</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <p><a href="index.html">← Back to blog</a></p>
-    <section id="org80f0019" class="nil">
-      <h2 id="org80f0019">Other file sync solutions</h2>
-      <p>I’ve been using file storage and synchronisation services
-      for almost 10 years. What started as a simple way of backing
-      up my personal files has become a critical part of my work
-      flow as I often have to jump between different devices. Over
-      that time, I’ve tried the likes of Dropbox, Google Drive, and
-      most recently, MEGAsync, but I haven’t been completely
-      satisfied with them.</p>
-      <ul class="org-ul">
-        <li>Dropbox: Only starts you with 2 GB (up to 16 GB if you
-        complete all the tasks and refer other people), which just
-        isn’t enough for how I work<input type="checkbox" id="1"
-        class="margin-toggle"><span class="sidenote">I like storing
-        a bunch of reference material and having it on hand across
-        all my devices</span>. Overall though, I enjoyed the user
-        experience of Dropbox the most and think it’s maybe the
-        most suitable for less technical users.</li>
-        <li>Google Drive: Similar to Dropbox, the free plan only
-        gives you 15 GB of space and that’s shared across all of
-        your Google services. Additionally, I had a lot of trouble
-        getting Google Drive to work on Linux properly – despite
-        Google saying an official client was in the works for
-        years, nothing ever came out. There are third party clients
-        you can use, but I would relatively frequently run into
-        sync issues that were a headache to debug and fix.</li>
-        <li>MEGAsync: Finally I came across something that seemed
-        like my long-term solution. MEGAsync offers 50 GB of
-        storage on its free tier and is cross-platform; I was able
-        to get it running on Windows/MacOS/Linux without too much
-        trouble. It also has mobile apps and a web client which
-        have been great for transferring files between my computer
-        and my phone and The main issue I’m having with it now is
-        that on my MacBook, it won’t automatically detect changes
-        and I frequently have to restart the client to force a
-        sync.</li>
-      </ul>
-      <p>In summary, what I really want is a file sync service that
-      is</p>
-      <ol class="org-ol">
-        <li>Free</li>
-        <li>Able to handle 10-20 GB of files</li>
-        <li>Cross-platform</li>
-        <li>Reliable, in that I don’t have to spend time working
-        out why my files are out of sync</li>
-      </ol>
-    </section>
-    <section id="org39db685" class="nil">
-      <h2 id="org39db685">Why Syncthing?</h2>
-      <p>I stumbled across <a href=
-      "https://tonsky.me/blog/syncthing/">Computers as I used to
-      love them</a> and Syncthing seemed like the natural next step
-      for me. I love that its free and open-source, and that it
-      doesn’t rely on some central server storing all of your
-      files. It removes the artificial limitation of having to pay
-      for storage space – now I can sync as much as can fit on my
-      hard-drive. Additionally, you can sync any folder on your
-      hard-drive, it doesn’t have to be contained within some
-      central sync folder.</p>
-      <p>The only downside is that there is no iOS app yet, but I
-      don’t really browse my files from my phone. A more common use
-      case for me is transferring files and I’m still on the
-      lookout for an appropriate tool.</p>
-    </section>
-    <section id="org3b4fde2" class="nil">
-      <h2 id="org3b4fde2">Installing on MacBook</h2>
-      <p>Setting up Syncthing was super simple. To get set up, all
-      you need to do is download a binary from the <a href=
-      "https://github.com/syncthing/syncthing/releases">project
-      releases page</a> and run it. In my case, I just used
-      Homebrew:</p>
-      <pre class="code"><code>brew install syncthing
+    <article id="content" class="content">
+        <header>
+            <h1 class="title">Syncthing</h1>
+        </header>
+        <nav id="table-of-contents" role="doc-toc">
+            <h2></h2>
+            <div id="text-table-of-contents" role="doc-toc">
+                <ul>
+                    <li>
+                        <a href="#org80f0019">Other file sync
+                        solutions</a>
+                    </li>
+                    <li>
+                        <a href="#org39db685">Why Syncthing?</a>
+                    </li>
+                    <li>
+                        <a href="#org3b4fde2">Installing on
+                        MacBook</a>
+                    </li>
+                    <li>
+                        <a href="#org1e4bbde">Installing on Windows
+                        (WSL)</a>
+                    </li>
+                    <li>
+                        <a href="#orgb38199d">Sharing a folder
+                        between devices</a>
+                    </li>
+                    <li>
+                        <a href="#orgfe4c807">Things to look out
+                        for</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <p><a href="index.html">← Back to blog</a></p>
+        <section id="org80f0019" class="nil">
+            <h2 id="org80f0019">Other file sync solutions</h2>
+            <p>I’ve been using file storage and synchronisation
+            services for almost 10 years. What started as a simple
+            way of backing up my personal files has become a
+            critical part of my work flow as I often have to jump
+            between different devices. Over that time, I’ve tried
+            the likes of Dropbox, Google Drive, and most recently,
+            MEGAsync, but I haven’t been completely satisfied with
+            them.</p>
+            <ul class="org-ul">
+                <li>Dropbox: Only starts you with 2 GB (up to 16 GB
+                if you complete all the tasks and refer other
+                people), which just isn’t enough for how I
+                work<label for="1" class=
+                "margin-toggle sidenote-number"></label><input type="checkbox"
+                id="1" class="margin-toggle"><span class=
+                "sidenote">I like storing a bunch of reference
+                material and having it on hand across all my
+                devices</span>. Overall though, I enjoyed the user
+                experience of Dropbox the most and think it’s maybe
+                the most suitable for less technical users.</li>
+                <li>Google Drive: Similar to Dropbox, the free plan
+                only gives you 15 GB of space and that’s shared
+                across all of your Google services. Additionally, I
+                had a lot of trouble getting Google Drive to work
+                on Linux properly – despite Google saying an
+                official client was in the works for years, nothing
+                ever came out. There are third party clients you
+                can use, but I would relatively frequently run into
+                sync issues that were a headache to debug and
+                fix.</li>
+                <li>MEGAsync: Finally I came across something that
+                seemed like my long-term solution. MEGAsync offers
+                50 GB of storage on its free tier and is
+                cross-platform; I was able to get it running on
+                Windows/MacOS/Linux without too much trouble. It
+                also has mobile apps and a web client which have
+                been great for transferring files between my
+                computer and my phone and The main issue I’m having
+                with it now is that on my MacBook, it won’t
+                automatically detect changes and I frequently have
+                to restart the client to force a sync.</li>
+            </ul>
+            <p>In summary, what I really want is a file sync
+            service that is</p>
+            <ol class="org-ol">
+                <li>Free</li>
+                <li>Able to handle 10-20 GB of files</li>
+                <li>Cross-platform</li>
+                <li>Reliable, in that I don’t have to spend time
+                working out why my files are out of sync</li>
+            </ol>
+        </section>
+        <section id="org39db685" class="nil">
+            <h2 id="org39db685">Why Syncthing?</h2>
+            <p>I stumbled across <a href=
+            "https://tonsky.me/blog/syncthing/">Computers as I used
+            to love them</a> and Syncthing seemed like the natural
+            next step for me. I love that its free and open-source,
+            and that it doesn’t rely on some central server storing
+            all of your files. It removes the artificial limitation
+            of having to pay for storage space – now I can sync as
+            much as can fit on my hard-drive. Additionally, you can
+            sync any folder on your hard-drive, it doesn’t have to
+            be contained within some central sync folder.</p>
+            <p>The only downside is that there is no iOS app yet,
+            but I don’t really browse my files from my phone. A
+            more common use case for me is transferring files and
+            I’m still on the lookout for an appropriate tool.</p>
+        </section>
+        <section id="org3b4fde2" class="nil">
+            <h2 id="org3b4fde2">Installing on MacBook</h2>
+            <p>Setting up Syncthing was super simple. To get set
+            up, all you need to do is download a binary from the
+            <a href=
+            "https://github.com/syncthing/syncthing/releases">project
+            releases page</a> and run it. In my case, I just used
+            Homebrew:</p>
+            <pre class="code"><code>brew install syncthing
 brew services start syncthing
 </code></pre>
-      <p>By default, Syncthing runs on <code>localhost:8384</code>.
-      To avoid Syncthing opening the browser UI when it starts, you
-      need to uncheck Start Browser under Actions &gt; Settings
-      &gt; GUI.</p>
-    </section>
-    <section id="org1e4bbde" class="nil">
-      <h2 id="org1e4bbde">Installing on Windows (WSL)</h2>
-      <p>To install Syncthing on Ubuntu (the OS I’m using for WSL),
-      it’s as simple as</p>
-      <pre class="code"><code><span style=
-      "color: #96A7A9;"># </span><span style=
-      "color: #96A7A9;">Add the release PGP keys:</span>
-<span style=
-"color: #b58900; font-style: italic;">sudo</span> <span style=
-"color: #b58900; font-style: italic;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
-<span style="color: #96A7A9;"># </span><span style=
-"color: #96A7A9;">Add the "stable" channel to your APT sources:</span>
-<span style=
-"color: #b58900; font-style: italic;">echo</span> <span style=
-"color: #2aa198;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #b58900; font-style: italic;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
-<span style="color: #96A7A9;"># </span><span style=
-"color: #96A7A9;">Update and install syncthing:</span>
-<span style=
-"color: #b58900; font-style: italic;">sudo</span> apt-get update
-<span style=
-"color: #b58900; font-style: italic;">sudo</span> apt-get install syncthing
+            <p>By default, Syncthing runs on
+            <code>localhost:8384</code>. To avoid Syncthing opening
+            the browser UI when it starts, you need to uncheck
+            Start Browser under Actions &gt; Settings &gt; GUI.</p>
+        </section>
+        <section id="org1e4bbde" class="nil">
+            <h2 id="org1e4bbde">Installing on Windows (WSL)</h2>
+            <p>To install Syncthing on Ubuntu (the OS I’m using for
+            WSL), it’s as simple as</p>
+            <pre class="code"><code><span style=
+            "color: #727072;"># </span><span style=
+            "color: #727072;">Add the release PGP keys:</span>
+<span style="color: #78DCE8;">sudo</span> <span style=
+"color: #78DCE8;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
+<span style="color: #727072;"># </span><span style=
+"color: #727072;">Add the "stable" channel to your APT sources:</span>
+<span style="color: #78DCE8;">echo</span> <span style=
+"color: #FFD866;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #78DCE8;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
+<span style="color: #727072;"># </span><span style=
+"color: #727072;">Update and install syncthing:</span>
+<span style="color: #78DCE8;">sudo</span> apt-get update
+<span style="color: #78DCE8;">sudo</span> apt-get install syncthing
 </code></pre>
-      <p>The version of Syncthing available by default with Ubuntu
-      is old and doesn’t run properly so it’s important to add
-      either the “candidate” or “stable” channel.</p>
-      <p>Getting Syncthing to automatically startup is not as easy
-      as it is on MacOS. It turns out that systemd is not fully
-      operational on WSL<input type="checkbox" id="2" class=
-      "margin-toggle"><span class="sidenote"><a href=
-      "https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As
-      of Nov 2021, Canonical is working on bringing systemd to
-      WSL.</a></span>. Instead, my approach was to add the
-      following snippet to my <code>.zprofile</code>:</p>
-      <pre class="code"><code><span style=
-      "color: #96A7A9;"># </span><span style=
-      "color: #96A7A9;">Start Syncthing</span>
-<span style=
-"color: #859900; font-weight: bold;">if</span> <span style=
-"color: #268bd2; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #859900; font-weight: bold;">then</span>
+            <p>The version of Syncthing available by default with
+            Ubuntu is old and doesn’t run properly so it’s
+            important to add either the “candidate” or “stable”
+            channel.</p>
+            <p>Getting Syncthing to automatically startup is not as
+            easy as it is on MacOS. It turns out that systemd is
+            not fully operational on WSL<label for="2" class=
+            "margin-toggle sidenote-number"></label><input type=
+            "checkbox" id="2" class="margin-toggle"><span class=
+            "sidenote"><a href=
+            "https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As
+            of Nov 2021, Canonical is working on bringing systemd
+            to WSL.</a></span>. Instead, my approach was to add the
+            following snippet to my <code>.zprofile</code>:</p>
+            <pre class="code"><code><span style=
+            "color: #727072;"># </span><span style=
+            "color: #727072;">Start Syncthing</span>
+<span style="color: #FF6188;">if</span> <span style=
+"color: #FF6188; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #FF6188;">then</span>
     <span style=
-"color: #268bd2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #6c71c4; font-weight: bold;">2</span>&gt;&<span style="color: #6c71c4; font-weight: bold;">1</span> &<span style="color: #268bd2;">)</span>
-<span style="color: #859900; font-weight: bold;">fi</span>
+"color: #AB9DF2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #AB9DF2; font-weight: bold;">2</span>&gt;&<span style="color: #AB9DF2; font-weight: bold;">1</span> &<span style="color: #AB9DF2;">)</span>
+<span style="color: #FF6188;">fi</span>
 </code></pre>
-    </section>
-    <section id="orgb38199d" class="nil">
-      <h2 id="orgb38199d">Sharing a folder between devices</h2>
-      <p>I’ve added my MacBook Air to my Windows desktop machine.
-      Then sharing a folder was as easy as clicking edit and
-      selecting the device to share with.</p>
-      <p>So far, I’ve only shared my org files, but they’re by far
-      the files I edit the most.</p>
-    </section>
-    <section id="orgfe4c807" class="nil">
-      <h2 id="orgfe4c807">Things to look out for</h2>
-      <p>Coming from other file sharing solutions, something I
-      didn’t expect was that there is no ’passive’ syncing. As a
-      consequence of peer-to-peer file syncing, if you want your
-      changes on one device to be replicated on another device,
-      they need to communicate with each other, i.e., be online at
-      the same time.</p>
-    </section><!-- Footnotes --><!-- 
+        </section>
+        <section id="orgb38199d" class="nil">
+            <h2 id="orgb38199d">Sharing a folder between
+            devices</h2>
+            <p>I’ve added my MacBook Air to my Windows desktop
+            machine. Then sharing a folder was as easy as clicking
+            edit and selecting the device to share with.</p>
+            <p>So far, I’ve only shared my org files, but they’re
+            by far the files I edit the most.</p>
+        </section>
+        <section id="orgfe4c807" class="nil">
+            <h2 id="orgfe4c807">Things to look out for</h2>
+            <p>Coming from other file sharing solutions, something
+            I didn’t expect was that there is no ’passive’ syncing.
+            As a consequence of peer-to-peer file syncing, if you
+            want your changes on one device to be replicated on
+            another device, they need to communicate with each
+            other, i.e., be online at the same time.</p>
+        </section><!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I like storing a bunch of reference material and having it on hand across all my devices</p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://www.theregister.com/2021/11/17/ubuntu_team_systemd_windows_wsl2/">As of Nov 2021, Canonical is working on bringing systemd to WSL.</a></p></div></div>
 
  -->
-  </article>
+    </article>
 </body>
 </html>
