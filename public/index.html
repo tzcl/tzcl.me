@@ -18,7 +18,7 @@
     "favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 </head>
-<body>
+<body class="loading">
     <h1 id="title">Toby Law</h1>
     <div class="center">
         <p>Hi! I am a software developer based in Melbourne. I
@@ -55,10 +55,6 @@
         </ul>
     </div>
     <script>
-     function setLoading() {
-         document.body.classList.add('loading');
-     }
-
      function setLoaded() {
          document.body.classList.add('loaded');
      }
@@ -78,7 +74,6 @@
      }
 
      document.addEventListener('DOMContentLoaded', () => {
-         setLoading();
          loadImage();
      });
     </script>
