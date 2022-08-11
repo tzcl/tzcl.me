@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 2022-07-22 Fri 21:08 -->
+    <!-- 2022-08-11 Thu 10:09 -->
     <meta charset="utf-8">
     <meta name="viewport" content=
     "width=device-width, initial-scale=1">
@@ -23,34 +23,34 @@
             <div id="text-table-of-contents" role="doc-toc">
                 <ul>
                     <li>
-                        <a href="#org80f0019">Other file sync
+                        <a href="#org4e7c6e1">Other file sync
                         solutions</a>
                     </li>
                     <li>
-                        <a href="#org39db685">Why Syncthing?</a>
+                        <a href="#org1afe0ae">Why Syncthing?</a>
                     </li>
                     <li>
-                        <a href="#org3b4fde2">Installing on
+                        <a href="#org13af67c">Installing on
                         MacBook</a>
                     </li>
                     <li>
-                        <a href="#org1e4bbde">Installing on Windows
+                        <a href="#org5997ec5">Installing on Windows
                         (WSL)</a>
                     </li>
                     <li>
-                        <a href="#orgb38199d">Sharing a folder
+                        <a href="#orgceb3815">Sharing a folder
                         between devices</a>
                     </li>
                     <li>
-                        <a href="#orgfe4c807">Things to look out
+                        <a href="#org8c1a333">Things to look out
                         for</a>
                     </li>
                 </ul>
             </div>
         </nav>
         <p><a href="index.html">← Back to blog</a></p>
-        <section id="org80f0019" class="nil">
-            <h2 id="org80f0019">Other file sync solutions</h2>
+        <section id="org4e7c6e1" class="nil">
+            <h2 id="org4e7c6e1">Other file sync solutions</h2>
             <p>I’ve been using file storage and synchronisation
             services for almost 10 years. What started as a simple
             way of backing up my personal files has become a
@@ -103,8 +103,8 @@
                 working out why my files are out of sync</li>
             </ol>
         </section>
-        <section id="org39db685" class="nil">
-            <h2 id="org39db685">Why Syncthing?</h2>
+        <section id="org1afe0ae" class="nil">
+            <h2 id="org1afe0ae">Why Syncthing?</h2>
             <p>I stumbled across <a href=
             "https://tonsky.me/blog/syncthing/">Computers as I used
             to love them</a> and Syncthing seemed like the natural
@@ -120,8 +120,8 @@
             more common use case for me is transferring files and
             I’m still on the lookout for an appropriate tool.</p>
         </section>
-        <section id="org3b4fde2" class="nil">
-            <h2 id="org3b4fde2">Installing on MacBook</h2>
+        <section id="org13af67c" class="nil">
+            <h2 id="org13af67c">Installing on MacBook</h2>
             <p>Setting up Syncthing was super simple. To get set
             up, all you need to do is download a binary from the
             <a href=
@@ -136,23 +136,27 @@ brew services start syncthing
             the browser UI when it starts, you need to uncheck
             Start Browser under Actions &gt; Settings &gt; GUI.</p>
         </section>
-        <section id="org1e4bbde" class="nil">
-            <h2 id="org1e4bbde">Installing on Windows (WSL)</h2>
+        <section id="org5997ec5" class="nil">
+            <h2 id="org5997ec5">Installing on Windows (WSL)</h2>
             <p>To install Syncthing on Ubuntu (the OS I’m using for
             WSL), it’s as simple as</p>
             <pre class="code"><code><span style=
-            "color: #727072;"># </span><span style=
-            "color: #727072;">Add the release PGP keys:</span>
-<span style="color: #78DCE8;">sudo</span> <span style=
-"color: #78DCE8;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
-<span style="color: #727072;"># </span><span style=
-"color: #727072;">Add the "stable" channel to your APT sources:</span>
-<span style="color: #78DCE8;">echo</span> <span style=
-"color: #FFD866;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #78DCE8;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
-<span style="color: #727072;"># </span><span style=
-"color: #727072;">Update and install syncthing:</span>
-<span style="color: #78DCE8;">sudo</span> apt-get update
-<span style="color: #78DCE8;">sudo</span> apt-get install syncthing
+            "color: #96A7A9;"># </span><span style=
+            "color: #96A7A9;">Add the release PGP keys:</span>
+<span style=
+"color: #b58900; font-style: italic;">sudo</span> <span style=
+"color: #b58900; font-style: italic;">curl</span> -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg#+end_src
+<span style="color: #96A7A9;"># </span><span style=
+"color: #96A7A9;">Add the "stable" channel to your APT sources:</span>
+<span style=
+"color: #b58900; font-style: italic;">echo</span> <span style=
+"color: #2aa198;">"deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"</span> | <span style="color: #b58900; font-style: italic;">sudo</span> tee /etc/apt/sources.list.d/syncthing.list
+<span style="color: #96A7A9;"># </span><span style=
+"color: #96A7A9;">Update and install syncthing:</span>
+<span style=
+"color: #b58900; font-style: italic;">sudo</span> apt-get update
+<span style=
+"color: #b58900; font-style: italic;">sudo</span> apt-get install syncthing
 </code></pre>
             <p>The version of Syncthing available by default with
             Ubuntu is old and doesn’t run properly so it’s
@@ -169,17 +173,18 @@ brew services start syncthing
             to WSL.</a></span>. Instead, my approach was to add the
             following snippet to my <code>.zprofile</code>:</p>
             <pre class="code"><code><span style=
-            "color: #727072;"># </span><span style=
-            "color: #727072;">Start Syncthing</span>
-<span style="color: #FF6188;">if</span> <span style=
-"color: #FF6188; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #FF6188;">then</span>
+            "color: #96A7A9;"># </span><span style=
+            "color: #96A7A9;">Start Syncthing</span>
+<span style=
+"color: #859900; font-weight: bold;">if</span> <span style=
+"color: #268bd2; font-weight: bold;">!</span> /usr/bin/pgrep syncthing &gt; /dev/null; <span style="color: #859900; font-weight: bold;">then</span>
     <span style=
-"color: #AB9DF2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #AB9DF2; font-weight: bold;">2</span>&gt;&<span style="color: #AB9DF2; font-weight: bold;">1</span> &<span style="color: #AB9DF2;">)</span>
-<span style="color: #FF6188;">fi</span>
+"color: #268bd2;">(</span>nohup syncthing &gt; /dev/null <span style="color: #6c71c4; font-weight: bold;">2</span>&gt;&<span style="color: #6c71c4; font-weight: bold;">1</span> &<span style="color: #268bd2;">)</span>
+<span style="color: #859900; font-weight: bold;">fi</span>
 </code></pre>
         </section>
-        <section id="orgb38199d" class="nil">
-            <h2 id="orgb38199d">Sharing a folder between
+        <section id="orgceb3815" class="nil">
+            <h2 id="orgceb3815">Sharing a folder between
             devices</h2>
             <p>I’ve added my MacBook Air to my Windows desktop
             machine. Then sharing a folder was as easy as clicking
@@ -187,8 +192,8 @@ brew services start syncthing
             <p>So far, I’ve only shared my org files, but they’re
             by far the files I edit the most.</p>
         </section>
-        <section id="orgfe4c807" class="nil">
-            <h2 id="orgfe4c807">Things to look out for</h2>
+        <section id="org8c1a333" class="nil">
+            <h2 id="org8c1a333">Things to look out for</h2>
             <p>Coming from other file sharing solutions, something
             I didn’t expect was that there is no ’passive’ syncing.
             As a consequence of peer-to-peer file syncing, if you

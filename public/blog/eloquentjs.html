@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 2022-07-22 Fri 21:08 -->
+  <!-- 2022-08-11 Thu 10:09 -->
   <meta charset="utf-8">
   <meta name="viewport" content=
   "width=device-width, initial-scale=1">
@@ -24,34 +24,34 @@
       <div id="text-table-of-contents" role="doc-toc">
         <ul>
           <li>
-            <a href="#org6799cfe">Review</a>
+            <a href="#org00a4a11">Review</a>
           </li>
           <li>
-            <a href="#org2312039">Project 1: Path-finding robot</a>
+            <a href="#org2b3e660">Project 1: Path-finding robot</a>
           </li>
           <li>
-            <a href="#orga603415">Project 2: Egg programming
+            <a href="#org2852783">Project 2: Egg programming
             language</a>
           </li>
           <li>
-            <a href="#org74f0212">Project 3: Platformer game</a>
+            <a href="#orgbf32908">Project 3: Platformer game</a>
           </li>
           <li>
-            <a href="#org23b4c10">Exercise: Game of Life</a>
+            <a href="#orge1a7f87">Exercise: Game of Life</a>
           </li>
           <li>
-            <a href="#orgb941274">Project 4: Pixel art editor</a>
+            <a href="#org6d74a05">Project 4: Pixel art editor</a>
           </li>
           <li>
-            <a href="#org3d93dec">Project 5: Skill-sharing
+            <a href="#orge7fa24b">Project 5: Skill-sharing
             website</a>
           </li>
         </ul>
       </div>
     </nav>
     <p><a href="index.html">← Back to blog</a></p>
-    <section id="org6799cfe" class="nil">
-      <h2 id="org6799cfe">Review</h2>
+    <section id="org00a4a11" class="nil">
+      <h2 id="org00a4a11">Review</h2>
       <p><a href="https://eloquentjavascript.net/">Eloquent
       JavaScript</a> is a book that teaches you the fundamentals of
       programming through JavaScript. From my five minutes of
@@ -85,8 +85,8 @@
       <p>Below are my solutions to the projects and the
       accompanying exercises from the text.</p>
     </section>
-    <section id="org2312039" class="nil">
-      <h2 id="org2312039">Project 1: Path-finding robot</h2>
+    <section id="org2b3e660" class="nil">
+      <h2 id="org2b3e660">Project 1: Path-finding robot</h2>
       <p>The first project of the book is to build a mail-delivery
       robot that picks up and drops off parcels. Immediately, we
       are exposed to graphs and path-finding algorithms<label for=
@@ -97,37 +97,40 @@
       get to try solve an interesting problem.</p>
       <p><a href="./eloquentjs/robot/robot.html">Try out the robot
       here!</a></p>
-      <h3 id="org392716a">Measuring a robot</h3>
+      <h3 id="org117d8f6">Measuring a robot</h3>
       <p>To objectively compare robots, we want to make sure each
       time we generate a task, we give that task to both robots and
       track the result.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">compareRobots</span>(<span style=
-      "color: #FCFCFA;">robot1</span>, <span style=
-      "color: #FCFCFA;">memory1</span>, <span style=
-      "color: #FCFCFA;">robot2</span>, <span style=
-      "color: #FCFCFA;">memory2</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">steps1</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>,
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">compareRobots</span>(<span style=
+      "color: #268bd2;">robot1</span>, <span style=
+      "color: #268bd2;">memory1</span>, <span style=
+      "color: #268bd2;">robot2</span>, <span style=
+      "color: #268bd2;">memory2</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">steps1</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>,
     steps2 = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>;
-  <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">task</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>; task &lt; <span style="color: #AB9DF2; font-weight: bold;">100</span>; task++) {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">state</span> = VillageState.random();
+"color: #6c71c4; font-weight: bold;">0</span>;
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">task</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; task &lt; <span style="color: #6c71c4; font-weight: bold;">100</span>; task++) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">state</span> = VillageState.random();
     steps1 += countRobot(state, robot1, memory1);
     steps2 += countRobot(state, robot2, memory2);
   }
 
   console.log(<span style=
-"color: #FFD866;">`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`</span>);
+"color: #2aa198;">`robot1: ${steps1 / 100}, robot2: ${steps2 / 100}`</span>);
 }
 </code></pre>
-      <h3 id="org1a65eeb">Robot efficiency</h3>
+      <h3 id="orgd84a8b2">Robot efficiency</h3>
       <p>The trick to designing a more efficient robot than the
       <code>goalOrientedRobot</code> is to realise that the
       <code>goalOrientedRobot</code> only looks at one parcel at a
@@ -142,28 +145,29 @@
       "./eloquentjs/robot/robot.html">robot
       animation</a></span>.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">greedyRobot</span>({ place, parcels }, route) {
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">greedyRobot</span>({ place, parcels }, route) {
   <span style=
-"color: #FF6188;">if</span> (route.length == <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>) {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">min_route</span> = [];
+"color: #859900; font-weight: bold;">if</span> (route.length == <span style="color: #6c71c4; font-weight: bold;">0</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">min_route</span> = [];
 
-    <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">parcel</span> <span style=
-"color: #FF6188;">of</span> parcels) {
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">parcel</span> <span style=
+"color: #859900; font-weight: bold;">of</span> parcels) {
       <span style=
-"color: #FF6188;">if</span> (parcel.place != place) {
+"color: #859900; font-weight: bold;">if</span> (parcel.place != place) {
         route = findRoute(roadGraph, place, parcel.place);
-      } <span style="color: #FF6188;">else</span> {
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
         route = findRoute(roadGraph, place, parcel.address);
       }
 
       <span style=
-"color: #FF6188;">if</span> (min_route.length == <span style=
-"color: #AB9DF2; font-weight: bold;">0</span> || route.length &lt; min_route.length) {
+"color: #859900; font-weight: bold;">if</span> (min_route.length == <span style="color: #6c71c4; font-weight: bold;">0</span> || route.length &lt; min_route.length) {
         min_route = route;
       }
     }
@@ -172,22 +176,21 @@
   }
 
   <span style=
-"color: #FF6188;">return</span> { direction: route[<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>], memory: route.slice(<span style="color: #AB9DF2; font-weight: bold;">1</span>) };
+"color: #859900; font-weight: bold;">return</span> { direction: route[<span style="color: #6c71c4; font-weight: bold;">0</span>], memory: route.slice(<span style="color: #6c71c4; font-weight: bold;">1</span>) };
 }
 </code></pre>
     </section>
-    <section id="orga603415" class="nil">
-      <h2 id="orga603415">Project 2: Egg programming language</h2>
+    <section id="org2852783" class="nil">
+      <h2 id="org2852783">Project 2: Egg programming language</h2>
       <p>In this project we build our own simple programming
       language called Egg:</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">do</span>(define(x, <span style=
-      "color: #AB9DF2; font-weight: bold;">10</span>),
-   <span style="color: #FF6188;">if</span>(&gt;(x, <span style=
-"color: #AB9DF2; font-weight: bold;">5</span>),
-      print(<span style="color: #FFD866;">"large"</span>),
-      print(<span style="color: #FFD866;">"small"</span>)))
+      "color: #859900; font-weight: bold;">do</span>(define(x, <span style="color: #6c71c4; font-weight: bold;">10</span>),
+   <span style=
+"color: #859900; font-weight: bold;">if</span>(&gt;(x, <span style=
+"color: #6c71c4; font-weight: bold;">5</span>),
+      print(<span style="color: #2aa198;">"large"</span>),
+      print(<span style="color: #2aa198;">"small"</span>)))
 
 # Console: large
 </code></pre>
@@ -209,17 +212,17 @@
       <p>The <code>&gt;(x, 5)</code> part of the previous program
       would be represented like this:</p>
       <pre class="code"><code>{
-  type: <span style="color: #FFD866;">"apply"</span>,
+  type: <span style="color: #2aa198;">"apply"</span>,
   operator: {type: <span style=
-"color: #FFD866;">"identifier"</span>, name: <span style=
-"color: #FFD866;">"&gt;"</span>},
+"color: #2aa198;">"identifier"</span>, name: <span style=
+"color: #2aa198;">"&gt;"</span>},
   args: [
     {type: <span style=
-"color: #FFD866;">"identifier"</span>, name: <span style=
-"color: #FFD866;">"x"</span>},
+"color: #2aa198;">"identifier"</span>, name: <span style=
+"color: #2aa198;">"x"</span>},
     {type: <span style=
-"color: #FFD866;">"value"</span>, value: <span style=
-"color: #AB9DF2; font-weight: bold;">5</span>}
+"color: #2aa198;">"value"</span>, value: <span style=
+"color: #6c71c4; font-weight: bold;">5</span>}
   ]
 }
 </code></pre>
@@ -237,7 +240,7 @@
       </ul>
       <p><a href="./eloquentjs/egg/egg.html">Try out the Egg
       interpreter!</a></p>
-      <h3 id="orgc7da5b7">Arrays</h3>
+      <h3 id="org1eaae3c">Arrays</h3>
       <p>We can implement arrays in Egg by adding the functions
       <code>array</code>, <code>length</code>, and
       <code>element</code> to the global scope. Respectively, they
@@ -247,34 +250,37 @@
       our implementation.</p>
       <pre class=
       "code"><code>globalScope.array = (...values) =&gt; {
-  <span style="color: #FF6188;">return</span> [...values];
+  <span style=
+"color: #859900; font-weight: bold;">return</span> [...values];
 };
 
 globalScope.length = (array) =&gt; {
-  <span style="color: #FF6188;">return</span> array.length;
+  <span style=
+"color: #859900; font-weight: bold;">return</span> array.length;
 };
 
 globalScope.element = (array, n) =&gt; {
-  <span style="color: #FF6188;">return</span> array[n];
+  <span style=
+"color: #859900; font-weight: bold;">return</span> array[n];
 };
 </code></pre>
-      <h3 id="org5b31c34">Comments</h3>
+      <h3 id="orgda40371">Comments</h3>
       <p>Allowing comments in Egg is a matter of changing the
       parser so it skips the rest of the line when it encounters a
       <code>#</code>.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">skipSpace</span>(<span style=
-      "color: #FCFCFA;">string</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">skippable</span> = string.match(<span style=
-"color: #FFD866;">/^(\s|#.*)*/</span>);
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">skipSpace</span>(<span style=
+      "color: #268bd2;">string</span>) {
   <span style=
-"color: #FF6188;">return</span> string.slice(skippable[<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>].length);
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">skippable</span> = string.match(<span style=
+"color: #2aa198;">/^(\s|#.*)*/</span>);
+  <span style=
+"color: #859900; font-weight: bold;">return</span> string.slice(skippable[<span style="color: #6c71c4; font-weight: bold;">0</span>].length);
 }
 </code></pre>
-      <h3 id="org859cd0f">Fixing scope</h3>
+      <h3 id="org94fc18f">Fixing scope</h3>
       <p>Assigning a new value to a binding with
       <code>define</code> can be counterintuitive because it may
       create a new binding in the local scope instead of updating
@@ -284,42 +290,44 @@ globalScope.element = (array, n) =&gt; {
       <pre class=
       "code"><code>specialForms.set = (args, scope) =&gt; {
   <span style=
-"color: #FF6188;">if</span> (args.length != <span style=
-"color: #AB9DF2; font-weight: bold;">2</span> || args[<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>].type != <span style=
-"color: #FFD866;">"identifier"</span>) {
-    <span style="color: #FF6188;">throw</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">SyntaxError</span>(<span style=
-"color: #FFD866;">"Incorrect use of set"</span>);
+"color: #859900; font-weight: bold;">if</span> (args.length != <span style="color: #6c71c4; font-weight: bold;">2</span> || args[<span style="color: #6c71c4; font-weight: bold;">0</span>].type != <span style="color: #2aa198;">"identifier"</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">throw</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">SyntaxError</span>(<span style="color: #2aa198;">"Incorrect use of set"</span>);
   }
 
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">value</span> = evaluate(args[<span style=
-"color: #AB9DF2; font-weight: bold;">1</span>], scope);
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">name</span> = args[<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>].name;
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">value</span> = evaluate(args[<span style=
+"color: #6c71c4; font-weight: bold;">1</span>], scope);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">name</span> = args[<span style=
+"color: #6c71c4; font-weight: bold;">0</span>].name;
 
-  <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">s</span> = scope; s; s = Object.getPrototypeOf(s)) {
-    <span style="color: #FF6188;">if</span> (Object.<span style=
-"color: #AB9DF2;">prototype</span>.hasOwnProperty(s, name)) {
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">s</span> = scope; s; s = Object.getPrototypeOf(s)) {
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (Object.<span style=
+"color: #6c71c4; font-weight: bold;">prototype</span>.hasOwnProperty(s, name)) {
       s[name] = value;
-      <span style="color: #FF6188;">return</span> value;
+      <span style=
+"color: #859900; font-weight: bold;">return</span> value;
     }
   }
 
-  <span style="color: #FF6188;">throw</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">ReferenceError</span>(<span style=
-"color: #FFD866;">`Could not find ${name} in any scope.`</span>);
+  <span style=
+"color: #859900; font-weight: bold;">throw</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">ReferenceError</span>(<span style="color: #2aa198;">`Could not find ${name} in any scope.`</span>);
 };
 </code></pre>
     </section>
-    <section id="org74f0212" class="nil">
-      <h2 id="org74f0212">Project 3: Platformer game</h2>
+    <section id="orgbf32908" class="nil">
+      <h2 id="orgbf32908">Project 3: Platformer game</h2>
       <p>This project uses the DOM as the rendering backend for a
       simple 2D platformer. Everything in the game is made of
       <code>div</code> elements with styling and positioning
@@ -332,146 +340,154 @@ globalScope.element = (array, n) =&gt; {
       <code>&lt;canvas&gt;</code> element</span>.</p>
       <p><a href="./eloquentjs/platformer/platformer.html">Try out
       the platformer game here!</a></p>
-      <h3 id="org1bf59b9">Game over</h3>
+      <h3 id="orgfd83714">Game over</h3>
       <p>We can keep track of the player’s lives by adding some
       logic to the function that starts the game.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">async</span> <span style=
-      "color: #FF6188;">function</span> runGame(<span style=
-      "color: #FCFCFA;">plans</span>, <span style=
-      "color: #FCFCFA;">Display</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">lives</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">3</span>;
-  <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">level</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>; level &lt; plans.length; ) {
+      "color: #859900; font-weight: bold;">async</span> <span style=
+      "color: #859900; font-weight: bold;">function</span> runGame(<span style="color: #268bd2;">plans</span>, <span style="color: #268bd2;">Display</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">lives</span> = <span style=
+"color: #6c71c4; font-weight: bold;">3</span>;
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">level</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; level &lt; plans.length; ) {
     console.log(<span style=
-"color: #FFD866;">`Lives: ${lives}`</span>);
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">status</span> = <span style=
-"color: #FF6188;">await</span> runLevel(<span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Level</span>(plans[level]), Display);
-    <span style="color: #FF6188;">if</span> (status == <span style=
-"color: #FFD866;">"lost"</span>) {
+"color: #2aa198;">`Lives: ${lives}`</span>);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">status</span> = <span style=
+"color: #859900; font-weight: bold;">await</span> runLevel(<span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Level</span>(plans[level]), Display);
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"lost"</span>) {
       lives--;
       <span style=
-"color: #FF6188;">if</span> (lives == <span style="color: #AB9DF2; font-weight: bold;">0</span>) {
+"color: #859900; font-weight: bold;">if</span> (lives == <span style="color: #6c71c4; font-weight: bold;">0</span>) {
         console.log(<span style=
-"color: #FFD866;">"You lost, restarting the game..."</span>);
+"color: #2aa198;">"You lost, restarting the game..."</span>);
         level = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>;
+"color: #6c71c4; font-weight: bold;">0</span>;
         lives = <span style=
-"color: #AB9DF2; font-weight: bold;">3</span>;
+"color: #6c71c4; font-weight: bold;">3</span>;
       }
     }
-    <span style="color: #FF6188;">if</span> (status == <span style=
-"color: #FFD866;">"won"</span>) level++;
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (status == <span style="color: #2aa198;">"won"</span>) level++;
   }
-  console.log(<span style="color: #FFD866;">"You've won!"</span>);
+  console.log(<span style="color: #2aa198;">"You've won!"</span>);
 }
 </code></pre>
-      <h3 id="org2d36eb5">Pausing the game</h3>
+      <h3 id="orgc5f2a37">Pausing the game</h3>
       <p>Adding a way to pause/unpause the game is not immediately
       obvious since adding another key listener in the section
       where we listen to user input won’t work. The solution is to
       add the key listener for pausing higher up, putting that
       logic into the <code>runLevel</code> function.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">runLevel</span>(<span style=
-      "color: #FCFCFA;">level</span>, <span style=
-      "color: #FCFCFA;">Display</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">display</span> = <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Display</span>(document.body, level);
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">state</span> = State.start(level);
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">ending</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">1</span>;
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">running</span> = <span style=
-"color: #FFD866;">"yes"</span>;
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">runLevel</span>(<span style=
+      "color: #268bd2;">level</span>, <span style=
+      "color: #268bd2;">Display</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">display</span> = <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Display</span>(document.body, level);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">state</span> = State.start(level);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">ending</span> = <span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">running</span> = <span style=
+"color: #2aa198;">"yes"</span>;
 
-  <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Promise</span>((resolve) =&gt; {
-    <span style="color: #FF6188;">function</span> <span style=
-"color: #A9DC76;">escHandler</span>(<span style=
-"color: #FCFCFA;">event</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Promise</span>((resolve) =&gt; {
+    <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">escHandler</span>(<span style=
+"color: #268bd2;">event</span>) {
       <span style=
-"color: #FF6188;">if</span> (event.key != <span style=
-"color: #FFD866;">"Escape"</span>) <span style=
-"color: #FF6188;">return</span>;
+"color: #859900; font-weight: bold;">if</span> (event.key != <span style="color: #2aa198;">"Escape"</span>) <span style="color: #859900; font-weight: bold;">return</span>;
       event.preventDefault();
       <span style=
-"color: #FF6188;">if</span> (running == <span style=
-"color: #FFD866;">"no"</span>) {
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"no"</span>) {
         console.log(<span style=
-"color: #FFD866;">"Unpausing game"</span>);
-        running = <span style="color: #FFD866;">"yes"</span>;
+"color: #2aa198;">"Unpausing game"</span>);
+        running = <span style="color: #2aa198;">"yes"</span>;
         runAnimation(frame);
-      } <span style="color: #FF6188;">else</span> <span style=
-"color: #FF6188;">if</span> (running == <span style=
-"color: #FFD866;">"yes"</span>) {
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"yes"</span>) {
         console.log(<span style=
-"color: #FFD866;">"Pausing game"</span>);
-        running = <span style="color: #FFD866;">"pausing"</span>;
-      } <span style="color: #FF6188;">else</span> {
-        running = <span style="color: #FFD866;">"yes"</span>;
+"color: #2aa198;">"Pausing game"</span>);
+        running = <span style="color: #2aa198;">"pausing"</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+        running = <span style="color: #2aa198;">"yes"</span>;
       }
     }
 
     window.addEventListener(<span style=
-"color: #FFD866;">"keyup"</span>, escHandler);
+"color: #2aa198;">"keyup"</span>, escHandler);
 
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">keys</span> = trackKeys([<span style=
-"color: #FFD866;">"ArrowLeft"</span>, <span style=
-"color: #FFD866;">"ArrowRight"</span>, <span style=
-"color: #FFD866;">"ArrowUp"</span>, <span style=
-"color: #FFD866;">"a"</span>, <span style=
-"color: #FFD866;">"d"</span>, <span style=
-"color: #FFD866;">"w"</span>]);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">keys</span> = trackKeys([<span style=
+"color: #2aa198;">"ArrowLeft"</span>, <span style=
+"color: #2aa198;">"ArrowRight"</span>, <span style=
+"color: #2aa198;">"ArrowUp"</span>, <span style=
+"color: #2aa198;">"a"</span>, <span style=
+"color: #2aa198;">"d"</span>, <span style=
+"color: #2aa198;">"w"</span>]);
 
-    <span style="color: #FF6188;">function</span> <span style=
-"color: #A9DC76;">frame</span>(<span style=
-"color: #FCFCFA;">time</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">frame</span>(<span style=
+"color: #268bd2;">time</span>) {
       <span style=
-"color: #FF6188;">if</span> (running == <span style=
-"color: #FFD866;">"pausing"</span>) {
+"color: #859900; font-weight: bold;">if</span> (running == <span style="color: #2aa198;">"pausing"</span>) {
         console.log(<span style=
-"color: #FFD866;">"Game paused"</span>);
-        running = <span style="color: #FFD866;">"no"</span>;
-        <span style="color: #FF6188;">return</span> <span style=
-"color: #AB9DF2;">false</span>;
+"color: #2aa198;">"Game paused"</span>);
+        running = <span style="color: #2aa198;">"no"</span>;
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">false</span>;
       }
 
       state = state.update(time, keys);
       display.syncState(state);
       <span style=
-"color: #FF6188;">if</span> (state.status == <span style=
-"color: #FFD866;">"playing"</span>) {
-        <span style="color: #FF6188;">return</span> <span style=
-"color: #AB9DF2;">true</span>;
-      } <span style="color: #FF6188;">else</span> <span style=
-"color: #FF6188;">if</span> (ending &gt; <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>) {
+"color: #859900; font-weight: bold;">if</span> (state.status == <span style="color: #2aa198;">"playing"</span>) {
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">true</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (ending &gt; <span style="color: #6c71c4; font-weight: bold;">0</span>) {
         ending -= time;
-        <span style="color: #FF6188;">return</span> <span style=
-"color: #AB9DF2;">true</span>;
-      } <span style="color: #FF6188;">else</span> {
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">true</span>;
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> {
         display.clear();
         window.removeEventListener(<span style=
-"color: #FFD866;">"keyup"</span>, escHandler);
+"color: #2aa198;">"keyup"</span>, escHandler);
         keys.unregister();
         resolve(state.status);
-        <span style="color: #FF6188;">return</span> <span style=
-"color: #AB9DF2;">false</span>;
+        <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #6c71c4; font-weight: bold;">false</span>;
       }
     }
 
@@ -479,88 +495,89 @@ globalScope.element = (array, n) =&gt; {
   });
 }
 </code></pre>
-      <h3 id="org03e29dd">A monster</h3>
+      <h3 id="org9d0db80">A monster</h3>
       <p>Using the scaffolding we’ve set up for the player, adding
       an enemy isn’t too hard. The tricky part is determining
       whether the player jumped on the head of the monster. The
       simplest way to approach is to compare the y-coords of the
       player and the monster at the time of collision.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">class</span> Monster {
+      "color: #859900; font-weight: bold;">class</span> Monster {
   constructor(pos, speed) {
-    <span style="color: #AB9DF2;">this</span>.pos = pos;
-    <span style="color: #AB9DF2;">this</span>.speed = speed;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos = pos;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.speed = speed;
   }
 
   update(time, state) {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">newPos</span> = <span style=
-"color: #AB9DF2;">this</span>.pos.plus(<span style=
-"color: #AB9DF2;">this</span>.speed.times(time));
     <span style=
-"color: #FF6188;">if</span> (!state.level.touches(newPos, <span style="color: #AB9DF2;">this</span>.size, <span style="color: #FFD866;">"wall"</span>)) {
-      <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Monster</span>(newPos, <span style=
-"color: #AB9DF2;">this</span>.speed);
-    } <span style="color: #FF6188;">else</span> {
-      <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Monster</span>(<span style=
-"color: #AB9DF2;">this</span>.pos, <span style=
-"color: #AB9DF2;">this</span>.speed.times(-<span style=
-"color: #AB9DF2; font-weight: bold;">1</span>));
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">newPos</span> = <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos.plus(<span style="color: #6c71c4; font-weight: bold;">this</span>.speed.times(time));
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (!state.level.touches(newPos, <span style="color: #6c71c4; font-weight: bold;">this</span>.size, <span style="color: #2aa198;">"wall"</span>)) {
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(newPos, <span style="color: #6c71c4; font-weight: bold;">this</span>.speed);
+    } <span style=
+"color: #859900; font-weight: bold;">else</span> {
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.pos, <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.speed.times(-<span style="color: #6c71c4; font-weight: bold;">1</span>));
     }
   }
 
   collide(state) {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">player</span> = state.player;
     <span style=
-"color: #FF6188;">if</span> (player.pos.y &lt; <span style=
-"color: #AB9DF2;">this</span>.pos.y) {
-      <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">filtered</span> = state.actors.filter((a) =&gt; a != <span style="color: #AB9DF2;">this</span>);
-      <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">State</span>(state.level, filtered, <span style=
-"color: #FFD866;">"playing"</span>);
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">player</span> = state.player;
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (player.pos.y &lt; <span style="color: #6c71c4; font-weight: bold;">this</span>.pos.y) {
+      <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">filtered</span> = state.actors.filter((a) =&gt; a != <span style="color: #6c71c4; font-weight: bold;">this</span>);
+      <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">State</span>(state.level, filtered, <span style="color: #2aa198;">"playing"</span>);
     }
 
-    <span style="color: #FF6188;">return</span> state;
+    <span style=
+"color: #859900; font-weight: bold;">return</span> state;
   }
 
   get type() {
-    <span style="color: #FF6188;">return</span> <span style=
-"color: #FFD866;">"monster"</span>;
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #2aa198;">"monster"</span>;
   }
 
   get size() {
-    <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Vec</span>(<span style=
-"color: #AB9DF2; font-weight: bold;">1.2</span>, <span style=
-"color: #AB9DF2; font-weight: bold;">2</span>);
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Vec</span>(<span style=
+"color: #6c71c4; font-weight: bold;">1.2</span>, <span style=
+"color: #6c71c4; font-weight: bold;">2</span>);
   }
 
-  <span style="color: #FF6188;">static</span> create(pos) {
-    <span style="color: #FF6188;">return</span> <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Monster</span>(pos.plus(<span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Vec</span>(<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>, -<span style=
-"color: #AB9DF2; font-weight: bold;">1</span>)), <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">Vec</span>(<span style=
-"color: #AB9DF2; font-weight: bold;">2</span>, <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>));
+  <span style=
+"color: #859900; font-weight: bold;">static</span> create(pos) {
+    <span style=
+"color: #859900; font-weight: bold;">return</span> <span style=
+"color: #859900; font-weight: bold;">new</span> <span style=
+"color: #b58900; font-style: italic;">Monster</span>(pos.plus(<span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Vec</span>(<span style="color: #6c71c4; font-weight: bold;">0</span>, -<span style="color: #6c71c4; font-weight: bold;">1</span>)), <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Vec</span>(<span style="color: #6c71c4; font-weight: bold;">2</span>, <span style="color: #6c71c4; font-weight: bold;">0</span>));
   }
 }
 </code></pre>
     </section>
-    <section id="org23b4c10" class="nil">
-      <h2 id="org23b4c10">Exercise: Game of Life</h2>
+    <section id="orge1a7f87" class="nil">
+      <h2 id="orge1a7f87">Exercise: Game of Life</h2>
       <p>Using HTML forms, it’s possible to write a basic version
       of the Game of Life. Each generation, a checkbox transitions
       according to the following rules:</p>
@@ -582,8 +599,8 @@ globalScope.element = (array, n) =&gt; {
       <p><a href="./eloquentjs/game-of-life/game-of-life.html">Try
       out the Game of Life!</a></p>
     </section>
-    <section id="orgb941274" class="nil">
-      <h2 id="orgb941274">Project 4: Pixel art editor</h2>
+    <section id="org6d74a05" class="nil">
+      <h2 id="org6d74a05">Project 4: Pixel art editor</h2>
       <p>As discussed in the platformer project, another way to
       render graphics on the web is using
       <code>&lt;canvas&gt;</code> elements. The design of this
@@ -595,7 +612,7 @@ globalScope.element = (array, n) =&gt; {
       each of which work slightly differently.</p>
       <p><a href="./eloquentjs/pixel-art/pixel-art.html">Try out
       the pixel art editor!</a></p>
-      <h3 id="orgc817883">Keyboard bindings</h3>
+      <h3 id="orgba036b8">Keyboard bindings</h3>
       <p>We want to add keyboard shortcuts such that pressing
       <code>ctrl-</code> or <code>cmd-</code> and the first letter
       of the tool automatically switches to that tool. Fortunately,
@@ -603,107 +620,115 @@ globalScope.element = (array, n) =&gt; {
       just need to add an event listener that dispatches on the
       different keybindings.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">class</span> PixelEditor {
+      "color: #859900; font-weight: bold;">class</span> PixelEditor {
   constructor(state, config) {
     <span style=
-"color: #FF6188;">let</span> { tools, controls, dispatch } = config;
-    <span style="color: #AB9DF2;">this</span>.state = state;
+"color: #859900; font-weight: bold;">let</span> { tools, controls, dispatch } = config;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state = state;
 
-    <span style="color: #AB9DF2;">this</span>.canvas = <span style=
-"color: #FF6188;">new</span> <span style=
-"color: #78DCE8;">PictureCanvas</span>(
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.canvas = <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">PictureCanvas</span>(
       state.picture,
       (pos) =&gt; {
-        <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">tool</span> = tools[<span style=
-"color: #AB9DF2;">this</span>.state.tool];
-
-        <span style="color: #727072;">// </span><span style=
-"color: #727072;">Call the tool once</span>
-        <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">onMove</span> = tool(pos, <span style=
-"color: #AB9DF2;">this</span>.state, dispatch);
-        <span style="color: #727072;">// </span><span style=
-"color: #727072;">Pass along function in case we need to redraw</span>
         <span style=
-"color: #FF6188;">if</span> (onMove) <span style=
-"color: #FF6188;">return</span> (pos) =&gt; onMove(pos, <span style="color: #AB9DF2;">this</span>.state);
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">tool</span> = tools[<span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state.tool];
+
+        <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Call the tool once</span>
+        <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">onMove</span> = tool(pos, <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.state, dispatch);
+        <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Pass along function in case we need to redraw</span>
+        <span style=
+"color: #859900; font-weight: bold;">if</span> (onMove) <span style="color: #859900; font-weight: bold;">return</span> (pos) =&gt; onMove(pos, <span style="color: #6c71c4; font-weight: bold;">this</span>.state);
       },
       () =&gt; dispatch({ commit: <span style=
-"color: #AB9DF2;">true</span> })
+"color: #6c71c4; font-weight: bold;">true</span> })
     );
 
     <span style=
-"color: #AB9DF2;">this</span>.controls = controls.map((Control) =&gt; <span style="color: #FF6188;">new</span> <span style="color: #78DCE8;">Control</span>(state, config));
+"color: #6c71c4; font-weight: bold;">this</span>.controls = controls.map((Control) =&gt; <span style="color: #859900; font-weight: bold;">new</span> <span style="color: #b58900; font-style: italic;">Control</span>(state, config));
 
-    <span style="color: #FF6188;">const</span> <span style=
-"color: #FCFCFA;">keyDown</span> = (event) =&gt; {
+    <span style=
+"color: #859900; font-weight: bold;">const</span> <span style=
+"color: #268bd2;">keyDown</span> = (event) =&gt; {
       <span style=
-"color: #FF6188;">if</span> (event.key == <span style=
-"color: #FFD866;">"z"</span> &amp;& (event.ctrlKey || event.metaKey)) {
+"color: #859900; font-weight: bold;">if</span> (event.key == <span style="color: #2aa198;">"z"</span> &amp;& (event.ctrlKey || event.metaKey)) {
         dispatch({ revert: <span style=
-"color: #FFD866;">"undo"</span> });
-      } <span style="color: #FF6188;">else</span> <span style=
-"color: #FF6188;">if</span> (event.key == <span style=
-"color: #FFD866;">"y"</span> &amp;& (event.ctrlKey || event.metaKey)) {
+"color: #2aa198;">"undo"</span> });
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (event.key == <span style="color: #2aa198;">"y"</span> &amp;& (event.ctrlKey || event.metaKey)) {
         dispatch({ revert: <span style=
-"color: #FFD866;">"redo"</span> });
-      } <span style="color: #FF6188;">else</span> <span style=
-"color: #FF6188;">if</span> (!event.ctrlKey &amp;& !event.metaKey &amp;& !event.altKey) {
-        <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">tool</span> <span style=
-"color: #FF6188;">in</span> tools) {
+"color: #2aa198;">"redo"</span> });
+      } <span style=
+"color: #859900; font-weight: bold;">else</span> <span style=
+"color: #859900; font-weight: bold;">if</span> (!event.ctrlKey &amp;& !event.metaKey &amp;& !event.altKey) {
+        <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">tool</span> <span style=
+"color: #859900; font-weight: bold;">in</span> tools) {
           <span style=
-"color: #FF6188;">if</span> (event.key == tool[<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>]) {
+"color: #859900; font-weight: bold;">if</span> (event.key == tool[<span style="color: #6c71c4; font-weight: bold;">0</span>]) {
             dispatch({ tool });
-            <span style="color: #FF6188;">return</span>;
+            <span style=
+"color: #859900; font-weight: bold;">return</span>;
           }
         }
       }
     };
 
-    <span style="color: #AB9DF2;">this</span>.dom = elt(
-      <span style="color: #FFD866;">"div"</span>,
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.dom = elt(
+      <span style="color: #2aa198;">"div"</span>,
       { tabIndex: <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>, onkeydown: (event) =&gt; keyDown(event) },
-      <span style="color: #AB9DF2;">this</span>.canvas.dom,
-      elt(<span style="color: #FFD866;">"br"</span>),
+"color: #6c71c4; font-weight: bold;">0</span>, onkeydown: (event) =&gt; keyDown(event) },
+      <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.canvas.dom,
+      elt(<span style="color: #2aa198;">"br"</span>),
       ...<span style=
-"color: #AB9DF2;">this</span>.controls.reduce((a, c) =&gt; a.concat(<span style="color: #FFD866;">" "</span>, c.dom), [])
+"color: #6c71c4; font-weight: bold;">this</span>.controls.reduce((a, c) =&gt; a.concat(<span style="color: #2aa198;">" "</span>, c.dom), [])
     );
   }
   ...
 }
 </code></pre>
-      <h3 id="orgf0f0d1c">Efficient drawing</h3>
+      <h3 id="org4d720b8">Efficient drawing</h3>
       <p>At the moment, each time we create a new state, we are
       redrawing all the pixels on the canvas which can be
       expensive. One way we can optimise this is to keep track of
       the previous state and then ’diff’ that against the new state
       and only draw the pixels that change.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">patchPicture</span>(<span style=
-      "color: #FCFCFA;">prev</span>, <span style=
-      "color: #FCFCFA;">curr</span>, <span style=
-      "color: #FCFCFA;">canvas</span>, <span style=
-      "color: #FCFCFA;">scale</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">cx</span> = canvas.getContext(<span style=
-"color: #FFD866;">"2d"</span>);
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">patchPicture</span>(<span style=
+      "color: #268bd2;">prev</span>, <span style=
+      "color: #268bd2;">curr</span>, <span style=
+      "color: #268bd2;">canvas</span>, <span style=
+      "color: #268bd2;">scale</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">cx</span> = canvas.getContext(<span style=
+"color: #2aa198;">"2d"</span>);
 
-  <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">y</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>; y &lt; prev.height; y++) {
-    <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">x</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">0</span>; x &lt; prev.width; x++) {
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">y</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; y &lt; prev.height; y++) {
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = <span style=
+"color: #6c71c4; font-weight: bold;">0</span>; x &lt; prev.width; x++) {
       <span style=
-"color: #FF6188;">if</span> (prev.pixel(x, y) != curr.pixel(x, y)) {
+"color: #859900; font-weight: bold;">if</span> (prev.pixel(x, y) != curr.pixel(x, y)) {
         cx.fillStyle = curr.pixel(x, y);
         cx.fillRect(x * scale, y * scale, scale, scale);
       }
@@ -711,7 +736,7 @@ globalScope.element = (array, n) =&gt; {
   }
 }
 </code></pre>
-      <h3 id="org13640cf">Circles</h3>
+      <h3 id="org860d2fc">Circles</h3>
       <p>Figuring out how to draw circles was a lot of fun. I
       struggled for a bit getting circles which were mostly squares
       with individual pixels sticking out (that looked like
@@ -720,50 +745,63 @@ globalScope.element = (array, n) =&gt; {
       radius. Below is what I found to give the best looking
       circles.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">circle</span>(<span style=
-      "color: #FCFCFA;">start</span>, <span style=
-      "color: #FCFCFA;">state</span>, <span style=
-      "color: #FCFCFA;">dispatch</span>) {
-  <span style="color: #FF6188;">const</span> <span style=
-"color: #FCFCFA;">dist</span> = (x, y) =&gt; {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">dx</span> = x - start.x;
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">dy</span> = y - start.y;
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">circle</span>(<span style=
+      "color: #268bd2;">start</span>, <span style=
+      "color: #268bd2;">state</span>, <span style=
+      "color: #268bd2;">dispatch</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">const</span> <span style=
+"color: #268bd2;">dist</span> = (x, y) =&gt; {
     <span style=
-"color: #FF6188;">return</span> Math.sqrt(dx * dx + dy * dy);
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dx</span> = x - start.x;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dy</span> = y - start.y;
+    <span style=
+"color: #859900; font-weight: bold;">return</span> Math.sqrt(dx * dx + dy * dy);
   };
 
-  <span style="color: #FF6188;">function</span> <span style=
-"color: #A9DC76;">drawCircle</span>(<span style=
-"color: #FCFCFA;">pos</span>) {
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">radius</span> = Math.ceil(dist(pos.x, pos.y));
+  <span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">drawCircle</span>(<span style=
+"color: #268bd2;">pos</span>) {
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">radius</span> = Math.ceil(dist(pos.x, pos.y));
 
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">xStart</span> = Math.max(<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>, start.x - radius);
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">yStart</span> = Math.max(<span style=
-"color: #AB9DF2; font-weight: bold;">0</span>, start.y - radius);
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">xEnd</span> = Math.min(start.x + radius, state.picture.width);
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">yEnd</span> = Math.min(start.y + radius, state.picture.height);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">xStart</span> = Math.max(<span style=
+"color: #6c71c4; font-weight: bold;">0</span>, start.x - radius);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">yStart</span> = Math.max(<span style=
+"color: #6c71c4; font-weight: bold;">0</span>, start.y - radius);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">xEnd</span> = Math.min(start.x + radius, state.picture.width);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">yEnd</span> = Math.min(start.y + radius, state.picture.height);
 
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">drawn</span> = [];
-    <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">y</span> = yStart; y &lt;= yEnd; y++) {
-      <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">x</span> = xStart; x &lt;= xEnd; x++) {
-        <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">d</span> = dist(x, y);
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">drawn</span> = [];
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">y</span> = yStart; y &lt;= yEnd; y++) {
+      <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = xStart; x &lt;= xEnd; x++) {
         <span style=
-"color: #FF6188;">if</span> (d &lt; radius) drawn.push({ x, y, colour: state.colour });
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">d</span> = dist(x, y);
+        <span style=
+"color: #859900; font-weight: bold;">if</span> (d &lt; radius) drawn.push({ x, y, colour: state.colour });
       }
     }
 
@@ -771,10 +809,11 @@ globalScope.element = (array, n) =&gt; {
   }
 
   drawCircle(start);
-  <span style="color: #FF6188;">return</span> drawCircle;
+  <span style=
+"color: #859900; font-weight: bold;">return</span> drawCircle;
 }
 </code></pre>
-      <h3 id="orgdfa1939">Proper lines</h3>
+      <h3 id="org662d02f">Proper lines</h3>
       <p>This was much more difficult than the previous exercises.
       I’ve heard of <a href=
       "https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham’s
@@ -783,68 +822,77 @@ globalScope.element = (array, n) =&gt; {
       took some time but it was satisfying being able to draw quick
       lines without gaps.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">function</span> <span style=
-      "color: #A9DC76;">drawLine</span>(<span style=
-      "color: #FCFCFA;">start</span>, <span style=
-      "color: #FCFCFA;">pos</span>, <span style=
-      "color: #FCFCFA;">colour</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">dx</span> = Math.abs(pos.x - start.x);
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">sx</span> = start.x &lt; pos.x ? <span style=
-"color: #AB9DF2; font-weight: bold;">1</span> : -<span style=
-"color: #AB9DF2; font-weight: bold;">1</span>;
+      "color: #859900; font-weight: bold;">function</span> <span style=
+      "color: #b58900;">drawLine</span>(<span style=
+      "color: #268bd2;">start</span>, <span style=
+      "color: #268bd2;">pos</span>, <span style=
+      "color: #268bd2;">colour</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dx</span> = Math.abs(pos.x - start.x);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">sx</span> = start.x &lt; pos.x ? <span style=
+"color: #6c71c4; font-weight: bold;">1</span> : -<span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
 
-  <span style="color: #727072;">// </span><span style=
-"color: #727072;">Note the negative</span>
-  <span style="color: #727072;">// </span><span style=
-"color: #727072;">In graphics, y++ means moving down</span>
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">dy</span> = -Math.abs(pos.y - start.y);
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">sy</span> = start.y &lt; pos.y ? <span style=
-"color: #AB9DF2; font-weight: bold;">1</span> : -<span style=
-"color: #AB9DF2; font-weight: bold;">1</span>;
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Note the negative</span>
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">In graphics, y++ means moving down</span>
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">dy</span> = -Math.abs(pos.y - start.y);
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">sy</span> = start.y &lt; pos.y ? <span style=
+"color: #6c71c4; font-weight: bold;">1</span> : -<span style=
+"color: #6c71c4; font-weight: bold;">1</span>;
 
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">err</span> = dx + dy;
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">err</span> = dx + dy;
 
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">drawn</span> = [];
-  <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">x</span> = start.x, <span style=
-"color: #FCFCFA;">y</span> = start.y; ; ) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">drawn</span> = [];
+  <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">x</span> = start.x, <span style=
+"color: #268bd2;">y</span> = start.y; ; ) {
     drawn.push({ x, y, colour });
     <span style=
-"color: #FF6188;">if</span> (x == pos.x &amp;& y == pos.y) <span style="color: #FF6188;">break</span>;
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">err2</span> = <span style=
-"color: #AB9DF2; font-weight: bold;">2</span> * err; <span style=
-"color: #727072;">// </span><span style=
-"color: #727072;">avoid dividing</span>
-    <span style="color: #FF6188;">if</span> (err2 &gt;= dy) {
+"color: #859900; font-weight: bold;">if</span> (x == pos.x &amp;& y == pos.y) <span style="color: #859900; font-weight: bold;">break</span>;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">err2</span> = <span style=
+"color: #6c71c4; font-weight: bold;">2</span> * err; <span style=
+"color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">avoid dividing</span>
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (err2 &gt;= dy) {
       <span style=
-"color: #FF6188;">if</span> (x == pos.x) <span style=
-"color: #FF6188;">break</span>;
+"color: #859900; font-weight: bold;">if</span> (x == pos.x) <span style="color: #859900; font-weight: bold;">break</span>;
       err += dy;
       x += sx;
     }
-    <span style="color: #FF6188;">if</span> (err2 &lt;= dx) {
+    <span style=
+"color: #859900; font-weight: bold;">if</span> (err2 &lt;= dx) {
       <span style=
-"color: #FF6188;">if</span> (y == pos.y) <span style=
-"color: #FF6188;">break</span>;
+"color: #859900; font-weight: bold;">if</span> (y == pos.y) <span style="color: #859900; font-weight: bold;">break</span>;
       err += dx;
       y += sy;
     }
   }
 
-  <span style="color: #FF6188;">return</span> drawn;
+  <span style=
+"color: #859900; font-weight: bold;">return</span> drawn;
 }
 </code></pre>
     </section>
-    <section id="org3d93dec" class="nil">
-      <h2 id="org3d93dec">Project 5: Skill-sharing website</h2>
+    <section id="orge7fa24b" class="nil">
+      <h2 id="orge7fa24b">Project 5: Skill-sharing website</h2>
       <p>This project was most like a real web app. In short, it
       allows users to add talks (for some kind of meetup) and
       comments on those talks. Using long-polling, it was possible
@@ -856,27 +904,29 @@ globalScope.element = (array, n) =&gt; {
       and to set a long maximum time for each request to avoid
       timing out. Node made this easy to manage on the server
       side.</p>
-      <p><a href="https://skillsharing.tzcl.me">Try out the
-      skill-sharing website here!</a></p>
-      <h3 id="orgd543d5c">Disk persistence</h3>
+      <h3 id="org3557572">Disk persistence</h3>
       <p>The simplest way we can add disk persistence is to make
       our <code>update</code> function write any changes to a
       file.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">class</span> SkillShareServer {
+      "color: #859900; font-weight: bold;">class</span> SkillShareServer {
   updated() {
-    <span style="color: #AB9DF2;">this</span>.version++;
-    <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">res</span> = <span style=
-"color: #AB9DF2;">this</span>.talkResponse();
     <span style=
-"color: #AB9DF2;">this</span>.waiting.forEach((resolve) =&gt; resolve(res));
-    <span style="color: #AB9DF2;">this</span>.waiting = [];
+"color: #6c71c4; font-weight: bold;">this</span>.version++;
+    <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">res</span> = <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.talkResponse();
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.waiting.forEach((resolve) =&gt; resolve(res));
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.waiting = [];
 
     writeFile(filePath, JSON.stringify(<span style=
-"color: #AB9DF2;">this</span>.talks), (err) =&gt; {
-      <span style="color: #FF6188;">if</span> (err) <span style=
-"color: #FF6188;">throw</span> err;
+"color: #6c71c4; font-weight: bold;">this</span>.talks), (err) =&gt; {
+      <span style=
+"color: #859900; font-weight: bold;">if</span> (err) <span style=
+"color: #859900; font-weight: bold;">throw</span> err;
     });
   }
   ...
@@ -886,32 +936,33 @@ globalScope.element = (array, n) =&gt; {
       talks from disk, if they exist. We pass this to the
       <code>SkillShareServer</code> through its constructor.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">const</span> <span style=
-      "color: #FCFCFA;">filePath</span> = <span style=
-      "color: #FFD866;">"data.json"</span>;
+      "color: #859900; font-weight: bold;">const</span> <span style=
+      "color: #268bd2;">filePath</span> = <span style=
+      "color: #2aa198;">"data.json"</span>;
 
-<span style="color: #FF6188;">async</span> <span style=
-"color: #FF6188;">function</span> loadTalks(<span style=
-"color: #FCFCFA;">file</span> = <span style=
-"color: #FCFCFA;">filePath</span>) {
-  <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">data</span>;
-  <span style="color: #FF6188;">try</span> {
+<span style=
+"color: #859900; font-weight: bold;">async</span> <span style=
+"color: #859900; font-weight: bold;">function</span> loadTalks(<span style="color: #268bd2;">file</span> = <span style="color: #268bd2;">filePath</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">data</span>;
+  <span style="color: #859900; font-weight: bold;">try</span> {
     data = JSON.parse(<span style=
-"color: #FF6188;">await</span> readFile(file, { encoding: <span style="color: #FFD866;">"utf-8"</span> }));
-  } <span style="color: #FF6188;">catch</span> (err) {
+"color: #859900; font-weight: bold;">await</span> readFile(file, { encoding: <span style="color: #2aa198;">"utf-8"</span> }));
+  } <span style=
+"color: #859900; font-weight: bold;">catch</span> (err) {
     data = {};
   }
 
-  <span style="color: #727072;">// </span><span style=
-"color: #727072;">Need to do this to remove the prototype</span>
-  <span style="color: #727072;">// </span><span style=
-"color: #727072;">If not, we wouldn't be able to use the 'in' operator safely</span>
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">Need to do this to remove the prototype</span>
+  <span style="color: #96A7A9;">// </span><span style=
+"color: #96A7A9;">If not, we wouldn't be able to use the 'in' operator safely</span>
   <span style=
-"color: #FF6188;">return</span> Object.assign(Object.create(<span style="color: #AB9DF2;">null</span>), data);
+"color: #859900; font-weight: bold;">return</span> Object.assign(Object.create(<span style="color: #6c71c4; font-weight: bold;">null</span>), data);
 }
 </code></pre>
-      <h3 id="orged67fbd">Comment field resets</h3>
+      <h3 id="org473aa9f">Comment field resets</h3>
       <p>One issue with how we’ve built the app is that it replaces
       DOM elements each time it renders. This may be annoying if
       you start writing a comment, and then someone else posts
@@ -921,49 +972,52 @@ globalScope.element = (array, n) =&gt; {
       as part of state and using that to fill in the content when
       the view updates.</p>
       <pre class="code"><code><span style=
-      "color: #FF6188;">class</span> Talk {
+      "color: #859900; font-weight: bold;">class</span> Talk {
   constructor(talk, dispatch) {
     <span style=
-"color: #AB9DF2;">this</span>.comments = elt(<span style=
-"color: #FFD866;">"div"</span>);
-    <span style="color: #AB9DF2;">this</span>.dom = elt(
-      <span style="color: #FFD866;">"section"</span>,
-      { className: <span style="color: #FFD866;">"talk"</span> },
+"color: #6c71c4; font-weight: bold;">this</span>.comments = elt(<span style="color: #2aa198;">"div"</span>);
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.dom = elt(
+      <span style="color: #2aa198;">"section"</span>,
+      { className: <span style="color: #2aa198;">"talk"</span> },
       elt(
-        <span style="color: #FFD866;">"h2"</span>,
-        <span style="color: #AB9DF2;">null</span>,
+        <span style="color: #2aa198;">"h2"</span>,
+        <span style=
+"color: #6c71c4; font-weight: bold;">null</span>,
         talk.title,
-        <span style="color: #FFD866;">" "</span>,
+        <span style="color: #2aa198;">" "</span>,
         elt(
-          <span style="color: #FFD866;">"button"</span>,
+          <span style="color: #2aa198;">"button"</span>,
           {
-            type: <span style="color: #FFD866;">"button"</span>,
+            type: <span style="color: #2aa198;">"button"</span>,
             onclick() {
               dispatch({ type: <span style=
-"color: #FFD866;">"deleteTalk"</span>, talk: talk.title });
+"color: #2aa198;">"deleteTalk"</span>, talk: talk.title });
             },
           },
-          <span style="color: #FFD866;">"Delete"</span>
+          <span style="color: #2aa198;">"Delete"</span>
         )
       ),
-      elt(<span style="color: #FFD866;">"div"</span>, <span style=
-"color: #AB9DF2;">null</span>, <span style=
-"color: #FFD866;">"by "</span>, elt(<span style=
-"color: #FFD866;">"strong"</span>, <span style=
-"color: #AB9DF2;">null</span>, talk.presenter)),
-      elt(<span style="color: #FFD866;">"p"</span>, <span style=
-"color: #AB9DF2;">null</span>, talk.summary),
-      <span style="color: #AB9DF2;">this</span>.comments,
+      elt(<span style="color: #2aa198;">"div"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, <span style=
+"color: #2aa198;">"by "</span>, elt(<span style=
+"color: #2aa198;">"strong"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, talk.presenter)),
+      elt(<span style="color: #2aa198;">"p"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, talk.summary),
+      <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments,
       elt(
-        <span style="color: #FFD866;">"form"</span>,
+        <span style="color: #2aa198;">"form"</span>,
         {
           onsubmit(e) {
             e.preventDefault();
-            <span style="color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">form</span> = e.target;
+            <span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">form</span> = e.target;
             dispatch({
               type: <span style=
-"color: #FFD866;">"newComment"</span>,
+"color: #2aa198;">"newComment"</span>,
               talk: talk.title,
               message: form.elements.comment.value,
             });
@@ -971,43 +1025,47 @@ globalScope.element = (array, n) =&gt; {
           },
         },
         elt(<span style=
-"color: #FFD866;">"input"</span>, { type: <span style=
-"color: #FFD866;">"text"</span>, name: <span style=
-"color: #FFD866;">"comment"</span> }),
-        <span style="color: #FFD866;">" "</span>,
+"color: #2aa198;">"input"</span>, { type: <span style=
+"color: #2aa198;">"text"</span>, name: <span style=
+"color: #2aa198;">"comment"</span> }),
+        <span style="color: #2aa198;">" "</span>,
         elt(<span style=
-"color: #FFD866;">"button"</span>, { type: <span style=
-"color: #FFD866;">"submit"</span> }, <span style=
-"color: #FFD866;">"Add comment"</span>)
+"color: #2aa198;">"button"</span>, { type: <span style=
+"color: #2aa198;">"submit"</span> }, <span style=
+"color: #2aa198;">"Add comment"</span>)
       )
     );
-    <span style="color: #AB9DF2;">this</span>.syncState(talk);
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.syncState(talk);
   }
 
   syncState(talk) {
-    <span style="color: #AB9DF2;">this</span>.talk = talk;
     <span style=
-"color: #AB9DF2;">this</span>.comments.textContent = <span style=
-"color: #FFD866;">""</span>;
-    <span style="color: #FF6188;">for</span> (<span style=
-"color: #FF6188;">let</span> <span style=
-"color: #FCFCFA;">comment</span> <span style=
-"color: #FF6188;">of</span> talk.comments) {
+"color: #6c71c4; font-weight: bold;">this</span>.talk = talk;
+    <span style=
+"color: #6c71c4; font-weight: bold;">this</span>.comments.textContent = <span style="color: #2aa198;">""</span>;
+    <span style=
+"color: #859900; font-weight: bold;">for</span> (<span style=
+"color: #859900; font-weight: bold;">let</span> <span style=
+"color: #268bd2;">comment</span> <span style=
+"color: #859900; font-weight: bold;">of</span> talk.comments) {
       <span style=
-"color: #AB9DF2;">this</span>.comments.appendChild(renderComment(comment));
+"color: #6c71c4; font-weight: bold;">this</span>.comments.appendChild(renderComment(comment));
     }
   }
 }
 
-<span style="color: #FF6188;">function</span> <span style=
-"color: #A9DC76;">renderComment</span>(<span style=
-"color: #FCFCFA;">comment</span>) {
-  <span style="color: #FF6188;">return</span> elt(
-    <span style="color: #FFD866;">"p"</span>,
-    { className: <span style="color: #FFD866;">"comment"</span> },
-    elt(<span style="color: #FFD866;">"strong"</span>, <span style=
-"color: #AB9DF2;">null</span>, comment.author),
-    <span style="color: #FFD866;">": "</span>,
+<span style=
+"color: #859900; font-weight: bold;">function</span> <span style=
+"color: #b58900;">renderComment</span>(<span style=
+"color: #268bd2;">comment</span>) {
+  <span style=
+"color: #859900; font-weight: bold;">return</span> elt(
+    <span style="color: #2aa198;">"p"</span>,
+    { className: <span style="color: #2aa198;">"comment"</span> },
+    elt(<span style="color: #2aa198;">"strong"</span>, <span style=
+"color: #6c71c4; font-weight: bold;">null</span>, comment.author),
+    <span style="color: #2aa198;">": "</span>,
     comment.message
   );
 }

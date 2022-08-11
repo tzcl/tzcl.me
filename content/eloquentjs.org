@@ -423,8 +423,6 @@ function drawLine(start, pos, colour) {
 * Project 5: Skill-sharing website
 This project was most like a real web app. In short, it allows users to add talks (for some kind of meetup) and comments on those talks. Using long-polling, it was possible to have the client update whenever any changes occurred on the server. To summarise, long polling is where clients continually ask the server for new information using regular HTTP requests, and the server delays its answer until it an update. The trick is to always have a polling request open and to set a long maximum time for each request to avoid timing out. Node made this easy to manage on the server side.
 
-[[https://skillsharing.tzcl.me][Try out the skill-sharing website here!]]
-
 ** Disk persistence
 The simplest way we can add disk persistence is to make our =update= function write any changes to a file.
 #+begin_src js
