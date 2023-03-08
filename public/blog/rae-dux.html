@@ -1,299 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 2022-08-11 Thu 12:21 -->
-    <meta charset="utf-8">
-    <meta name="viewport" content=
-    "width=device-width, initial-scale=1">
-    <title>rae-dux build guide</title>
-    <meta name="author" content="Toby Law">
-    <meta name="generator" content="Org Mode">
-    <link rel="stylesheet" href="res/tufte.min.css">
-    <script async defer data-website-id=
-    "da32127d-c6a3-438c-b385-e709c9d0e07d" src=
-    "https://analytics.tzcl.me/umami.js"></script>
+<!-- 2023-03-08 Wed 22:55 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>rae-dux build guide</title>
+<meta name="author" content="Toby Law" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="res/tufte.min.css"/><script async defer data-website-id="6e6d5221-0e72-43ef-8e6e-27955832c259" src="https://analytics.tzcl.me/umami.js"></script>
 </head>
 <body>
-    <article id="content" class="content">
-        <header>
-            <h1 class="title">rae-dux build guide</h1>
-        </header>
-        <nav id="table-of-contents" role="doc-toc">
-            <h2></h2>
-            <div id="text-table-of-contents" role="doc-toc">
-                <ul>
-                    <li>
-                        <a href="#org0b16131">Overview</a>
-                    </li>
-                    <li>
-                        <a href="#org84bdde7">Parts</a>
-                    </li>
-                    <li>
-                        <a href="#org1f3bf51">Build guide</a>
-                    </li>
-                    <li>
-                        <a href="#orgdc8fe86">Configuring ZMK</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <p><a href="index.html">← Back to blog</a></p>
-        <figure id="org468ffb6">
-            <img src="https://i.imgur.com/eRWbyCC.jpg" alt=
-            "eRWbyCC.jpg">
-        </figure>
-        <section id="org0b16131" class="nil">
-            <h2 id="org0b16131">Overview</h2>
-            <p>The <a href=
-            "https://github.com/andrewjrae/rae-dux">rae-dux</a> is
-            a 36-key wireless ergo split keyboard designed by
-            <a href="https://github.com/andrewjrae">Andrew Rae</a>.
-            In my mind, it’s the perfect keyboard:</p>
-            <ul class="org-ul">
-                <li>I’ve found that 36 keys strikes the right
-                balance for me<label for="1" class=
-                "margin-toggle sidenote-number"></label><input type="checkbox"
-                id="1" class="margin-toggle"><span class=
-                "sidenote">Although, with combos, maybe going even
-                smaller is better 🤔</span> – it feels great letting
-                your index fingers and thumbs do most of the
-                work.</li>
-                <li>Going wireless has a lot of benefits, e.g.,
-                reducing clutter on your desk and allowing you to
-                pair to your tablet or your phone.</li>
-                <li>nice!nanos come with 18 pins so you can
-                actually get away without using diodes<label for=
-                "2" class=
-                "margin-toggle sidenote-number"></label><input type="checkbox"
-                id="2" class="margin-toggle"><span class=
-                "sidenote">Note, <a href=
-                "https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start">
-                the n!n docs warn against socketing the B+ and B-
-                pins</a></span> (can connect all keys on each side
-                directly to a pin).</li>
-                <li>Low profile switches and keycaps feel super
-                comfy and help give the board a small form factor,
-                making it easy to pack away and carry with
-                you.</li>
-            </ul>
-            <p>If you’re interested in seeing how I use the
-            rae-dux, my ZMK config is available <a href=
-            "https://github.com/tzcl/zmk-config">here</a>.</p>
-        </section>
-        <section id="org84bdde7" class="nil">
-            <h2 id="org84bdde7">Parts</h2>
-            <ul class="org-ul">
-                <li>2 x PCBs: see <a href="#orgf495a03">below on
-                printing PCBs</a>
-                </li>
-                <li>2 x <a href=
-                "https://keebd.com/products/nice-nano">nice!nano</a>:
-                see <a href=
-                "https://nicekeyboards.com/nice-nano#find-a-store">
-                    https://nicekeyboards.com/nice-nano#find-a-store</a>
-                </li>
-                <li>2 x <a href=
-                "https://core-electronics.com.au/lipo-polymer-lithium-ion-battery-120mah.html">
-                    3.7V 120mAh LiPo battery</a>: should be stocked
-                    by most electronics stores
-                </li>
-                <li>2 x <a href=
-                "https://core-electronics.com.au/jst-right-angle-connector-through-hole-2-pin.html">
-                    right-angle JST-2 connector</a>: should be
-                    stocked by most electronics stores
-                </li>
-                <li>4 x 13 x <a href=
-                "https://keebd.com/products/40-pin-machined-ic-breakable-female-header-strip">
-                    female machined pin headers</a>
-                </li>
-                <li>56 x <a href=
-                "https://keebd.com/products/mill-max-low-profile-controller-pins-pack-of-25">
-                    mill-max pins</a>
-                </li>
-                <li>2 x <a href=
-                "https://keebd.com/products/3x6x4-3mm-dip-push-button-switch">
-                    reset button</a>: dimensions should be
-                    6x3x4.3mm
-                </li>
-                <li>2 x <a href=
-                "https://keebd.com/products/switch-mini-7-pin-2-slide-positions">
-                    power switch</a>: should have 7 pins
-                </li>
-                <li>36 x <a href=
-                "https://keebd.com/products/kailh-hot-swappable-low-profile-1350-pcb-socket-pack-of-10">
-                    kailh low-profile hotswap sockets</a>
-                </li>
-                <li>36 x <a href=
-                "https://keebd.com/collections/choc-switches">choc
-                switches</a>
-                </li>
-                <li>36 x <a href=
-                "https://keebd.com/collections/choc-keycaps">choc
-                keycaps</a>
-                </li>
-                <li>8 x <a href=
-                "https://keebd.com/products/rubber-feet-with-adhesive-backing-pack-of-4">
-                    rubber feet</a>
-                </li>
-            </ul>
-            <figure id="org61bea1f">
-                <img src="https://i.imgur.com/UIEahGC.jpg" alt=
-                "UIEahGC.jpg">
-            </figure>
-            <h3 id="orgf495a03">Getting PCBs printed</h3>
-            <p>If you haven’t done it before, printing PCBs is
-            simple. I use JLCPCB but there are a few similar
-            services out there.</p>
-            <p>First, grab the <a href=
-            "https://github.com/andrewjrae/rae-dux/blob/rae-dux/output/gerber.zip">
-            gerbers from the repo</a>. Then, navigate to <a href=
-            "https://cart.jlcpcb.com/quote">https://cart.jlcpcb.com/quote</a>
-            and upload the gerber file. The settings are fine to
-            leave as is, the main choices to make are whether you
-            want a thinner PCB (1.2mm or 1.6mm are both fine) and
-            what colour you want<label for="3" class=
-            "margin-toggle sidenote-number"></label><input type=
-            "checkbox" id="3" class="margin-toggle"><span class=
-            "sidenote">Note, colours other than green may take
-            longer to print</span>.</p>
-        </section>
-        <section id="org1f3bf51" class="nil">
-            <h2 id="org1f3bf51">Build guide</h2>
-            <p>The build process is relatively straight forward as
-            there’s no need to fiddle with tiny components like
-            diodes and LEDs. The main thing is to double check
-            which side of the PCBs is the front and which is the
-            back. Getting this wrong will mean desoldering which is
-            a pain in butt and can result in lifted pads if you
-            aren’t careful. Better to get it right and not have to
-            deal with any of that.</p>
-            <ol class="org-ol">
-                <li>Solder on the hotswap sockets to the back of
-                the left and right PCBs</li>
-            </ol>
-            <p>The first step is soldering on the hotswap sockets.
-            This is easiest to do while the board is flat and a
-            good way to warm up if you’re new to soldering or
-            haven’t soldered in a while. You can’t really mess this
-            up, just make sure you know which PCB is going to be
-            the left side of the board and which is going to be the
-            right side, and make sure you solder the sockets on the
-            <i>back</i> of the PCBs.</p>
-            <ol class="org-ol">
-                <li value="2">Solder on the reset buttons to the
-                front of the PCBs</li>
-                <li>Solder on the JST connectors (be careful with
-                the positioning)</li>
-                <li>Solder on the power switches</li>
-            </ol>
-            <p>Next, we need to solder on the front-facing
-            components. Like the hotswap sockets, you can’t really
-            go wrong with soldering the reset buttons. A useful tip
-            for these and for the JST connectors is to use some
-            masking tape to hold them in place while you’re
-            soldering. With the JST connectors, it’s important to
-            place them in the right through-holes. The leftmost
-            through-hole marked B+ shouldn’t be used, instead, the
-            connectors should go into the B- and rightmost B+
-            holes. See the image below if you’re not sure. Finally,
-            the sliding switches have 7 small pads so they are a
-            little more difficult than the hotswap sockets. Take
-            your time and reduce the heat of your soldering iron.
-            It has two pins that fit into holes in the PCBs which
-            should help keep them in place.</p>
-            <ol class="org-ol">
-                <li value="5">Break the female machined pin headers
-                into four rows of 13</li>
-                <li>Solder the pin headers to the front of each
-                PCB</li>
-                <li>Insert the mill-max pins into the pin
-                headers</li>
-                <li>Put the nice!nanos in position and solder them
-                to the mill-max pins (the left n!n should face down
-                and the right n!n should face up)</li>
-            </ol>
-            <p>The last step is socketing the nice!nanos. If you’ve
-            never done this before, the <a href=
-            "https://docs.splitkb.com/hc/en-us/articles/360011263059-How-do-I-socket-a-microcontroller-">
-            splitkb.com docs</a> have a good guide with pictures.
-            Break off four rows of 13 of the female machined pin
-            headers and solder them to the front of each PCB.
-            Again, masking tape may come in handy. Once that’s
-            done, insert the mill-max pins into the sockets and
-            then put the nice!nanos into place. Make sure the left
-            nice!nano should be flipped so the flat side (the back)
-            is facing upwards. Then, solder the pins to the
-            controllers. Be careful, take your time and reduce the
-            heat of your soldering iron.</p>
-            <ol class="org-ol">
-                <li value="9">Lift the nice!nanos from the sockets,
-                position the batteries between the pin headers and
-                reseat the nice!nanos on top of the batteries</li>
-            </ol>
-            <p>If all goes well, you should be able to gently rock
-            the nice!nanos and lift them out of the sockets.
-            Connect the batteries to the JST connectors and place
-            them in between the sockets, underneath where the
-            nice!nanos go. Now, you can push the nice!nanos back in
-            and hopefully never need to remove them again.</p>
-            <p>At this stage, you should have something like this.
-            Before installing all of your switches and keycaps, I
-            recommend testing the board to make sure everything is
-            working.</p>
-            <figure id="org9bfa0eb">
-                <img src="https://i.imgur.com/VQaLfG4.jpg" alt=
-                "VQaLfG4.jpg">
-            </figure>
-        </section>
-        <section id="orgdc8fe86" class="nil">
-            <h2 id="orgdc8fe86">Configuring ZMK</h2>
-            <p>Now that you’ve built your keyboard, we want to make
-            sure that things work before going through the effort
-            of putting all your switches and keycaps in place. The
-            simplest way to do that is to grab <a href=
-            "https://github.com/tzcl/zmk-config/actions/runs/2681775211">
-            the firmware from my zmk-config</a>. You can completely
-            customise this if you want, you just need to make sure
-            that you use <a href=
-            "https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux">
-            the shield created by Andrew</a> which isn’t available
-            in the main ZMK repo at this point<label for="4" class=
-            "margin-toggle sidenote-number"></label><input type=
-            "checkbox" id="4" class="margin-toggle"><span class=
-            "sidenote">The policy is that personal projects should
-            create a separate zmk-config repo instead</span>.</p>
-            <p>Once you’ve downloaded the firmware, you need to
-            extract it. This should give you a folder with a bunch
-            of <code>.uf2</code> files.</p>
-            <figure id="orgda101dd">
-                <img src="https://i.imgur.com/8yt9ReM.png" alt=
-                "8yt9ReM.png">
-            </figure>
-            <p>To flash the nice!nanos, you need to hit the reset
-            button twice to put them into bootloader mode. Starting
-            with the left half, connect it to your computer using a
-            USB-C cable and put it into booloader mode. Then, you
-            should it pop up on your computer, where you need to
-            copy and paste the left <code>.uf2</code>. After this,
-            it should reboot and eject itself. Repeat this with the
-            other half.</p>
-            <figure id="orgdee62b6">
-                <img src="https://i.imgur.com/mjb0HtT.png" alt=
-                "mjb0HtT.png">
-            </figure>
-            <p>Once this is done, you should be able to go to the
-            Bluetooth settings on your computer or phone and see
-            ’rae-dux’. Connecting to this should let you see if
-            your keyboard is correctly sending keystrokes.</p>
-            <p>Note, if you have the keyboard connected to your
-            computer via a USB cable, it will communicate via that
-            cable instead of by Bluetooth. Also, if you have issues
-            getting your keyboard to connect, grab the
-            <code>settings_reset .uf2</code> file in the firmware
-            folder and follow these steps to <a href=
-            "https://zmk.dev/docs/troubleshooting#reset-split-keyboard-procedure">
-            reset your split keyboard halves</a>.</p>
-        </section><!-- Footnotes --><!-- 
+<article id="content" class="content">
+<header>
+<h1 class="title">rae-dux build guide</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org830a6ed">Overview</a></li>
+<li><a href="#org735fe04">Parts</a></li>
+<li><a href="#org49662a2">Build guide</a></li>
+<li><a href="#org099fd1c">Configuring ZMK</a></li>
+</ul>
+</div>
+</nav>
+<p>
+<a href="index.html">← Back to blog</a>
+</p>
+
+
+<figure id="org55be808">
+<img src="https://i.imgur.com/eRWbyCC.jpg" alt="eRWbyCC.jpg">
+
+</figure>
+
+<section id="org830a6ed" class="nil">
+<h2 id="org830a6ed">Overview</h2>
+<p>
+The <a href="https://github.com/andrewjrae/rae-dux">rae-dux</a> is a 36-key wireless ergo split keyboard designed by <a href="https://github.com/andrewjrae">Andrew Rae</a>. In my mind, it&rsquo;s the perfect keyboard:
+</p>
+<ul class="org-ul">
+<li>I&rsquo;ve found that 36 keys strikes the right balance for me<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">Although, with combos, maybe going even smaller is better 🤔</span> &#x2013; it feels great letting your index fingers and thumbs do most of the work.</li>
+<li>Going wireless has a lot of benefits, e.g., reducing clutter on your desk and allowing you to pair to your tablet or your phone.</li>
+<li>nice!nanos come with 18 pins so you can actually get away without using diodes<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">Note, <a href="https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start">the n!n docs warn against socketing the B+ and B- pins</a></span> (can connect all keys on each side directly to a pin).</li>
+<li>Low profile switches and keycaps feel super comfy and help give the board a small form factor, making it easy to pack away and carry with you.</li>
+</ul>
+
+<p>
+If you&rsquo;re interested in seeing how I use the rae-dux, my ZMK config is available <a href="https://github.com/tzcl/zmk-config">here</a>.
+</p>
+</section>
+
+<section id="org735fe04" class="nil">
+<h2 id="org735fe04">Parts</h2>
+<ul class="org-ul">
+<li>2 x PCBs: see <a href="#orgd1aa7fa">below on printing PCBs</a></li>
+<li>2 x <a href="https://keebd.com/products/nice-nano">nice!nano</a>: see <a href="https://nicekeyboards.com/nice-nano#find-a-store">https://nicekeyboards.com/nice-nano#find-a-store</a></li>
+<li>2 x <a href="https://core-electronics.com.au/lipo-polymer-lithium-ion-battery-120mah.html">3.7V 120mAh LiPo battery</a>: should be stocked by most electronics stores</li>
+<li>2 x <a href="https://core-electronics.com.au/jst-right-angle-connector-through-hole-2-pin.html">right-angle JST-2 connector</a>: should be stocked by most electronics stores</li>
+<li>4 x 13 x <a href="https://keebd.com/products/40-pin-machined-ic-breakable-female-header-strip">female machined pin headers</a></li>
+<li>56 x <a href="https://keebd.com/products/mill-max-low-profile-controller-pins-pack-of-25">mill-max pins</a></li>
+<li>2 x <a href="https://keebd.com/products/3x6x4-3mm-dip-push-button-switch">reset button</a>: dimensions should be 6x3x4.3mm</li>
+<li>2 x <a href="https://keebd.com/products/switch-mini-7-pin-2-slide-positions">power switch</a>: should have 7 pins</li>
+<li>36 x <a href="https://keebd.com/products/kailh-hot-swappable-low-profile-1350-pcb-socket-pack-of-10">kailh low-profile hotswap sockets</a></li>
+<li>36 x <a href="https://keebd.com/collections/choc-switches">choc switches</a></li>
+<li>36 x <a href="https://keebd.com/collections/choc-keycaps">choc keycaps</a></li>
+<li>8 x <a href="https://keebd.com/products/rubber-feet-with-adhesive-backing-pack-of-4">rubber feet</a></li>
+</ul>
+
+
+<figure id="orgc4f1fef">
+<img src="https://i.imgur.com/UIEahGC.jpg" alt="UIEahGC.jpg">
+
+</figure>
+
+
+<h3 id="orgd1aa7fa">Getting PCBs printed</h3>
+<p>
+If you haven&rsquo;t done it before, printing PCBs is simple. I use JLCPCB but there are a few similar services out there.
+</p>
+
+<p>
+First, grab the <a href="https://github.com/andrewjrae/rae-dux/blob/rae-dux/output/gerber.zip">gerbers from the repo</a>. Then, navigate to <a href="https://cart.jlcpcb.com/quote">https://cart.jlcpcb.com/quote</a> and upload the gerber file. The settings are fine to leave as is, the main choices to make are whether you want a thinner PCB (1.2mm or 1.6mm are both fine) and what colour you want<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">Note, colours other than green may take longer to print</span>.
+</p>
+</section>
+
+<section id="org49662a2" class="nil">
+<h2 id="org49662a2">Build guide</h2>
+<p>
+The build process is relatively straight forward as there&rsquo;s no need to fiddle with tiny components like diodes and LEDs. The main thing is to double check which side of the PCBs is the front and which is the back. Getting this wrong will mean desoldering which is a pain in butt and can result in lifted pads if you aren&rsquo;t careful. Better to get it right and not have to deal with any of that.
+</p>
+
+<ol class="org-ol">
+<li>Solder on the hotswap sockets to the back of the left and right PCBs</li>
+</ol>
+
+<p>
+The first step is soldering on the hotswap sockets. This is easiest to do while the board is flat and a good way to warm up if you&rsquo;re new to soldering or haven&rsquo;t soldered in a while. You can&rsquo;t really mess this up, just make sure you know which PCB is going to be the left side of the board and which is going to be the right side, and make sure you solder the sockets on the <i>back</i> of the PCBs.
+</p>
+
+<ol class="org-ol">
+<li value="2">Solder on the reset buttons to the front of the PCBs</li>
+<li>Solder on the JST connectors (be careful with the positioning)</li>
+<li>Solder on the power switches</li>
+</ol>
+
+<p>
+Next, we need to solder on the front-facing components. Like the hotswap sockets, you can&rsquo;t really go wrong with soldering the reset buttons. A useful tip for these and for the JST connectors is to use some masking tape to hold them in place while you&rsquo;re soldering. With the JST connectors, it&rsquo;s important to place them in the right through-holes. Make sure that the red cord goes to B+ and the black cord to B-. Finally, the sliding switches have 7 small pads so they are a little more difficult than the hotswap sockets. Take your time and reduce the heat of your soldering iron. It has two pins that fit into holes in the PCBs which should help keep them in place.
+</p>
+
+<ol class="org-ol">
+<li value="5">Break the female machined pin headers into four rows of 13</li>
+<li>Solder the pin headers to the front of each PCB</li>
+<li>Insert the mill-max pins into the pin headers</li>
+<li>Put the nice!nanos in position and solder them to the mill-max pins (the left n!n should face down and the right n!n should face up)</li>
+</ol>
+
+<p>
+The last step is socketing the nice!nanos. If you&rsquo;ve never done this before, the <a href="https://docs.splitkb.com/hc/en-us/articles/360011263059-How-do-I-socket-a-microcontroller-">splitkb.com docs</a> have a good guide with pictures. Break off four rows of 13 of the female machined pin headers and solder them to the front of each PCB. Again, masking tape may come in handy. Once that&rsquo;s done, insert the mill-max pins into the sockets and then put the nice!nanos into place. Make sure the left nice!nano should be flipped so the flat side (the back) is facing upwards. Then, solder the pins to the controllers. Be careful, take your time and reduce the heat of your soldering iron.
+</p>
+
+<ol class="org-ol">
+<li value="9">Lift the nice!nanos from the sockets, position the batteries between the pin headers and reseat the nice!nanos on top of the batteries</li>
+</ol>
+
+<p>
+If all goes well, you should be able to gently rock the nice!nanos and lift them out of the sockets. Connect the batteries to the JST connectors and place them in between the sockets, underneath where the nice!nanos go. Now, you can push the nice!nanos back in and hopefully never need to remove them again.
+</p>
+
+<p>
+At this stage, you should have something like this. Before installing all of your switches and keycaps, I recommend testing the board to make sure everything is working.
+</p>
+
+
+<figure id="org0b3cc22">
+<img src="https://i.imgur.com/VQaLfG4.jpg" alt="VQaLfG4.jpg">
+
+</figure>
+</section>
+
+<section id="org099fd1c" class="nil">
+<h2 id="org099fd1c">Configuring ZMK</h2>
+<p>
+Now that you&rsquo;ve built your keyboard, we want to make sure that things work before going through the effort of putting all your switches and keycaps in place. The simplest way to do that is to grab <a href="https://github.com/tzcl/zmk-config/actions/runs/2681775211">the firmware from my zmk-config</a>. You can completely customise this if you want, you just need to make sure that you use <a href="https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux">the shield created by Andrew</a> which isn&rsquo;t available in the main ZMK repo at this point<label for="4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="4" class="margin-toggle"/><span class="sidenote">The policy is that personal projects should create a separate zmk-config repo instead</span>.
+</p>
+
+<p>
+Once you&rsquo;ve downloaded the firmware, you need to extract it. This should give you a folder with a bunch of <code>.uf2</code> files.
+</p>
+
+
+<figure id="orgd7df50e">
+<img src="https://i.imgur.com/8yt9ReM.png" alt="8yt9ReM.png">
+
+</figure>
+
+<p>
+To flash the nice!nanos, you need to hit the reset button twice to put them into bootloader mode. Starting with the left half, connect it to your computer using a USB-C cable and put it into booloader mode. Then, you should it pop up on your computer, where you need to copy and paste the left <code>.uf2</code>. After this, it should reboot and eject itself. Repeat this with the other half.
+</p>
+
+
+<figure id="org4768376">
+<img src="https://i.imgur.com/mjb0HtT.png" alt="mjb0HtT.png">
+
+</figure>
+
+<p>
+Once this is done, you should be able to go to the Bluetooth settings on your computer or phone and see &rsquo;rae-dux&rsquo;. Connecting to this should let you see if your keyboard is correctly sending keystrokes.
+</p>
+
+<p>
+Note, if you have the keyboard connected to your computer via a USB cable, it will communicate via that cable instead of by Bluetooth. Also, if you have issues getting your keyboard to connect, grab the <code>settings_reset .uf2</code> file in the firmware folder and follow these steps to <a href="https://zmk.dev/docs/troubleshooting#reset-split-keyboard-procedure">reset your split keyboard halves</a>.
+</p>
+</section>
+<!-- Footnotes --><!-- 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Although, with combos, maybe going even smaller is better 🤔</p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Note, <a href="https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start">the n!n docs warn against socketing the B+ and B- pins</a></p></div></div>
@@ -302,7 +182,6 @@
 
 <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">The policy is that personal projects should create a separate zmk-config repo instead</p></div></div>
 
- -->
-    </article>
+ --></article>
 </body>
 </html>

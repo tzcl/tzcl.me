@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2023-03-08 Wed 22:51 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fuyu TKL Build Guide</title>
+<meta name="author" content="Toby Law" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="res/tufte.min.css"/><script async defer data-website-id="6e6d5221-0e72-43ef-8e6e-27955832c259" src="https://analytics.tzcl.me/umami.js"></script>
+</head>
+<body>
+<article id="content" class="content">
+<header>
+<h1 class="title">Fuyu TKL Build Guide</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2></h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0a04958">Overview</a></li>
+<li><a href="#org8a188de">Parts</a></li>
+<li><a href="#org5d26b2e">Build guide</a></li>
+</ul>
+</div>
+</nav>
+<p>
+<a href="index.html">← Back to blog</a>
+</p>
+
+
+<figure id="org26f2084">
+<img src="https://i.imgur.com/nOed4PF.jpg" alt="nOed4PF.jpg">
+
+</figure>
+
+
+<figure id="org82e3060">
+<img src="https://i.imgur.com/6DI5Qya.jpg" alt="6DI5Qya.jpg">
+
+</figure>
+
+<section id="org0a04958" class="nil">
+<h2 id="org0a04958">Overview</h2>
+<p>
+The Fuyu is a comfy TKL PCB that support multiple layouts and is compatible with a number of cases. You can pair it with something real nice, like the Geonworks F1-8K, or something a little easier on the wallet, like CustomKBD&rsquo;s TKRielle. It has a heap of cool features like support for multiple layouts, hella LEDs (including a programmable snowflake arrangement), and uses a RP2040 MCU.
+</p>
+
+<p>
+I highly recommend checking out <a href="https://github.com/zykrah/fuyu">https://github.com/zykrah/fuyu</a> for more info.
+</p>
+</section>
+
+<section id="org8a188de" class="nil">
+<h2 id="org8a188de">Parts</h2>
+<ul class="org-ul">
+<li>1 x <a href="https://github.com/zykrah/fuyu">Fuyu PCB</a>: see <a href="#org41bb867">see below on printing PCBs</a></li>
+<li>87 x MX switches</li>
+<li>87 x keycaps (including a 6.25U spacebar!)</li>
+<li>4 x 2U, 1 x 6.25U stabs</li>
+<li>A compatible case, like the Geonworks F1-8K/F1-8X or CustomKBD&rsquo;s TKRielle.</li>
+</ul>
+
+
+<figure id="org62027c4">
+<img src="https://i.imgur.com/Uevsmvz.jpg" alt="Uevsmvz.jpg">
+
+</figure>
+
+
+<h3 id="org41bb867">Printing PCBs</h3>
+<p>
+You can get the Fuyu PCB online from Geonworks or CustomKBD or do what I did and get it printed. I went with PCBWay and got them to assemble the PCBs for me too. I&rsquo;ve put up a <a href="https://www.pcbway.com/project/shareproject/Fuyu_TKL_Keyboard_PCB_f114f3c9.html">shared project</a> so all you have to do it hit <i>add to cart</i>.
+</p>
+</section>
+
+<section id="org5d26b2e" class="nil">
+<h2 id="org5d26b2e">Build guide</h2>
+
+<h3 id="org0d05fa4">PCB assembly</h3>
+<p>
+Having the PCBs pre-assembled honestly saves a lot of time, especially if you&rsquo;re like me and are newer to soldering. If you&rsquo;re doing it the hard way, take your time soldering the components to the PCB and make sure to check out the <a href="https://github.com/zykrah/fuyu">Fuyu Github repo</a>.
+</p>
+
+<p>
+If all goes well<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">I actually messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</span>, it should look a little something like this<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">If you&rsquo;re nervous and want more reference images, you can see what mine looked like <a href="https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip">here</a>.</span>:
+</p>
+
+
+<figure id="org1998f7c">
+<img src="https://i.imgur.com/V5dXndl.jpg" alt="V5dXndl.jpg">
+
+</figure>
+
+
+<h3 id="org484d4e0">Setting up firmware</h3>
+<p>
+It&rsquo;s important to take the time now to make sure your PCB is working properly. That means plugging it into your computer and seeing if it lights up!
+</p>
+
+<p>
+If you&rsquo;re like me and printed the PCB yourself, you&rsquo;ll have to flash the desired firmware onto the RP2040. If you bought it from a store, they&rsquo;ve probably already done this for you and you can skip the rest of this section.
+</p>
+
+<p>
+Luckily, the process isn&rsquo;t too hard. First, we need to clone and build the firmware<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">See below if you&rsquo;d rather just download a pre-built <code>.uf2</code> file</span>. I&rsquo;m using the <a href="https://github.com/zykrah/vial-qmk/tree/vdev-zykrah/keyboards/zykrah/fuyu">VIAL firmware</a> but you could just as easily use the <a href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/zykrah/slime88">firmware in QMK</a> (which is VIA-compatible).
+</p>
+
+<p>
+We need to clone the firmware to our machine:
+</p>
+<pre class="code"><code><span style="color: #b58900; font-style: italic;">git</span> clone https://github.com/zykrah/vial-qmk/
+</code></pre>
+
+<p>
+Next, we need to build it. This requires <a href="https://docs.qmk.fm/#/getting_started_build_tools">setting up your QMK environment</a>, if you haven&rsquo;t done it before. Finally, we can run:
+</p>
+<pre class="code"><code><span style="color: #b58900; font-style: italic;">make</span> zykrah/fuyu:vial
+</code></pre>
+
+<p>
+If that&rsquo;s all too tricky, don&rsquo;t worry, you can download the <code>.uf2</code> file from <a href="https://github.com/tzcl/keyboards/tree/fuyu">my Github</a>.
+</p>
+
+<p>
+Once you connect the PCB to your computer, it should automatically pop up as <code>RPI-RP2</code> and you can flash it by dragging the <code>.uf2</code> file across. If it doesn&rsquo;t pop up, you may need to put the RP2040 into bootloader mode by shorting the <code>BOOT</code> pins under the End key.
+</p>
+
+
+<figure id="org3184c99">
+<img src="https://i.imgur.com/cwU16RF.jpg" alt="cwU16RF.jpg">
+
+</figure>
+
+<p>
+If you&rsquo;re still having issues, you&rsquo;ve most likely flipped the orientation of an LED or a diode and caused a short-circuit. It can be tricky to work out exactly what&rsquo;s going wrong but there are some great Discord communities out there that may be able to help you through the troubleshooting process. Good luck!
+</p>
+
+
+<h3 id="org6d130c6">Installing stabilisers</h3>
+<p>
+Now, to the actual build.
+</p>
+
+<p>
+The first step is to install your stabilisers. It&rsquo;s worth taking the time to lube and tune them because it&rsquo;s a real pain to try and adjust them once you&rsquo;ve started soldering your switches in. <a href="https://www.youtube.com/watch?v=usNx1_d0HbQ">Taeha Types has a great video</a> on this if you need more info.
+</p>
+
+
+<h3 id="org879c6d7">Mounting plate and soldering switches</h3>
+
+
+<h3 id="org93c0b5e">Final touches</h3>
+</section>
+<!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I actually messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">If you&rsquo;re nervous and want more reference images, you can see what mine looked like <a href="https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip">here</a>.</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">See below if you&rsquo;d rather just download a pre-built <code>.uf2</code> file</p></div></div>
+
+ --></article>
+</body>
+</html>

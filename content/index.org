@@ -1,8 +1,9 @@
 #+TITLE: Blog
 
-+ 20/07 [[file:rae-dux.org][rae-dux build guide]]
-+ 03/06 [[file:eloquentjs.org][Eloquent JavaScript projects]]
-+ 17/04 [[file:syncthing.org][Syncthing: how I sync files between my computers]]
-+ 16/02 [[file:example.org][Recreating the Tufte CSS homepage in org-mode and ox-tufte]]
++ [[file:fuyu-tkl.org][Fuyu TKL build guide]] (Mar 2023)
++ [[file:rae-dux.org][rae-dux build guide]] (Jul 2022)
++ [[file:eloquentjs.org][Eloquent JavaScript projects]] (Jun 2022)
++ [[file:syncthing.org][Syncthing: how I sync files between my computers]] (Apr 2022)
++ [[file:example.org][Recreating the Tufte CSS homepage in org-mode and ox-tufte]] (Feb 2022)
 
 [[../index.html][← Back to home]]

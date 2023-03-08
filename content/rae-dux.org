@@ -46,7 +46,7 @@ The first step is soldering on the hotswap sockets. This is easiest to do while 
 3. Solder on the JST connectors (be careful with the positioning)
 4. Solder on the power switches
 
-Next, we need to solder on the front-facing components. Like the hotswap sockets, you can't really go wrong with soldering the reset buttons. A useful tip for these and for the JST connectors is to use some masking tape to hold them in place while you're soldering. With the JST connectors, it's important to place them in the right through-holes. The leftmost through-hole marked B+ shouldn't be used, instead, the connectors should go into the B- and rightmost B+ holes. See the image below if you're not sure. Finally, the sliding switches have 7 small pads so they are a little more difficult than the hotswap sockets. Take your time and reduce the heat of your soldering iron. It has two pins that fit into holes in the PCBs which should help keep them in place.
+Next, we need to solder on the front-facing components. Like the hotswap sockets, you can't really go wrong with soldering the reset buttons. A useful tip for these and for the JST connectors is to use some masking tape to hold them in place while you're soldering. With the JST connectors, it's important to place them in the right through-holes. Make sure that the red cord goes to B+ and the black cord to B-. Finally, the sliding switches have 7 small pads so they are a little more difficult than the hotswap sockets. Take your time and reduce the heat of your soldering iron. It has two pins that fit into holes in the PCBs which should help keep them in place.
 
 5. [@5] Break the female machined pin headers into four rows of 13
 6. Solder the pin headers to the front of each PCB
