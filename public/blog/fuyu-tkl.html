@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-03-08 Wed 22:51 -->
+<!-- 2023-03-10 Fri 10:29 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuyu TKL Build Guide</title>
@@ -28,13 +28,13 @@
 </p>
 
 
-<figure id="org26f2084">
+<figure id="orgb6a1aa4">
 <img src="https://i.imgur.com/nOed4PF.jpg" alt="nOed4PF.jpg">
 
 </figure>
 
 
-<figure id="org82e3060">
+<figure id="orgb3ef7e6">
 <img src="https://i.imgur.com/6DI5Qya.jpg" alt="6DI5Qya.jpg">
 
 </figure>
@@ -42,11 +42,11 @@
 <section id="org0a04958" class="nil">
 <h2 id="org0a04958">Overview</h2>
 <p>
-The Fuyu is a comfy TKL PCB that support multiple layouts and is compatible with a number of cases. You can pair it with something real nice, like the Geonworks F1-8K, or something a little easier on the wallet, like CustomKBD&rsquo;s TKRielle. It has a heap of cool features like support for multiple layouts, hella LEDs (including a programmable snowflake arrangement), and uses a RP2040 MCU.
+The Fuyu is a comfy TKL PCB that support multiple layouts and is compatible with a number of cases. You can pair it with something fancy, like the Geonworks F1-8K, or something a little easier on the wallet, like CustomKBD&rsquo;s TKRielle. It has cool features like support for multiple layouts, hella LEDs (including a programmable snowflake arrangement), firmware for visual keymap editors like VIAL and VIA, and uses a RP2040 MCU.
 </p>
 
 <p>
-I highly recommend checking out <a href="https://github.com/zykrah/fuyu">https://github.com/zykrah/fuyu</a> for more info.
+I highly recommend checking out the <a href="https://github.com/zykrah/fuyu">Fuyu Github repo</a> for more info.
 </p>
 </section>
 
@@ -61,7 +61,7 @@ I highly recommend checking out <a href="https://github.com/zykrah/fuyu">https:/
 </ul>
 
 
-<figure id="org62027c4">
+<figure id="org315376b">
 <img src="https://i.imgur.com/Uevsmvz.jpg" alt="Uevsmvz.jpg">
 
 </figure>
@@ -69,7 +69,7 @@ I highly recommend checking out <a href="https://github.com/zykrah/fuyu">https:/
 
 <h3 id="org41bb867">Printing PCBs</h3>
 <p>
-You can get the Fuyu PCB online from Geonworks or CustomKBD or do what I did and get it printed. I went with PCBWay and got them to assemble the PCBs for me too. I&rsquo;ve put up a <a href="https://www.pcbway.com/project/shareproject/Fuyu_TKL_Keyboard_PCB_f114f3c9.html">shared project</a> so all you have to do it hit <i>add to cart</i>.
+You can get the Fuyu PCB online from Geonworks or CustomKBD or do what I did and get it printed. I went with PCBWay and got them to assemble the PCBs for me too. I&rsquo;ve put up a <a href="https://www.pcbway.com/project/shareproject/Fuyu_TKL_Keyboard_PCB_f114f3c9.html">shared project</a> so all you have to do it hit &ldquo;Add to cart&rdquo;.
 </p>
 </section>
 
@@ -78,15 +78,15 @@ You can get the Fuyu PCB online from Geonworks or CustomKBD or do what I did and
 
 <h3 id="org0d05fa4">PCB assembly</h3>
 <p>
-Having the PCBs pre-assembled honestly saves a lot of time, especially if you&rsquo;re like me and are newer to soldering. If you&rsquo;re doing it the hard way, take your time soldering the components to the PCB and make sure to check out the <a href="https://github.com/zykrah/fuyu">Fuyu Github repo</a>.
+Having the PCBs preassembled honestly saves a lot of time, especially if you&rsquo;re like me and are newer to soldering. If you&rsquo;re doing it the hard way, take your time soldering the components to the PCB and reference the <a href="https://github.com/zykrah/fuyu">Fuyu Github repo</a> as you go.
 </p>
 
 <p>
-If all goes well<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">I actually messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</span>, it should look a little something like this<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">If you&rsquo;re nervous and want more reference images, you can see what mine looked like <a href="https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip">here</a>.</span>:
+If all goes well<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">I initially messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</span>, it should look a little something like this<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">If you&rsquo;re nervous and want more reference images, you can see what mine looked like <a href="https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip">here</a>.</span>:
 </p>
 
 
-<figure id="org1998f7c">
+<figure id="org75005ea">
 <img src="https://i.imgur.com/V5dXndl.jpg" alt="V5dXndl.jpg">
 
 </figure>
@@ -102,7 +102,7 @@ If you&rsquo;re like me and printed the PCB yourself, you&rsquo;ll have to flash
 </p>
 
 <p>
-Luckily, the process isn&rsquo;t too hard. First, we need to clone and build the firmware<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">See below if you&rsquo;d rather just download a pre-built <code>.uf2</code> file</span>. I&rsquo;m using the <a href="https://github.com/zykrah/vial-qmk/tree/vdev-zykrah/keyboards/zykrah/fuyu">VIAL firmware</a> but you could just as easily use the <a href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/zykrah/slime88">firmware in QMK</a> (which is VIA-compatible).
+Luckily, the process isn&rsquo;t too hard. First, we need to clone and build the firmware<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">See below if you&rsquo;d rather just download a pre-built <code>.uf2</code> file</span>. I&rsquo;m using the <a href="https://github.com/zykrah/vial-qmk/tree/vdev-zykrah/keyboards/zykrah/fuyu">VIAL firmware</a> but you could just as easily use the <a href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/zykrah/fuyu">firmware in QMK master</a> (which is VIA-compatible).
 </p>
 
 <p>
@@ -118,7 +118,11 @@ Next, we need to build it. This requires <a href="https://docs.qmk.fm/#/getting_
 </code></pre>
 
 <p>
-If that&rsquo;s all too tricky, don&rsquo;t worry, you can download the <code>.uf2</code> file from <a href="https://github.com/tzcl/keyboards/tree/fuyu">my Github</a>.
+This should generate a file called <code>zykrah_fuyu_vial.uf2</code> in the directory where you cloned the repo.
+</p>
+
+<p>
+If that&rsquo;s all too tricky, don&rsquo;t worry, you can download the <a href="https://github.com/tzcl/keyboards/tree/fuyu">firmware from my Github</a>.
 </p>
 
 <p>
@@ -126,7 +130,7 @@ Once you connect the PCB to your computer, it should automatically pop up as <co
 </p>
 
 
-<figure id="org3184c99">
+<figure id="orgd8027ce">
 <img src="https://i.imgur.com/cwU16RF.jpg" alt="cwU16RF.jpg">
 
 </figure>
@@ -146,17 +150,81 @@ The first step is to install your stabilisers. It&rsquo;s worth taking the time 
 </p>
 
 
+<figure id="orgc6f8fbb">
+<img src="https://i.imgur.com/YoCPn8z.jpg" alt="YoCPn8z.jpg">
+
+</figure>
+
+
 <h3 id="org879c6d7">Mounting plate and soldering switches</h3>
+<p>
+Next up is soldering in the switches. I like putting the plate on and securing it by installing the corner switches first.
+</p>
+
+
+<figure id="orgba500ea">
+<img src="https://i.imgur.com/MZb3Jua.jpg" alt="MZb3Jua.jpg">
+
+</figure>
+
+<p>
+From there, it&rsquo;s just taking the time to put the switches in place and solder the pins. Be careful not to bend any switch pin legs as they are quite easy to break off. Again, don&rsquo;t rush and make sure everything looks good because soldering. I used a combination of tactile (Boba U4T) and linear (Gateron Yellow) switches<label for="4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="4" class="margin-toggle"/><span class="sidenote">Personally, I&rsquo;m a big fan of linears but wanted to try some tactile switches. The feedback on keypresses is really nice but I feel they get tiring after typing for longer periods of time. Linear modifiers is a good compromise.</span>.
+</p>
+
+
+<figure id="org4c58029">
+<img src="https://i.imgur.com/3CweXPi.jpg" alt="3CweXPi.jpg">
+
+</figure>
+
+<p>
+Once all the switches are in, it&rsquo;s time to plug it in and test them out. <a href="https://config.qmk.fm/#/test">QMK Configurator</a> is a good way to test that all the switches are working and emitting the right keycodes. The most likely reason for a switch to not be working is that the switch pins don&rsquo;t have good contact with the PCB so you may need to resolder them.
+</p>
+
+
+<figure id="org184f2af">
+<img src="https://i.imgur.com/FfGqWta.jpg" alt="FfGqWta.jpg">
+
+</figure>
 
 
 <h3 id="org93c0b5e">Final touches</h3>
+<p>
+The last step is to put your case together!
+</p>
+
+
+<figure id="org9ba9528">
+<img src="https://i.imgur.com/iA8cNqH.jpg" alt="iA8cNqH.jpg">
+
+</figure>
+
+<p>
+Since this will depend on the case you have, I don&rsquo;t have any specific tips. In my case, I went with the TKRielle case which was the first time I&rsquo;ve encountered a gasket mounted POM plate. It took me longer than I&rsquo;d like to admit to figure out how to mount the PCB but I got there in the end and was pretty happy with the result.
+</p>
+
+
+<figure id="org5b9b727">
+<img src="https://i.imgur.com/qkjJz79.jpg" alt="qkjJz79.jpg">
+
+</figure>
+
+<p>
+Unfortunately I don&rsquo;t have a sound test for you but I love the thock this board has and the flex when typing. If you&rsquo;re interested, <a href="https://www.youtube.com/@zestrion_">Zestrion</a> has a sound test of the TKRielle on YouTube:
+</p>
+
+<p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VjeUizURuPQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</p>
 </section>
 <!-- Footnotes --><!-- 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I actually messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</p></div></div>
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">I initially messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.</p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">If you&rsquo;re nervous and want more reference images, you can see what mine looked like <a href="https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip">here</a>.</p></div></div>
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">See below if you&rsquo;d rather just download a pre-built <code>.uf2</code> file</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">Personally, I&rsquo;m a big fan of linears but wanted to try some tactile switches. The feedback on keypresses is really nice but I feel they get tiring after typing for longer periods of time. Linear modifiers is a good compromise.</p></div></div>
 
  --></article>
 </body>
