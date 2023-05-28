@@ -9,7 +9,11 @@
 
 @layer base {
   body {
-    @apply font-georgia text-gray-900;
+    @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
+  }
+
+  article {
+    @apply mx-auto max-w-prose px-4;
   }
 
   h1,
@@ -59,7 +63,7 @@
   }
 
   a {
-    @apply underline hover:text-gray-500;
+    @apply underline hover:text-gray-500 dark:hover:text-gray-400;
   }
 
   hr {
@@ -69,7 +73,7 @@
 
 @layer components {
   .title {
-    @apply bg-sky bg-cover bg-clip-text text-transparent;
+    @apply bg-sky bg-cover bg-clip-text bg-center text-transparent dark:bg-roof;
     @apply text-center font-lora text-title font-bold leading-relaxed;
   }
 }
