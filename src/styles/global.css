@@ -6,3 +6,70 @@
   font-family: "Lora";
   src: url("lora.woff2");
 }
+
+@layer base {
+  body {
+    @apply font-georgia text-gray-900;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-normal leading-none;
+  }
+
+  h1 {
+    @apply mb-6 mt-10 text-[3.2rem];
+  }
+
+  h2 {
+    @apply mb-6 mt-9 text-[2.2rem] italic;
+  }
+
+  h3 {
+    @apply mb-6 mt-8 text-[1.7rem] italic;
+  }
+
+  p,
+  dl,
+  ol,
+  ul {
+    @apply text-lg;
+  }
+
+  p {
+    @apply my-4 align-baseline;
+  }
+
+  p.subtitle {
+    @apply my-4 block text-[1.8rem] italic leading-none;
+  }
+
+  dl,
+  ul,
+  ol {
+    @apply ml-6;
+  }
+
+  li:not(:first-child) {
+    @apply mt-1;
+  }
+
+  a {
+    @apply underline hover:text-gray-500;
+  }
+
+  hr {
+    @apply border;
+  }
+}
+
+@layer components {
+  .title {
+    @apply bg-sky bg-cover bg-clip-text text-transparent;
+    @apply text-center font-lora text-title font-bold leading-relaxed;
+  }
+}
