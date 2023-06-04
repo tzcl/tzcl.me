@@ -11,13 +11,17 @@
 }
 
 @layer base {
+  html {
+    font-size: 20px;
+  }
+
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
     counter-reset: sidenote-counter;
   }
 
   article {
-    @apply mx-auto max-w-prose px-8 py-20;
+    @apply mx-auto max-w-prose px-8;
   }
 
   section {
@@ -45,11 +49,9 @@
     @apply mb-4 mt-6 text-[1.7rem] italic;
   }
 
-  a,
   p,
   ul,
   ol {
-    @apply text-lg;
     @apply my-4;
   }
 
@@ -130,6 +132,16 @@ input.margin-toggle {
 
   .margin-toggle:not(:checked) + .sidenote {
     @apply relative left-4 float-right clear-both my-4 mr-0 inline-block w-full text-sm;
+  }
+}
+
+/* ------- */
+/* Sidebar */
+/* ------- */
+
+@media (min-width: 70rem) {
+  .sidebar {
+    /* @apply sticky float-left clear-both -ml-[22.5vw] w-[20vw]; */
   }
 }
 

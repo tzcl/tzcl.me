@@ -16,10 +16,12 @@ const { Content } = await post.render();
 
 <Layout title={post.title}>
   <article>
-    <h1>{post.data.title}</h1>
-    <p>
-      {post.data.date.toLocaleDateString()}
-    </p>
+    <section class="sidebar">
+      <h1>{post.data.title}</h1>
+      <p>
+        {post.data.date.toLocaleDateString()}
+      </p>
+    </section>
     <hr />
     <Content />
     <hr />

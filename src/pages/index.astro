@@ -30,9 +30,9 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     <ul class="list-none pl-0">
       {
         posts.map((post) => (
-          <li class="mb-4">
+          <li class="mb-4 flex items-center justify-between">
             <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-            <time class="float-right" datetime={post.data.date.toISOString()}>
+            <time datetime={post.data.date.toISOString()}>
               {post.data.date.toLocaleDateString()}
             </time>
           </li>
