@@ -102,7 +102,7 @@ input.margin-toggle {
 }
 
 .sidenote-number:after {
-  @apply -top-2 left-[0.1rem] cursor-pointer text-sm underline;
+  @apply -top-2 left-[0.1rem] text-sm;
   content: counter(sidenote-counter);
 }
 
@@ -112,15 +112,25 @@ input.margin-toggle {
 }
 
 .sidenote {
-  @apply hidden;
-}
-
-.margin-toggle:not(:checked) + .sidenote {
-  @apply relative left-4 float-right clear-both my-4 inline-block w-full text-sm;
+  @apply relative float-right clear-both -mr-[22.5vw] mt-[0.3rem] w-[20vw] text-sm;
 }
 
 .sidenote > a {
   @apply text-sm;
+}
+
+@media (max-width: 70rem) {
+  .sidenote-number:after {
+    @apply cursor-pointer underline;
+  }
+
+  .sidenote {
+    @apply hidden;
+  }
+
+  .margin-toggle:not(:checked) + .sidenote {
+    @apply relative left-4 float-right clear-both my-4 mr-0 inline-block w-full text-sm;
+  }
 }
 
 @layer components {
