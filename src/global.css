@@ -10,10 +10,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Fira Mono";
-  src: url("fira-code.ttf") format("ttf");
-}
 @layer base {
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
@@ -102,6 +98,7 @@ input.margin-toggle {
 .sidenote-number:after,
 .sidenote:before {
   @apply relative;
+  font-family: Times;
 }
 
 .sidenote-number:after {

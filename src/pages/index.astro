@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("posts");
+
+// Sort in reverse chronological order
+posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout title="Toby Law">
@@ -24,12 +27,12 @@ const posts = await getCollection("posts");
       <a href="https://linkedin.com/in/tobylaw">LinkedIn</a>
     </section>
     <h2>Posts</h2>
-    <ul>
+    <ul class="list-none pl-0">
       {
         posts.map((post) => (
-          <li class="flex justify-between">
+          <li class="mb-4">
             <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-            <time datetime={post.data.date.toISOString()}>
+            <time class="float-right" datetime={post.data.date.toISOString()}>
               {post.data.date.toLocaleDateString()}
             </time>
           </li>
