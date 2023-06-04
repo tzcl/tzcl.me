@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
 ---
 
 <Layout title="Toby Law">
   <h1 class="title mb-8">Toby Law</h1>
   <article>
-    <p></p>
     <p>
       Hi! I am a software developer based in Melbourne. I graduated from the
       University of Melbourne and now work at ANZ. I am interested in fintech,
@@ -13,15 +15,26 @@ import Layout from "../layouts/Layout.astro";
     </p>
     <p>
       Recently, I've been studying <a href="#">data structures and algorithms</a
-      > and <a href="https://github.com/tzcl/keyboards">building keebs</a>.
+      > and
+      <a href="https://github.com/tzcl/keyboards">building keebs</a>.
     </p>
-    <h2>Essays</h2>
-    <p>TODO :D</p>
-    <h2>Contact</h2>
-    <ul class="list-inside list-disc">
-      <li><a href="https://twitter.com/tobylaw_">Twitter</a></li>
-      <li><a href="https://github.com/tzcl">Github</a></li>
-      <li><a href="https://www.linkedin.com/in/tobylaw/">LinkedIn</a></li>
+    <section class="flex justify-center gap-8">
+      <a href="https://twitter.com/tobylaw_">Twitter</a>
+      <a href="https://github.com/tzcl">GitHub</a>
+      <a href="https://linkedin.com/in/tobylaw">LinkedIn</a>
+    </section>
+    <h2>Posts</h2>
+    <ul>
+      {
+        posts.map((post) => (
+          <li class="flex justify-between">
+            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString()}
+            </time>
+          </li>
+        ))
+      }
     </ul>
   </article>
 </Layout>

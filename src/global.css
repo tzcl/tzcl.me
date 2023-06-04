@@ -4,16 +4,28 @@
 
 @font-face {
   font-family: "Lora";
-  src: url("lora.woff2");
+  src: url("lora.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: "Fira Mono";
+  src: url("fira-code.ttf") format("ttf");
+}
 @layer base {
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
+    counter-reset: sidenote-counter;
   }
 
   article {
-    @apply mx-auto max-w-prose px-4;
+    @apply mx-auto max-w-prose px-8 py-20;
+  }
+
+  section {
+    @apply py-4;
   }
 
   h1,
@@ -26,54 +38,107 @@
   }
 
   h1 {
-    @apply mb-6 mt-10 text-[3.2rem];
+    @apply mb-4 mt-8 text-[3.2rem];
   }
 
   h2 {
-    @apply mb-6 mt-9 text-[2.2rem] italic;
+    @apply mb-4 mt-7 text-[2.2rem] italic;
   }
 
   h3 {
-    @apply mb-6 mt-8 text-[1.7rem] italic;
+    @apply mb-4 mt-6 text-[1.7rem] italic;
   }
 
+  a,
   p,
-  dl,
-  ol,
-  ul {
+  ul,
+  ol {
     @apply text-lg;
+    @apply my-4;
   }
 
-  p {
-    @apply my-4 align-baseline;
+  a {
+    @apply underline hover:text-gray-400 dark:hover:text-gray-500;
+  }
+
+  ul,
+  ol {
+    @apply ps-[5%];
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply mb-1;
+  }
+
+  hr {
+    @apply border;
+  }
+
+  code {
+    @apply text-sm;
+  }
+}
+
+/* -------------------------- */
+/* Sidenotes and margin notes */
+/* -------------------------- */
+
+input.margin-toggle {
+  @apply hidden;
+}
+
+.sidenote-number {
+  counter-increment: sidenote-counter;
+}
+
+.sidenote-number:after,
+.sidenote:before {
+  @apply relative;
+}
+
+.sidenote-number:after {
+  @apply -top-2 left-[0.1rem] cursor-pointer text-sm underline;
+  content: counter(sidenote-counter);
+}
+
+.sidenote:before {
+  @apply -top-2 text-sm;
+  content: counter(sidenote-counter) " ";
+}
+
+.sidenote {
+  @apply hidden;
+}
+
+.margin-toggle:not(:checked) + .sidenote {
+  @apply relative left-4 float-right clear-both my-4 inline-block w-full text-sm;
+}
+
+.sidenote > a {
+  @apply text-sm;
+}
+
+@layer components {
+  .title {
+    @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
+    @apply text-center font-lora text-title font-bold leading-relaxed;
+    @apply mb-8 mt-12;
   }
 
   p.subtitle {
     @apply my-4 block text-[1.8rem] italic leading-none;
   }
 
-  dl,
-  ul,
-  ol {
-    @apply ml-6;
-  }
-
-  li:not(:first-child) {
-    @apply mt-1;
-  }
-
-  a {
-    @apply underline hover:text-gray-500 dark:hover:text-gray-400;
-  }
-
-  hr {
-    @apply border;
-  }
-}
-
-@layer components {
-  .title {
-    @apply bg-sky bg-cover bg-clip-text bg-center text-transparent dark:bg-roof;
-    @apply text-center font-lora text-title font-bold leading-relaxed;
+  span.newthought {
+    font-variant-caps: small-caps;
+    @apply text-xl;
   }
 }
