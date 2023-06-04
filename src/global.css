@@ -25,7 +25,7 @@
   }
 
   section {
-    @apply py-4;
+    @apply my-4;
   }
 
   h1,
@@ -132,16 +132,6 @@ input.margin-toggle {
 
   .margin-toggle:not(:checked) + .sidenote {
     @apply relative left-4 float-right clear-both my-4 mr-0 inline-block w-full text-sm;
-  }
-}
-
-/* ------- */
-/* Sidebar */
-/* ------- */
-
-@media (min-width: 70rem) {
-  .sidebar {
-    /* @apply sticky float-left clear-both -ml-[22.5vw] w-[20vw]; */
   }
 }
 

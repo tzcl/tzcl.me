@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import type { MarkdownHeading } from "astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -11,22 +12,38 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+
+// TODO: process nested headings
 ---
 
 <Layout title={post.title}>
-  <article>
-    <section class="sidebar">
-      <h1>{post.data.title}</h1>
-      <p>
-        {post.data.date.toLocaleDateString()}
-      </p>
-    </section>
-    <hr />
+  <section class="sidebar top-0">
+    <h1>{post.data.title}</h1>
+    <p>
+      {post.data.date.toLocaleDateString()}
+    </p>
+    <h3>Contents</h3>
+    <ul class="list-inside">
+      {
+        headings.map((heading: MarkdownHeading) => (
+          <li class="italic">
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <article class="py-20">
     <Content />
-    <hr />
-    <section>
-      <a href="/" class="mt-8">← Home</a>
-    </section>
   </article>
+  <section class="sidebar bottom-20">
+    <a href="/" class="mt-8">← Home</a>
+  </section>
 </Layout>
+
+<style>
+  .sidebar {
+    @apply fixed left-8 w-[20vw];
+  }
+</style>

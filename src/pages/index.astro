@@ -26,18 +26,25 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
       <a href="https://github.com/tzcl">GitHub</a>
       <a href="https://linkedin.com/in/tobylaw">LinkedIn</a>
     </section>
-    <h2>Posts</h2>
-    <ul class="list-none pl-0">
-      {
-        posts.map((post) => (
-          <li class="mb-4 flex items-center justify-between">
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-            <time datetime={post.data.date.toISOString()}>
-              {post.data.date.toLocaleDateString()}
-            </time>
-          </li>
-        ))
-      }
-    </ul>
+    <section>
+      <h2>Posts</h2>
+      <ul class="list-none pl-0">
+        {
+          posts.map((post) => (
+            <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
+              <a class="flex-[3]" href={`/posts/${post.slug}`}>
+                {post.data.title}
+              </a>
+              <time
+                class="flex-1 text-right"
+                datetime={post.data.date.toISOString()}
+              >
+                {post.data.date.toLocaleDateString()}
+              </time>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </article>
 </Layout>

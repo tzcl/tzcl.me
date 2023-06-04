@@ -1,5 +1,5 @@
 ---
-title: Sidenotes vs Margin notes
+title: Sidenotes vs margin notes, this is a very long title, very long indeed
 description: Tips and tricks
 date: 2023-06-03
 draft: true
