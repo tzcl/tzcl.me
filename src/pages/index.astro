@@ -39,7 +39,7 @@ posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
                 class="flex-1 text-right"
                 datetime={post.data.pubDate.toISOString()}
               >
-                {post.data.pubDate.toLocaleDateString()}
+                {post.data.pubDate.toLocaleDateString("en-AU")}
               </time>
             </li>
           ))

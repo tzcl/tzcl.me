@@ -22,7 +22,7 @@ const { Content, headings } = await post.render();
     <section class="desktop:sidebar desktop:top-0">
       <h1>{post.data.title}</h1>
       <p>
-        {post.data.pubDate.toLocaleDateString()}
+        {post.data.pubDate.toLocaleDateString("en-AU")}
       </p>
       {
         headings.length > 0 && (
