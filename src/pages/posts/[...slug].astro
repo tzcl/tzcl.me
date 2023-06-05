@@ -18,32 +18,28 @@ const { Content, headings } = await post.render();
 ---
 
 <Layout title={post.title}>
-  <section class="sidebar top-0">
-    <h1>{post.data.title}</h1>
-    <p>
-      {post.data.date.toLocaleDateString()}
-    </p>
-    <h3>Contents</h3>
-    <ul class="list-inside">
-      {
-        headings.map((heading: MarkdownHeading) => (
-          <li class="italic">
-            <a href={`#${heading.slug}`}>{heading.text}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
   <article class="py-20">
+    <section class="desktop:sidebar desktop:top-0">
+      <h1>{post.data.title}</h1>
+      <p>
+        {post.data.date.toLocaleDateString()}
+      </p>
+      <div class="hidden desktop:block">
+        <h3>Contents</h3>
+        <ul>
+          {
+            headings.map((heading: MarkdownHeading) => (
+              <li>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
     <Content />
+    <section class="desktop:sidebar desktop:bottom-24">
+      <a href="/">← Home</a>
+    </section>
   </article>
-  <section class="sidebar bottom-20">
-    <a href="/" class="mt-8">← Home</a>
-  </section>
 </Layout>
-
-<style>
-  .sidebar {
-    @apply fixed left-8 w-[20vw];
-  }
-</style>

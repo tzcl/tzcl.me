@@ -24,10 +24,6 @@
     @apply mx-auto max-w-prose px-8;
   }
 
-  section {
-    @apply my-4;
-  }
-
   h1,
   h2,
   h3,
@@ -121,7 +117,7 @@ input.margin-toggle {
   @apply text-sm;
 }
 
-@media (max-width: 70rem) {
+@media (max-width: 1399px) {
   .sidenote-number:after {
     @apply cursor-pointer underline;
   }
@@ -140,6 +136,10 @@ input.margin-toggle {
     @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
     @apply text-center font-lora text-title font-bold leading-relaxed;
     @apply mb-8 mt-12;
+  }
+
+  .sidebar {
+    @apply fixed left-8 w-[20vw];
   }
 
   p.subtitle {
