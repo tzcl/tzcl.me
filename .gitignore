@@ -3,6 +3,7 @@
 *.log
 tmp/
 
-.packages/*
+.packages/
 .astro
 node_modules/
+dist/
