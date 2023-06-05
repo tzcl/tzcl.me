@@ -1,7 +1,7 @@
 ---
 title: rae-dux build guide
 description: Building a rae-dux from scratch
-date: 2022-07-01
+pubDate: 2022-07-01
 ---
 
 ## Overview

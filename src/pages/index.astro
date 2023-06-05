@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("posts");
 
 // Sort in reverse chronological order
-posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <Layout title="Toby Law">
@@ -37,9 +37,9 @@ posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
               </a>
               <time
                 class="flex-1 text-right"
-                datetime={post.data.date.toISOString()}
+                datetime={post.data.pubDate.toISOString()}
               >
-                {post.data.date.toLocaleDateString()}
+                {post.data.pubDate.toLocaleDateString()}
               </time>
             </li>
           ))

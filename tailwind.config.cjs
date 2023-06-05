@@ -10,8 +10,8 @@ module.exports = {
         dark: "#151515",
       },
       backgroundImage: {
-        sky: "url('sky.jpg')",
-        roof: "url('roof.jpg')",
+        sky: "url('/sky.jpg')",
+        roof: "url('/roof.jpg')",
       },
       fontFamily: {
         lora: ["Lora", ...defaultTheme.fontFamily.serif],

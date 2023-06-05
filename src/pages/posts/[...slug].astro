@@ -22,20 +22,22 @@ const { Content, headings } = await post.render();
     <section class="desktop:sidebar desktop:top-0">
       <h1>{post.data.title}</h1>
       <p>
-        {post.data.date.toLocaleDateString()}
+        {post.data.pubDate.toLocaleDateString()}
       </p>
-      <div class="hidden desktop:block">
-        <h3>Contents</h3>
-        <ul>
-          {
-            headings.map((heading: MarkdownHeading) => (
-              <li>
-                <a href={`#${heading.slug}`}>{heading.text}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      {
+        headings.length > 0 && (
+          <div class="hidden desktop:block">
+            <h3>Contents</h3>
+            <ul>
+              {headings.map((heading: MarkdownHeading) => (
+                <li>
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
     </section>
     <Content />
     <section class="desktop:sidebar desktop:bottom-24">

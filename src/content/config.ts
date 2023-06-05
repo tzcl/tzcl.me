@@ -6,7 +6,7 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     // Transform string to Date object
-    date: z
+    pubDate: z
       .string()
       .or(z.date())
       .transform((str) => new Date(str)),
