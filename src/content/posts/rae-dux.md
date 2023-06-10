@@ -35,7 +35,7 @@ If you're interested in seeing how I use the rae-dux, my ZMK config is available
 
 <img class="py-4" src="https://i.imgur.com/UIEahGC.jpg" />
 
-## Getting PCBs printed
+### Getting PCBs printed
 
 If you haven't done it before, printing PCBs is simple. I use JLCPCB but there are a few similar services out there.
 

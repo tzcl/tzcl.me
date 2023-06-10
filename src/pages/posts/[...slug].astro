@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import type { MarkdownHeading } from "astro";
 
@@ -14,8 +14,64 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
 
-// TODO: process nested headings
+// Process headings
+const toc = headings.filter((heading: { depth: number }) => {
+  // return heading.depth == 2;
+  return true;
+});
+
+console.log(toc);
 // TODO: Is using '-apple-system' safe on other systems?
+
+function generateTableOfContents(headings2: any) {
+  let html = "<ul>";
+
+  for (const heading of headings2) {
+    const { depth, slug, text } = heading;
+    const listItem = `<li><a href="#${slug}">${text}</a></li>`;
+
+    if (depth === 2) {
+      html += listItem;
+    } else if (depth === 3) {
+      if (html.endsWith("</ul>")) {
+        html = html.slice(-5); // Remove closing </ul> tag
+      }
+      html += "<ul>";
+      html += listItem;
+    }
+  }
+
+  html += "</ul>";
+  return html;
+}
+
+// Example usage
+const headings2 = [
+  { depth: 2, slug: "overview", text: "Overview" },
+  { depth: 2, slug: "parts", text: "Parts" },
+  { depth: 3, slug: "printing-pcbs", text: "Printing PCBs" },
+  { depth: 2, slug: "build-guide", text: "Build guide" },
+  { depth: 3, slug: "pcb-assembly", text: "PCB assembly" },
+  {
+    depth: 3,
+    slug: "setting-up-the-firmware",
+    text: "Setting up the firmware",
+  },
+  {
+    depth: 3,
+    slug: "installing-stabilisers",
+    text: "Installing stabilisers",
+  },
+  {
+    depth: 3,
+    slug: "mounting-the-plate-and-soldering-switches",
+    text: "Mounting the plate and soldering switches",
+  },
+  { depth: 3, slug: "final-touches", text: "Final touches" },
+];
+
+const tableOfContents = generateTableOfContents(headings2);
+console.log(tableOfContents);
 ---
 
 <Layout
@@ -30,13 +86,13 @@ const { Content, headings } = await post.render();
           {post.data.pubDate.toLocaleDateString("en-AU")}
         </p>
         {
-          headings.length > 0 && (
+          toc.length > 0 && (
             <details open class="group hidden desktop:block">
               <summary class="inline-block cursor-pointer after:inline-block after:pl-1 after:align-text-bottom after:font-['-apple-system'] after:transition-transform after:content-['►'] group-open:after:rotate-90">
                 <h3 class="inline cursor-pointer">Contents</h3>
               </summary>
               <ul>
-                {headings.map((heading: MarkdownHeading) => (
+                {toc.map((heading: MarkdownHeading) => (
                   <li>
                     <a href={`#${heading.slug}`}>{heading.text}</a>
                   </li>
