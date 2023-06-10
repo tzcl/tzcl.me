@@ -20,10 +20,6 @@
     counter-reset: sidenote-counter;
   }
 
-  article {
-    @apply mx-auto max-w-prose px-8;
-  }
-
   h1,
   h2,
   h3,
@@ -110,7 +106,8 @@ input.margin-toggle {
 }
 
 .sidenote {
-  @apply relative float-right clear-both -mr-[25vw] mt-[0.3rem] w-[22.5vw] text-sm;
+  /* @apply relative float-right clear-both mr-0 mt-[0.3rem] text-sm; */
+  @apply relative right-0 float-right clear-both -mr-[20vw] mt-[0.25rem] w-[20vw] pl-8 text-sm;
 }
 
 .sidenote > a {
