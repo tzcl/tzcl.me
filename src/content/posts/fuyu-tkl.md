@@ -103,7 +103,7 @@ The last step is putting your case together!
 
 ![assembling keyboard case](https://i.imgur.com/iA8cNqH.jpg)
 
-Since ethis will depend on the case you have, I don't have any specific tips. I went with the TKRielle case which was the first time I've encountered a gasket-mounted POM plate. It took me a minute to figure out how to mount the PCB but I got there in the end and was pretty happy with the result.
+Since this will depend on the case you have, I don't have any specific tips. I went with the TKRielle case which was the first time I've encountered a gasket-mounted POM plate. It took me a minute to figure out how to mount the PCB but I got there in the end and was pretty happy with the result.
 
 ![fully assembled keyboard](https://i.imgur.com/qkjJz79.jpg)
 
