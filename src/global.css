@@ -57,7 +57,7 @@
 
   ul,
   ol {
-    @apply ps-[5%];
+    @apply ps-6;
   }
 
   ul {
@@ -110,7 +110,7 @@ input.margin-toggle {
 }
 
 .sidenote {
-  @apply relative float-right clear-both -mr-[22.5vw] mt-[0.3rem] w-[20vw] text-sm;
+  @apply relative float-right clear-both -mr-[25vw] mt-[0.3rem] w-[22.5vw] text-sm;
 }
 
 .sidenote > a {
@@ -136,10 +136,6 @@ input.margin-toggle {
     @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
     @apply text-center font-lora text-title font-bold leading-relaxed;
     @apply mb-8 mt-12;
-  }
-
-  .sidebar {
-    @apply fixed left-8 w-[20vw];
   }
 
   p.subtitle {

@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 import remarkSectionize from "remark-sectionize";
-import remarkSidenotes from "@tufte-markdown/remark-sidenotes";
+import remarkSidenotes from "remark-sidenotes";
 
 // https://astro.build/config
 export default defineConfig({

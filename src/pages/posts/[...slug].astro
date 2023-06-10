@@ -19,15 +19,17 @@ const { Content, headings } = await post.render();
 
 <Layout title={post.title}>
   <article class="py-20">
-    <section class="desktop:sidebar desktop:top-0">
+    <section class="desktop:fixed desktop:left-8 desktop:w-[20vw]">
       <h1>{post.data.title}</h1>
       <p>
         {post.data.pubDate.toLocaleDateString("en-AU")}
       </p>
       {
         headings.length > 0 && (
-          <div class="hidden desktop:block">
-            <h3>Contents</h3>
+          <details open class="group hidden desktop:block">
+            <summary class="inline-block cursor-pointer after:inline-block after:pl-1 after:align-text-bottom after:transition-transform after:content-['►'] group-open:after:rotate-90">
+              <h3 class="inline cursor-pointer">Contents</h3>
+            </summary>
             <ul>
               {headings.map((heading: MarkdownHeading) => (
                 <li>
@@ -35,12 +37,15 @@ const { Content, headings } = await post.render();
                 </li>
               ))}
             </ul>
-          </div>
+          </details>
         )
       }
+      <section class="my-4">
+        <a href="/">← Home</a>
+      </section>
     </section>
     <Content />
-    <section class="desktop:sidebar desktop:bottom-24">
+    <section class="desktop:hidden">
       <a href="/">← Home</a>
     </section>
   </article>
