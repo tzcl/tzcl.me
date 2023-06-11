@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+
+// Sort in reverse chronological order
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Layout title="Toby Law">
+  <h1 class="title mb-8">Toby Law</h1>
+  <article class="mx-auto max-w-prose">
+    <p>
+      Hi! I am a software developer based in Melbourne. I graduated from the
+      University of Melbourne and now work at ANZ. I am interested in fintech,
+      tools for thought, and programming language design.
+    </p>
+    <p>
+      Recently, I've been studying <a href="#">data structures and algorithms</a
+      > and
+      <a href="https://github.com/tzcl/keyboards">building keebs</a>.
+    </p>
+    <section class="flex justify-center gap-8">
+      <a href="https://twitter.com/tobylaw_">Twitter</a>
+      <a href="https://github.com/tzcl">GitHub</a>
+      <a href="https://linkedin.com/in/tobylaw">LinkedIn</a>
+    </section>
+    <section class="mb-20">
+      <h2>Posts</h2>
+      <ul class="list-none pl-0">
+        {
+          posts.map((post) => (
+            <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
+              <a class="flex-[3]" href={`/posts/${post.slug}`}>
+                {post.data.title}
+              </a>
+              <time
+                class="flex-1 text-right"
+                datetime={post.data.pubDate.toISOString()}
+              >
+                {post.data.pubDate.toLocaleDateString("en-AU")}
+              </time>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</Layout>

@@ -1,0 +1,99 @@
+---
+import { getCollection, CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import type { MarkdownHeading } from "astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+let { Content, headings } = await post.render();
+
+headings = headings.filter((heading: MarkdownHeading) => {
+  return heading.depth == 2;
+});
+
+interface Heading {
+  slug: string;
+  text: string;
+  children: Heading[];
+}
+
+const nestedHeadings: Heading[] = [
+  { slug: headings[0].slug, text: headings[0].text, children: [] },
+];
+const history: Heading[][] = [];
+let level: Heading[] = nestedHeadings;
+
+for (let i = 1; i < headings.length; i++) {
+  const prev = headings[i - 1];
+  const curr = headings[i];
+
+  if (curr.depth > prev.depth) {
+    history.push(level);
+    level = level[level.length - 1].children;
+  } else if (curr.depth < prev.depth) {
+    level = history.pop()!;
+  }
+
+  level.push({ slug: curr.slug, text: curr.text, children: [] });
+}
+---
+
+<Layout
+  title={post.title}
+  class="flex justify-center py-20 mobile:mx-auto mobile:max-w-prose mobile:flex-col mobile:px-8"
+>
+  <div class="basis-[21.5%] desktop:max-w-sm">
+    <aside class="sticky top-8 desktop:px-8">
+      <section>
+        <h1>{post.data.title}</h1>
+        <p>
+          {post.data.pubDate.toLocaleDateString("en-AU")}
+        </p>
+        {
+          nestedHeadings.length > 0 && (
+            <details class="group hidden desktop:block">
+              <summary class="inline-block cursor-pointer after:inline-block after:pl-1 after:align-text-bottom after:font-['-apple-system'] after:transition-transform after:content-['►'] group-open:after:rotate-90">
+                <h3 class="inline cursor-pointer">Contents</h3>
+              </summary>
+              <ul>
+                {nestedHeadings.map((heading: Heading) => (
+                  <li>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                    {heading.children.length > 0 && (
+                      <ul>
+                        {heading.children.map((child: Heading) => (
+                          <li>
+                            <a href={`#${child.slug}`}>{child.text}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )
+        }
+        <section class="my-4 hidden desktop:block">
+          <a href="/">← Home</a>
+        </section>
+      </section>
+    </aside>
+  </div>
+  <div class="max-w-prose basis-[57%]">
+    <article class="">
+      <Content />
+      <section class="desktop:hidden">
+        <a href="/">← Home</a>
+      </section>
+    </article>
+  </div>
+  <div class="max-w-sm basis-[21.5%]"></div>
+</Layout>
