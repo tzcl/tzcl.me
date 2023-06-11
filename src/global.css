@@ -11,10 +11,6 @@
 }
 
 @layer base {
-  html {
-    font-size: 20px;
-  }
-
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
     counter-reset: sidenote-counter;

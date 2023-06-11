@@ -8,7 +8,7 @@ const posts = await getCollection("posts");
 posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
-<Layout title="Toby Law">
+<Layout title="Toby Law" class="mobile:px-8">
   <h1 class="title mb-8">Toby Law</h1>
   <article class="mx-auto max-w-prose">
     <p>
@@ -31,12 +31,12 @@ posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
       <ul class="list-none pl-0">
         {
           posts.map((post) => (
-            <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
+            <li class="mb-4 flex flex-col sm:flex-row">
               <a class="flex-[3]" href={`/posts/${post.slug}`}>
                 {post.data.title}
               </a>
               <time
-                class="flex-1 text-right"
+                class="flex-1 text-sm"
                 datetime={post.data.pubDate.toISOString()}
               >
                 {post.data.pubDate.toLocaleDateString("en-AU")}

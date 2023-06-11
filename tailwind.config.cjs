@@ -21,8 +21,8 @@ module.exports = {
         title: "clamp(4em, 15vw + 1rem, 12em)",
       },
       screens: {
-        mobile: { raw: "(max-width: 1399px)" },
-        desktop: "1400px",
+        mobile: { raw: "(max-width: 1119px)" },
+        desktop: "1120px",
       },
     },
   },
