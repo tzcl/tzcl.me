@@ -17,8 +17,6 @@ I highly recommend checking out the [Fuyu GitHub](https://github.com/zykrah/fuyu
 ## Parts
 
 - 1 x [Fuyu PCB](https://github.com/zykrah/fuyu): see below on [printing PCBs](#printing-pcbs)
-  - This is a nested list :o
-  - What does it look like?
 - 87 x MX switches
 - 87 x keycaps (including a 6.25U spacebar!)
 - 4 x 2U, 1 x 6.25U stabs

@@ -77,8 +77,11 @@
     @apply border;
   }
 
-  code {
-    @apply text-sm;
+  code,
+  kbd,
+  samp,
+  pre {
+    @apply px-2 py-4 text-sm;
   }
 }
 

@@ -14,9 +14,9 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 let { Content, headings } = await post.render();
 
-// headings = headings.filter((heading: MarkdownHeading) => {
-//   return heading.depth == 2;
-// });
+headings = headings.filter((heading: MarkdownHeading) => {
+  return heading.depth == 2;
+});
 
 interface Heading {
   slug: string;
