@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "remark-sectionize": "^2.0.0",
     "remark-sidenotes": "github:tzcl/remark-sidenotes"
   }
 }

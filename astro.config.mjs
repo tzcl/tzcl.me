@@ -3,14 +3,13 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
-import remarkSectionize from "remark-sectionize";
 import remarkSidenotes from "remark-sidenotes";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://tzcl.me",
   markdown: {
-    remarkPlugins: [remarkSectionize, remarkSidenotes],
+    remarkPlugins: [remarkSidenotes],
   },
   integrations: [
     mdx(),

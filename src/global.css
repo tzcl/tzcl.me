@@ -133,14 +133,6 @@ input.margin-toggle {
   .margin-toggle:not(:checked) + .sidenote {
     @apply relative my-4 mr-0 block w-full px-8 text-sm;
   }
-
-  /* Collapse the margins of sidenotes next to each other */
-  .margin-toggle:not(:checked)
-    + .sidenote
-    ~ .margin-toggle:not(:checked)
-    + .sidenote {
-    @apply mt-0;
-  }
 }
 
 .astro-code {

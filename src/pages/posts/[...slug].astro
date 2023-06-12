@@ -39,6 +39,8 @@ for (let i = 1; i < headings.length; i++) {
 
   level.push({ slug: curr.slug, text: curr.text, children: [] });
 }
+
+nestedHeadings.length = 0;
 ---
 
 <Layout
@@ -46,7 +48,7 @@ for (let i = 1; i < headings.length; i++) {
   class="flex justify-center py-20 mobile:mx-auto mobile:max-w-prose mobile:flex-col mobile:px-8"
 >
   <div class="basis-[21.5%] desktop:max-w-sm">
-    <aside class="desktop:sticky desktop:top-8 desktop:px-8">
+    <aside class="desktop:sticky desktop:top-8 desktop:px-4">
       <section>
         <h1>{post.data.title}</h1>
         <p>
@@ -55,7 +57,7 @@ for (let i = 1; i < headings.length; i++) {
         {
           nestedHeadings.length > 0 && (
             <>
-              <h3 class="inline cursor-pointer">Contents</h3>
+              <h3>Contents</h3>
               <ul>
                 {nestedHeadings.map((heading: Heading) => (
                   <li>
