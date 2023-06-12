@@ -95,7 +95,7 @@ nestedHeadings.length = 0;
 </Layout>
 
 <script lang="ts">
-sidenotes = document.getElementsByClassName("sidenote");
+const sidenotes = document.getElementsByClassName("sidenote");
 
 function touching(rect1, rect2) {
   return (
@@ -119,6 +119,11 @@ function collapse() {
       }
     }
   }
+}
+
+for (let i = 1; i < sidenotes.length + 1; i++) {
+  const toggle = document.getElementById(`sidenote-${i}`);
+  toggle.addEventListener("change", collapse);
 }
 
 collapse();
