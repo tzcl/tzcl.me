@@ -93,3 +93,35 @@ nestedHeadings.length = 0;
   </div>
   <div class="max-w-sm basis-[21.5%]"></div>
 </Layout>
+
+<script lang="ts">
+sidenotes = document.getElementsByClassName("sidenote");
+
+function touching(rect1, rect2) {
+  return (
+    rect1.top <= rect2.bottom &&
+    rect1.bottom + 32 >= rect2.top &&
+    rect1.left <= rect2.right &&
+    rect1.right >= rect2.left
+  );
+}
+
+// Manually collapse margins, need to call this on resize
+function collapse() {
+  for (let i = 0; i < sidenotes.length - 1; i++) {
+    for (let j = i + 1; j < sidenotes.length; j++) {
+      const a = sidenotes[i].getBoundingClientRect();
+      const b = sidenotes[j].getBoundingClientRect();
+      if (touching(a, b)) {
+        sidenotes[j].classList.add("!mt-0");
+      } else {
+        sidenotes[j].classList.remove("!mt-0");
+      }
+    }
+  }
+}
+
+collapse();
+
+window.onresize = collapse;
+</script>
