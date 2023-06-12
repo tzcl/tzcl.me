@@ -18,7 +18,7 @@ module.exports = {
         georgia: ["Georgia", ...defaultTheme.fontFamily.serif],
       },
       fontSize: {
-        title: "clamp(4em, 15vw + 1rem, 12em)",
+        title: "clamp(3.5em, 12vw + 1rem, 12em)",
       },
       screens: {
         mobile: { raw: "(max-width: 1119px)" },

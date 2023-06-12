@@ -10,7 +10,7 @@ pubDate: 2023-03-01
 
 ## Overview
 
-The Fuyu is a comfy TKL PCB that support multiple layouts and is compatible with a number of cases. You can pair it with something fancy, like the Geonworks F1-8K, or something a little easier on the wallet, like CustomKBD’s TKRielle. It has cool features like support for multiple layouts, hella LEDs (including a programmable snowflake arrangement), firmware for visual keymap editors like VIAL and VIA, and uses a RP2040 MCU.
+The Fuyu is a comfy TKL PCB that supports multiple layouts and is compatible with a number of cases. You can pair it with something fancy, like the Geonworks F1-8K, or something a little easier on the wallet, like CustomKBD’s TKRielle. It has cool features like support for multiple layouts, hella LEDs (including a programmable snowflake arrangement), firmware for visual keymap editors like VIAL and VIA, and uses a RP2040 MCU.
 
 I highly recommend checking out the [Fuyu GitHub](https://github.com/zykrah/fuyu) repo for more info.
 

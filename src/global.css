@@ -77,7 +77,7 @@
   kbd,
   samp,
   pre {
-    @apply px-2 py-4 text-sm;
+    @apply text-sm;
   }
 }
 
@@ -100,24 +100,28 @@ input.margin-toggle {
 }
 
 .sidenote-number:after {
-  @apply -top-2 left-[0.1rem] text-sm;
+  @apply -top-2 text-sm;
   content: counter(sidenote-counter);
 }
 
 .sidenote:before {
-  @apply -top-2 text-sm;
+  @apply absolute -top-2 left-5 text-sm;
   content: counter(sidenote-counter) " ";
 }
 
 .sidenote {
-  @apply relative right-0 float-right clear-both -mr-[20vw] mt-[0.25rem] w-[20vw] pl-8 text-sm;
+  @apply relative right-0 float-right clear-both -mr-[20vw] mb-4 w-[20vw] pl-8 text-sm;
 }
 
 .sidenote > a {
   @apply text-sm;
 }
 
-@media (max-width: 1399px) {
+.sidenote > code {
+  @apply text-[0.875em] leading-[1.25em];
+}
+
+@media (max-width: 1119px) {
   .sidenote-number:after {
     @apply cursor-pointer underline;
   }
@@ -127,8 +131,20 @@ input.margin-toggle {
   }
 
   .margin-toggle:not(:checked) + .sidenote {
-    @apply relative left-4 float-right clear-both my-4 mr-0 inline-block w-full text-sm;
+    @apply relative my-4 mr-0 block w-full px-8 text-sm;
   }
+
+  /* Collapse the margins of sidenotes next to each other */
+  .margin-toggle:not(:checked)
+    + .sidenote
+    ~ .margin-toggle:not(:checked)
+    + .sidenote {
+    @apply mt-0;
+  }
+}
+
+.astro-code {
+  @apply rounded-md p-4;
 }
 
 @layer components {
