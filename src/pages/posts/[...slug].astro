@@ -54,10 +54,8 @@ for (let i = 1; i < headings.length; i++) {
         </p>
         {
           nestedHeadings.length > 0 && (
-            <details class="group hidden desktop:block">
-              <summary class="inline-block cursor-pointer after:inline-block after:pl-1 after:align-text-bottom after:font-['-apple-system'] after:transition-transform after:content-['►'] group-open:after:rotate-90">
-                <h3 class="inline cursor-pointer">Contents</h3>
-              </summary>
+            <>
+              <h3 class="inline cursor-pointer">Contents</h3>
               <ul>
                 {nestedHeadings.map((heading: Heading) => (
                   <li>
@@ -74,7 +72,7 @@ for (let i = 1; i < headings.length; i++) {
                   </li>
                 ))}
               </ul>
-            </details>
+            </>
           )
         }
         <section class="my-4 hidden desktop:block">
