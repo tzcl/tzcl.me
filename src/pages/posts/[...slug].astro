@@ -1,7 +1,6 @@
 ---
 import { getCollection, CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import type { MarkdownHeading } from "astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -40,7 +39,8 @@ for (let i = 1; i < headings.length; i++) {
   level.push({ slug: curr.slug, text: curr.text, children: [] });
 }
 
-nestedHeadings.length = 0;
+// Disables contents
+// nestedHeadings.length = 0;
 ---
 
 <Layout
