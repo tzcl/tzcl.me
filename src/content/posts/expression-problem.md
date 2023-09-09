@@ -6,23 +6,26 @@ pubDate: 2023-08-09
 
 ## What is the Expression Problem?
 
-The expression problem is a classic problem in computer science.
-It was originally posed by Philip Wadler in a post on the [Java Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt).
+The expression problem is a classic problem in computer science. I can't remember where I first came across it, but it's become a part of programming lore.
+The origins of the problem date back to a post by Philip Wadler on the [Java Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
 
-<pre>
+<blockquote>
 The Expression Problem is a new name for an old problem.  The goal is
 to define a datatype by cases, where one can add new cases to the
 datatype and new functions over the datatype, without recompiling
 existing code, and while retaining static type safety (e.g., no
 casts).
-</pre>
+<cite>helo world xd</cite>
+</blockquote>
+
+> **This should be a quote!**
 
 Fundamentally, it is a question of how expressive languages are when it comes to creating user-defined types.
 OOP languages make it easy for users to create new types but defining new operations is hard.
 Conversely, functional languages make it easy to define operations but hard to define new types.
-The goal is to design a solution that allows extensibility in both dimensions.
+The goal is to express a design that allows extensibility in both dimensions.
 
-## Defining the problem
+### Defining the problem
 
 In Oliveira and Cook's paper, [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf), they state five requirements that a solution must satisfy:
 
@@ -36,7 +39,7 @@ In Oliveira and Cook's paper, [Extensibility for the Masses](https://www.cs.utex
 
 The fifth constraint is an extra requirement that wasn't a part of Wadler's initial formulation of the problem. However, a solution that doesn't allow independent modules to compose wouldn't be very useful in practice, what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
 
-## Solutions to the problem
+### Solutions to the problem
 
 As of today, there are a whole bunch of ways to solve the Expression Problem.
 [Wikipedia](https://en.wikipedia.org/wiki/Expression_problem) suggests you try one of
@@ -61,13 +64,15 @@ I don't know much about functional programming, so I can't comment much on the o
 
 [^4]: See https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/
 
-Finally, the most 'realistic' solution may be object algebras, as explored in the paper mentioned earlier, [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf). I say that because this approach doesn't require any crazy language extensions or complex type machinery, it is relatively simple to implement in most mainstream languages. From what I understand, object algebras are like the abstract factory pattern where you build a tree of constructors and then inject concrete implementations later. There's some deep connection here to some of the other solutions, with object algebras being the OOP version of tagless-final encodings.
+Finally, the most 'realistic' solution may be object algebras, as explored in the paper mentioned earlier, [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf). I say that because this approach doesn't require any crazy language extensions or complex type machinery, it is relatively simple to implement in most mainstream languages. From what I understand, object algebras are like the abstract factory pattern where you build a tree of constructors and then inject concrete implementations later. There's some deep connection here to some of the other solutions, with object algebras being the OOP version of tagless-final encoding.
 
-## A solution with interfaces
+## A solution with Go interfaces
 
-Finally, let's get to some code. The classic example is building a basic expression language that has two types, constants and addition, and can be evaluated. From there, we'll extend it by adding another operation, printing expressions, and another type, multiplication.
+Finally, let's get to some code. The classic example is building a basic expression language that has two types, constants and addition, and supports evaluation. From there, we'll extend it by adding another operation, printing expressions, and another type, multiplication.
 
-To model types, a natural approach in Go is something like
+To model types, a natural approach in Go[^5] is something like
+
+[^5]: This example is inspired by Eli Bendersky's article on [The Expression Problem in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/)
 
 ```go
 type Expr interface{}
@@ -82,12 +87,12 @@ type BinaryPlus struct {
 }
 ```
 
-We want to be able to evaluate expressions, so let's add an interface and implement it for our types[^5].
+We want to be able to evaluate expressions, so let's add an interface and implement it for our types.
 
-[^5]: You can find the full code [here](https://gist.github.com/tzcl/def0c829bb00ef7dff74116c1d7e5d8b)
+[^6]: You can find the full code [here](https://gist.github.com/tzcl/def0c829bb00ef7dff74116c1d7e5d8b)
 
 ```go
-type Eval interface {
+type Evaluator interface {
 	Eval() float64
 }
 
@@ -96,7 +101,7 @@ func (c *Constant) Eval() float64 {
 }
 
 func (bp *BinaryPlus) Eval() float64 {
-	return bp.left.(Eval).Eval() + bp.right.(Eval).Eval()
+	return bp.left.(Evaluator).Eval() + bp.right.(Evaluator).Eval()
 }
 ```
 
@@ -121,17 +126,17 @@ func (bp *BinaryPlus) Print() string {
 Note, if this was defined in a separate package, there is slightly more we have to do since Go doesn't allow adding methods to types from another package.
 
 ```go
-// package printer
+package printer
 
 // Assume Expr/Eval are defined in a package called base
-// import base
+import base
 
 type Printer interface {
     Print() string
 }
 
 type Constant struct {
-    base.Constant // Implements Eval() for us
+    base.Constant // Reuse implementation of Eval()
 }
 
 func (c *Constant) Print() string {
@@ -160,7 +165,7 @@ type BinaryMul struct {
 }
 
 func (bm *BinaryMul) Eval() float64 {
-	return bm.left.(Eval).Eval() * bm.right.(Eval).Eval()
+	return bm.left.(Evaluator).Eval() * bm.right.(Evaluator).Eval()
 }
 
 func (bm *BinaryMul) Print() string {
@@ -170,7 +175,7 @@ func (bm *BinaryMul) Print() string {
 }
 ```
 
-Noice. We've managed to build our expression language and it was all pretty straightforward. Let's make an expression and run it.
+Noice. We've managed to build our expression language and it was all pretty straightforward! Let's make an expression and run it.
 
 ```go
 func CreateNewExpr() Expr {
@@ -183,18 +188,179 @@ func CreateNewExpr() Expr {
 
 func main() {
 	expr := CreateNewExpr()
-	fmt.Println(expr.(Eval).Eval()) // 10.89
+	fmt.Println(expr.(Evaluator).Eval()) // 10.89
 	fmt.Println(expr.(Printer).Print()) // ((1.1 + 2.2) * 3.3)
 }
 ```
 
-Job done, right? Well, not quite. We've almost got a full solution except for the casting from `Expr` to `Eval` and `Printer`. This, unfortunately, means that we run into type errors at runtime, not compile time.
+It works! Job done, right? Well, not quite. We've almost got a full solution except for the casting from `Expr` to `Eval` and `Printer`. This means that we can't catch type errors until runtime.
 
 ```go
+// Compiles fine
 expr := &BinaryPlus{left: "abc", right: &Constant{value: 1.23}}
-fmt.Println(expr.(Eval).Eval()) // Uh oh, panic
+fmt.Println(expr.(Evaluator).Eval()) // Uh oh, panic
 ```
 
 The question is, is there a way for us to get static type safety? 🤔
 
 ## Object algebras in Go
+
+As mentioned previously, object algebras are a solution to the expression problem described by Oliveira and Cook in [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf). In my opinion, the paper is actually pretty readable and the authors do a good job motivating and explaining the relevant ideas as they build up to solving the expression problem (and extensions of the problem).
+
+Other great resources on object algebras are:
+
+- [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by one of the authors (and clarifies a typo in the paper).
+- Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all click into place for me.
+
+To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition.
+
+```go
+type ExprAlg[Op any] interface {
+	Constant(value float64) Op
+	BinaryPlus(lhs, rhs Op) Op
+}
+```
+
+Like before, we can define an operation over these expressions using an interface.
+
+```go
+type Evaluator interface {
+	Eval() float64
+}
+```
+
+However, unlike before, instead of adding methods to structs, we need to create a concrete factory that implements the `ExprAlg` interface.
+Because we have a single-method interface, a neat trick we can use is implementing the `Eval` interface on a function. `EvalFunc` works like an adapter and lets us make a closure satisfy `Eval`.
+
+```go
+type EvalFunc func() float64
+
+// EvalFunc implements Evaluator
+func (fn EvalFunc) Eval() float64 {
+	return fn()
+}
+
+// EvalExpr implements ExprAlg[Evaluator]
+type EvalExpr struct{}
+
+func (EvalExpr) Constant(value float64) Evaluator {
+	return EvalFunc(func() float64 {
+		return value
+	})
+}
+
+func (EvalExpr) BinaryPlus(lhs, rhs Evaluator) Evaluator {
+	return EvalFunc(func() float64 {
+		return lhs.Eval() + rhs.Eval()
+	})
+}
+```
+
+Checking that this works, we can define expressions using the object algebra and inject the concrete factories in later.
+
+```go
+func NewExpr[A any](alg ExprAlg[A]) A {
+	return alg.Add(alg.Constant(1.1), alg.Constant(2.2))
+}
+
+func main() {
+	// expr is inferred to be ExprAlg[Evaluator]
+	expr := NewExpr(EvalExpr{})
+	fmt.Println(expr.Eval()) // 3.3
+}
+```
+
+Now, adding another operation is easy, we just need to define another interface and create another concrete implementation of `ExprAlg`.
+
+```go
+type Printer interface {
+	Print() string
+}
+
+// PrintFunc implements Printer
+type PrintFunc func() string
+
+func (fn PrintFunc) Print() string {
+	return fn()
+}
+
+// PrintExpr implements ExprAlg[Printer]
+type PrintExpr struct{}
+
+func (PrintExpr) Constant(value float64) Printer {
+	return PrintFunc(func() string {
+		return strconv.FormatFloat(value, 'f', -1, 64)
+	})
+}
+
+func (PrintExpr) BinaryPlus(lhs, rhs Printer) Printer {
+	return PrintFunc(func() string {
+		return fmt.Sprintf("(%s + %s)", lhs.Print(), rhs.Print())
+	})
+}
+
+func main() {
+	expr := NewExpr(PrintExpr{})
+	fmt.Println(expr.Print()) // (1.1 + 2.2)
+}
+```
+
+Adding another expression is slightly more complex but still allows us to reuse all existing code. It's a good example of the power of embedding. To add multiplication expressions, we need to extend `ExprAlg` and add a new constructor method. Then, we need to make more concrete factories.
+
+```go
+type ExprMulAlg[A any] interface {
+	ExprAlg[A]
+	Mul(lhs, rhs A) A
+}
+
+type EvalMulExpr struct {
+	EvalExpr
+}
+
+func (EvalMulExpr) Mul(lhs, rhs Evaluator) Evaluator {
+	return EvalFunc(func() float64 {
+		return lhs.Eval() * rhs.Eval()
+	})
+}
+
+type PrintMulExpr struct {
+	PrintExpr
+}
+
+func (PrintMulExpr) Mul(lhs, rhs Printer) Printer {
+	return PrinterFunc(func() Print {
+		return fmt.Sprintf("(%s * %s)", lhs.Print(), rhs.Print())
+	})
+}
+```
+
+Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^6].
+
+[^6]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
+
+```go
+func NewMulExpr[A any](alg ExprMulAlg[A]) A {
+	// We can use NewExpr because ExprMulAlg[A] implements ExprAlg[A]!
+	return alg.Mul(NewExpr(alg), alg.Lit(3.3))
+}
+
+func main() {
+	// Note, these have different types
+	evalExpr := NewMulExpr(EvalMulExpr{})
+	printExpr := NewMulExpr(PrintMulExpr{})
+
+	fmt.Println(evalExpr.Eval()) // 10.89
+	fmt.Println(printExpr.Print()) // ((1.1 + 2.2) * 3.3)
+}
+```
+
+Finally, if we try to create an invalid expression, the Go type checker will catch it for us! 🎉
+
+```go
+func NewMulExpr[A any](alg ExprMulAlg[A]) A {
+	return alg.Mul("abc", alg.Lit(3.3))
+	// cannot use "abc" (untyped string constant) as A value in argument to arg.Mul
+}
+```
+
+## Is it worth it?
