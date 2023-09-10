@@ -9,16 +9,13 @@ pubDate: 2023-08-09
 The expression problem is a classic problem in computer science. I can't remember where I first came across it, but it's become a part of programming lore.
 The origins of the problem date back to a post by Philip Wadler on the [Java Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
 
-<blockquote>
+<pre>
 The Expression Problem is a new name for an old problem.  The goal is
 to define a datatype by cases, where one can add new cases to the
 datatype and new functions over the datatype, without recompiling
 existing code, and while retaining static type safety (e.g., no
 casts).
-<cite>helo world xd</cite>
-</blockquote>
-
-> **This should be a quote!**
+</pre>
 
 Fundamentally, it is a question of how expressive languages are when it comes to creating user-defined types.
 OOP languages make it easy for users to create new types but defining new operations is hard.
@@ -364,3 +361,27 @@ func NewMulExpr[A any](alg ExprMulAlg[A]) A {
 ```
 
 ## Is it worth it?
+
+In [The one ring problem: abstraction and our quest for power](https://www.tedinski.com/2018/01/30/the-one-ring-problem-abstraction-and-power.html), Ted Kaminski talks about the mistake of always seeking out more power.
+
+<pre>
+While looking over [academic papers on programming languages], I realized
+there was an unfortunate common theme:
+
+Quite a lot of papers would come up with something they wanted to do, 
+show that existing designs were incapable of doing it, then design 
+some more powerful system where they could.
+
+I believe this thought process is a common failing among programmers.
+</pre>
+
+Abstractions cut both ways. There are always trade-offs when choosing one abstraction over another.
+
+<pre>
+You cannot make an abstraction more powerful without sacrificing some 
+properties that you used to know about it. Necessarily. 
+You cannot require a new property be true about an abstraction without
+sacrificing some of its power and flexibility. Always.
+</pre>
+
+Do we need to solve the expression problem? Is the extra complexity worth the type safety? In most cases, I'd argue not – we should prefer to use the least powerful option as our disposal as writing code is more about managing complexity than anything else. However, in the cases where it is required, it's handy to know a solution exists.
