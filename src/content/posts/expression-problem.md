@@ -6,8 +6,7 @@ pubDate: 2023-08-09
 
 ## What is the Expression Problem?
 
-The expression problem is a classic problem in computer science. I can't remember where I first came across it, but it's become a part of programming lore.
-The origins of the problem date back to a post by Philip Wadler on the [Java Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
+The expression problem is a classic problem in computer science. It dates back to a post by Philip Wadler on the [Java-Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
 
 <pre>
 The Expression Problem is a new name for an old problem.  The goal is
@@ -24,7 +23,7 @@ The goal is to express a design that allows extensibility in both dimensions.
 
 ### Defining the problem
 
-In Oliveira and Cook's paper, [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf), they state five requirements that a solution must satisfy:
+In [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf), Oliveira and Cook state five requirements that a solution must satisfy:
 
 1. **Extensibility in both dimensions**: A solution must allow the addition of new data variants and new operations and support extending existing operations.
 2. **Strong static type safety**: A solution must prevent applying an operation to a data variant which it cannot handle using static checks.
@@ -32,9 +31,9 @@ In Oliveira and Cook's paper, [Extensibility for the Masses](https://www.cs.utex
 4. **Separate compilation and type-checking**: Safety checks or compilation steps must not be deferred until link or runtime.
 5. **Independent extensibility**: It should be possible to combine independently developed extensions so that they can be used jointly.[^1]
 
-[^1]: See [Independently Extensible Solutions to the Expression Problem](https://homepages.inf.ed.ac.uk/wadler/fool/program/final/10/10_Paper.pdf)
+[^1]: This was first specified in [Independently Extensible Solutions to the Expression Problem](https://homepages.inf.ed.ac.uk/wadler/fool/program/final/10/10_Paper.pdf).
 
-The fifth constraint is an extra requirement that wasn't a part of Wadler's initial formulation of the problem. However, a solution that doesn't allow independent modules to compose wouldn't be very useful in practice, what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
+The fifth constraint wasn't a part of Wadler's initial version of the problem. However, a solution that doesn't allow independent modules to compose almost defeats the point of the exercise – what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
 
 ### Solutions to the problem
 
@@ -48,28 +47,29 @@ As of today, there are a whole bunch of ways to solve the Expression Problem.
 - Tagless-final / object algebras
 - Polymorphic variants
 
-Perhaps the simplest solution is monkey patching. In dynamic languages like Ruby, Python and JavaScript, you can override methods of an externally-defined object, so new code can reach in and shake up existing code. The problem with this is that it breaks modularity as the behaviour of your program can subtly change each time you import a module[^2].
+Perhaps the simplest solution is monkey patching. In dynamic languages like Ruby, Python and JavaScript, you can override methods of an externally-defined object, so new code just yeets any existing code. The problem with this is that it breaks modularity, as now the behaviour of your program can subtly change each time you import a module[^2].
 
-[^2]: Instead of being able to reason about your program locally, you have to consider the program as a whole to make sure it makes sense.
+[^2]: Instead of being able to reason about your program locally, you have to consider the program as a whole to validate it.
 
 In languages like Julia and Clojure, you can use multimethods to gain the flexibility required to solve the problem.
-However, the magic sauce is open methods, not multiple dispatch[^3]. A key part of the problem is to retroactively implement interfaces.
+[However, the magic sauce is open methods, not multiple dispatch](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions#is-multiple-dispatch-necessary-to-cleanly-solve-the-expression-problem). A key part of any solution is retroactively implementing interfaces.
 
-[^3]: See https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions#is-multiple-dispatch-necessary-to-cleanly-solve-the-expression-problem
+I don't know much about functional programming, so I can't comment much on the other approaches. From what I've read though, it doesn't seem like type classes are a valid solution, [the problem being that type classes are not actually types](https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/)[^3].
 
-I don't know much about functional programming, so I can't comment much on the other approaches. From what I've read though, it doesn't seem like type classes are a valid solution, the problem being that type classes are not actually types[^4]. There are ways around this using functors which are 🤯.
+[^3]: There are ways around this, using type constructors to unify expression types.
 
-[^4]: See https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/
+Finally, the most 'practical' solution may be object algebras. I say that because this approach doesn't require any wacky language extensions or complex type machinery, it is relatively simple to implement in most mainstream languages. From what I understand, object algebras are like the abstract factory pattern – they work by building a tree of constructors and then injecting concrete implementations later[^4].
 
-Finally, the most 'realistic' solution may be object algebras, as explored in the paper mentioned earlier, [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf). I say that because this approach doesn't require any crazy language extensions or complex type machinery, it is relatively simple to implement in most mainstream languages. From what I understand, object algebras are like the abstract factory pattern where you build a tree of constructors and then inject concrete implementations later. There's some deep connection here to some of the other solutions, with object algebras being the OOP version of tagless-final encoding.
+[^4]: There's some deep connection here to some of the other solutions, with object algebras being the OOP version of tagless-final encoding.
 
 ## A solution with Go interfaces
 
 Finally, let's get to some code. The classic example is building a basic expression language that has two types, constants and addition, and supports evaluation. From there, we'll extend it by adding another operation, printing expressions, and another type, multiplication.
 
-To model types, a natural approach in Go[^5] is something like
+To model types, a natural approach in Go[^5] is something like[^6]
 
-[^5]: This example is inspired by Eli Bendersky's article on [The Expression Problem in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/)
+[^5]: This implementation is heavily inspired by Eli Bendersky's article on [The Expression Problem in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
+[^6]: You can find the full code [here](https://gist.github.com/tzcl/def0c829bb00ef7dff74116c1d7e5d8b).
 
 ```go
 type Expr interface{}
@@ -85,8 +85,6 @@ type BinaryPlus struct {
 ```
 
 We want to be able to evaluate expressions, so let's add an interface and implement it for our types.
-
-[^6]: You can find the full code [here](https://gist.github.com/tzcl/def0c829bb00ef7dff74116c1d7e5d8b)
 
 ```go
 type Evaluator interface {
@@ -141,7 +139,7 @@ func (c *Constant) Print() string {
 }
 
 type BinaryPlus struct {
-    base.BinaryPlus
+    base.BinaryPlus // Reuse implementation of Eval()
 }
 
 func (bp *BinaryPlus) Print() string {
@@ -153,7 +151,7 @@ func (bp *BinaryPlus) Print() string {
 
 To keep things concise, assume the rest of the code is in one package, but remember it's possible to split all of these samples out.
 
-Lastly, let's implement multiplication expressions. This is also pretty easy.
+Lastly, let's implement multiplication expressions.
 
 ```go
 type BinaryMul struct {
@@ -190,10 +188,11 @@ func main() {
 }
 ```
 
-It works! Job done, right? Well, not quite. We've almost got a full solution except for the casting from `Expr` to `Eval` and `Printer`. This means that we can't catch type errors until runtime.
+It works! Job done, right?
+
+Well, not quite. We've almost got a full solution except for the casting from `Expr` to `Evaluator` and `Printer`. This means that we can't catch type errors until runtime.
 
 ```go
-// Compiles fine
 expr := &BinaryPlus{left: "abc", right: &Constant{value: 1.23}}
 fmt.Println(expr.(Evaluator).Eval()) // Uh oh, panic
 ```
@@ -202,12 +201,12 @@ The question is, is there a way for us to get static type safety? 🤔
 
 ## Object algebras in Go
 
-As mentioned previously, object algebras are a solution to the expression problem described by Oliveira and Cook in [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf). In my opinion, the paper is actually pretty readable and the authors do a good job motivating and explaining the relevant ideas as they build up to solving the expression problem (and extensions of the problem).
+As mentioned previously, we can use object algebras to get a full solution to the expression problem. In my opinion, [the paper](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf) is actually pretty readable and the authors do a good job motivating and explaining the relevant ideas as they build up to solving the expression problem (and extensions of the problem).
 
 Other great resources on object algebras are:
 
-- [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by one of the authors (and clarifies a typo in the paper).
-- Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all click into place for me.
+- [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by Oliveira himself (and clarifies a typo in the paper).
+- Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all 'click' for me.
 
 To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition.
 
@@ -227,7 +226,7 @@ type Evaluator interface {
 ```
 
 However, unlike before, instead of adding methods to structs, we need to create a concrete factory that implements the `ExprAlg` interface.
-Because we have a single-method interface, a neat trick we can use is implementing the `Eval` interface on a function. `EvalFunc` works like an adapter and lets us make a closure satisfy `Eval`.
+Because we have a single-method interface, a neat Go trick we can use is implementing the `Eval` interface on a function (like `http.HandlerFunc`). `EvalFunc` works like an adapter and lets us create a closure that satisfies `Eval`.
 
 ```go
 type EvalFunc func() float64
@@ -253,7 +252,7 @@ func (EvalExpr) BinaryPlus(lhs, rhs Evaluator) Evaluator {
 }
 ```
 
-Checking that this works, we can define expressions using the object algebra and inject the concrete factories in later.
+Checking that this works, we can define expressions using the object algebra and inject the concrete factory.
 
 ```go
 func NewExpr[A any](alg ExprAlg[A]) A {
@@ -302,7 +301,7 @@ func main() {
 }
 ```
 
-Adding another expression is slightly more complex but still allows us to reuse all existing code. It's a good example of the power of embedding. To add multiplication expressions, we need to extend `ExprAlg` and add a new constructor method. Then, we need to make more concrete factories.
+Adding another expression is slightly more complex but still allows us to reuse all existing code. It's a good example of the power of embedding. To add multiplication, we need to extend `ExprAlg` and add a new constructor method. Then, we need to make more concrete factories.
 
 ```go
 type ExprMulAlg[A any] interface {
@@ -331,9 +330,9 @@ func (PrintMulExpr) Mul(lhs, rhs Printer) Printer {
 }
 ```
 
-Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^6].
+Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^7].
 
-[^6]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
+[^7]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
 
 ```go
 func NewMulExpr[A any](alg ExprMulAlg[A]) A {
@@ -362,11 +361,11 @@ func NewMulExpr[A any](alg ExprMulAlg[A]) A {
 
 ## Is it worth it?
 
-In [The one ring problem: abstraction and our quest for power](https://www.tedinski.com/2018/01/30/the-one-ring-problem-abstraction-and-power.html), Ted Kaminski talks about the mistake of always seeking out more power.
+In [The one ring problem: abstraction and our quest for power](https://www.tedinski.com/2018/01/30/the-one-ring-problem-abstraction-and-power.html), Ted Kaminski talks about the mistake of biasing towards power.
 
 <pre>
-While looking over [academic papers on programming languages], I realized
-there was an unfortunate common theme:
+While looking over [academic papers on programming languages], I 
+realized there was an unfortunate common theme:
 
 Quite a lot of papers would come up with something they wanted to do, 
 show that existing designs were incapable of doing it, then design 
@@ -384,4 +383,6 @@ You cannot require a new property be true about an abstraction without
 sacrificing some of its power and flexibility. Always.
 </pre>
 
-Do we need to solve the expression problem? Is the extra complexity worth the type safety? In most cases, I'd argue not – we should prefer to use the least powerful option as our disposal as writing code is more about managing complexity than anything else. However, in the cases where it is required, it's handy to know a solution exists.
+Do we need to solve the expression problem? Is the extra complexity worth the type safety?
+
+In most cases, I'd argue not – we should prefer to use the least powerful option at our disposal to minimise complexity. However, in the cases where it is required, it's handy to know a solution exists.
