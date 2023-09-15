@@ -86,12 +86,6 @@
   }
 }
 
-@media not (prefers-color-scheme: dark) {
-  pre.astro-code {
-    filter: invert(1);
-  }
-}
-
 /* -------------------------- */
 /* Sidenotes and margin notes */
 /* -------------------------- */
@@ -143,6 +137,12 @@ input.margin-toggle {
 
   .margin-toggle:not(:checked) + .sidenote {
     @apply relative my-4 mr-0 block w-full px-8 text-sm;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  pre.astro-code {
+    filter: invert() hue-rotate(180deg);
   }
 }
 
