@@ -372,4 +372,4 @@ Abstractions cut both ways. There are always trade-offs when choosing one abstra
 
 Do we need to solve the expression problem? Is the extra complexity worth the type safety?
 
-In most cases, I'd argue not – we should prefer to use the least powerful option at our disposal to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.
+In most cases, I'd argue not – we should prefer to use the least powerful option in order to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.

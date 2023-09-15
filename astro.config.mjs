@@ -10,6 +10,9 @@ export default defineConfig({
   site: "https://tzcl.me",
   markdown: {
     remarkPlugins: [remarkSidenotes],
+    shikiConfig: {
+      // theme: "css-variables",
+    },
   },
   integrations: [
     mdx(),

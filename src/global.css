@@ -86,6 +86,12 @@
   }
 }
 
+@media not (prefers-color-scheme: dark) {
+  pre.astro-code {
+    filter: invert(1);
+  }
+}
+
 /* -------------------------- */
 /* Sidenotes and margin notes */
 /* -------------------------- */
