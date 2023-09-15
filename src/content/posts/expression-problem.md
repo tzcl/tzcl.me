@@ -6,15 +6,11 @@ pubDate: 2023-08-09
 
 ## What is the Expression Problem?
 
-The expression problem is a classic problem in computer science. It dates back to a post by Philip Wadler on the [Java-Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
+The expression problem is a classic problem in computer science.
+It dates back to a post by Philip Wadler on the [Java-Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
 
-<pre>
-The Expression Problem is a new name for an old problem.  The goal is
-to define a datatype by cases, where one can add new cases to the
-datatype and new functions over the datatype, without recompiling
-existing code, and while retaining static type safety (e.g., no
-casts).
-</pre>
+> The Expression Problem is a new name for an old problem.
+> The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).
 
 Fundamentally, it is a question of how expressive languages are when it comes to creating user-defined types.
 OOP languages make it easy for users to create new types but defining new operations is hard.
@@ -363,26 +359,17 @@ func NewMulExpr[A any](alg ExprMulAlg[A]) A {
 
 In [The one ring problem: abstraction and our quest for power](https://www.tedinski.com/2018/01/30/the-one-ring-problem-abstraction-and-power.html), Ted Kaminski talks about the mistake of biasing towards power.
 
-<pre>
-While looking over [academic papers on programming languages], I 
-realized there was an unfortunate common theme:
-
-Quite a lot of papers would come up with something they wanted to do, 
-show that existing designs were incapable of doing it, then design 
-some more powerful system where they could.
-
-I believe this thought process is a common failing among programmers.
-</pre>
+> While looking over [academic papers on programming languages], I realized there was an unfortunate common theme:
+>
+> Quite a lot of papers would come up with something they wanted to do, show that existing designs were incapable of doing it, then design some more powerful system where they could.
+>
+> I believe this thought process is a common failing among programmers.
 
 Abstractions cut both ways. There are always trade-offs when choosing one abstraction over another.
 
-<pre>
-You cannot make an abstraction more powerful without sacrificing some 
-properties that you used to know about it. Necessarily. 
-You cannot require a new property be true about an abstraction without
-sacrificing some of its power and flexibility. Always.
-</pre>
+> You cannot make an abstraction more powerful without sacrificing some properties that you used to know about it. Necessarily.
+> You cannot require a new property be true about an abstraction without sacrificing some of its power and flexibility. Always.
 
 Do we need to solve the expression problem? Is the extra complexity worth the type safety?
 
-In most cases, I'd argue not – we should prefer to use the least powerful option at our disposal to minimise complexity. However, in the cases where it is required, it's handy to know a solution exists.
+In most cases, I'd argue not – we should prefer to use the least powerful option at our disposal to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.

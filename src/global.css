@@ -76,8 +76,13 @@
   code,
   kbd,
   samp,
+  blockquote,
   pre {
     @apply text-sm;
+  }
+
+  blockquote {
+    @apply border-l-2 pl-4;
   }
 }
 
