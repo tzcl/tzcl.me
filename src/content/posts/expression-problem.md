@@ -29,7 +29,7 @@ In [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/e
 
 [^1]: This was first specified in [Independently Extensible Solutions to the Expression Problem](https://homepages.inf.ed.ac.uk/wadler/fool/program/final/10/10_Paper.pdf).
 
-The fifth constraint wasn't a part of Wadler's initial version of the problem. However, a solution that doesn't allow independent modules to compose almost defeats the point of the exercise – what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
+This fifth constraint wasn't a part of Wadler's initial version of the problem. However, a solution that doesn't allow independent modules to compose almost defeats the point of the exercise – what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
 
 ### Solutions to the problem
 
@@ -65,7 +65,7 @@ Finally, let's get to some code. The classic example is building a basic express
 To model types, a natural approach in Go[^5] is something like[^6]
 
 [^5]: This implementation is heavily inspired by Eli Bendersky's article on [The Expression Problem in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
-[^6]: You can find the full code [here](https://gist.github.com/tzcl/def0c829bb00ef7dff74116c1d7e5d8b).
+[^6]: You can find the full code [here](https://go.dev/play/p/9gGNgelHPoA).
 
 ```go
 type Expr interface{}
@@ -204,7 +204,9 @@ Other great resources on object algebras are:
 - [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by Oliveira himself (and clarifies a typo in the paper).
 - Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all 'click' for me.
 
-To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition.
+To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition[^7].
+
+[^7]: You can find the full code [here](https://go.dev/play/p/9fK86KVhQs3).
 
 ```go
 type ExprAlg[Op any] interface {
@@ -252,7 +254,7 @@ Checking that this works, we can define expressions using the object algebra and
 
 ```go
 func NewExpr[A any](alg ExprAlg[A]) A {
-	return alg.Add(alg.Constant(1.1), alg.Constant(2.2))
+	return alg.BinaryPlus(alg.Constant(1.1), alg.Constant(2.2))
 }
 
 func main() {
@@ -302,14 +304,14 @@ Adding another expression is slightly more complex but still allows us to reuse 
 ```go
 type ExprMulAlg[A any] interface {
 	ExprAlg[A]
-	Mul(lhs, rhs A) A
+	BinaryMul(lhs, rhs A) A
 }
 
 type EvalMulExpr struct {
 	EvalExpr
 }
 
-func (EvalMulExpr) Mul(lhs, rhs Evaluator) Evaluator {
+func (EvalMulExpr) BinaryMul(lhs, rhs Evaluator) Evaluator {
 	return EvalFunc(func() float64 {
 		return lhs.Eval() * rhs.Eval()
 	})
@@ -319,21 +321,21 @@ type PrintMulExpr struct {
 	PrintExpr
 }
 
-func (PrintMulExpr) Mul(lhs, rhs Printer) Printer {
-	return PrinterFunc(func() Print {
+func (PrintMulExpr) BinaryMul(lhs, rhs Printer) Printer {
+	return PrinterFunc(func() string {
 		return fmt.Sprintf("(%s * %s)", lhs.Print(), rhs.Print())
 	})
 }
 ```
 
-Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^7].
+Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^8].
 
-[^7]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
+[^8]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
 
 ```go
 func NewMulExpr[A any](alg ExprMulAlg[A]) A {
 	// We can use NewExpr because ExprMulAlg[A] implements ExprAlg[A]!
-	return alg.Mul(NewExpr(alg), alg.Lit(3.3))
+	return alg.BinaryMul(NewExpr(alg), alg.Constant(3.3))
 }
 
 func main() {
@@ -350,8 +352,8 @@ Finally, if we try to create an invalid expression, the Go type checker will cat
 
 ```go
 func NewMulExpr[A any](alg ExprMulAlg[A]) A {
-	return alg.Mul("abc", alg.Lit(3.3))
-	// cannot use "abc" (untyped string constant) as A value in argument to arg.Mul
+	return alg.BinaryMul("abc", alg.Constant(3.3))
+	// cannot use "abc" (untyped string constant) as A value in argument to arg.BinaryMul
 }
 ```
 
@@ -372,4 +374,4 @@ Abstractions cut both ways. There are always trade-offs when choosing one abstra
 
 Do we need to solve the expression problem? Is the extra complexity worth the type safety?
 
-In most cases, I'd argue not – we should prefer to use the least powerful option in order to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.
+In most cases, I'd argue not – we should prefer the least powerful option in order to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.

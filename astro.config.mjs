@@ -11,7 +11,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkSidenotes],
     shikiConfig: {
-      theme: "solarized-light",
+      theme: "css-variables",
     },
   },
   integrations: [
