@@ -1,7 +1,6 @@
 ---
 import { getCollection, CollectionEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import type { MarkdownHeading } from "astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -40,58 +39,68 @@ for (let i = 1; i < headings.length; i++) {
   level.push({ slug: curr.slug, text: curr.text, children: [] });
 }
 
-nestedHeadings.length = 0;
+// Disables contents
+// nestedHeadings.length = 0;
 ---
 
-<Layout
-  title={post.title}
-  class="flex justify-center py-20 mobile:mx-auto mobile:max-w-prose mobile:flex-col mobile:px-8"
->
-  <div class="basis-[21.5%] desktop:max-w-sm">
-    <aside class="desktop:sticky desktop:top-8 desktop:px-4">
-      <section>
-        <h1>{post.data.title}</h1>
-        <p>
-          {post.data.pubDate.toLocaleDateString("en-AU")}
-        </p>
-        {
-          nestedHeadings.length > 0 && (
-            <>
-              <h3>Contents</h3>
-              <ul>
-                {nestedHeadings.map((heading: Heading) => (
-                  <li>
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                    {heading.children.length > 0 && (
-                      <ul>
-                        {heading.children.map((child: Heading) => (
-                          <li>
-                            <a href={`#${child.slug}`}>{child.text}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )
-        }
-        <section class="my-4 hidden desktop:block">
+<Layout title={post.title} class="py-20">
+  <!-- Title -->
+  <div class="max-w-prose mx-auto">
+    <div class="mobile:px-8">
+      <h1>{post.data.title}</h1>
+      <p>
+        {post.data.pubDate.toLocaleDateString("en-AU")}
+      </p>
+    </div>
+  </div>
+  <div
+    class="flex justify-center mobile:mx-auto mobile:max-w-prose mobile:flex-col mobile:px-8"
+  >
+    <!-- Sidebar -->
+    <div class="basis-[21.5%] desktop:max-w-sm">
+      <aside class="desktop:sticky desktop:top-8 desktop:ml-4 desktop:mr-12">
+        <section>
+          {
+            nestedHeadings.length > 0 && (
+              <>
+                <h2>Contents</h2>
+                <ul>
+                  {nestedHeadings.map((heading: Heading) => (
+                    <li>
+                      <a href={`#${heading.slug}`}>{heading.text}</a>
+                      {heading.children.length > 0 && (
+                        <ul>
+                          {heading.children.map((child: Heading) => (
+                            <li>
+                              <a href={`#${child.slug}`}>{child.text}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )
+          }
+          <section class="my-4 hidden desktop:block">
+            <a href="/">← Home</a>
+          </section>
+        </section>
+      </aside>
+    </div>
+    <!-- Main content -->
+    <div class="max-w-prose basis-[57%]">
+      <article>
+        <Content />
+        <section class="desktop:hidden">
           <a href="/">← Home</a>
         </section>
-      </section>
-    </aside>
+      </article>
+    </div>
+    <!-- Sidenotes -->
+    <div class="max-w-sm basis-[21.5%]"></div>
   </div>
-  <div class="max-w-prose basis-[57%]">
-    <article>
-      <Content />
-      <section class="desktop:hidden">
-        <a href="/">← Home</a>
-      </section>
-    </article>
-  </div>
-  <div class="max-w-sm basis-[21.5%]"></div>
 </Layout>
 
 <script lang="ts">
@@ -106,7 +115,7 @@ function touching(rect1, rect2) {
   );
 }
 
-// Manually collapse margins, need to call this on resize
+// Manually collapse margins, need to call this on window resize
 function collapse() {
   for (let i = 0; i < sidenotes.length - 1; i++) {
     for (let j = i + 1; j < sidenotes.length; j++) {

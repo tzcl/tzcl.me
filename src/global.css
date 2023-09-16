@@ -10,7 +10,39 @@
   font-display: swap;
 }
 
+/* Code themes */
+:root {
+  --astro-code-color-background: #fdf6e3;
+  --astro-code-color-text: #657b83;
+  --astro-code-token-constant: #cb4b16;
+  --astro-code-token-comment: #93a1a1;
+  --astro-code-token-keyword: #859900;
+  --astro-code-token-parameter: #cb4b16;
+  --astro-code-token-function: #268bd2;
+  --astro-code-token-string-expression: #2aa198;
+
+  /* Unused */
+  --astro-code-token-punctuation: #586e75;
+  --astro-code-token-string: #770000;
+  --astro-code-token-link: #ee0000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --astro-code-color-background: #24292e;
+    --astro-code-color-text: #e1e4e8;
+    --astro-code-token-constant: #79b8ff;
+    --astro-code-token-keyword: #f97583;
+    --astro-code-token-function: #b392f0;
+    --astro-code-token-string-expression: #9ecbff;
+  }
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
     counter-reset: sidenote-counter;
@@ -79,11 +111,17 @@
   pre {
     @apply text-sm;
   }
+
+  blockquote {
+    @apply ml-4 border-l-2 pl-4;
+  }
 }
 
 /* -------------------------- */
 /* Sidenotes and margin notes */
 /* -------------------------- */
+
+/* TODO: move into layer? What's best practice? */
 
 input.margin-toggle {
   @apply hidden;
@@ -105,7 +143,7 @@ input.margin-toggle {
 }
 
 .sidenote:before {
-  @apply absolute -top-2 left-5 text-sm;
+  @apply absolute -top-[0.375rem] left-5 text-sm;
   content: counter(sidenote-counter) " ";
 }
 
@@ -140,12 +178,6 @@ input.margin-toggle {
 }
 
 @layer components {
-  .title {
-    @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
-    @apply text-center font-lora text-title font-bold leading-relaxed;
-    @apply mb-8 mt-12;
-  }
-
   p.subtitle {
     @apply my-4 block text-[1.8rem] italic leading-none;
   }
@@ -153,5 +185,13 @@ input.margin-toggle {
   span.newthought {
     font-variant-caps: small-caps;
     @apply text-xl;
+  }
+}
+
+@layer utilities {
+  .title {
+    @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
+    @apply text-center font-lora text-title font-bold leading-relaxed;
+    @apply mb-8 mt-12;
   }
 }
