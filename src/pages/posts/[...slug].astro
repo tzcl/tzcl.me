@@ -1,5 +1,5 @@
 ---
-import { getCollection, CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -38,12 +38,9 @@ for (let i = 1; i < headings.length; i++) {
 
   level.push({ slug: curr.slug, text: curr.text, children: [] });
 }
-
-// Disables contents
-// nestedHeadings.length = 0;
 ---
 
-<Layout title={post.title} class="py-20">
+<Layout title={post.data.title} class="py-20">
   <!-- Title -->
   <div class="max-w-prose mx-auto">
     <div class="mobile:px-8">

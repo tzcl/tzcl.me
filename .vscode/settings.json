@@ -1,5 +1,4 @@
 {
   "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.rootFontSize": 20,
-  "prettier.prettierPath": "./node_modules/prettier"
+  "tailwindCSS.rootFontSize": 20
 }
