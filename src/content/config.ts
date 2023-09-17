@@ -5,11 +5,8 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     // Transform string to Date object
-    pubDate: z
-      .string()
-      .or(z.date())
-      .transform((str) => new Date(str)),
-    updatedDate: z.string().optional(),
+    pubDate: z.date(),
+    updatedDate: z.date().optional(),
   }),
 });
 

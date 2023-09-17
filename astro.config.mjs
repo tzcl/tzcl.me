@@ -18,10 +18,8 @@ export default defineConfig({
     mdx(),
     sitemap(),
     tailwind({
-      config: {
-        // Disable injecting a basic `base.css` on every page
-        applyBaseStyles: false,
-      },
+      // Disable injecting a basic `base.css` on every page
+      applyBaseStyles: false,
     }),
   ],
 });
