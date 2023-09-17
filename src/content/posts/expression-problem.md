@@ -2,11 +2,12 @@
 title: Solving the Expression Problem in Go
 description: Solving the Expression Problem in Go
 pubDate: 2023-08-09
+updatedDate: 2023-08-16
 ---
 
 ## What is the Expression Problem?
 
-The expression problem is a classic problem in computer science.
+The Expression Problem is a classic problem in computer science.
 It dates back to a post by Philip Wadler on the [Java-Genericity mailing list](https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt) in the late 1990s.
 
 > The Expression Problem is a new name for an old problem.
@@ -96,7 +97,9 @@ func (bp *BinaryPlus) Eval() float64 {
 }
 ```
 
-Adding another operation is easy, we just define another interface and add more methods to our types.
+Adding another operation is easy, we just define another interface and add more methods to our types[^7].
+
+[^7]: I decided to call this interface `Printer` to avoid confusion with `fmt.Stringer` but in hindsight it would have been simpler to use the more standard name.
 
 ```go
 type Printer interface {
@@ -197,16 +200,16 @@ The question is, is there a way for us to get static type safety? 🤔
 
 ## Object algebras in Go
 
-As mentioned previously, we can use object algebras to get a full solution to the expression problem. In my opinion, [the paper](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf) is actually pretty readable and the authors do a good job motivating and explaining the relevant ideas as they build up to solving the expression problem (and extensions of the problem).
+As mentioned previously, we can use object algebras to get a full solution to the Expression Problem. In my opinion, [the paper](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf) is actually pretty readable and the authors do a good job motivating and explaining the relevant ideas as they build up to solving the Expression Problem (and extensions of the problem).
 
 Other great resources on object algebras are:
 
 - [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by Oliveira himself (and clarifies a typo in the paper).
 - Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all 'click' for me.
 
-To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition[^7].
+To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition[^8].
 
-[^7]: You can find the full code [here](https://go.dev/play/p/9fK86KVhQs3).
+[^8]: You can find the full code [here](https://go.dev/play/p/9fK86KVhQs3).
 
 ```go
 type ExprAlg[Op any] interface {
@@ -328,9 +331,9 @@ func (PrintMulExpr) BinaryMul(lhs, rhs Printer) Printer {
 }
 ```
 
-Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^8].
+Note, this actually allows us to build up more complex expressions using simpler expressions because they have different types[^9].
 
-[^8]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
+[^9]: Oliveira and Cook state that this is one of the advantages of this solution over something like open classes. With open classes, you keep extending the same expression type so there's no distinction between more complex expressions.
 
 ```go
 func NewMulExpr[A any](alg ExprMulAlg[A]) A {
@@ -372,6 +375,103 @@ Abstractions cut both ways. There are always trade-offs when choosing one abstra
 > You cannot make an abstraction more powerful without sacrificing some properties that you used to know about it. Necessarily.
 > You cannot require a new property be true about an abstraction without sacrificing some of its power and flexibility. Always.
 
-Do we need to solve the expression problem? Is the extra complexity worth the type safety?
+Do we need to solve the Expression Problem? Is the extra complexity worth the type safety?
 
 In most cases, I'd argue not – we should prefer the least powerful option in order to minimise complexity. However, in the cases where it is required, it's nice knowing that a solution exists.
+
+## Wadler's solution
+
+_Update: 16/08/2023_
+
+It turns out the Go team thought about all of this when they were designing generics. Rob Pike wrote to Phil Wadler and asked:
+
+> Would you be interested in helping us get polymorphism right (and/or figuring out what “right” means) for some future version of Go?
+
+The result was the [Featherweight Go](https://arxiv.org/abs/2005.11710) paper, published in 2020.
+
+In addition to formalising the design of generics in Go, the paper provides a short discussion of the Expression Problem. The key insight to their solution is to note where attempts that don't use generics fail. The solution that uses `any` to represent expressions doesn't work because we have to perform type assertions before recursive calls, violating static type checking.
+
+```go
+type BinaryPlus struct {
+	left any
+	right any
+}
+
+func (bp *BinaryPlus) Eval() float64 {
+	// Need to perform a type assertion before we can use left and right
+}
+```
+
+A variant of this solution that defines a static interface also doesn't work because it doesn't allow us to define new operations.
+
+```go
+type Expr interface {
+	Eval() float64
+}
+
+type BinaryPlus struct {
+	left Expr
+	right Expr
+}
+
+func (bp *BinaryPlus) Eval() float64 {
+	return bp.left.Eval() + bp.right.Eval()
+}
+
+// How to implement printing?
+```
+
+To get the flexibility we need, we just need to parameterise recursive expression types. In Featherweight Go, the solution to the Expression Problem is:
+
+```go
+// 1. Define expressions that implement Evaluator
+type Evaluator interface {
+	Eval() int
+}
+
+type Constant struct {
+	value int
+}
+
+func (c Constant) Eval() int {
+	return c.value
+}
+
+type Plus(type a any) struct {
+	left a
+	right a
+}
+
+func (p Plus(type a Evaluator)) Eval() int {
+	return p.left.Eval() + p.right.Eval()
+}
+
+// 2. Define another operation, Stringer
+type Stringer interface {
+	String() string
+}
+
+func (c Constant) String() string {
+	return fmt.Sprintf("%d", c.value)
+}
+
+func (p Plus(type a Stringer)) String() string {
+	return fmt.Sprintf("(%s + %s)", p.left.String(), p.right.String())
+}
+
+// 3. Tie it all together
+type Expr interface {
+	Evaluator
+	Stringer
+}
+
+func main() {
+	var e Expr = Plus(Expr){Constant{1}, Constant{2}}
+	var _ Int = e.Eval() // 3
+	var _ string = e.String() // "(1+2)"
+}
+```
+
+However, this doesn't work in actual Go because we can't bound method receivers[^10]. Until then, we need another layer of indirection, like object algebras.
+
+[^10]: See [here](https://go.dev/play/p/cnBlVZZ7nHv).
