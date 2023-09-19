@@ -173,8 +173,8 @@ input.margin-toggle {
   @apply rounded-md p-4;
 }
 
-code {
-  @apply rounded-md bg-[var(--astro-code-color-background)] p-1;
+p > code {
+  @apply rounded-md bg-[var(--astro-code-color-background)] px-1 py-0.5;
 }
 
 @layer components {
