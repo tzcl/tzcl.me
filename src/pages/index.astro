@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 const posts = await getCollection("posts");
 
@@ -10,41 +11,76 @@ posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 <Layout title="Toby Law" class="mobile:px-8">
   <h1 class="title mb-8">Toby Law</h1>
-  <article class="mx-auto max-w-prose">
-    <p>
-      Hi! I am a software developer based in Melbourne. I graduated from the
-      University of Melbourne and now work at ANZ. I am interested in fintech,
-      tools for thought, and programming language design.
-    </p>
-    <p>
-      Recently, I've been studying <a href="https://kinopio.club/data-structures-and-algorithms-ZdaJPpyq5-yJaY9txjIms">data structures and algorithms</a
-      > and
-      <a href="https://github.com/tzcl/keyboards">building keebs</a>.
-    </p>
-    <section class="flex justify-center gap-8">
-      <a href="https://twitter.com/tobylaw_">Twitter</a>
-      <a href="https://github.com/tzcl">GitHub</a>
-      <a href="https://linkedin.com/in/tobylaw">LinkedIn</a>
-    </section>
-    <section class="mb-20">
-      <h2>Posts</h2>
-      <ul class="list-none pl-0">
-        {
-          posts.map((post) => (
-            <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
-              <a class="flex-[3] pr-4" href={`/posts/${post.slug}`}>
-                {post.data.title}
-              </a>
-              <time
-                class="flex-1 text-sm"
-                datetime={post.data.pubDate.toISOString()}
+
+  <div class="flex justify-center">
+    <div class="max-w-prose">
+      <article>
+        <section>
+          <p>
+            Hi! I am a software developer based in Sydney. I graduated from the
+            University of Melbourne and now work at Rokt. I'm interested in deep
+            learning, MLOps and building real-time systems.
+          </p>
+          <p>
+            Recently, I've been reading <em>The Effective Engineer</em> and
+            thinking about <a
+              href="https://kinopio.club/onboarding-GZO9t0_iekjKSnNzweYbu"
+              >tech</a
+            >{" "}
+            <a href="https://kinopio.club/promotion-mo7vERfDHkMl27AuqE7Yt"
+              >careers</a
+            >.
+          </p>
+        </section>
+        <!-- Why is tailwind class sorting not working??? -->
+        <section class="flex justify-center align-baseline gap-1">
+          <a href="https://twitter.com/tobylaw_"
+            ><Icon name="fa-brands:twitter-square" size="1em" /></a
+          >
+          <a href="https://github.com/tzcl"
+            ><Icon name="fa-brands:github-square" size="1em" /></a
+          >
+          <a href="https://linkedin.com/in/tobylaw"
+            ><Icon name="fa-brands:linkedin" size="1em" /></a
+          >
+          <a href="mailto:toby@tzcl.me" class="text-xs ml-2">toby@tzcl.me</a>
+        </section>
+        <section>
+          <h2>Lists</h2>
+          <ul class="list-none pl-0">
+            <li class="mb-4">
+              <a
+                href="https://kinopio.club/beautiful-websites-eLHucYBYCCiIk70D8Xeo_"
+                }>beautiful websites</a
               >
-                {post.data.pubDate.toLocaleDateString("en-AU")}
-              </time>
             </li>
-          ))
-        }
-      </ul>
-    </section>
-  </article>
+            <li class="mb-4">
+              <a
+                href="https://kinopio.club/computer-science-classics-09gV85HRlHlqsEMZCVOAY"
+                }>computer science classics</a
+              >
+            </li>
+          </ul>
+        </section>
+        <h2>Posts</h2>
+        <ul class="list-none pl-0">
+          {
+            posts.map((post) => (
+              <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
+                <a class="flex-[3] pr-4" href={`/posts/${post.slug}`}>
+                  {post.data.title}
+                </a>
+                <time
+                  class="flex-1 text-sm"
+                  datetime={post.data.pubDate.toISOString()}
+                >
+                  {post.data.pubDate.toLocaleDateString("en-AU")}
+                </time>
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+    </div>
+  </div>
 </Layout>
