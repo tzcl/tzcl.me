@@ -1,5 +1,6 @@
 ---
 import "../global.css";
+import { ViewTransitions } from "astro:transitions";
 
 export interface Props {
   title: string;
@@ -9,10 +10,11 @@ export interface Props {
 const props = Astro.props as Props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>{props.title}</title>
+    <ViewTransitions />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
