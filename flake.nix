@@ -39,7 +39,7 @@
 
           (writeScriptBin "dev" ''
             setup
-            ${run "pnpm"} run dev
+            ${run "pnpm"} run dev $@
           '')
 
           (writeScriptBin "format" ''
