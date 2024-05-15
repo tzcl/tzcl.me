@@ -54,15 +54,15 @@
   }
 
   h1 {
-    @apply mb-4 mt-8 text-[3.2rem];
+    @apply mb-4 mt-20 text-[3.2rem];
   }
 
   h2 {
-    @apply mb-4 mt-7 text-[2.2rem] italic;
+    @apply mb-4 mt-16 text-[2.2rem] italic;
   }
 
   h3 {
-    @apply mb-4 mt-6 text-[1.7rem] italic;
+    @apply mb-4 mt-12 text-[1.7rem] italic;
   }
 
   p,
