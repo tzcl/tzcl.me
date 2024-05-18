@@ -43,7 +43,7 @@ for (let i = 1; i < headings.length; i++) {
 
 <Layout title={post.data.title} class="py-20">
   <!-- Title -->
-  <div class="max-w-prose mx-auto">
+  <div class="mx-auto max-w-prose">
     <div class="mobile:px-8">
       <h1>{post.data.title}</h1>
       <p>
@@ -69,7 +69,7 @@ for (let i = 1; i < headings.length; i++) {
           {
             nestedHeadings.length > 0 && (
               <>
-                <h2>Contents</h2>
+                <h3>Contents</h3>
                 <ul>
                   {nestedHeadings.map((heading: Heading) => (
                     <li>
@@ -109,39 +109,68 @@ for (let i = 1; i < headings.length; i++) {
   </div>
 </Layout>
 
-<script lang="ts">
-  const sidenotes = document.getElementsByClassName("sidenote");
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const sidenotes = document.getElementsByClassName("sidenote");
+    const headings = document.querySelectorAll<HTMLElement>("h2, h3");
 
-  function touching(rect1, rect2) {
-    return (
-      rect1.top <= rect2.bottom &&
-      rect1.bottom + 32 >= rect2.top &&
-      rect1.left <= rect2.right &&
-      rect1.right >= rect2.left
-    );
-  }
+    // Why does this use 32??
+    function touching(rect1: DOMRect, rect2: DOMRect, space = 0) {
+      return (
+        rect1.top <= rect2.bottom &&
+        rect1.bottom + space >= rect2.top &&
+        rect1.left <= rect2.right &&
+        rect1.right >= rect2.left
+      );
+    }
 
-  // Manually collapse margins, need to call this on window resize
-  function collapse() {
-    for (let i = 0; i < sidenotes.length - 1; i++) {
-      for (let j = i + 1; j < sidenotes.length; j++) {
+    // Manually collapse margins between stacked sidenotes
+    function collapseMargins() {
+      for (let i = 0; i < sidenotes.length - 1; i++) {
         const a = sidenotes[i].getBoundingClientRect();
-        const b = sidenotes[j].getBoundingClientRect();
-        if (touching(a, b)) {
-          sidenotes[j].classList.add("!mt-0");
-        } else {
-          sidenotes[j].classList.remove("!mt-0");
+        for (let j = i + 1; j < sidenotes.length; j++) {
+          const b = sidenotes[j].getBoundingClientRect();
+          // Touching if within 32px (2rem)
+          if (touching(a, b, 32)) {
+            sidenotes[j].classList.add("!mt-0");
+          } else {
+            sidenotes[j].classList.remove("!mt-0");
+          }
         }
       }
     }
-  }
 
-  for (let i = 1; i < sidenotes.length + 1; i++) {
-    const toggle = document.getElementById(`sidenote-${i}`);
-    toggle.addEventListener("change", collapse);
-  }
+    // Manually expand margins between sidenotes and titles
+    function expandTitles() {
+      for (const heading of headings) {
+        let shouldReset = true;
+        const a = heading.getBoundingClientRect();
+        for (const sidenote of sidenotes) {
+          const b = sidenote.getBoundingClientRect();
+          const size = b.height;
 
-  collapse();
+          if (touching(a, b)) {
+            shouldReset = false;
+            heading.style.setProperty("padding-top", `calc(${size}px + 1rem)`);
+          }
+        }
 
-  window.onresize = collapse;
+        if (shouldReset) {
+          heading.style.removeProperty("padding-top");
+        }
+      }
+    }
+
+    for (let i = 1; i < sidenotes.length + 1; i++) {
+      const toggle = document.getElementById(`sidenote-${i}`);
+      toggle?.addEventListener("change", collapseMargins);
+      toggle?.addEventListener("change", expandTitles);
+    }
+
+    collapseMargins();
+    expandTitles();
+
+    window.addEventListener("resize", collapseMargins);
+    window.addEventListener("resize", expandTitles);
+  });
 </script>

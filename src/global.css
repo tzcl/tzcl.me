@@ -36,9 +36,6 @@
     }
   }
 
-  html {
-  }
-
   body {
     @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
     counter-reset: sidenote-counter;
@@ -54,11 +51,11 @@
   }
 
   h1 {
-    @apply mb-4 mt-20 text-[3.2rem];
+    @apply mb-4 mt-16 text-[3.2rem];
   }
 
   h2 {
-    @apply mb-4 mt-16 text-[2.2rem] italic;
+    @apply mb-4 mt-14 text-[2.2rem] italic;
   }
 
   h3 {
