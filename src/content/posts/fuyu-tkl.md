@@ -108,5 +108,5 @@ Since this will depend on the case you have, I don't have any specific tips. I w
 Unfortunately, I don't have a sound test for you but I love the thock this board has and the flex when typing. If you're interested, [Zestrion](https://www.youtube.com/@zestrion_) has a sound test of the TKRielle on YouTube:
 
 <div class="aspect-[16/9] mobile:mb-4">
-<iframe width="100%" height="100%" src="https://www.youtube.com/embed/VjeUizURuPQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+<iframe width="100%" height="100%" loading="lazy" src="https://www.youtube.com/embed/VjeUizURuPQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
 </div>
