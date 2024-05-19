@@ -2,7 +2,7 @@
 title: Solving the Expression Problem in Go
 description: Solving the Expression Problem in Go
 pubDate: 2023-08-09
-updatedDate: 2023-08-16
+updatedDate: 2024-05-19
 ---
 
 ## What is the Expression Problem?
@@ -14,28 +14,28 @@ It dates back to a post by Philip Wadler on the [Java-Genericity mailing list](h
 > The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).
 
 Fundamentally, it is a question of how expressive languages are when it comes to creating user-defined types.
-OOP languages make it easy for users to create new types but defining new operations is hard.
+OOP languages make it easy for users to create new types but hard to define new operations.
 Conversely, functional languages make it easy to define operations but hard to define new types.
 The goal is to express a design that allows extensibility in both dimensions.
 
 ### Defining the problem
 
-In [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf), Oliveira and Cook state five requirements that a solution must satisfy:
+In [Extensibility for the Masses](https://www.cs.utexas.edu/~wcook/Drafts/2012/ecoop2012.pdf), Oliveira and Cook state five requirements for potential solutions:
 
 1. **Extensibility in both dimensions**: A solution must allow the addition of new data variants and new operations and support extending existing operations.
 2. **Strong static type safety**: A solution must prevent applying an operation to a data variant which it cannot handle using static checks.
 3. **No modification or duplication**: Existing code must not be modified nor duplicated.
 4. **Separate compilation and type-checking**: Safety checks or compilation steps must not be deferred until link or runtime.
-5. **Independent extensibility**: It should be possible to combine independently developed extensions so that they can be used jointly.[^1]
+5. **Independent extensibility**: It should be possible to combine independently developed extensions so that they can be used jointly.
 
-[^1]: This was first specified in [Independently Extensible Solutions to the Expression Problem](https://homepages.inf.ed.ac.uk/wadler/fool/program/final/10/10_Paper.pdf).
+This fifth constraint wasn't a part of Wadler's initial version of the problem[^1]. However, a solution that doesn't allow independent modules to compose almost defeats the point of the exercise – what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
 
-This fifth constraint wasn't a part of Wadler's initial version of the problem. However, a solution that doesn't allow independent modules to compose almost defeats the point of the exercise – what's the point of having all this extensibility if the end-user has to reimplement everything themselves?
+[^1]: This was first specified in Zenger and Odersky's [Independently Extensible Solutions to the Expression Problem](https://homepages.inf.ed.ac.uk/wadler/fool/program/final/10/10_Paper.pdf).
 
 ### Solutions to the problem
 
-As of today, there are a whole bunch of ways to solve the Expression Problem.
-[Wikipedia](https://en.wikipedia.org/wiki/Expression_problem) suggests you try one of
+As of today, there are many ways to solve the Expression Problem.
+[Wikipedia](https://en.wikipedia.org/wiki/Expression_problem) suggests you try
 
 - Multiple dispatch
 - Open classes
@@ -44,9 +44,9 @@ As of today, there are a whole bunch of ways to solve the Expression Problem.
 - Tagless-final / object algebras
 - Polymorphic variants
 
-Perhaps the simplest solution is monkey patching. In dynamic languages like Ruby, Python and JavaScript, you can override methods of an externally-defined object, so new code just yeets any existing code. The problem with this is that it breaks modularity, as now the behaviour of your program can subtly change each time you import a module[^2].
+Perhaps the simplest solution is monkey patching. In dynamic languages like Ruby, Python and JavaScript, you can override methods of an externally-defined object, so new code just yeets out any existing code. The problem with this is that it breaks modularity, as now the behaviour of your program can subtly change each time you import a module[^2].
 
-[^2]: Instead of being able to reason about your program locally, you have to consider the program as a whole to validate it.
+[^2]: Instead of being able to reason about your program locally, you have to consider the program holistically. This is a similar concern with aspect-oriented programming.
 
 In languages like Julia and Clojure, you can use multimethods to gain the flexibility required to solve the problem.
 [However, the magic sauce is open methods, not multiple dispatch](https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions#is-multiple-dispatch-necessary-to-cleanly-solve-the-expression-problem). A key part of any solution is retroactively implementing interfaces.
@@ -61,7 +61,7 @@ Finally, the most 'practical' solution may be object algebras. I say that becaus
 
 ## A solution with Go interfaces
 
-Finally, let's get to some code. The classic example is building a basic expression language that has two types, constants and addition, and supports evaluation. From there, we'll extend it by adding another operation, printing expressions, and another type, multiplication.
+Finally, let's get to some code. The classic example is building a basic expression language that supports constants and addition. From there, we'll extend it by adding another operation, printing expressions, and another type, multiplication.
 
 To model types, a natural approach in Go[^5] is something like[^6]
 
@@ -97,9 +97,7 @@ func (bp *BinaryPlus) Eval() float64 {
 }
 ```
 
-Adding another operation is easy, we just define another interface and add more methods to our types[^7].
-
-[^7]: I decided to call this interface `Printer` to avoid confusion with `fmt.Stringer` but in hindsight it would have been simpler to use the more standard name.
+Adding another operation is easy, we just define another interface and add more methods to our types.
 
 ```go
 type Printer interface {
@@ -148,7 +146,7 @@ func (bp *BinaryPlus) Print() string {
 }
 ```
 
-To keep things concise, assume the rest of the code is in one package, but remember it's possible to split all of these samples out.
+To keep things concise, assume the rest of the code is in one package, but remember it's possible to split all of these examples out.
 
 Lastly, let's implement multiplication expressions.
 
@@ -169,7 +167,7 @@ func (bm *BinaryMul) Print() string {
 }
 ```
 
-Noice. We've managed to build our expression language and it was all pretty straightforward! Let's make an expression and run it.
+[Noice](https://www.youtube.com/watch?v=h3uBr0CCm58). We've managed to build our expression language and it was all pretty straightforward! Let's make an expression and run it.
 
 ```go
 func CreateNewExpr() Expr {
@@ -205,7 +203,7 @@ As mentioned previously, we can use object algebras to get a full solution to th
 Other great resources on object algebras are:
 
 - [This Stack Overflow post](https://stackoverflow.com/questions/67818254/how-to-implement-exp-in-bool-or-iff-from-the-paper-extensibility-for-the-masses) on implementing object algebras which was answered by Oliveira himself (and clarifies a typo in the paper).
-- Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart. Watching this made it all 'click' for me.
+- Tijs van der Storm's talk, [Who's Afraid of Object Algebras](https://www.infoq.com/presentations/object-algebras/), which walks through an implementation of object algebras in Dart.
 
 To get started, let's define an object algebra, which is somewhat like an abstract factory for creating expressions. The two methods here are constructors for our two initial expressions, constants and addition[^8].
 
@@ -472,6 +470,4 @@ func main() {
 }
 ```
 
-However, this doesn't work in actual Go because we can't bound method receivers[^10]. Until then, we need another layer of indirection, like object algebras.
-
-[^10]: See [here](https://go.dev/play/p/cnBlVZZ7nHv).
+However, this doesn't work in actual Go because we can't bound method receivers. Until then, we need another layer of indirection, like object algebras.
