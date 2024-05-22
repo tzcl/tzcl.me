@@ -10,11 +10,10 @@ The [rae-dux](https://github.com/andrewjrae/rae-dux) is a 36-key wireless ergo s
 
 - I've found that 36 keys strikes the right balance for me[^1] -- it feels great letting your index fingers and thumbs do most of the work.
 - Going wireless has a lot of benefits, e.g., reducing clutter on your desk and allowing you to pair to your tablet or your phone.
-- nice!nanos come with 18 pins so you can actually get away without using diodes[^2] (can connect all keys on each side directly to a pin).
+- nice!nanos come with 18 pins so you can actually get away without using diodes (can connect all keys on each side directly to a pin).
 - Low-profile switches and keycaps feel super comfy and help give the board a small form factor, making it easy to pack away and carry with you.
 
 [^1]: Although, with combos, maybe going even smaller is better 🤔
-[^2]: Note, [the n!n docs warn against socketing the B+ and B- pins](https://nicekeyboards.com/docs/nice-nano/getting-started#before-you-start)
 
 If you're interested in seeing how I use the rae-dux, my ZMK config is available [here](https://github.com/tzcl/zmk-config).
 
@@ -39,9 +38,9 @@ If you're interested in seeing how I use the rae-dux, my ZMK config is available
 
 If you haven't done it before, printing PCBs is simple. I use JLCPCB but there are a few similar services out there.
 
-First, grab the [gerbers from the repo](https://github.com/andrewjrae/rae-dux/blob/rae-dux/output/gerber.zip). Then, navigate to https://cart.jlcpcb.com/quote and upload the gerber file. The settings are fine to leave as is, the main choices to make are whether you want a thinner PCB (1.2mm or 1.6mm are both fine) and what colour you want.[^3]
+First, grab the [gerbers from the repo](https://github.com/andrewjrae/rae-dux/blob/rae-dux/output/gerber.zip). Then, navigate to https://cart.jlcpcb.com/quote and upload the gerber file. The settings are fine to leave as is, the main choices to make are whether you want a thinner PCB (1.2mm or 1.6mm are both fine) and what colour you want.[^1]
 
-[^3]: Note, colours other than green may take longer to print
+[^1]: Note, colours other than green may take longer to print
 
 ## Build guide
 
@@ -74,9 +73,9 @@ At this stage, you should have something like this. Before installing all of you
 
 ## Configuring ZMK
 
-Now that you've built your keyboard, we want to make sure that things work before going through the effort of putting all your switches and keycaps in place. The simplest way to do that is to grab [the firmware from my zmk-config](https://github.com/tzcl/zmk-config/actions/runs/2681775211). You can completely customise this if you want, you just need to make sure that you use [the shield created by Andrew](https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux) which isn't available in the main ZMK repo at this point[^5].
+Now that you've built your keyboard, we want to make sure that things work before going through the effort of putting all your switches and keycaps in place. The simplest way to do that is to grab [the firmware from my zmk-config](https://github.com/tzcl/zmk-config/actions/runs/2681775211). You can completely customise this if you want, you just need to make sure that you use [the shield created by Andrew](https://github.com/andrewjrae/zmk-config/tree/development/config/boards/shields/rae_dux) which isn't available in the main ZMK repo at this point[^1].
 
-[^5]: The policy is that personal projects should create a separate zmk-config repo instead
+[^1]: The policy is that personal projects should create a separate zmk-config repo instead
 
 Once you've downloaded the firmware, you need to extract it. This should give you a folder with a bunch of `.uf2` files.
 
