@@ -20,24 +20,27 @@ interface Heading {
   children: Heading[];
 }
 
-const nestedHeadings: Heading[] = [
-  { slug: headings[0].slug, text: headings[0].text, children: [] },
-];
-const history: Heading[][] = [];
-let level: Heading[] = nestedHeadings;
+let nestedHeadings: Heading[] = [];
 
-for (let i = 1; i < headings.length; i++) {
-  const prev = headings[i - 1];
-  const curr = headings[i];
+if (headings.length > 0) {
+  nestedHeadings = [
+    { slug: headings[0].slug, text: headings[0].text, children: [] },
+  ];
+  const history: Heading[][] = [];
 
-  if (curr.depth > prev.depth) {
-    history.push(level);
-    level = level[level.length - 1].children;
-  } else if (curr.depth < prev.depth) {
-    level = history.pop()!;
+  for (let i = 1; i < headings.length; i++) {
+    const prev = headings[i - 1];
+    const curr = headings[i];
+
+    if (curr.depth > prev.depth) {
+      history.push(nestedHeadings);
+      nestedHeadings = nestedHeadings[nestedHeadings.length - 1].children;
+    } else if (curr.depth < prev.depth) {
+      nestedHeadings = history.pop()!;
+    }
+
+    nestedHeadings.push({ slug: curr.slug, text: curr.text, children: [] });
   }
-
-  level.push({ slug: curr.slug, text: curr.text, children: [] });
 }
 ---
 
@@ -119,8 +122,8 @@ for (let i = 1; i < headings.length; i++) {
       return (
         rect1.top <= rect2.bottom &&
         rect1.bottom + space >= rect2.top &&
-        rect1.left <= rect2.right &&
-        rect1.right >= rect2.left
+        rect1.left < rect2.right &&
+        rect1.right > rect2.left
       );
     }
 
