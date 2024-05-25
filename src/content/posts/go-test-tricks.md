@@ -19,18 +19,16 @@ A neat trick is using `export_test.go` to redeclare the identifiers you want to 
 This works as test files are excluded from regular package builds but included when the `go test` command is run.
 
 ```go
-// export_test.go
 package foo
 
 var Foo = foo
 var FooType fooType
 ```
 
-This pattern can be seen in the [`math`](https://github.com/golang/go/blob/master/src/math/export_test.go) and [`net/http`](https://github.com/golang/go/blob/master/src/net/http/export_test.go) packages from the Go standard library.
+This pattern can be seen in the [`math/export_test.go`](https://github.com/golang/go/blob/master/src/math/export_test.go) and [`net/http/export_test.go`](https://github.com/golang/go/blob/master/src/net/http/export_test.go) packages from the Go standard library.
 By convention, the file that exposes internals to tests is named `export_test.go`.
 
 ```go
-// math/export_test.go
 package math
 
 // Export internal functions for testing.
@@ -46,7 +44,6 @@ const ReduceThreshold = reduceThreshold
 <br>
 
 ```go
-// net/http/export_test.go
 package http
 
 var (
@@ -112,7 +109,6 @@ You may be familiar with the `import .` syntax, which pulls all of a package's e
 This is handy when you're writing a test that cannot be made part of the package due to circular dependencies.
 
 ```go
-// foo_test.go
 package foo_test
 
 import (
@@ -124,7 +120,6 @@ import (
 This is used in [`net/http/serve_test.go`](https://cs.opensource.google/go/go/+/master:src/net/http/serve_test.go) to be able to use various subpackages.
 
 ```go
-// net/http/serve_test.go
 package http_test
 
 import (
