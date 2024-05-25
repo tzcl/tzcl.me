@@ -25,10 +25,11 @@ var Foo = foo
 var FooType fooType
 ```
 
-This pattern can be seen in the [`math/export_test.go`](https://github.com/golang/go/blob/master/src/math/export_test.go) and [`net/http/export_test.go`](https://github.com/golang/go/blob/master/src/net/http/export_test.go) packages from the Go standard library.
+This pattern can be seen in the [`math](https://github.com/golang/go/blob/master/src/math/export_test.go) and [`net/http`](https://github.com/golang/go/blob/master/src/net/http/export_test.go) packages from the Go standard library.
 By convention, the file that exposes internals to tests is named `export_test.go`.
 
 ```go
+// math/export_test.go
 package math
 
 // Export internal functions for testing.
@@ -44,6 +45,7 @@ const ReduceThreshold = reduceThreshold
 <br>
 
 ```go
+// net/http/export_test.go
 package http
 
 var (
