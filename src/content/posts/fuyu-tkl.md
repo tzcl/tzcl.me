@@ -37,6 +37,7 @@ Having the PCBs assembled honestly saves a lot of time, especially if you're lik
 If all goes well[^1], it should look a little something like this[^2]:
 
 [^1]: I initially messed up and forgot to include the USB-C connector 🤦‍♂️ The shared project above has the corrected BOM.
+
 [^2]: If you're nervous and want more reference images, you can see what mine looked like [here](https://pcbwayfile.s3.us-west-2.amazonaws.com/mail/23/01/07/1501006057824.zip).
 
 ![completed PCB](https://i.imgur.com/V5dXndl.jpg)

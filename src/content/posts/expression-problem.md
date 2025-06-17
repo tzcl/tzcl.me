@@ -66,6 +66,7 @@ Finally, let's get to some code. The classic example is building a basic express
 To model types, a natural approach in Go[^5] is something like[^6]
 
 [^5]: This implementation is heavily inspired by Eli Bendersky's article on [The Expression Problem in Go](https://eli.thegreenplace.net/2018/the-expression-problem-in-go/).
+
 [^6]: You can find the full code [here](https://go.dev/play/p/9gGNgelHPoA).
 
 ```go
