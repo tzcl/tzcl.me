@@ -11,7 +11,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        common = with pkgs; [ nodejs_24 pnpm ];
+        common = with pkgs; [ nodejs pnpm ];
 
         run = pkg: "${pkgs.${pkg}}/bin/${pkg}";
 
