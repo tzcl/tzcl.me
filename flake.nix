@@ -7,18 +7,11 @@
   };
 
   outputs = { self, flake-utils, nixpkgs }:
-    let
-      overlays = [
-        (self: super: {
-          nodejs = super.nodejs-18_x;
-          pnpm = super.nodePackages.pnpm;
-        })
-      ];
-    in flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit overlays system; };
+        pkgs = import nixpkgs { inherit system; };
 
-        common = with pkgs; [ nodejs pnpm ];
+        common = with pkgs; [ nodejs_24 pnpm ];
 
         run = pkg: "${pkgs.${pkg}}/bin/${pkg}";
 
