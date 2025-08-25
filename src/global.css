@@ -13,7 +13,7 @@
 @layer base {
   /* Code themes */
   :root {
-    --astro-code-color-background: #fdf6e3;
+    --astro-code-background: #fdf6e3;
     --astro-code-color-text: #657b83;
     --astro-code-token-constant: #cb4b16;
     --astro-code-token-comment: #93a1a1;
@@ -27,7 +27,7 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --astro-code-color-background: #24292e;
+      --astro-code-background: #24292e;
       --astro-code-color-text: #e1e4e8;
       --astro-code-token-constant: #79b8ff;
       --astro-code-token-keyword: #f97583;
@@ -171,7 +171,7 @@ input.margin-toggle {
 }
 
 p > code {
-  @apply rounded-md bg-[var(--astro-code-color-background)] px-1 py-0.5;
+  @apply rounded-md bg-[var(--astro-code-background)] px-1 py-0.5;
 }
 
 @layer components {
