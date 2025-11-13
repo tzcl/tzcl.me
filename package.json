@@ -22,7 +22,7 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "astro": "^5.13.2",
+    "astro": "^5.15.6",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "remark-sidenotes": "github:tzcl/remark-sidenotes",
