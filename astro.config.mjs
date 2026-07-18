@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwind from "@tailwindcss/vite";
 import remarkSidenotes from "remark-sidenotes";
 import icon from "astro-icon";
 
@@ -14,13 +14,8 @@ export default defineConfig({
       theme: "css-variables",
     },
   },
-  integrations: [
-    mdx(),
-    sitemap(),
-    tailwind({
-      // Disable injecting a basic `base.css` on every page
-      applyBaseStyles: false,
-    }),
-    icon(),
-  ],
+  integrations: [mdx(), sitemap(), icon()],
+  vite: {
+    plugins: [tailwind()],
+  },
 });

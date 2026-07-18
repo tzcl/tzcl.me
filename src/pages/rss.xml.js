@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 
-export async function get(context) {
+export async function GET(context) {
   const posts = await getCollection("posts");
   return rss({
     title: "Toby's blog",
@@ -9,7 +9,7 @@ export async function get(context) {
     site: context.site,
     items: posts.map((post) => ({
       ...post.data,
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.id}/`,
     })),
   });
 }
