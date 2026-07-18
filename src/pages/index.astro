@@ -72,7 +72,7 @@ posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
             {
               posts.map((post) => (
                 <li class="mb-4 flex flex-col sm:flex-row sm:items-center">
-                  <a class="flex-[3] pr-4" href={`/posts/${post.slug}`}>
+                  <a class="flex-[3] pr-4" href={`/posts/${post.id}`}>
                     {post.data.title}
                   </a>
                   <time
