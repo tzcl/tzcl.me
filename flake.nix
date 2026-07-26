@@ -11,9 +11,9 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        common = with pkgs; [ nodejs pnpm ];
+        common = with pkgs; [ nodejs corepack ];
 
-        run = pkg: "${pkgs.${pkg}}/bin/${pkg}";
+        pnpm = "${pkgs.corepack}/bin/corepack pnpm";
 
         scripts = with pkgs; [
           (writeScriptBin "clean" ''
@@ -22,39 +22,39 @@
 
           (writeScriptBin "setup" ''
             clean
-            ${run "pnpm"} install
+            ${pnpm} install
           '')
 
           (writeScriptBin "build" ''
             setup
-            ${run "pnpm"} run build
+            ${pnpm} run build
           '')
 
           (writeScriptBin "dev" ''
             setup
-            ${run "pnpm"} run dev $@
+            ${pnpm} run dev $@
           '')
 
           (writeScriptBin "format" ''
             setup
-            ${run "pnpm"} run format
+            ${pnpm} run format
           '')
 
           (writeScriptBin "check-types" ''
-            ${run "pnpm"} run typecheck
+            ${pnpm} run typecheck
           '')
 
           (writeScriptBin "preview" ''
             build
-            ${run "pnpm"} run preview
+            ${pnpm} run preview
           '')
         ];
 
         runLocal = pkgs.writeScriptBin "run-local" ''
           rm -rf dist
-          ${run "pnpm"} install
-          ${run "pnpm"} run build
-          ${run "pnpm"} run preview
+          ${pnpm} install
+          ${pnpm} run build
+          ${pnpm} run preview
         '';
       in {
         devShells = {
