@@ -4,6 +4,7 @@
 tmp/
 
 .packages/
+.pnpm-store/
 .astro
 node_modules/
 dist/

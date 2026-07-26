@@ -7,9 +7,11 @@ export async function GET(context) {
     title: "Toby's blog",
     description: "Notes from the underground",
     site: context.site,
-    items: posts.map((post) => ({
-      ...post.data,
-      link: `/blog/${post.id}/`,
-    })),
+    items: posts
+      .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+      .map((post) => ({
+        ...post.data,
+        link: `/posts/${post.id}/`,
+      })),
   });
 }

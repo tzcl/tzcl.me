@@ -38,7 +38,7 @@
   }
 
   body {
-    @apply bg-light font-georgia text-gray-900 dark:bg-dark dark:text-gray-300;
+    @apply bg-light font-georgia dark:bg-dark text-gray-900 dark:text-gray-300;
     counter-reset: sidenote-counter;
   }
 
@@ -48,19 +48,19 @@
   h4,
   h5,
   h6 {
-    @apply font-normal leading-none;
+    @apply leading-none font-normal;
   }
 
   h1 {
-    @apply mb-4 mt-20 text-[3.2rem];
+    @apply mt-20 mb-4 text-[3.2rem];
   }
 
   h2 {
-    @apply mb-6 mt-16 text-[2.2rem] italic;
+    @apply mt-16 mb-6 text-[2.2rem] italic;
   }
 
   h3 {
-    @apply mb-5 mt-12 text-[1.7rem] italic;
+    @apply mt-12 mb-5 text-[1.7rem] italic;
   }
 
   p,
@@ -177,13 +177,13 @@ p > code {
 
 @layer components {
   .title {
-    @apply bg-sky bg-contain bg-clip-text bg-center text-transparent dark:bg-roof;
-    @apply text-center font-lora text-title font-bold leading-relaxed;
-    @apply mb-8 mt-12;
+    @apply bg-sky dark:bg-roof bg-contain bg-clip-text bg-center text-transparent;
+    @apply font-lora text-title text-center leading-relaxed font-bold;
+    @apply mt-12 mb-8;
   }
 
   p.subtitle {
-    @apply my-4 block text-[1.8rem] italic leading-none;
+    @apply my-4 block text-[1.8rem] leading-none italic;
   }
 
   span.newthought {
