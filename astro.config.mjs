@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
@@ -9,7 +10,9 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "https://tzcl.me",
   markdown: {
-    remarkPlugins: [remarkSidenotes],
+    processor: unified({
+      remarkPlugins: [remarkSidenotes],
+    }),
     shikiConfig: {
       theme: "css-variables",
     },
