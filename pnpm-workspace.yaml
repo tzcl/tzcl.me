@@ -8,4 +8,4 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - astro@7.3.5
 overrides:
-  esbuild: 0.28.1
+  esbuild: ^0.28.1
