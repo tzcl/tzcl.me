@@ -9,5 +9,3 @@ minimumReleaseAgeExclude:
   - astro@7.3.5
 overrides:
   esbuild: 0.28.1
-  undici@>=7.0.0 <7.29.0: ^7.29.0
-  sharp@>=0.35.0 <0.35.4: ^0.35.4
